@@ -64,7 +64,7 @@ We can define helper functions in this folder. There are some functions that we 
 It contains the layout components*.
 Layout is the common top wrapper component usually will contain Navbar , Sidebar and Children components
 
-#### `src/index` 
+#### `src/store/index` 
 All type definitions, actions, reducers and the redux index belong to this folder.
 
 #### `src/routes`
