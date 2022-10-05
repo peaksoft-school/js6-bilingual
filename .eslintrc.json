@@ -19,6 +19,8 @@
         "react-hooks/exhaustive-deps": "off",
         "no-unused-vars": "error",
         "react-hooks/rules-of-hooks": "off",
+        "react/button-has-type": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
         "react/function-component-definition": "off",
         "max-len": [
             "error",
@@ -44,6 +46,20 @@
                 "newlinesBetween": "always", // new line between groups
                 "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
                 "alphabetize": { "order": "asc", "ignoreCase": true }
+            }
+        ],
+        "jsx-a11y/no-static-element-interactions": [
+            "off",
+            {
+                "handlers": [
+                    "onClick",
+                    "onMouseDown",
+                    "onMouseUp",
+                    "onKeyPress",
+                    "onKeyDown",
+                    "onKeyUp"
+                ],
+                "allowExpressionValues": true
             }
         ]
     }
