@@ -5,8 +5,7 @@ import Modal from "components/UI/Modal";
 const App = () => {
     return (
         <div>
-            App
-            <Modal />
+            <Modal open />
         </div>
     );
 };

@@ -1,11 +1,12 @@
 import React from "react";
+
 import Box from "@mui/material/Box";
-import ExitIcon from "assets/icons/";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import ExitIcon from "assets/icons/ExitIcon.svg";
 import styled from "styled-components";
 
-export default function BasicModal({ title, onClick, text, children, open }) {
+export default function BasicModal({ title, onClick, text, open }) {
     return (
         <Modal
             open={open}
