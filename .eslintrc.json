@@ -14,6 +14,8 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-props-no-spreading": "off",
         "react/react-in-jsx-scope": "error",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
         "import/prefer-default-export": "off",
         "no-shadow": "error",
         "react-hooks/exhaustive-deps": "off",
@@ -40,14 +42,24 @@
                 }
             }
         ],
-        "import-helpers/order-imports": [
+
+        "import/order": [
             "error",
             {
-                "newlinesBetween": "always", // new line between groups
-                "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
-                "alphabetize": { "order": "asc", "ignoreCase": true }
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index",
+                    "object",
+                    "type"
+                ],
+                "newlines-between": "always-and-inside-groups"
             }
         ],
+
         "jsx-a11y/no-static-element-interactions": [
             "off",
             {
@@ -60,6 +72,12 @@
                     "onKeyUp"
                 ],
                 "allowExpressionValues": true
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "projectDependencies": "off"
             }
         ]
     }
