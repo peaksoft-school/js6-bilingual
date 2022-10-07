@@ -1,13 +1,7 @@
 import React from "react";
 
-import Modal from "components/UI/Modal";
-
 const App = () => {
-    return (
-        <div>
-            <Modal />
-        </div>
-    );
+    return <div>test</div>;
 };
 
 export default App;
