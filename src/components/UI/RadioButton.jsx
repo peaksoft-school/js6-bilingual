@@ -5,12 +5,12 @@ import Radio from "@mui/material/Radio";
 import { styled } from "@mui/material/styles";
 
 function RadioButton({ onChange, value }) {
-    return <StyleRadio onChange={onChange} value={value} />;
+    return <StyledRadio onChange={onChange} value={value} />;
 }
 
 export default RadioButton;
 
-const StyleRadio = styled(Radio)`
+const StyledRadio = styled(Radio)`
     &.MuiButtonBase-root {
         width: 18px;
         height: 18px;
