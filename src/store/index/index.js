@@ -1,1 +1,1 @@
-const item = (x) => x
+const item = (x) => x;
