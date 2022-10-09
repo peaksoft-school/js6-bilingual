@@ -1,13 +1,7 @@
 import React from "react";
 
-import CheckBox from "components/UI/Checkbox";
-
 const App = () => {
-    return (
-        <div>
-            <CheckBox />
-        </div>
-    );
+    return <div>App</div>;
 };
 
 export default App;
