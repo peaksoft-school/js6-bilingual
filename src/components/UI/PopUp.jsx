@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SuccessSaveIcon } from "assets";
+import { SuccessSaveIcon, xPopUp } from "assets";
 
 import { ReactNotifications, Store } from "react-notifications-component";
 import styled, { css } from "styled-components";
@@ -15,18 +15,17 @@ const PopUp = ({ forCss, typeIs, titleIs, textIs }) => {
             type: typeIs,
             insert: "top",
             container: "top-right",
-            animationIn: ["animate__animated animate__fadeIn"],
-            animationOut: ["animate__animated animate__fadeOut"],
+            animationIn: ["animate__animated animate__fadeInRightBig"],
+            animationOut: ["animate__animated animate__backOutRight"],
+            dismiss: {
+                duration: 3000,
+            },
         };
         Store.addNotification({
             ...notification,
         });
     }, []);
-    return (
-        <div>
-            <Notification {...forCss} typeIs={typeIs} />
-        </div>
-    );
+    return <Notification {...forCss} typeIs={typeIs} />;
 };
 
 const Notification = styled(ReactNotifications)`
@@ -36,16 +35,30 @@ const Notification = styled(ReactNotifications)`
         BgDanger = "#FFF1F0",
         titleColor = "#4C4859",
         textColor = "#646464",
-        typeIs,
     }) => {
         return css`
             .rnc__notification {
                 width: 100%;
                 max-width: ${width}px;
+                position: relative;
             }
             .rnc__notification-item {
                 border-left: none;
                 padding: 24px 0;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    right: 16.75px;
+                    top: 16.75px;
+                    background: url(${xPopUp});
+                    background-size: cover;
+                    z-index: 1;
+                    cursor: pointer;
+                    width: 10.5px;
+                    height: 10.5px;
+                }
             }
             .rnc__notification-title {
                 margin-top: 0;
@@ -53,35 +66,34 @@ const Notification = styled(ReactNotifications)`
                 font-size: 16px;
                 line-height: 19px;
                 color: ${titleColor};
+            }
+            .rnc__notification-item--success .rnc__notification-title {
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    position: absolute;
+                    top: 0px;
+                    left: 16px;
+                    background: url(${SuccessSaveIcon});
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+            }
 
-                ${typeIs === "success"
-                    ? css`
-                          &::before {
-                              content: "";
-                              display: inline-block;
-                              width: 20px;
-                              height: 20px;
-                              position: absolute;
-                              top: 0px;
-                              left: 16px;
-                              background: url(${SuccessSaveIcon});
-                              background-size: contain;
-                              background-repeat: no-repeat;
-                          }
-                      `
-                    : css`
-                          &::before {
-                              content: "";
-                              display: inline-block;
-                              width: 3px;
-                              height: 100%;
-                              position: absolute;
-                              top: 0px;
-                              left: 8px;
-                              border-radius: 6px;
-                              background: red;
-                          }
-                      `}
+            .rnc__notification-item--danger .rnc__notification-title {
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 3px;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    left: 8px;
+                    border-radius: 6px;
+                    background: red;
+                }
             }
             .rnc__notification-message {
                 font-family: cursive;
@@ -105,9 +117,16 @@ const Notification = styled(ReactNotifications)`
                 border-radius: 4px;
             }
 
-            .rnc__notification-content {
+            .rnc__notification-item--success .rnc__notification-content {
                 position: relative;
-                ${typeIs === "success" ? "padding-left: 60px" : "padding-left: 32px"};
+                padding-left: 60px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
+
+            .rnc__notification-item--danger .rnc__notification-content {
+                position: relative;
+                padding-left: 32px;
                 padding-top: 0px;
                 padding-bottom: 0px;
             }
