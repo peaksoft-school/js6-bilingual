@@ -6,10 +6,9 @@ import { InputViewOff, InputViewOn } from "assets/icons/index";
 
 import styled from "styled-components";
 
-function PasswordInput({ ...props }) {
+function PasswordInput({ onChange, value }) {
     const [inputViewOnOff, setInputViewOnOff] = useState(false);
 
-    console.log(props);
     function handleViewOnOff() {
         setInputViewOnOff((prevState) => !prevState);
     }
@@ -18,6 +17,8 @@ function PasswordInput({ ...props }) {
             <InputLabel>Password</InputLabel>
             <OutlinedInput1
                 error={false}
+                onChange={onChange}
+                value={value}
                 type={inputViewOnOff ? "password" : "text"}
                 endAdornment={
                     <IconButton onClick={() => handleViewOnOff()}>
