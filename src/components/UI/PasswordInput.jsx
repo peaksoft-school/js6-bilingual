@@ -6,9 +6,10 @@ import { InputViewOff, InputViewOn } from "assets/icons/index";
 
 import styled from "styled-components";
 
-function PasswordInput() {
+function PasswordInput({ ...props }) {
     const [inputViewOnOff, setInputViewOnOff] = useState(false);
 
+    console.log(props);
     function handleViewOnOff() {
         setInputViewOnOff((prevState) => !prevState);
     }
@@ -30,11 +31,13 @@ function PasswordInput() {
 }
 
 const OutlinedInput1 = styled(OutlinedInput)`
+    width: 500px;
+    height: 52px;
     color: #757575 !important;
 `;
 const FormControl1 = styled(FormControl)({
     width: "500px",
-    height: "50px",
+    height: "52px",
     "& label.Mui-focused": {
         color: "#3A10E5",
     },
