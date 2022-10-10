@@ -57,8 +57,9 @@ const ContainerDrop = styled.div`
 `;
 
 const DropImage = styled.img`
-    width: 181px;
-    height: 178px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 6px;
 `;
 
@@ -78,8 +79,9 @@ const ProverkaDlyaHovera = styled.div`
     border-radius: 8px;
     &:hover {
         img {
-            width: 181px;
-            height: 178px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 6px;
             background: black;
             opacity: 0.9;
