@@ -1,7 +1,13 @@
 import React from "react";
 
+import CustomizedSwitches from "components/UI/Switcher";
+
 const App = () => {
-    return <div>App</div>;
+    return (
+        <div>
+            <CustomizedSwitches />
+        </div>
+    );
 };
 
 export default App;
