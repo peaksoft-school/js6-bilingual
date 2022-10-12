@@ -14,10 +14,12 @@ function ImagePicker() {
             };
             reader.readAsDataURL(file);
         });
+        setImages([]);
     }, []);
+
     const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
         onDrop,
-        maxFiles: 2,
+        maxFiles: 1,
         accept: {
             "image/jpeg": [],
             "image/png": [],
@@ -55,7 +57,6 @@ const ContainerDrop = styled.div`
         display: none;
     }
 `;
-
 const DropImage = styled.img`
     width: 100%;
     height: 100%;
