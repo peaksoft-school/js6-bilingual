@@ -1,18 +1,7 @@
-import React, { useState } from "react";
-
-import CheckBox from "components/UI/CheckBox";
+import React from "react";
 
 const App = () => {
-    const [value, setValue] = useState(null);
-    const changeHandler = () => {
-        setValue(true);
-    };
-    return (
-        <div>
-            App
-            <CheckBox onChange={changeHandler} value={value} boxcolor="red" />
-        </div>
-    );
+    return <div>App</div>;
 };
 
 export default App;
