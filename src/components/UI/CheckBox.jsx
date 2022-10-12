@@ -4,11 +4,11 @@ import Checkbox from "@mui/material/Checkbox";
 
 import { styled } from "@mui/material/styles";
 
-function UserCheckbox({ onChange, value, boxcolor }) {
+function CheckBox({ onChange, value, boxcolor }) {
     return <StyledCheckbox onChange={onChange} value={value} boxcolor={boxcolor} />;
 }
 
-export default UserCheckbox;
+export default CheckBox;
 
 const StyledCheckbox = styled(Checkbox)`
     &.MuiCheckbox-root {
