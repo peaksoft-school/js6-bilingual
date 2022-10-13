@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 
-function ImagePicker() {
+function ImagePicker({ getImages }) {
     const [images, setImages] = useState([]);
 
     const onDrop = useCallback((acceptedFiles) => {
@@ -13,6 +13,7 @@ function ImagePicker() {
                 setImages((prevState) => [...prevState, reader.result]);
             };
             reader.readAsDataURL(file);
+            getImages(file);
         });
         setImages([]);
     }, []);
