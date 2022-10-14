@@ -11,9 +11,9 @@ function ImagePicker({ getImages }) {
             const reader = new FileReader();
             reader.onload = () => {
                 setImages((prevState) => [...prevState, reader.result]);
+                getImages(reader?.result);
             };
             reader.readAsDataURL(file);
-            getImages(file);
         });
         setImages([]);
     }, []);
