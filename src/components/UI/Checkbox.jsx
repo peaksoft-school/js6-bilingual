@@ -5,7 +5,9 @@ import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 
 function CheckBox({ onChange, value }) {
-    return <StyledCheckbox onChange={onChange} value={value} />;
+    return (
+        <StyledCheckbox onChange={(e) => onChange(e.target.checked ? value : "")} value={value} />
+    );
 }
 
 export default CheckBox;
@@ -18,5 +20,8 @@ const StyledCheckbox = styled(Checkbox)`
     }
     &.Mui-checked {
         color: #2ab930;
+    }
+    .MuiTouchRipple-root {
+        display: none;
     }
 `;
