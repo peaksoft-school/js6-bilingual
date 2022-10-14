@@ -3,9 +3,13 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
-const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, text }) => {
+const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, text, click }) => {
+    const handleClick = () => {
+        click();
+    };
     return (
         <ButtonMain
+            onClick={handleClick}
             maxwidth={maxwidth}
             fontSize={fontSize}
             maxheight={maxheight}
