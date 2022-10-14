@@ -27,6 +27,8 @@ const DropDown = ({
     BgHover = "rgba(58, 16, 229, 0.16)",
     colorText = "#313144",
     BgColorText = "#333",
+    background = "pink",
+    click,
 }) => {
     const [dropState, setDropState] = React.useState(arr[0]);
     const [dropActive, setDropActive] = React.useState(0);
@@ -34,6 +36,7 @@ const DropDown = ({
 
     const handleClickDrop = (obj, idx) => {
         setDropState(obj);
+        click(obj);
         setDropActive(idx);
     };
 
@@ -47,7 +50,7 @@ const DropDown = ({
 
     return (
         <ClickAwayListener onClickAway={handleClickDropAway}>
-            <DropBox width={width} fontSize={fontSize}>
+            <DropBox background={background} width={width} fontSize={fontSize}>
                 <DropHead
                     colorText={colorText}
                     className={!openDrop ? "is_close" : ""}
@@ -77,12 +80,12 @@ const DropDown = ({
 };
 
 const DropBox = styled.div`
-    background: white;
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
     ${(props) => {
         return css`
+            background: ${props.background};
             font-size: ${props.fontSize}px;
             max-width: ${props.width}px;
         `;
@@ -117,6 +120,7 @@ const DropList = styled(motion.ul)`
     margin: 8px 0;
     overflow: auto;
     max-height: 218px;
+    padding: 0;
     ${(props) =>
         props.className === "is_close" &&
         css`
