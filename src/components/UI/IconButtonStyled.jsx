@@ -2,9 +2,13 @@ import React from "react";
 
 import styled, { css } from "styled-components";
 
-const IconButtonStyled = ({ Icon, fontSize, onhover }) => {
+const IconButtonStyled = ({ Icon, fontSize, onhover, click }) => {
+    const handleClick = () => {
+        click();
+    };
     return (
         <StyledIcon
+            onClick={handleClick}
             onhover={onhover}
             fontSize={fontSize}
             dangerouslySetInnerHTML={{ __html: Icon }}
