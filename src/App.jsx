@@ -1,13 +1,7 @@
 import React from "react";
 
-import ImagePicker from "components/UI/ImagePicker";
-
 const App = () => {
-    return (
-        <div>
-            <ImagePicker getImages={(img) => console.log(img)} />
-        </div>
-    );
+    return <div>App</div>;
 };
 
 export default App;
