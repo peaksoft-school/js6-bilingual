@@ -3,6 +3,7 @@
         "browser": true,
         "es2021": true
     },
+
     "extends": ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
     "overrides": [],
     "parserOptions": {
@@ -24,6 +25,7 @@
         "react/button-has-type": "off",
         "jsx-a11y/click-events-have-key-events": "off",
         "react/function-component-definition": "off",
+
         "max-len": [
             "error",
             {
