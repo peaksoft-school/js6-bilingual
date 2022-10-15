@@ -9,6 +9,8 @@ const App = () => {
         <div className="app">
             <PopUp titleIs="File saved " textIs="Successfully saved" typeIs="Success" />
             <PopUp titleIs="Error" textIs="Please fill in all fields" typeIs="danger" />
+            <PopUp titleIs="Error" textIs="Please fill in all fields" typeIs="danger" />
+            <PopUp titleIs="Error" textIs="Please fill in all fields" typeIs="danger" />
         </div>
     );
 };
