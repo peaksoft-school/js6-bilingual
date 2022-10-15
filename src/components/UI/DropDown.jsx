@@ -6,38 +6,14 @@ import { motion } from "framer-motion";
 
 import styled, { css } from "styled-components";
 
-const arr = [
-    { value: "item1", text: "lorem 1" },
-    { value: "item2", text: "lorem 2" },
-    { value: "item3", text: "lorem 3" },
-    { value: "item4", text: "lorem 4" },
-    { value: "item5", text: "lorem 5" },
-    { value: "item6", text: "lorem 6" },
-    { value: "item7", text: "lorem 7" },
-    { value: "item8", text: "lorem 8" },
-    { value: "item10", text: "lorem 10" },
-    { value: "item11", text: "lorem 11" },
-    { value: "item12", text: "lorem 12" },
-    { value: "item13", text: "lorem 13" },
-];
-
-const DropDown = ({
-    width = 500,
-    fontSize = 16,
-    BgHover = "rgba(58, 16, 229, 0.16)",
-    colorText = "#313144",
-    BgColorText = "#333",
-    background = "pink",
-    click,
-}) => {
-    const [dropState, setDropState] = React.useState(arr[0]);
+const DropDown = ({ items, stylecss, dropState, setDropState }) => {
     const [dropActive, setDropActive] = React.useState(0);
     const [openDrop, setOpenDrop] = React.useState(false);
 
     const handleClickDrop = (obj, idx) => {
         setDropState(obj);
-        click(obj);
         setDropActive(idx);
+        setOpenDrop(() => false);
     };
 
     const handleClickDropClose = () => {
@@ -50,22 +26,19 @@ const DropDown = ({
 
     return (
         <ClickAwayListener onClickAway={handleClickDropAway}>
-            <DropBox background={background} width={width} fontSize={fontSize}>
+            <DropBox {...stylecss}>
                 <DropHead
-                    colorText={colorText}
+                    {...stylecss}
                     className={!openDrop ? "is_close" : ""}
                     onClick={handleClickDropClose}>
                     <span>{dropState.text}</span>
                 </DropHead>
-                <DropBody animate={openDrop ? { height: "auto" } : { height: "0" }}>
+                <DropBody animate={openDrop ? { height: "auto" } : { height: "0px" }}>
                     <DropList
                         animate={openDrop ? { opacity: 1 } : { opacity: 0 }}
                         className={!openDrop ? "is_close" : ""}>
-                        {arr.map((obj, idx) => (
+                        {items.map((obj, idx) => (
                             <DropListItem
-                                colorText={colorText}
-                                BgColorText={BgColorText}
-                                BgHover={BgHover}
                                 className={dropActive === idx && "active"}
                                 onClick={() => handleClickDrop(obj, idx)}
                                 key={obj.value}>
@@ -83,11 +56,11 @@ const DropBox = styled.div`
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    ${(props) => {
+    ${({ background = "#b0cdff", fontSize = 14, width = "200px" }) => {
         return css`
-            background: ${props.background};
-            font-size: ${props.fontSize}px;
-            max-width: ${props.width}px;
+            background: ${background};
+            font-size: ${fontSize}px;
+            max-width: ${width};
         `;
     }}
 `;
@@ -114,6 +87,7 @@ const DropHead = styled.div`
 const DropBody = styled(motion.div)`
     height: 100%;
     padding-right: 5px;
+    height: 0px;
 `;
 
 const DropList = styled(motion.ul)`
@@ -147,7 +121,7 @@ const DropListItem = styled.li`
     margin: 4px 5px 4px 0;
     cursor: pointer;
 
-    ${({ BgHover, colorText, BgColorText, className }) =>
+    ${({ BgHover = "rgba(58, 16, 229, 0.16)", colorText, BgColorText = " #4C4859", className }) =>
         css`
             background-color: ${className === "active" && BgHover};
             color: ${className === "active" ? BgColorText : colorText};
