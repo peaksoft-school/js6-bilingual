@@ -8,9 +8,9 @@ function UICard({ children, cardWidth, cardHeight, cardBorderRadius, cardBoxShad
     return (
         <StyeldCard
             cardWidth={cardWidth || "100%"}
-            cardheight={cardHeight || "auto"}
-            cardborderradius={cardBorderRadius || 0}
-            cardboxshadow={cardBoxShadow || ""}>
+            cardHeight={cardHeight || "auto"}
+            cardBorderRadius={cardBorderRadius || 0}
+            cardBoxShadow={cardBoxShadow || ""}>
             {children}
         </StyeldCard>
     );
@@ -20,9 +20,9 @@ export default UICard;
 
 const StyeldCard = styled(({ cardWidth, ...props }) => <Card {...props} />)`
     width: ${(props) => props.cardWidth};
-    height: ${(props) => props.cardheight};
+    height: ${(props) => props.cardHeight};
     margin: 0 auto;
     padding: 40px 43px;
-    box-shadow: ${(props) => props.cardboxshadow};
-    border-radius: ${(props) => props.cardborderradius};
+    box-shadow: ${(props) => props.cardBoxShadow};
+    border-radius: ${(props) => props.cardBorderRadius};
 `;
