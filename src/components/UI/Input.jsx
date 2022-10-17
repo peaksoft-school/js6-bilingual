@@ -8,14 +8,12 @@ const Input = ({
     forInput,
     colortext = "gray",
     colorlabeltextandborderandhover = "#3A10E5",
-    value,
-    setValue,
+    handleChange,
 }) => {
     // FOR INPUT colorlabeltextandborderandhover
     return (
         <CssTextField
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
+            onChange={handleChange}
             colortext={colortext}
             colorlabeltextandborderandhover={colorlabeltextandborderandhover}
             {...forInput}
