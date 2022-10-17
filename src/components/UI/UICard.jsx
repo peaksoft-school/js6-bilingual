@@ -4,13 +4,13 @@ import Card from "@mui/material/Card";
 
 import { styled } from "@mui/material/styles";
 
-function UICard({ children, cardwidth, cardheight, cardborderradius, cardboxshadow }) {
+function UICard({ children, cardWidth, cardHeight, cardBorderRadius, cardBoxShadow }) {
     return (
         <StyeldCard
-            cardwidth={cardwidth}
-            cardheight={cardheight}
-            cardborderradius={cardborderradius}
-            cardboxshadow={cardboxshadow}>
+            cardWidth={cardWidth || "100%"}
+            cardheight={cardHeight || "auto"}
+            cardborderradius={cardBorderRadius || 0}
+            cardboxshadow={cardBoxShadow || ""}>
             {children}
         </StyeldCard>
     );
@@ -18,9 +18,9 @@ function UICard({ children, cardwidth, cardheight, cardborderradius, cardboxshad
 
 export default UICard;
 
-const StyeldCard = styled(Card)`
-    width: ${(props) => props.cardwidth};
-    height: ${(props) => props.cardheight}
+const StyeldCard = styled(({ cardWidth, ...props }) => <Card {...props} />)`
+    width: ${(props) => props.cardWidth};
+    height: ${(props) => props.cardheight};
     margin: 0 auto;
     padding: 40px 43px;
     box-shadow: ${(props) => props.cardboxshadow};
