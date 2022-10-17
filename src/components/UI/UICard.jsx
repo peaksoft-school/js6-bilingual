@@ -18,10 +18,11 @@ function UICard({ children, cardWidth, cardHeight, cardBorderRadius, cardBoxShad
 
 export default UICard;
 
-const StyeldCard = styled(({ cardWidth, ...props }) => <Card {...props} />)`
+const StyeldCard = styled(
+    ({ cardWidth, cardHeight, cardBorderRadius, cardBoxShadow, ...props }) => <Card {...props} />
+)`
     width: ${(props) => props.cardWidth};
     height: ${(props) => props.cardHeight};
-    margin: 0 auto;
     padding: 40px 43px;
     box-shadow: ${(props) => props.cardBoxShadow};
     border-radius: ${(props) => props.cardBorderRadius};
