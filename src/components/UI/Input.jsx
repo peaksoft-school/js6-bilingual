@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 
 const Input = ({
     forInput,
-    colorеext = "gray",
+    colortext = "gray",
     colorlabeltextandborderandhover = "#3A10E5",
     value,
     setValue,
@@ -16,7 +16,7 @@ const Input = ({
         <CssTextField
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            colorеext={colorеext}
+            colortext={colortext}
             colorlabeltextandborderandhover={colorlabeltextandborderandhover}
             {...forInput}
             fullWidth
@@ -27,10 +27,9 @@ const Input = ({
 
 const CssTextField = styled(TextField)`
     ${(props) => {
-        console.log(props);
         return css`
     & input: {
-        color: ${props.colorеext},
+        color: ${props.colortext},
     },
     & label.Mui-focused: {
         color: ${props.colorlabeltextandborderandhover},
