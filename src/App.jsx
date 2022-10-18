@@ -1,5 +1,6 @@
 import React from "react";
 
+<<<<<<< HEAD
 import Accordion from "components/Accordion";
 
 const data = [
@@ -29,6 +30,12 @@ const App = () => {
             <Accordion data={data} />
         </div>
     );
+=======
+import "./App.css";
+
+const App = () => {
+    return <div className="app">App</div>;
+>>>>>>> 0fcc3fb0a11d772630b5f6b7f6fe5c403ca5c289
 };
 
 export default App;
