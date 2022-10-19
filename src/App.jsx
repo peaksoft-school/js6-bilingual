@@ -1,12 +1,13 @@
 import React from "react";
 
-import SwitcherComp from "components/UI/Switcher";
+import CountUp from "components/CountUp/CountUp";
+
 import "./App.css";
 
 const App = () => {
     return (
         <div className="app">
-            <SwitcherComp />
+            <CountUp />
         </div>
     );
 };
