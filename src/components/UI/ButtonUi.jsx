@@ -16,6 +16,7 @@ const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, tex
             variant={variant}
             color={color}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
+
             <span>{text}</span>
         </ButtonMain>
     );
