@@ -1,15 +1,9 @@
 import React from "react";
 
-import CountUp from "components/CountUp/CountUp";
-
 import "./App.css";
 
 const App = () => {
-    return (
-        <div className="app">
-            <CountUp />
-        </div>
-    );
+    return <div className="app">App</div>;
 };
 
 export default App;
