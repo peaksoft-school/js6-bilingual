@@ -19,7 +19,7 @@ function PasswordInput({ onChange, value }) {
                 error={false}
                 onChange={onChange}
                 value={value}
-                type={inputViewOnOff ? "password" : "text"}
+                type={inputViewOnOff ? "text" : "password"}
                 endAdornment={
                     <IconButton onClick={() => handleViewOnOff()}>
                         {inputViewOnOff ? <InputViewOff /> : <InputViewOn />}

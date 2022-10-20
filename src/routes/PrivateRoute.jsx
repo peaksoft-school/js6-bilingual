@@ -9,7 +9,7 @@ const PrivateRoute = ({ expectedRoles, children }) => {
     if (expectedRoles.find((role) => role === UserRoles)) {
         return children;
     }
-    return <Navigate to={`/${RoutesUrl.SignIn}`} />;
+    return <Navigate to={`${RoutesUrl.SignIn}`} />;
 };
 
 export default PrivateRoute;
