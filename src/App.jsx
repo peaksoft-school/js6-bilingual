@@ -1,9 +1,7 @@
 import React from "react";
 
-import RoutesRender from "routes/routes-render";
-
 const App = () => {
-    return <RoutesRender />;
+    return <div>App</div>;
 };
 
 export default App;
