@@ -22,8 +22,11 @@
         "react-redux": "^8.0.4",
         "react-router-dom": "^6.4.2",
         "react-scripts": "5.0.1",
+<<<<<<< HEAD
         "react-slick": "^0.29.0",
         "slick-carousel": "^1.8.1",
+=======
+>>>>>>> 3a79db09dd081ab1e302e667ac3be8753f47dcfc
         "react-scroll-trigger": "^0.6.14",
         "styled-components": "^5.3.6",
         "web-vitals": "^2.1.4"
