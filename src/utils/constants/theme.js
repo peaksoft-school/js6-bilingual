@@ -18,6 +18,7 @@ export const Styles = {
             Scd75: "#757575",
             ScdC4: "#C4C4C4",
             Scd9A: "#9A9A9A",
+            Scd23: "#23212A",
         },
     },
 
@@ -34,6 +35,7 @@ export const Styles = {
         28: 28,
         30: 30,
         32: 32,
+        40: 40,
         60: 60,
     },
 };

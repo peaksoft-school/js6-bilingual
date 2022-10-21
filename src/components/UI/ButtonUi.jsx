@@ -22,6 +22,7 @@ const ButtonStyled = ({
             variant={variant}
             color={color}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
+
             <span>{text}</span>
         </ButtonMain>
     );
