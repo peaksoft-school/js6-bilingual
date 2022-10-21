@@ -3,8 +3,17 @@ import React from "react";
 import { TextField } from "@mui/material";
 import styled from "styled-components";
 
-export default function TextArea({ width, ...props }) {
-    return <Textarea width={width} multiline minRows={3} {...props} />;
+export default function TextArea({ width, value, setValue, placeholder }) {
+    return (
+        <Textarea
+            width={width}
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+            placeholder={placeholder}
+            multiline
+            minRows={3}
+        />
+    );
 }
 
 const Textarea = styled(TextField)`
