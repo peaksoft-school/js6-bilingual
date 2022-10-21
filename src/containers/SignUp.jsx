@@ -21,11 +21,14 @@ const SignIn = () => {
     });
 
     const postData = async () => {
-        const createUser = await createUserWithEmailAndPassword(auth, user.email, user.password, {
-            name: user.name,
-            lastName: user.lastName,
-        });
-        console.log(user);
+        const createUser = await createUserWithEmailAndPassword(
+            auth,
+            user.email,
+            user.password,
+            user.name,
+            user.lastName
+        );
+        console.log(createUser);
     };
 
     return (
