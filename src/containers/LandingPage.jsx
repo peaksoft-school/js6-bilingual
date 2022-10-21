@@ -1,7 +1,9 @@
 import React from "react";
 
+import UseFullVideo from "components/LandingPage/UseFullVideo/UseFullVideo";
+
 const LandingPage = () => {
-    return <div>LandingPage</div>;
+    return <UseFullVideo />;
 };
 
 export default LandingPage;

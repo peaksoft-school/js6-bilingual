@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 import "react-notifications-component/dist/theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import App from "./App";
 

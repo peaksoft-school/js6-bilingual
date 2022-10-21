@@ -4,13 +4,10 @@ import { Box } from "@mui/system";
 import { google, logoSignIn } from "assets/images";
 
 import { ButtonUi, Checkbox, Input, PasswordInput } from "components/UI";
-import { auth } from "firebase.config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { RoutesUrl } from "routes/constants";
 
 import styled from "styled-components";
-// import { auth } from "firebase.config";
 
 const SignIn = () => {
     const [user, setUser] = React.useState({
@@ -20,16 +17,7 @@ const SignIn = () => {
         password: "",
     });
 
-    const postData = async () => {
-        const createUser = await createUserWithEmailAndPassword(
-            auth,
-            user.email,
-            user.password,
-            user.name,
-            user.lastName
-        );
-        console.log(createUser);
-    };
+    const postData = async () => {};
 
     return (
         <SignInMain>
