@@ -107,7 +107,7 @@ const ArrowNext = styled.button`
             &.bottom_arrow {
                 top: inherit;
                 bottom: -104px !important;
-                right: calc(50% - ${Math.trunc(props.childrens.length / 3 + 1) * 25 + 60}px);
+                right: calc(50% - ${Math.trunc(props.childrens.length / 3 + 1) * 25 + 80}px);
             }
         `;
     }}
@@ -138,7 +138,7 @@ const ArrowPrev = styled.button`
             &.bottom_arrow {
                 bottom: -104px !important;
                 top: inherit;
-                left: calc(50% - ${Math.trunc(props.childrens.length / 3 + 1) * 25 + 60}px);
+                left: calc(50% - ${Math.trunc(props.childrens.length / 3 + 1) * 25 + 80}px);
             }
         `;
     }}
