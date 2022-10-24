@@ -1,12 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Box from "@mui/material/Box";
-
-import Rating from "@mui/material/Rating";
+import { Rating, Typography } from "@mui/material";
 
 import { styled as StyledMUI } from "@mui/material/styles";
-
-import Typography from "@mui/material/Typography";
 
 import Slider from "react-slick";
 
@@ -15,15 +11,17 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import NextIcon from "../../assets/icons/BackIcon.svg";
+import { aboutUser } from "utils/constants/General";
 
-import BackIcon from "../../assets/icons/NextIcon.svg";
+import { ReactComponent as NextIcon } from "../../assets/icons/BackIcon.svg";
+
+import { ReactComponent as BackIcon } from "../../assets/icons/NextIcon.svg";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
         <div className={className} style={{ ...style, padding: 20 }} onClick={onClick}>
-            <img src={BackIcon} alt="" />
+            <BackIcon />
         </div>
     );
 }
@@ -32,83 +30,54 @@ function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
     return (
         <div className={className} style={{ ...style, padding: 20 }} onClick={onClick}>
-            <img src={NextIcon} alt="" />
+            <NextIcon />
         </div>
     );
 }
 
 export default function SecondarySlider() {
+    const [indexImage, setIndexImage] = useState(0);
     const settings = {
         className: "center",
         centerMode: true,
-        dots: true,
-        focusOnSelect: true,
         infinite: true,
-        centerPadding: 1,
+        centerPadding: -10,
         slidesToShow: 3,
-        slidesToScroll: 1,
         speed: 500,
+        dots: true,
+        swipeToSlide: true,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
+        beforeChange: (current, next) => setIndexImage(next),
     };
-    const aboutUser = [
-        {
-            id: Math.random().toString(),
-            name: "-Chyngyz Zalkarbekov",
-            text: "Bilingual has helped me to get a good grasp of the language in a fun and challenging way. I enjoy the dialogues and scenarios, which include helpful phrases that can be used in various situations.",
-            avatar: "https://play-lh.googleusercontent.com/nCVVCbeSI14qEvNnvvgkkbvfBJximn04qoPRw8GZjC7zeoKxOgEtjqsID_DDtNfkjyo",
-            rating: 5,
-        },
-        {
-            id: Math.random().toString(),
-            name: "-Chyngyz Zalkarbekov",
-            text: "I have tried other language apps and found them boring but with Bilingual, it is easy and fun to practice every day.",
-            avatar: "https://i.playground.ru/p/rv2YGvWcdjHspVJcuvV19Q.jpeg",
-            rating: 5,
-        },
-        {
-            id: Math.random().toString(),
-            name: "-Chyngyz Zalkarbekov",
-            text: "Great way to learn a language. Fun, interactive, and engaging. I am enjoying the course immensely and would recommend it to anyone who wishes to learn a second language.",
-            avatar: "https://laverdadnoticias.com/__export/1635186190986/sites/laverdad/img/2021/10/25/version_de_naruto_uzumaki_como_villano.jpg_750902796.jpg",
-            rating: 5,
-        },
-        {
-            id: Math.random().toString(),
-            name: "-Chyngyz Zalkarbekov",
-            text: "Great way to learn a language. Fun, interactive, and engaging. I am enjoying the course immensely and would recommend it to anyone who wishes to learn a second language.",
-            avatar: "https://i.pinimg.com/736x/1d/6f/cc/1d6fcc8a14f2fcd9e964e16baf759e87--naruto-uzumaki-shippuden-read-naruto-manga.jpg",
-            rating: 5,
-        },
-        {
-            id: Math.random().toString(),
-            name: "-Chyngyz Zalkarbekov",
-            text: "Great way to learn a language. Fun, interactive, and engaging. I am enjoying the course immensely and would recommend it to anyone who wishes to learn a second language.",
-            avatar: "https://www.worthview.com/wp-content/uploads/2019/03/Cult-Anime.jpg",
-            rating: 5,
-        },
-    ];
+
     return (
         <MainBox>
             <MainTitle variant="h1">Why people love Bilingual</MainTitle>
-            <StyledSlider nextIcon={<NextIcon />} prevIcon={BackIcon} {...settings}>
-                {aboutUser.map((item) => (
-                    <BoxCard key={item.id}>
+            <StyledSlider {...settings}>
+                {aboutUser.map((item, index) => (
+                    <BoxActive key={item.id} className={index === indexImage}>
                         <UserPhotos src={item.avatar} alt="user avatar" />
-                        <Text variant="subtitle1">{item.text}</Text>
-                        <UserName variant="h5">{item.name}</UserName>
+                        <Text className={index === indexImage} variant="subtitle1">
+                            {item.text}
+                        </Text>
+                        <UserName className={index === indexImage} variant="h5">
+                            {item.name}
+                        </UserName>
                         <UserRating name="read-only" value={item.rating} readOnly />
-                    </BoxCard>
+                    </BoxActive>
                 ))}
             </StyledSlider>
         </MainBox>
     );
 }
 
-const MainBox = StyledMUI(Box)`
-    height: 804px;
-    padding: 0;
-    background: #fef5e8;
+const MainBox = styled("div")`
+    height: 854px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-bottom: 120px;
 `;
 const MainTitle = StyledMUI(Typography)`
     text-align: center;
@@ -117,14 +86,7 @@ const MainTitle = StyledMUI(Typography)`
     font-size: 40px;
     line-height: 48px;
     color: #3752b4;
-    margin-bottom: 60px;
-`;
-const BoxCard = StyledMUI(Box)`
-    width: 366px;
-    height: 564px;
-    background: #e5e5e5;
-    border-radius: 40px;
-    margin-bottom: 58px;
+    
 `;
 const UserPhotos = styled.img`
     width: 180px;
@@ -140,6 +102,7 @@ const Text = StyledMUI(Typography)`
     line-height: 24px;
     color: rgba(35, 33, 42, 0.8);
     margin: 0 10px 0 17px;
+    color:${(p) => (p.className ? "#FFFFFF" : "rgba(35, 33, 42, 0.8)")}
 `;
 const UserName = StyledMUI(Typography)`
     width: 170px;
@@ -151,6 +114,7 @@ const UserName = StyledMUI(Typography)`
     line-height: 24px;
     color: #3A10E5;
     margin: 24px 96px 20px 85px;
+    color:${(p) => (p.className ? "#FFFFFF" : "#3A10E5")}
 `;
 const UserRating = StyledMUI(Rating)`
     width: 98px;
@@ -159,28 +123,74 @@ const UserRating = StyledMUI(Rating)`
 `;
 const StyledSlider = styled(Slider)`
     .slick-slide {
-        padding: 0 20px;
+        width: 700px;
+        background: #e5e5e5;
+        border-radius: 40px;
+    }
+    .slick-track {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        height: 564px;
+        padding-top: 50px;
     }
     ,
     .slick-list {
         margin: 0 auto;
         width: 1100px;
+        height: 700px;
+        padding-bottom: 50px;
     }
+
     .slick-arrow {
         width: 60px;
         height: 60px;
-        border: 1px solid #3a10e5;
         border-radius: 50%;
         z-index: 10;
         margin: 0 -60px;
+        border: 1px solid #3a10e5;
+    }
+    .slick-next,
+    .slick-prev {
+        color: #3a10e5;
     }
 
+    .slick-next:active,
     .slick-prev:before,
     .slick-next:before {
         content: none;
     }
-    .slick-prev:active,
-    .slick-next:active {
-        background: #666ca7;
+    .slick-dots {
+        margin-top: 50px;
+        * {
+        }
     }
+    .slick-dots li {
+        width: 15px;
+        margin: 0;
+    }
+    .slick-dots li button:before {
+        content: "";
+        width: 6px;
+        height: 16px;
+        background: rgba(58, 16, 229, 0.2);
+        border-radius: 20px;
+    }
+    .slick-dots li.slick-active button:before {
+        background: #3a10e5;
+        width: 6px;
+        height: 30px;
+        margin-top: -14px;
+        transition: all 0.5s ease;
+    }
+`;
+const BoxActive = styled("div")`
+    background: ${(p) => (p.className ? "#666CA7" : "")};
+    transition: ${(p) => (p.className ? "transform 300ms" : "")};
+    transform: ${(p) => (p.className ? "scale(1.1)" : "")};
+    height: ${(p) => (p.className ? "550px" : "")};
+    max-width: ${(p) => (p.className ? "330px" : "")};
+    border-radius: ${(p) => (p.className ? "40px" : "40px")};
+    color: ${(p) => (p.className ? "white" : "")};
+    transition: all 0.3s ease;
 `;
