@@ -1,15 +1,9 @@
 import React from "react";
 
-import Way from "components/LandingPage/Way";
-
 import "./App.css";
 
 const App = () => {
-    return (
-        <div className="app">
-            <Way />
-        </div>
-    );
+    return <div className="app">App</div>;
 };
 
 export default App;
