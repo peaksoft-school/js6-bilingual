@@ -38,12 +38,14 @@ function SamplePrevArrow(props) {
 export default function SecondarySlider() {
     const [indexImage, setIndexImage] = useState(0);
     const settings = {
+        autoplay: true,
         className: "center",
         centerMode: true,
         infinite: true,
         centerPadding: -10,
         slidesToShow: 3,
-        speed: 500,
+        speed: 3000,
+        autoplaySpeed: 2000,
         dots: true,
         swipeToSlide: true,
         nextArrow: <SampleNextArrow />,
