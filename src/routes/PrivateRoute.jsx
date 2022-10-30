@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "./constants";
 
 const PrivateRoute = ({ expectedRoles, children }) => {
-    const UserRoles = UsersRole.client;
+    const UserRoles = UsersRole.admin;
     if (expectedRoles.find((role) => role === UserRoles)) {
         return children;
     }
