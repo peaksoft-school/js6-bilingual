@@ -77,13 +77,14 @@ function Header({ Choice }) {
 }
 
 const StyledHeader = styled.div`
-    width: 1440px;
+    width: 1550px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: ${(props) => props.bgColor};
     position: fixed;
+    z-index: 10;
 `;
 const StyledImage = styled.img`
     width: 235px;
@@ -94,7 +95,7 @@ const StyledHeaderLandingPage = styled.div`
     width: 259px;
     height: 42px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-right: 100px;
 `;
