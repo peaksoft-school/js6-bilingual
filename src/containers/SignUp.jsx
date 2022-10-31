@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Box } from "@mui/system";
-import { InputUi, CheckboxUi, ButtonUi } from "components/UI";
+import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const SignIn = () => {
                         <div>
                             <img src={Logo} alt="logo" />
                         </div>
-                        <h3>Sign in</h3>
+                        <h3>Create an Account</h3>
                     </SignInHead>
                     <form>
                         <Controller
@@ -120,17 +120,11 @@ const SignIn = () => {
                             }}
                             render={({ field: { onChange } }) => {
                                 return (
-                                    <InputUi
-                                        handleChange={onChange}
+                                    <PasswordInputUi
+                                        onChange={onChange}
                                         sx={{ width: "100%", marginTop: "20px" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
-                                        forInput={{
-                                            error: !!errors?.password,
-                                            label: "Password",
-                                            type: "password",
-                                            name: "password",
-                                        }}
                                     />
                                 );
                             }}
@@ -154,7 +148,7 @@ const SignIn = () => {
                             maxheight="52px"
                             variant="contained"
                             maxwidth="100%"
-                            text="SIGN IN"
+                            text="SIGN UP"
                         />
                     </form>
                     <SignInWithGoogleBox>
@@ -166,7 +160,7 @@ const SignIn = () => {
                         </Link>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
-                        Dont have an account? <Link to="sign-up">Register</Link>{" "}
+                        Dont have an account? <Link to="sign-up">LOG IN</Link>{" "}
                     </IsAccaunt>
                 </SignInWrapper>
             </SignInBox>
