@@ -2,22 +2,22 @@ import React, { useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
+import { scrollHeader } from "utils/helpers";
+
+import Logotip from "../../assets/images/landingPage/Layer 1.png";
 
 function Header({ Choice }) {
-    const [bgColor, setBgColor] = useState("");
+    const [bgColor, setBgColor] = useState();
 
-    function setScrool() {
-        if (window.scrollY >= 80) {
-            setBgColor("white");
+    window.addEventListener("scroll", () => {
+        if (scrollHeader()) {
+            setBgColor(true);
         } else {
-            setBgColor("");
+            setBgColor(false);
         }
-    }
-
-    window.addEventListener("scroll", setScrool);
+    });
 
     function handleClick(e) {
         e.preventDefault();
@@ -76,14 +76,22 @@ function Header({ Choice }) {
     );
 }
 
+const HeaderAnimation = keyframes`
+from{
+    background-color: none;
+}
+to{
+    background-color: white;
+}
+`;
 const StyledHeader = styled.div`
     width: 1440px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: ${(props) => props.bgColor};
     position: fixed;
+    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 1s forwards;
 `;
 const StyledImage = styled.img`
     width: 235px;
