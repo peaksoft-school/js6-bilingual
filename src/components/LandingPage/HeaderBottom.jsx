@@ -8,9 +8,12 @@ import PhotoBook from "../../assets/images/landingPage/Group 4265.png";
 
 import PhotoHeader from "../../assets/images/landingPage/PhotoHeader.png";
 
+import Header from "./Header";
+
 function HeaderBottom() {
     return (
         <SHeaderBottom>
+            <Header Choice="true" />
             <StyledHeaderBottom>
                 <StyledHeaderContainerText>
                     <StyledHeaderText>Prove your English proficiency today with</StyledHeaderText>

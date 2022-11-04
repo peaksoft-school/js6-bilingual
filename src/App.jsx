@@ -8,7 +8,6 @@ import HeaderBottom from "components/LandingPage/HeaderBottom";
 const App = () => {
     return (
         <div className="app">
-            <Header Choice="false" />
             <HeaderBottom />
         </div>
     );
