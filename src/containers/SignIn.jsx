@@ -1,10 +1,12 @@
 import React from "react";
 
 import { Box } from "@mui/system";
-import { InputUi, CheckboxUi, ButtonUi } from "components/UI";
-import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 
+import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
+import { useForm, Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RoutesUrl } from "routes/constants";
 import styled from "styled-components";
 
 import Logo from "../assets/images/AuthLogo.svg";
@@ -17,9 +19,13 @@ const SignIn = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const postData = (data) => {
-        console.log(data);
-    };
+
+    const autoPostData = (data) => {};
+
+    React.useEffect(() => {
+        autoPostData();
+    }, []);
+    const postData = async (data) => {};
     return (
         <SignInMain>
             <SignInBox>
@@ -66,8 +72,8 @@ const SignIn = () => {
                             }}
                             render={({ field: { onChange } }) => {
                                 return (
-                                    <InputUi
-                                        handleChange={onChange}
+                                    <PasswordInputUi
+                                        onChange={onChange}
                                         sx={{ width: "100%", marginTop: "20px" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
@@ -112,7 +118,7 @@ const SignIn = () => {
                         </Link>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
-                        Dont have an account? <Link to="sign-up">Register</Link>{" "}
+                        Dont have an account? <Link to={RoutesUrl.SignUp}>Register</Link>{" "}
                     </IsAccaunt>
                 </SignInWrapper>
             </SignInBox>

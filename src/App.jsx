@@ -1,13 +1,12 @@
 import React from "react";
 
-import SignUp from "./containers/SignUp";
-
+import RoutesRender from "routes/routes-render";
 import "./App.css";
 
 const App = () => {
     return (
         <div className="app">
-            <SignUp />
+            <RoutesRender />
         </div>
     );
 };
