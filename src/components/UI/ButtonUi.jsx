@@ -3,26 +3,15 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
-const ButtonStyled = ({
-    color,
-    variant,
-    maxwidth,
-    fontSize,
-    maxheight,
-    icon,
-    text,
-    onClick,
-    disabled,
-}) => {
+const ButtonStyled = ({ mui, icon, text, onClick, style }) => {
+    console.log(style);
     return (
         <ButtonMain
-            disabled={disabled}
+            {...mui}
             onClick={onClick}
-            maxwidth={maxwidth}
-            fontSize={fontSize}
-            maxheight={maxheight}
-            variant={variant}
-            color={color}>
+            maxwidth={style?.maxWidth}
+            maxheight={style?.maxHeight}
+            style={{ style }}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
             <span>{text}</span>
         </ButtonMain>
@@ -30,7 +19,8 @@ const ButtonStyled = ({
 };
 
 const ButtonMain = styled(Button)`
-    ${({ maxwidth, maxheight = "42px", fontSize = "14" }) => {
+    ${({ maxwidth, maxheight = "42px", style }) => {
+        console.log(style);
         return css`
             display: flex;
             align-items: center;
@@ -38,8 +28,8 @@ const ButtonMain = styled(Button)`
             height: ${maxheight};
             font-size: 14px;
             letter-spacing: 0.02em !important;
-            font-size: ${fontSize}px !important;
-
+            font-size: ${style?.style?.fontSize}px !important;
+            background: ${style?.style?.background} !important;
             &.css-f3g22s-MuiButtonBase-root-MuiButton-root,
             &.css-sghohy-MuiButtonBase-root-MuiButton-root {
                 background-color: #3a10e5;
@@ -66,21 +56,17 @@ const ButtonMain = styled(Button)`
                     background: #3007da !important;
                 }
             }
-
             &.css-1at7div-MuiButtonBase-root-MuiButton-root,
             &.css-sxix9q-MuiButtonBase-root-MuiButton-root {
                 border: 2px solid #2ab930 !important;
-
                 &:hover {
                     background: #2ab930;
                     color: #fff;
                 }
-
                 &:active {
                     background: #08af10;
                 }
             }
-
             .css-8je8zh-MuiTouchRipple-root {
                 display: none;
             }
@@ -88,18 +74,15 @@ const ButtonMain = styled(Button)`
             &.css-ke5b6m-MuiButtonBase-root-MuiButton-root {
                 background: #2ab930;
                 box-shadow: none;
-
                 &:hover {
                     background: #31cf38;
                     box-shadow: none;
                 }
-
                 &:active {
                     background: #08af10;
                     box-shadow: none;
                 }
             }
-
             // --------------------- DISABLED --------------------
             &.Mui-disabled {
                 background: transparent !important;

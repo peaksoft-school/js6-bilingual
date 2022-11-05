@@ -1,12 +1,16 @@
 import React from "react";
 
+import { ButtonUi } from "components/UI";
 import "./App.css";
-import ButtonStyled from "components/UI/Button";
 
 const App = () => {
     return (
         <div className="app">
-            <ButtonStyled text="Close" variant="outlined" />
+            <ButtonUi
+                text="register"
+                mui={{ color: "primary", variant: "contained" }}
+                style={{ maxWidth: "320px" }}
+            />
         </div>
     );
 };

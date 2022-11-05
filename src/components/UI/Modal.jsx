@@ -22,7 +22,7 @@ const StyleForBox = styled(Box)`
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: auto;
+    min-width: 300px;
     display: flex;
     justify-content: center;
     flex-direction: column;
