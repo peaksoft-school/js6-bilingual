@@ -1,58 +1,82 @@
 import React from "react";
 
 import Container from "components/CustomUi/Container";
-
 import CustomSlider from "components/CustomUi/CustomSlider";
-
+import Section from "components/CustomUi/Section";
 import styled from "styled-components";
 
-import PhotoOne from "../../assets/images/landingPage/Group 4281 (1).png";
+import Globus from "../../assets/images/landingPage/Globus.svg";
+import SliderItem from "./SliderItem";
 
-import PhotoTwo from "../../assets/images/landingPage/Group 4281.png";
+const sliderArray = [
+    {
+        title: "Confirm your English proficiency today! ",
+        text: "For nearly 30 years, learners have turned to Rosetta Stone to build the fluency and confidence they need to speak new languages.",
+        image: Globus,
+        background: "#333",
+    },
 
-function PrimarySlider() {
-    const settings = {
-        className: "center",
-        centerMode: true,
-        dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        speed: 500,
-    };
-    const Data = [
-        { Photo: PhotoOne },
-        { Photo: PhotoTwo },
-        { Photo: PhotoOne },
-        { Photo: PhotoTwo },
-        { Photo: PhotoOne },
-        { Photo: PhotoTwo },
-    ];
+    {
+        title: "Confirm your English proficiency today! ",
+        text: "For nearly 30 years, learners have turned to Rosetta Stone to build the fluency and confidence they need to speak new languages.",
+        image: Globus,
+        background: "#333",
+    },
+
+    {
+        title: "Confirm your English proficiency today! ",
+        text: "For nearly 30 years, learners have turned to Rosetta Stone to build the fluency and confidence they need to speak new languages.",
+        image: Globus,
+        background: "#333",
+    },
+    {
+        title: "Confirm your English proficiency today! ",
+        text: "For nearly 30 years, learners have turned to Rosetta Stone to build the fluency and confidence they need to speak new languages.",
+        image: Globus,
+        background: "#333",
+    },
+];
+
+const settings = {
+    className: "center",
+    dots: true,
+    centerMode: true,
+    infinite: true,
+    centerPadding: "100px",
+    slidesToShow: 1,
+    speed: 1500,
+};
+
+const PrimarySlider = () => {
     return (
-        <div style={{ position: "relative" }}>
-            <Container>
-                <CustomSlider settings={settings} bottomArrows>
-                    {Data.map((item) => {
-                        return (
-                            <ContainerImage>
-                                <StyledImage src={item.Photo} />
-                            </ContainerImage>
-                        );
-                    })}
-                </CustomSlider>
-            </Container>
-        </div>
+        <Section>
+            <SliderMain>
+                <SliderWrapp>
+                    <Container>
+                        <SliderBox>
+                            <CustomSlider settings={settings} bottomArrows>
+                                {sliderArray.map((item) => {
+                                    return <SliderItem key={item.text} data={item} />;
+                                })}
+                            </CustomSlider>
+                        </SliderBox>
+                    </Container>
+                </SliderWrapp>
+            </SliderMain>
+        </Section>
     );
-}
-
-const ContainerImage = styled.div`
-    width: 1028px;
-    height: 440px;
-    margin-left: 50px;
-`;
-
-const StyledImage = styled.img`
-    width: 1028px;
-    height: 440px;
-`;
+};
 
 export default PrimarySlider;
+
+const SliderMain = styled.div``;
+const SliderWrapp = styled.div``;
+const SliderBox = styled.div`
+    margin-right: -185px;
+    position: relative;
+
+    .slick-center {
+        transition: all 0.3s ease;
+        transform: scale(1.15);
+    }
+`;
