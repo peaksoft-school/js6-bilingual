@@ -1,15 +1,8 @@
 import React from "react";
-
-import HeaderBottom from "components/LandingPage/HeaderBottom";
-
 import "./App.css";
 
 const App = () => {
-    return (
-        <div className="app">
-            <HeaderBottom />
-        </div>
-    );
+    return <div className="app"></div>;
 };
 
 export default App;
