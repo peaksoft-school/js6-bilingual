@@ -3,27 +3,24 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
-const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, text, click }) => {
-    const handleClick = () => {
-        click();
-    };
+const ButtonStyled = ({ mui, icon, text, onClick, style }) => {
+    console.log(style);
     return (
         <ButtonMain
-            onClick={handleClick}
-            maxwidth={maxwidth}
-            fontSize={fontSize}
-            maxheight={maxheight}
-            variant={variant}
-            color={color}>
+            {...mui}
+            onClick={onClick}
+            maxwidth={style?.maxWidth}
+            maxheight={style?.maxHeight}
+            style={{ style }}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
-
             <span>{text}</span>
         </ButtonMain>
     );
 };
 
 const ButtonMain = styled(Button)`
-    ${({ maxwidth, maxheight = "42px", fontSize = "14" }) => {
+    ${({ maxwidth, maxheight = "42px", style }) => {
+        console.log(style);
         return css`
             display: flex;
             align-items: center;
@@ -31,7 +28,8 @@ const ButtonMain = styled(Button)`
             height: ${maxheight};
             font-size: 14px;
             letter-spacing: 0.02em !important;
-            font-size: ${fontSize}px !important;
+            font-size: ${style?.style?.fontSize}px !important;
+            background: ${style?.style?.background} !important;
             &.css-f3g22s-MuiButtonBase-root-MuiButton-root,
             &.css-sghohy-MuiButtonBase-root-MuiButton-root {
                 background-color: #3a10e5;
