@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 
@@ -9,15 +9,21 @@ import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 function Header({ Choice }) {
     const [bgColor, setBgColor] = useState("");
 
-    function setScrool() {
-        if (window.scrollY >= 80) {
-            setBgColor("white");
-        } else {
-            setBgColor("");
-        }
-    }
+    useEffect(() => {
+        const setScrool = () => {
+            if (window.scrollY >= 80) {
+                setBgColor("white");
+            } else {
+                setBgColor("");
+            }
+        };
 
-    window.addEventListener("scroll", setScrool);
+        window.addEventListener("scroll", setScrool);
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+        };
+    }, []);
 
     function handleClick(e) {
         e.preventDefault();
