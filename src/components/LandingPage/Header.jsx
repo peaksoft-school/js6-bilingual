@@ -7,14 +7,14 @@ import styled from "styled-components";
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice }) {
-    const [bgColor, setBgColor] = useState("");
+    const [isUpper, setIsUpper] = useState(false);
 
     useEffect(() => {
         const setScrool = () => {
             if (window.scrollY >= 80) {
-                setBgColor("white");
+                setIsUpper(true);
             } else {
-                setBgColor("");
+                setIsUpper(false);
             }
         };
 
@@ -29,7 +29,7 @@ function Header({ Choice }) {
         e.preventDefault();
     }
     return (
-        <StyledHeader bgColor={bgColor}>
+        <StyledHeader className={isUpper ? "active" : ""}>
             <StyledImage src={Logotip} />
             {Choice ? (
                 <StyledHeaderLandingPage>
@@ -88,9 +88,15 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: ${(props) => props.bgColor};
+    background-color: "#FCD200";
     position: fixed;
     z-index: 10;
+
+    transition: 0.2s ease;
+
+    &.active {
+        background-color: white;
+    }
 `;
 const StyledImage = styled.img`
     width: 235px;
