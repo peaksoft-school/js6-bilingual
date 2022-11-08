@@ -9,6 +9,7 @@ import { scrollHeader } from "utils/helpers";
 import Logotip from "../../assets/images/landingPage/Layer 1.png";
 
 function Header({ Choice }) {
+    
     const [bgColor, setBgColor] = useState();
 
     window.addEventListener("scroll", () => {
