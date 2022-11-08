@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 
@@ -19,7 +19,6 @@ function Header({ Choice }) {
             setBgColor(false);
         }
     });
-
     function handleClick(e) {
         e.preventDefault();
     }
@@ -75,10 +74,6 @@ function Header({ Choice }) {
                     </StyledHeaderClientRole>
                 )}
             </StyledHeader>
-        </HeaderGlav>
-    );
-}
-
 const HeaderAnimation = keyframes`
 from{
     background-color: none;
@@ -92,13 +87,20 @@ const HeaderGlav = styled.div`
     justify-content: center;
 `;
 const StyledHeader = styled.div`
-    width: 1440px;
+    width: 1550px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 1s forwards;
+    background-color: "#FCD200";
+    position: fixed;
+    z-index: 10;
+    transition: 0.2s ease;
+    &.active {
+        background-color: white;
+    }
 `;
 const StyledImage = styled.img`
     width: 235px;
@@ -109,7 +111,7 @@ const StyledHeaderLandingPage = styled.div`
     width: 259px;
     height: 42px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-right: 100px;
 `;
