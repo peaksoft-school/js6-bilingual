@@ -1,16 +1,16 @@
 import React from "react";
 
+import styled from "styled-components";
+
 import Autoplay from "./Autoplay";
 
-import PartnersItem from "./PartnersItem";
-
-import styled from "styled-components";
+import SecondarySlider from "./SecondarySlider";
 
 function LandingPage() {
     return (
         <ContainerDiv>
+            <SecondarySlider />
             <Autoplay />
-            <PartnersItem />
         </ContainerDiv>
     );
 }
