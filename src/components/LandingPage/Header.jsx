@@ -9,7 +9,6 @@ import { scrollHeader } from "utils/helpers";
 import Logotip from "../../assets/images/landingPage/Layer 1.png";
 
 function Header({ Choice }) {
-    
     const [bgColor, setBgColor] = useState();
 
     window.addEventListener("scroll", () => {
@@ -80,9 +79,6 @@ function Header({ Choice }) {
 }
 
 const HeaderAnimation = keyframes`
-from{
-    background-color: none;
-}
 to{
     background-color: white;
 }
@@ -98,7 +94,7 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 1s forwards;
+    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
 `;
 const StyledImage = styled.img`
     width: 235px;
