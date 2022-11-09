@@ -6,7 +6,7 @@ import styled, { keyframes } from "styled-components";
 
 import { scrollHeader } from "utils/helpers";
 
-import Logotip from "../../assets/images/landingPage/Layer 1.png";
+import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice }) {
     const [bgColor, setBgColor] = useState();
@@ -18,7 +18,6 @@ function Header({ Choice }) {
             setBgColor(false);
         }
     });
-
     function handleClick(e) {
         e.preventDefault();
     }
@@ -80,7 +79,7 @@ function Header({ Choice }) {
 
 const HeaderAnimation = keyframes`
 to{
-    background-color: white;
+    background-color: red;
 }
 `;
 const HeaderGlav = styled.div`
@@ -88,13 +87,19 @@ const HeaderGlav = styled.div`
     justify-content: center;
 `;
 const StyledHeader = styled.div`
-    width: 1440px;
+    width: 1550px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
+    position: fixed;
+    z-index: 10;
+    transition: 0.2s ease;
+    &.active {
+        background-color: white;
+    }
 `;
 const StyledImage = styled.img`
     width: 235px;
@@ -105,7 +110,7 @@ const StyledHeaderLandingPage = styled.div`
     width: 259px;
     height: 42px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-right: 100px;
 `;
