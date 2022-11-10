@@ -2,17 +2,24 @@ import React from "react";
 
 import { Box } from "@mui/system";
 
+import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
+import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { RoutesUrl } from "routes/constants";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { RoutesUrl, UsersRole } from "routes/constants";
+import { getUserInfo, userSave } from "services/saveUser";
 import styled from "styled-components";
+
+import { LOGIN } from "utils/constants/api";
 
 import Logo from "../assets/images/AuthLogo.svg";
 import google from "../assets/images/google.svg";
 
 const SignIn = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {
         reset,
         control,
@@ -20,12 +27,17 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    const autoPostData = (data) => {};
+    async function onSubmit(userInfo) {
+        console.log(userInfo);
+        try {
+            const { data } = await baseAxios.post(LOGIN, userInfo);
+            dispatch(userRequest(data));
+            userSave(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    React.useEffect(() => {
-        autoPostData();
-    }, []);
-    const postData = async (data) => {};
     return (
         <SignInMain>
             <SignInBox>
@@ -102,7 +114,7 @@ const SignIn = () => {
                             <CheckboxUi boxcolor="blue" label="To remember me" />
                         </Box>
                         <ButtonUi
-                            onClick={handleSubmit(postData)}
+                            onClick={handleSubmit(onSubmit)}
                             maxheight="52px"
                             variant="contained"
                             maxwidth="100%"

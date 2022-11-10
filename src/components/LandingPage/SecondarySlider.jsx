@@ -11,7 +11,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { aboutUser } from "utils/constants/General";
+import { aboutUser } from "utils/constants/general";
 
 import { ReactComponent as NextIcon } from "../../assets/icons/BackIcon.svg";
 

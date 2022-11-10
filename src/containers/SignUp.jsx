@@ -1,17 +1,23 @@
 import React from "react";
 
 import { Box } from "@mui/system";
+import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { postData } from "features/authSlice";
+import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { RoutesUrl, UsersRole } from "routes/constants";
+import { getUserInfo, userSave } from "services/saveUser";
 import styled from "styled-components";
+
+import { REGISTRATION } from "utils/constants/api";
 
 import Logo from "../assets/images/AuthLogo.svg";
 import google from "../assets/images/google.svg";
 
 const SignIn = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
         reset,
@@ -20,9 +26,25 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    function onSubmit(data) {
-        dispatch(postData(data));
+    const makeIsHave = (data) => {
+        if (data?.role === UsersRole.client) navigate("/home");
+        if (data?.role === UsersRole.admin) navigate("/admin");
+    };
+
+    async function onSubmit(userInfo) {
+        try {
+            const { data } = await baseAxios.post(REGISTRATION, userInfo);
+            dispatch(userRequest(data));
+            userSave(data);
+            makeIsHave(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
+    React.useEffect(() => {
+        const resUser = getUserInfo();
+        makeIsHave(resUser);
+    }, []);
 
     return (
         <SignInMain>
@@ -169,7 +191,7 @@ const SignIn = () => {
                         </Link>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
-                        Dont have an account? <Link to="sign-up">Register</Link>{" "}
+                        Dont have an account? <Link to={RoutesUrl.SignIn}>Register</Link>
                     </IsAccaunt>
                 </SignInWrapper>
             </SignInBox>
