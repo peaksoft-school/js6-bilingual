@@ -9,7 +9,7 @@ function AdminTest() {
         <div>
             <Header />
             <UICard>
-                <ButtonUi>+ ADD NEW TEST</ButtonUi>
+                <ButtonUi>+ ADD NEW </ButtonUi>
             </UICard>
         </div>
     );
