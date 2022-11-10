@@ -79,7 +79,7 @@ function Header({ Choice }) {
 
 const HeaderAnimation = keyframes`
 to{
-    background-color: red;
+    background-color: white;
 }
 `;
 const HeaderGlav = styled.div`
