@@ -8,8 +8,8 @@ import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { RoutesUrl, UsersRole } from "routes/constants";
-import { getUserInfo, userSave } from "services/saveUser";
+import { RoutesUrl } from "routes/constants";
+import { userSave } from "services/saveUser";
 import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
@@ -18,6 +18,8 @@ import Logo from "../assets/images/AuthLogo.svg";
 import google from "../assets/images/google.svg";
 
 const SignIn = () => {
+    const [errorMessage, setErrorMessage] = React.useState(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
@@ -27,14 +29,21 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
+    const makeIsHave = (data) => {
+        if (data?.role === UsersRole.client) navigate("/home");
+        if (data?.role === UsersRole.admin) navigate("/admin");
+    };
+
     async function onSubmit(userInfo) {
         console.log(userInfo);
         try {
             const { data } = await baseAxios.post(LOGIN, userInfo);
             dispatch(userRequest(data));
             userSave(data);
+            makeIsHave(data);
+            reset();
         } catch (error) {
-            console.log(error);
+            setErrorMessage(error.response.status);
         }
     }
 
@@ -62,7 +71,10 @@ const SignIn = () => {
                             render={({ field: { onChange } }) => {
                                 return (
                                     <InputUi
-                                        handleChange={onChange}
+                                        handleChange={(e) => {
+                                            onChange(e.target.value);
+                                            setErrorMessage(null);
+                                        }}
                                         sx={{ width: "100%" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
@@ -85,7 +97,10 @@ const SignIn = () => {
                             render={({ field: { onChange } }) => {
                                 return (
                                     <PasswordInputUi
-                                        onChange={onChange}
+                                        onChange={(e) => {
+                                            onChange(e.target.value);
+                                            setErrorMessage(null);
+                                        }}
                                         sx={{ width: "100%", marginTop: "20px" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
@@ -102,6 +117,24 @@ const SignIn = () => {
                         {errors.password && (
                             <ErrorMessage> {errors.password.message} </ErrorMessage>
                         )}
+                        {errorMessage ? (
+                            <ErrMessPassOrEmail>
+                                <span> Incorrect email and/or password </span>
+                                <span>
+                                    <svg
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 18 18"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9 18C4.0293 18 0 13.9707 0 9C0 4.0293 4.0293 0 9 0C13.9707 0 18 4.0293 18 9C18 13.9707 13.9707 18 9 18ZM8.1 11.7V13.5H9.9V11.7H8.1ZM8.1 4.5V9.9H9.9V4.5H8.1Z"
+                                            fill="#F71414"
+                                        />
+                                    </svg>
+                                </span>
+                            </ErrMessPassOrEmail>
+                        ) : null}
 
                         <Box
                             sx={{
@@ -143,10 +176,22 @@ export default SignIn;
 const SignInMain = styled.div`
     background: linear-gradient(90.76deg, #6b0fa9 0.74%, #520fb6 88.41%);
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+const ErrMessPassOrEmail = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: red;
+    line-height: 21px;
+    margin-top: 8px;
+    span {
+        display: contents;
+    }
 `;
 
 const ErrorMessage = styled.small`

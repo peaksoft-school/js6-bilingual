@@ -17,6 +17,8 @@ import Logo from "../assets/images/AuthLogo.svg";
 import google from "../assets/images/google.svg";
 
 const SignIn = () => {
+    const [errorMessage, setErrorMessage] = React.useState(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
@@ -37,8 +39,9 @@ const SignIn = () => {
             dispatch(userRequest(data));
             userSave(data);
             makeIsHave(data);
+            reset();
         } catch (error) {
-            console.log(error);
+            setErrorMessage(error.response.status);
         }
     }
     React.useEffect(() => {
@@ -64,6 +67,7 @@ const SignIn = () => {
                                 required: "This field is required",
                             }}
                             render={({ field: { onChange } }) => {
+                                console.log(onChange);
                                 return (
                                     <InputUi
                                         handleChange={onChange}
@@ -120,7 +124,10 @@ const SignIn = () => {
                             render={({ field: { onChange } }) => {
                                 return (
                                     <InputUi
-                                        handleChange={onChange}
+                                        handleChange={(e) => {
+                                            onChange(e.target.value);
+                                            setErrorMessage(null);
+                                        }}
                                         sx={{ width: "100%", marginTop: "20px" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
@@ -147,7 +154,10 @@ const SignIn = () => {
                             render={({ field: { onChange } }) => {
                                 return (
                                     <PasswordInputUi
-                                        onChange={onChange}
+                                        onChange={(e) => {
+                                            onChange(e.target.value);
+                                            setErrorMessage(null);
+                                        }}
                                         sx={{ width: "100%", marginTop: "20px" }}
                                         colorlabeltextandborderandhover="rgba(58, 16, 229, 1)"
                                         colortext="rgba(117, 117, 117, 1)"
@@ -163,6 +173,24 @@ const SignIn = () => {
                         {errors.password && (
                             <ErrorMessage> {errors.password.message} </ErrorMessage>
                         )}
+                        {errorMessage ? (
+                            <ErrMessPassOrEmail>
+                                <span> This account already exists </span>
+                                <span>
+                                    <svg
+                                        width="18"
+                                        height="18"
+                                        viewBox="0 0 18 18"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M9 18C4.0293 18 0 13.9707 0 9C0 4.0293 4.0293 0 9 0C13.9707 0 18 4.0293 18 9C18 13.9707 13.9707 18 9 18ZM8.1 11.7V13.5H9.9V11.7H8.1ZM8.1 4.5V9.9H9.9V4.5H8.1Z"
+                                            fill="#F71414"
+                                        />
+                                    </svg>
+                                </span>
+                            </ErrMessPassOrEmail>
+                        ) : null}
 
                         <Box
                             sx={{
@@ -203,7 +231,7 @@ export default SignIn;
 
 const SignInMain = styled.div`
     background: linear-gradient(90.76deg, #6b0fa9 0.74%, #520fb6 88.41%);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,11 +246,22 @@ const SignInBox = styled.div`
     max-width: 616px;
     width: 100%;
     border-radius: 10px;
-    padding: 66px 58px 64px;
-    transform: scale(0.8);
+    padding: 60px 79px;
 `;
 
 const SignInWrapper = styled.div``;
+const ErrMessPassOrEmail = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: red;
+    line-height: 21px;
+    margin-top: 8px;
+    span {
+        display: contents;
+    }
+`;
 
 const SignInHead = styled.div`
     display: flex;

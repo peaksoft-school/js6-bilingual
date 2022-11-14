@@ -13,7 +13,7 @@ function PasswordInput({ onChange, sx, forInput }) {
         setInputViewOnOff((prevState) => !prevState);
     }
     return (
-        <FormControl1 sx={sx}>
+        <FormControl1 error={forInput.error} sx={sx}>
             <InputLabel>Password</InputLabel>
             <OutlinedInput1
                 {...forInput}
@@ -31,15 +31,15 @@ function PasswordInput({ onChange, sx, forInput }) {
 }
 
 const OutlinedInput1 = styled(OutlinedInput)`
-    width: 500px;
+    width: 100%;
     height: 52px;
     color: #757575 !important;
 `;
 const FormControl1 = styled(FormControl)({
-    width: "500px",
+    width: "100%",
     height: "52px",
-    "& label.Mui-focused": {
-        color: "#3A10E5",
+    "& > label": {
+        color: (props) => props.error && "red",
     },
     "& .MuiOutlinedInput-root": {
         "& fieldset": {

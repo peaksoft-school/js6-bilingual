@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Home, Admin, LandingPage, SignIn, SignUp, NotFound } from "containers";
+import { LandingPage, SignIn, SignUp, NotFound } from "containers";
 
 import { Navigate } from "react-router-dom";
 import { getUserInfo } from "services/saveUser";
-import { store } from "store";
 
 import AdminRoutes from "./AdminRoutes";
 import ClientRoutes from "./ClientRoutes";
@@ -19,7 +18,6 @@ const isAuth = (children) => {
     if (user?.role === UsersRole.admin) {
         return <Navigate to="/admin" replace />;
     }
-    console.log(children);
     return children;
 };
 
