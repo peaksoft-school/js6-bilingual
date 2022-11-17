@@ -1,15 +1,18 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { RoutesUrl, UsersRole } from "./constants";
+import { RoutesUrl } from "./constants";
 
 const PrivateRoute = ({ expectedRoles, children }) => {
-    const UserRoles = UsersRole.admin;
-    if (expectedRoles.find((role) => role === UserRoles)) {
-        return children;
+    const user = useSelector((state) => state.auth.data);
+    if (user !== null) {
+        if (expectedRoles.find((role) => user?.role === role && user?.token)) {
+            return children;
+        }
+        return <Navigate to={`${RoutesUrl.SignIn}`} />;
     }
-    return <Navigate to={`/${RoutesUrl.SignIn}`} />;
 };
 
 export default PrivateRoute;

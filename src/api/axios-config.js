@@ -9,9 +9,10 @@ const headers = {
 
 const baseAxios = axios.create({ baseURL: BASE_URL, headers });
 
+const token = getToken();
+
 baseAxios.interceptors.request.use((config) => {
     const updatedConfig = { ...config };
-    const token = getToken();
     if (token) {
         updatedConfig.headers.Authorization = `Bearer ${token}`;
     }
@@ -23,6 +24,7 @@ baseAxios.interceptors.response.use(
         return Promise.resolve(response);
     },
     (error) => {
+        console.log(error);
         if (error.response.status === 401) {
             logout();
         }
