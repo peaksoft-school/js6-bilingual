@@ -1,99 +1,102 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+import { scrollHeader } from "utils/helpers";
 
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice }) {
-    const [isUpper, setIsUpper] = useState(false);
+    const [bgColor, setBgColor] = useState();
 
-    useEffect(() => {
-        const setScrool = () => {
-            if (window.scrollY >= 80) {
-                setIsUpper(true);
-            } else {
-                setIsUpper(false);
-            }
-        };
-
-        window.addEventListener("scroll", setScrool);
-
-        return () => {
-            window.removeEventListener("scroll", onScroll);
-        };
-    }, []);
-
+    window.addEventListener("scroll", () => {
+        if (scrollHeader()) {
+            setBgColor(true);
+        } else {
+            setBgColor(false);
+        }
+    });
     function handleClick(e) {
         e.preventDefault();
     }
     return (
-        <StyledHeader className={isUpper ? "active" : ""}>
-            <StyledImage src={Logotip} />
-            {Choice ? (
-                <StyledHeaderLandingPage>
-                    <ButtonStyled
-                        text="TO COME IN"
-                        variant="contained"
-                        maxwidth="122px"
-                        maxheight="42px"
-                        fontSize="14px"
-                        click={() => handleClick}
-                    />
-                    <ButtonStyled
-                        text="REGISTER"
-                        variant="outlined"
-                        maxwidth="122px"
-                        maxheight="42px"
-                        fontSize="14px"
-                        click={() => handleClick}
-                    />
-                </StyledHeaderLandingPage>
-            ) : (
-                <StyledHeaderClientRole>
-                    <ButtonStyled
-                        text="TESTS"
-                        variant="text"
-                        maxwidth="44px"
-                        maxheight="18px"
-                        fontSize="15px"
-                        click={() => handleClick}
-                    />
-                    <ButtonStyled
-                        text="MY RESULTS"
-                        variant="text"
-                        maxwidth="110px"
-                        maxheight="18px"
-                        fontSize="15px"
-                        click={() => handleClick}
-                    />
-                    <ButtonStyled
-                        text="LOG OUT"
-                        variant="outlined"
-                        maxwidth="104px"
-                        maxheight="42px"
-                        fontSize="15px"
-                        click={() => handleClick}
-                    />
-                </StyledHeaderClientRole>
-            )}
-        </StyledHeader>
+        <HeaderGlav>
+            <StyledHeader bgColor={bgColor}>
+                <StyledImage src={Logotip} />
+                {Choice ? (
+                    <StyledHeaderLandingPage>
+                        <ButtonStyled
+                            text="TO COME IN"
+                            variant="contained"
+                            maxwidth="122px"
+                            maxheight="42px"
+                            fontSize="14px"
+                            click={() => handleClick}
+                        />
+                        <ButtonStyled
+                            text="REGISTER"
+                            variant="outlined"
+                            maxwidth="122px"
+                            maxheight="42px"
+                            fontSize="14px"
+                            click={() => handleClick}
+                        />
+                    </StyledHeaderLandingPage>
+                ) : (
+                    <StyledHeaderClientRole>
+                        <ButtonStyled
+                            text="TESTS"
+                            variant="text"
+                            maxwidth="44px"
+                            maxheight="18px"
+                            fontSize="15px"
+                            click={() => handleClick}
+                        />
+                        <ButtonStyled
+                            text="MY RESULTS"
+                            variant="text"
+                            maxwidth="110px"
+                            maxheight="18px"
+                            fontSize="15px"
+                            click={() => handleClick}
+                        />
+                        <ButtonStyled
+                            text="LOG OUT"
+                            variant="outlined"
+                            maxwidth="104px"
+                            maxheight="42px"
+                            fontSize="15px"
+                            click={() => handleClick}
+                        />
+                    </StyledHeaderClientRole>
+                )}
+            </StyledHeader>
+        </HeaderGlav>
     );
 }
 
+const HeaderAnimation = keyframes`
+to{
+    background-color: white;
+}
+`;
+const HeaderGlav = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 const StyledHeader = styled.div`
     width: 1550px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: "#FCD200";
+    position: fixed;
+    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
     position: fixed;
     z-index: 10;
-
     transition: 0.2s ease;
-
     &.active {
         background-color: white;
     }
