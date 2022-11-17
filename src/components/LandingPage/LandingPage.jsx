@@ -1,10 +1,10 @@
 import React from "react";
 
+import styled from "styled-components";
+
 import Autoplay from "./Autoplay";
 
 import PartnersItem from "./PartnersItem";
-
-import styled from "styled-components";
 
 function LandingPage() {
     return (
