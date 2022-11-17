@@ -41,7 +41,7 @@ const SignIn = () => {
             makeIsHave(data);
             reset();
         } catch (error) {
-            setErrorMessage(error.response.status);
+            setErrorMessage(error.response);
         }
     }
     React.useEffect(() => {
@@ -67,7 +67,6 @@ const SignIn = () => {
                                 required: "This field is required",
                             }}
                             render={({ field: { onChange } }) => {
-                                console.log(onChange);
                                 return (
                                     <InputUi
                                         handleChange={onChange}
@@ -133,7 +132,7 @@ const SignIn = () => {
                                         colortext="rgba(117, 117, 117, 1)"
                                         forInput={{
                                             label: "Email",
-                                            error: !!errors?.email,
+                                            error: !!errors?.email || !!errorMessage,
                                             name: "email",
                                         }}
                                     />
@@ -175,7 +174,7 @@ const SignIn = () => {
                         )}
                         {errorMessage ? (
                             <ErrMessPassOrEmail>
-                                <span> This account already exists </span>
+                                <span> {errorMessage.data.message} </span>
                                 <span>
                                     <svg
                                         width="18"
