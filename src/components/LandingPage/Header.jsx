@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 
@@ -7,23 +7,29 @@ import styled from "styled-components";
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice }) {
-    const [bgColor, setBgColor] = useState("");
+    const [isUpper, setIsUpper] = useState(false);
 
-    function setScrool() {
-        if (window.scrollY >= 80) {
-            setBgColor("white");
-        } else {
-            setBgColor("");
-        }
-    }
+    useEffect(() => {
+        const setScrool = () => {
+            if (window.scrollY >= 80) {
+                setIsUpper(true);
+            } else {
+                setIsUpper(false);
+            }
+        };
 
-    window.addEventListener("scroll", setScrool);
+        window.addEventListener("scroll", setScrool);
+
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+        };
+    }, []);
 
     function handleClick(e) {
         e.preventDefault();
     }
     return (
-        <StyledHeader bgColor={bgColor}>
+        <StyledHeader className={isUpper ? "active" : ""}>
             <StyledImage src={Logotip} />
             {Choice ? (
                 <StyledHeaderLandingPage>
@@ -82,9 +88,15 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: ${(props) => props.bgColor};
+    background-color: "#FCD200";
     position: fixed;
     z-index: 10;
+
+    transition: 0.2s ease;
+
+    &.active {
+        background-color: white;
+    }
 `;
 const StyledImage = styled.img`
     width: 235px;

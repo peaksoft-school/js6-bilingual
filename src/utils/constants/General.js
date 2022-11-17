@@ -35,3 +35,5 @@ export const aboutUser = [
         rating: 5,
     },
 ];
+
+export const JWT_TOKEN_KEY = "token";
