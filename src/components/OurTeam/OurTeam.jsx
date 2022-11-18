@@ -2,17 +2,17 @@ import React from "react";
 
 import styled from "styled-components";
 
-import Human1 from "../../assets/images/Human1.svg";
+import Human1 from "../../assets/images/landingPage/Human1.svg";
 
-import Human2 from "../../assets/images/Human2.svg";
+import Human2 from "../../assets/images/landingPage/Human2.svg";
 
-import Human3 from "../../assets/images/Human3.svg";
+import Human3 from "../../assets/images/landingPage/Human3.svg";
 
-import Human4 from "../../assets/images/Human4.svg";
+import Human4 from "../../assets/images/landingPage/Human4.svg";
 
-import Human5 from "../../assets/images/Human5.svg";
+import Human5 from "../../assets/images/landingPage/Human5.svg";
 
-import Human6 from "../../assets/images/Human6.svg";
+import Human6 from "../../assets/images/landingPage/Human6.svg";
 
 function OurTeam() {
     const Data = [

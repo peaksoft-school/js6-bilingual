@@ -10,20 +10,50 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import AccordionSummary from "@mui/material/AccordionSummary";
 
-export default function ControlledAccordions({ data }) {
+import styleds from "styled-components";
+
+export default function ControlledAccordions() {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (e, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const Footerdata = [
+        {
+            question: "What is Bilingual? ",
+            panel: 1,
+            answer: "Please take the test in a separate, quiet room. Close all other windows and close all other programs before starting the test.An external USB keyboard or mouse can be used during the test. However, when answering test questions, you should only type on one keyboard and use one mouse. Don't switch between multiple keyboards or mice.",
+        },
+        {
+            question: "How can I show what I am typing during the test? ",
+            panel: 2,
+            answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        },
+        {
+            question: "Why should I take the Bilingual English Test? ",
+            panel: 3,
+            answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        },
+        {
+            question: "How can I make sure my microphone picks up my voice clearly?",
+            panel: 4,
+            answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        },
+        {
+            question: "How can I allow a test to record my computer's screen? ",
+            panel: 5,
+            answer: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        },
+    ];
     return (
-        <div>
+        <StyledFooter>
             <StyledContainer>
                 <Header>FAQ:</Header>
-                {data.map((el) => {
+                {Footerdata.map((el) => {
                     return (
                         <StyledAccordion
+                            key={el.panel}
                             expanded={expanded === el.panel}
                             onChange={handleChange(el.panel)}>
                             <StyledAccordionSummary aria-controls="panel1bh-content" id={el.panel}>
@@ -36,10 +66,13 @@ export default function ControlledAccordions({ data }) {
                     );
                 })}
             </StyledContainer>
-        </div>
+        </StyledFooter>
     );
 }
-
+const StyledFooter = styleds.div`
+    width: 100%;
+    background-color: #262626;
+`;
 const StyledAccordionSummary = styled((props) => (
     <AccordionSummary expandIcon={<AddIcon sx={{ color: "#ffffff" }} />} {...props} />
 ))(() => ({
@@ -86,6 +119,7 @@ const Header = styled("h1")`
 
 const StyledContainer = styled(Container)`
     width: 1220px;
+    padding: 120px 0;
     background-color: #262626;
 `;
 

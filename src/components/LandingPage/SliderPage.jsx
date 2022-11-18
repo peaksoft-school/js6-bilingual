@@ -3,10 +3,9 @@ import React from "react";
 import styled from "styled-components";
 
 import Autoplay from "./Autoplay";
-
 import SecondarySlider from "./SecondarySlider";
 
-function LandingPage() {
+function SliderPage() {
     return (
         <ContainerDiv>
             <SecondarySlider />
@@ -15,7 +14,7 @@ function LandingPage() {
     );
 }
 
-export default LandingPage;
+export default SliderPage;
 
 const ContainerDiv = styled.div`
     width: 100%;

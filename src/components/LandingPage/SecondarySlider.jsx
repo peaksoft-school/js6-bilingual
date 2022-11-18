@@ -15,12 +15,12 @@ import { ReactComponent as NextIcon } from "../../assets/icons/BackIcon.svg";
 
 import { ReactComponent as BackIcon } from "../../assets/icons/NextIcon.svg";
 
-import Human1 from "../../assets/images/Human1.svg";
-import Human2 from "../../assets/images/Human2.svg";
-import Human3 from "../../assets/images/Human3.svg";
-import Human4 from "../../assets/images/Human4.svg";
-import Human5 from "../../assets/images/Human5.svg";
-import Human6 from "../../assets/images/Human6.svg";
+import Human1 from "../../assets/images/landingPage/Human1.svg";
+import Human2 from "../../assets/images/landingPage/Human2.svg";
+import Human3 from "../../assets/images/landingPage/Human3.svg";
+import Human4 from "../../assets/images/landingPage/Human4.svg";
+import Human5 from "../../assets/images/landingPage/Human5.svg";
+import Human6 from "../../assets/images/landingPage/Human6.svg";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -40,7 +40,7 @@ function SamplePrevArrow(props) {
     );
 }
 
-export default function SecondarySlider() {
+function SecondarySlider() {
     const aboutUser = [
         {
             id: Math.random().toString(),
@@ -122,6 +122,7 @@ export default function SecondarySlider() {
         </MainBox>
     );
 }
+export default SecondarySlider;
 
 const MainBox = styled("div")`
     height: 854px;
