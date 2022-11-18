@@ -1,4 +1,5 @@
 import { store } from "store";
+
 import { JWT_TOKEN_KEY } from "utils/constants/general";
 
 export const getToken = () => {

@@ -1,6 +1,6 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
-const tokenFromLS = localStorage.getItem("Token");
+const tokenFromLS = localStorage.getItem("/test");
 
 const initialState = {
     user: {

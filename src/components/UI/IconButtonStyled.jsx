@@ -8,6 +8,7 @@ const IconButtonStyled = ({ Icon, fontSize, onhover, handleClick }) => {
             onClick={handleClick}
             onhover={onhover}
             fontSize={fontSize}
+            Icon={Icon}
             dangerouslySetInnerHTML={{ __html: Icon }}
         />
     );
@@ -42,7 +43,6 @@ const StyledIcon = styled.span`
                 }
                 circle {
                     fill: ${onhover?.fillColor};
-                    ${console.log(onhover)}
                 }
             }
         `;

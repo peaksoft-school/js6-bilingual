@@ -3,9 +3,9 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
-const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, text, click }) => {
+const ButtonUi = ({ color, variant, maxwidth, fontSize, maxheight, icon, children, onClick }) => {
     const handleClick = () => {
-        click();
+        onClick();
     };
     return (
         <ButtonMain
@@ -17,7 +17,7 @@ const ButtonStyled = ({ color, variant, maxwidth, fontSize, maxheight, icon, tex
             color={color}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
 
-            <span>{text}</span>
+            <span>{children}</span>
         </ButtonMain>
     );
 };
@@ -69,7 +69,7 @@ const ButtonMain = styled(Button)`
                     background: #08af10;
                 }
             }
-            .css-8je8zh-MuiTouchRipple-root {
+            .MuiTouchRipple-root {
                 display: none;
             }
             &.css-rlclm-MuiButtonBase-root-MuiButton-root,
@@ -104,4 +104,4 @@ const ButtonSpan = styled.span`
     margin-right: 15px;
 `;
 
-export default ButtonStyled;
+export default ButtonUi;

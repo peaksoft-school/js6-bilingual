@@ -1,7 +1,7 @@
 import axios from "axios";
-import { getToken, logout } from "utils/helpers/helpers";
+import { logout } from "utils/helpers/helpers";
 
-const BASE_URL = "http://ec2-54-93-233-9.eu-central-1.compute.amazonaws.com/api/";
+import { BASE_URL } from "./baseUrl";
 
 const headers = {
     "Content-Type": "application/json",
@@ -11,7 +11,8 @@ const baseAxios = axios.create({ baseURL: BASE_URL, headers });
 
 baseAxios.interceptors.request.use((config) => {
     const updatedConfig = { ...config };
-    const token = getToken();
+    const token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwZWFrc29mdCBob3VzZSIsImV4cCI6MTY3Mzc4NTI3MiwiaWF0IjoxNjY4NjAxMjcyLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSJ9.8thao8sPL8KybbugDazSZxDhL5ZTozrXC51XpldKXHI";
     if (token) {
         updatedConfig.headers.Authorization = `Bearer ${token}`;
     }
