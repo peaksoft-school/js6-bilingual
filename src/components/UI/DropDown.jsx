@@ -56,7 +56,7 @@ const DropBox = styled.div`
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    ${({ background = "#b0cdff", fontSize = 14, width = "200px" }) => {
+    ${({ background, fontSize = 14, width = "200px" }) => {
         return css`
             background: ${background};
             font-size: ${fontSize}px;
