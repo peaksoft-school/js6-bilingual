@@ -6,23 +6,22 @@ import { InputViewOff, InputViewOn } from "assets/icons/index";
 
 import styled from "styled-components";
 
-function PasswordInput({ onChange, value }) {
+function PasswordInput({ onChange, sx, forInput }) {
     const [inputViewOnOff, setInputViewOnOff] = useState(false);
 
     function handleViewOnOff() {
         setInputViewOnOff((prevState) => !prevState);
     }
     return (
-        <FormControl1>
+        <FormControl1 error={forInput.error} sx={sx}>
             <InputLabel>Password</InputLabel>
             <OutlinedInput1
-                error={false}
+                {...forInput}
                 onChange={onChange}
-                value={value}
-                type={inputViewOnOff ? "password" : "text"}
+                type={inputViewOnOff ? "text" : "password"}
                 endAdornment={
                     <IconButton onClick={() => handleViewOnOff()}>
-                        {inputViewOnOff ? <InputViewOff /> : <InputViewOn />}
+                        {inputViewOnOff ? <InputViewOn /> : <InputViewOff />}
                     </IconButton>
                 }
                 label="Password"
@@ -32,15 +31,15 @@ function PasswordInput({ onChange, value }) {
 }
 
 const OutlinedInput1 = styled(OutlinedInput)`
-    width: 500px;
+    width: 100%;
     height: 52px;
     color: #757575 !important;
 `;
 const FormControl1 = styled(FormControl)({
-    width: "500px",
+    width: "100%",
     height: "52px",
-    "& label.Mui-focused": {
-        color: "#3A10E5",
+    "& > label": {
+        color: (props) => props.error && "red",
     },
     "& .MuiOutlinedInput-root": {
         "& fieldset": {
