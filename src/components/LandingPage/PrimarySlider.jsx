@@ -72,6 +72,8 @@ export default PrimarySlider;
 const SliderMain = styled.div``;
 const SliderWrapp = styled.div``;
 const SliderBox = styled.div`
+    width: 1370px;
+
     margin-right: -185px;
     position: relative;
 

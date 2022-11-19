@@ -80,7 +80,7 @@ const StyledHeaderButton = styled.div`
     width: 200px;
     height: 60px;
     margin-top: 20px;
-    color: whote;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;

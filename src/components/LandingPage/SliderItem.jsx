@@ -21,13 +21,13 @@ const SliderItem = ({ data }) => {
 export default SliderItem;
 
 const SliderInner = styled.div`
-    max-width: 975px;
+    max-width: 960px;
     background: ${({ bg }) => bg};
     width: 100%;
     height: 440px;
     overflow: hidden;
     border-radius: 70px 70px 70px 0px;
-    margin: 80px 10px 80px 105px;
+    margin: 100px 10px 80px 100px;
     transition: all 3s ease;
     padding: 44px 46px;
 `;
