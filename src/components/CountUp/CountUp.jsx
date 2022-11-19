@@ -97,8 +97,7 @@ const MainBox = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 1500px;
-    background: #fef5e8;
+    margin-bottom: 200px;
 `;
 const BoxForAdvertisement = styled.div`
     width: 1203px;
