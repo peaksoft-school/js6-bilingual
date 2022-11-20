@@ -1,67 +1,68 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteTest, getTests, isTestActive } from "store/slices/adminTestActions";
+
 import styled from "styled-components";
 
-function AdminTest() {
-    const dispatch = useDispatch();
-    const tests = useSelector((state) => state.test.tests);
-
-    useEffect(() => {
-        dispatch(getTests());
-    }, []);
-
+function QuestionToTest() {
     const navigate = useNavigate();
-
-    const goToNexPage = () => {
-        navigate("/admin/create-test");
-    };
-
-    const updateTestsHandler = (id) => {
-        navigate(`/admin/update-test/${id}`);
-    };
-
-    const isActiveTest = (id) => {
-        dispatch(isTestActive(id));
-    };
-
-    const deleteHandler = (id) => {
-        dispatch(deleteTest(id));
+    const goBacktoAdminTests = () => {
+        navigate("/admin/update-test/:id");
     };
     return (
         <StyledMainDiv>
-            <StyledCardDiv>
+            <UICard
+                marginBox="68px 190px 227px 190px"
+                cardWidth="100%"
+                cardBorderRadius="20px"
+                cardBoxShadow="0px 4px 39px rgba(196, 196, 196, 0.6)">
+                <StyledAboutTest>
+                    <StyledNameTest>
+                        Title:
+                        <StyledSpan>Take a free practice test and estimate your score</StyledSpan>
+                    </StyledNameTest>
+                    <StyledNameTest>
+                        Short Description: <StyledSpan>Select real English words</StyledSpan>
+                    </StyledNameTest>
+                    <StyledNameTest>
+                        Duration: <StyledSpan>15:00</StyledSpan>
+                    </StyledNameTest>
+                </StyledAboutTest>
+                <StyledBtnDiv>
+                    <ButtonUi variant="contained">+ ADD MORE QUESTIONS </ButtonUi>
+                </StyledBtnDiv>
+                <StyledLine />
+                <StyledAboutTests>
+                    <StyledNameDiv>
+                        <p>#</p>
+                        <p>Name</p>
+                    </StyledNameDiv>
+                    <StyledQuestions>
+                        <p>Question</p>
+                        <p>Question Type</p>
+                    </StyledQuestions>
+                </StyledAboutTests>
                 <UICard
-                    marginBox="68px 190px"
+                    cardBorderRadius="8px"
+                    cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
                     cardWidth="100%"
-                    cardBorderRadius="20px"
-                    cardBoxShadow="0px 4px 39px rgba(196, 196, 196, 0.6)">
-                    <StyledBtnDiv>
-                        <ButtonUi variant="contained" onClick={goToNexPage}>
-                            + ADD NEW TEST
-                        </ButtonUi>
-                    </StyledBtnDiv>
-                    {tests.map((item) => (
-                        <StyledContainerDiv key={item.id}>
-                            <UICard
-                                cardBorderRadius="8px"
-                                cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
-                                cardWidth="975px"
-                                cardHeight="66px">
-                                <StyledItemsDiv>
-                                    <h6>{item.title}</h6>
-                                    <StyledIconsBtn>
-                                        <SwitcherComp onChange={() => isActiveTest(item.id)} />
-                                        <IconButtonStyled
-                                            handleClick={() => updateTestsHandler(item.id)}
-                                            Icon={`
-                                     <svg
+                    cardHeight="66px">
+                    <StyledContainerCard>
+                        <StyledAboutQuestion>
+                            <p>1</p>
+                            <p>Select the real Englisg word in the list...</p>
+                            <p>1 min</p>
+                            <p>Select real English word</p>
+                        </StyledAboutQuestion>
+                        <StyledIconsBtn>
+                            <SwitcherComp />
+                            <IconButtonStyled
+                                Icon={`
+                                    <svg
                                         width="20"
                                         height="20"
                                         viewBox="0 0 20 20"
@@ -89,10 +90,9 @@ function AdminTest() {
                                             </clipPath>
                                         </defs>
                                     </svg>`}
-                                        />
-                                        <IconButtonStyled
-                                            handleClick={() => deleteHandler(item.id)}
-                                            Icon={`
+                            />
+                            <IconButtonStyled
+                                Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -115,45 +115,95 @@ function AdminTest() {
                                         />
                                     </svg>
                                     `}
-                                        />
-                                    </StyledIconsBtn>
-                                </StyledItemsDiv>
-                            </UICard>
-                        </StyledContainerDiv>
-                    ))}
+                            />
+                        </StyledIconsBtn>
+                    </StyledContainerCard>
                 </UICard>
-            </StyledCardDiv>
+                <StyledBtnGoBack>
+                    <ButtonUi variant="outlined" onClick={goBacktoAdminTests}>
+                        GO BACK
+                    </ButtonUi>
+                    <ButtonUi variant="contained" color="success">
+                        SAVE
+                    </ButtonUi>
+                </StyledBtnGoBack>
+            </UICard>
         </StyledMainDiv>
     );
 }
 
-export default AdminTest;
+export default QuestionToTest;
 
 const StyledMainDiv = styled.div`
-    padding: 100px 0 282px 0;
+    padding: 100px 190px 153px 190px;
     background: #d7e1f8;
+    margin-top: 100px;
 `;
 
-const StyledCardDiv = styled.div`
-    width: 1060px;
-    margin: 0 auto;
-    padding-top: 68px;
+const StyledAboutTest = styled.div`
+    height: 66px;
+    margin-bottom: 44px;
+`;
+
+const StyledNameTest = styled.h5`
+    font-style: normal;
+    font-size: 16px;
+    padding-top: 6px;
+    color: #3752b4;
+`;
+
+const StyledSpan = styled.span`
+    font-weight: 400;
+    font-size: 16px;
+    color: #4c4859;
 `;
 
 const StyledBtnDiv = styled.div`
-    width: 100%;
     display: flex;
+    align-items: center;
     justify-content: end;
-    margin-bottom: 25px;
 `;
 
-const StyledContainerDiv = styled.div`
-    margin-bottom: 16px;
+const StyledLine = styled.div`
+    height: 1px;
+    border: 1.53px solid #d4d0d0;
+    background: #c4c4c4;
+    margin: 22px 0 24px 0;
 `;
 
-const StyledItemsDiv = styled.div`
+const StyledAboutTests = styled.div`
+    width: 670px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+`;
+
+const StyledNameDiv = styled.div`
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 45px;
+`;
+
+const StyledQuestions = styled.div`
+    width: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const StyledContainerCard = styled.div`
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const StyledAboutQuestion = styled.div`
+    width: 700px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -164,4 +214,12 @@ const StyledIconsBtn = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+`;
+
+const StyledBtnGoBack = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: end;
+    margin-top: 32px;
 `;

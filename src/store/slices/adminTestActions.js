@@ -5,6 +5,7 @@ import {
     updateTestById,
     getTestQueryId,
     deleteById,
+    switcherById,
 } from "api/tes-query";
 
 const initialState = {
@@ -35,9 +36,7 @@ export const postQuestions = createAsyncThunk(
     async (value, { rejectWithValue, dispatch }) => {
         try {
             const response = await postQuestionsQuery(value);
-            if (response.data) {
-                dispatch(getTests());
-            }
+            dispatch(getTests());
             return response.data;
         } catch (error) {
             return rejectWithValue(error.message);
@@ -48,17 +47,24 @@ export const postQuestions = createAsyncThunk(
 export const updateTest = createAsyncThunk(
     "test/updateTest",
     async (data, { rejectWithValue, dispatch }) => {
-        console.log(data, "valeuuue");
         try {
             const updateTestData = await updateTestById(data.id, data.newInputValue);
             dispatch(getTests());
             return updateTestData;
         } catch (error) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
 );
+
+export const isTestActive = createAsyncThunk("test/isTestActive", async (id) => {
+    try {
+        const response = await switcherById(id);
+        return response;
+    } catch (error) {
+        return error.message;
+    }
+});
 
 export const deleteTest = createAsyncThunk("test/deleteTest", async (id, { dispatch }) => {
     await deleteById(id);
@@ -75,9 +81,6 @@ export const testsPostSlice = createSlice({
         },
         [getTestById.fulfilled]: (state, action) => {
             state.singleTest = action.payload;
-        },
-        [updateTest.fulfilled]: (state, action) => {
-            console.log(action.payload);
         },
     },
 });

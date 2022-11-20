@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { ButtonUi } from "components/UI";
-
 import Input from "components/UI/Input";
-
 import UICard from "components/UI/UICard";
-
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getTests, getTestById, updateTest } from "store/slices/adminTestActions";
+import { getTestById, updateTest } from "store/slices/adminTestActions";
 import styled from "styled-components";
 
 function NewTest() {
@@ -16,34 +13,29 @@ function NewTest() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [newInputValue, setNewInputValue] = useState({
-        newTitle: "",
-        newDescription: "",
+        title: "",
+        shortDescription: "",
     });
-    console.log(newInputValue);
-
-    // useEffect(() => {
-    //     dispatch(getTests());
-    // }, []);
 
     useEffect(() => {
         dispatch(getTestById(id))
             .unwrap()
             .then((result) => {
-                console.log(result, "resssult");
+                console.log(result, "result");
                 setNewInputValue({
                     ...newInputValue,
-                    newTitle: result.title,
-                    newDescription: result.shortDescription,
+                    title: result.title,
+                    shortDescription: result.shortDescription,
                 });
             });
     }, []);
 
     const getNewTitleHandler = (e) => {
-        setNewInputValue({ ...newInputValue, newTitle: e.target.value });
+        setNewInputValue({ ...newInputValue, title: e.target.value });
     };
 
     const getNewDescriptionHandler = (e) => {
-        setNewInputValue({ ...newInputValue, newDescription: e.target.value });
+        setNewInputValue({ ...newInputValue, shortDescription: e.target.value });
     };
 
     const goToBackPage = () => {
@@ -51,9 +43,13 @@ function NewTest() {
     };
 
     const sedingUppdateTestById = () => {
-        // if (!newInputValue.newTitle && !newInputValue.newDescription) return;
+        if (!newInputValue.title && !newInputValue.shortDescription) return;
         dispatch(updateTest({ id, newInputValue }));
-        // navigate("/admin/tests");
+        navigate("/admin/tests");
+    };
+
+    const addQuestion = () => {
+        navigate("/admin/question-to-test");
     };
 
     return (
@@ -66,13 +62,13 @@ function NewTest() {
                 <StyledDiv>
                     <div>
                         <StyledTitle>Title</StyledTitle>
-                        <Input handleChange={getNewTitleHandler} value={newInputValue.newTitle} />
+                        <Input handleChange={getNewTitleHandler} value={newInputValue.title} />
                     </div>
                     <div>
                         <StyledTitle>Short Description</StyledTitle>
                         <Input
                             handleChange={getNewDescriptionHandler}
-                            value={newInputValue.newDescription}
+                            value={newInputValue.shortDescription}
                         />
                     </div>
                     <StyledBtnDiv>
@@ -85,7 +81,9 @@ function NewTest() {
                             onClick={sedingUppdateTestById}>
                             SAVE
                         </ButtonUi>
-                        <ButtonUi variant="contained">+ ADD QUESTIONS </ButtonUi>
+                        <ButtonUi variant="contained" onClick={addQuestion}>
+                            + ADD QUESTIONS{" "}
+                        </ButtonUi>
                     </StyledBtnDiv>
                 </StyledDiv>
             </UICard>
@@ -99,7 +97,9 @@ const StyledSection = styled.section`
     width: 980px;
     margin: 0 auto;
     margin-top: 68px;
+    padding: 100px 0 282px 0;
 `;
+
 const StyledDiv = styled.div`
     width: 100%;
     height: 290px;
@@ -107,6 +107,7 @@ const StyledDiv = styled.div`
     flex-direction: column;
     justify-content: space-between;
 `;
+
 const StyledTitle = styled.h5`
     font-weight: 500;
     font-size: 16px;
@@ -114,6 +115,7 @@ const StyledTitle = styled.h5`
     color: #4c4859;
     margin-bottom: 12px;
 `;
+
 const StyledBtnDiv = styled.div`
     display: flex;
     gap: 16px;

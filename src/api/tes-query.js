@@ -23,3 +23,8 @@ export const updateTestById = async (id, updatedTest) => {
 export const deleteById = async (id) => {
     await baseAxios.delete(`/test/${id}`);
 };
+
+export const switcherById = async (id) => {
+    const response = await baseAxios.put(`/test/enable-disable/${id}`);
+    return response.data;
+};

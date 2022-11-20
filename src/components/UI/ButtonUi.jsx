@@ -3,7 +3,17 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
-const ButtonUi = ({ color, variant, maxwidth, fontSize, maxheight, icon, children, onClick }) => {
+const ButtonUi = ({
+    color,
+    variant,
+    maxwidth,
+    fontSize,
+    maxheight,
+    icon,
+    children,
+    onClick,
+    text,
+}) => {
     const handleClick = () => {
         onClick();
     };
@@ -16,8 +26,8 @@ const ButtonUi = ({ color, variant, maxwidth, fontSize, maxheight, icon, childre
             variant={variant}
             color={color}>
             {icon && <ButtonSpan>{icon}</ButtonSpan>}
-
-            <span>{children}</span>
+            {text}
+            {children}
         </ButtonMain>
     );
 };

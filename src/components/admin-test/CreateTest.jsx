@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 
 import { ButtonUi } from "components/UI";
-
 import Input from "components/UI/Input";
-
 import UICard from "components/UI/UICard";
-
 import { useDispatch } from "react-redux";
-
 import { useNavigate } from "react-router-dom";
-
 import { postQuestions } from "store/slices/adminTestActions";
 
 import styled from "styled-components";
@@ -17,7 +12,7 @@ import styled from "styled-components";
 function CreateTest() {
     const [value, setValue] = useState({
         title: "",
-        description: "",
+        shortDescription: "",
     });
 
     const navigate = useNavigate();
@@ -29,7 +24,7 @@ function CreateTest() {
     };
 
     const getDescriptionHandler = (event) => {
-        setValue({ ...value, description: event.target.value });
+        setValue({ ...value, shortDescription: event.target.value });
     };
 
     const goToBackPage = () => {
@@ -37,7 +32,7 @@ function CreateTest() {
     };
 
     const sendingTestHandler = () => {
-        if (!value.description && !value.title) return;
+        if (!value.shortDescription && !value.title) return;
         dispatch(postQuestions(value));
         navigate("/admin/tests");
     };
@@ -56,7 +51,10 @@ function CreateTest() {
                     </div>
                     <div>
                         <StyledTitle>Short Description</StyledTitle>
-                        <Input value={value.description} handleChange={getDescriptionHandler} />
+                        <Input
+                            value={value.shortDescription}
+                            handleChange={getDescriptionHandler}
+                        />
                     </div>
                     <StyledBtnDiv>
                         <ButtonUi variant="outlined" onClick={goToBackPage}>
@@ -78,7 +76,9 @@ const StyledSection = styled.section`
     width: 980px;
     margin: 0 auto;
     margin-top: 68px;
+    padding: 100px 0 282px 0;
 `;
+
 const StyledDiv = styled.div`
     width: 100%;
     height: 290px;
@@ -86,6 +86,7 @@ const StyledDiv = styled.div`
     flex-direction: column;
     justify-content: space-between;
 `;
+
 const StyledTitle = styled.h5`
     font-weight: 500;
     font-size: 16px;
@@ -93,6 +94,7 @@ const StyledTitle = styled.h5`
     color: #4c4859;
     margin-bottom: 12px;
 `;
+
 const StyledBtnDiv = styled.div`
     display: flex;
     gap: 16px;

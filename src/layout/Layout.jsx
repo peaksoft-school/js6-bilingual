@@ -6,18 +6,16 @@ import styled from "styled-components";
 
 function Layout() {
     return (
-        <>
-            <Header />
-            <StyledMain>
-                <Outlet />
-            </StyledMain>
-        </>
+        <StyledMain>
+            <Header HeaderBg="white" />
+            <Outlet />
+        </StyledMain>
     );
 }
 
 export default Layout;
 
 const StyledMain = styled.main`
-    padding-top: 96px;
+    width: 100%;
     background: #d7e1f8;
 `;
