@@ -21,7 +21,6 @@ function NewTest() {
         dispatch(getTestById(id))
             .unwrap()
             .then((result) => {
-                console.log(result, "result");
                 setNewInputValue({
                     ...newInputValue,
                     title: result.title,

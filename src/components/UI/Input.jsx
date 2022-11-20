@@ -8,6 +8,8 @@ const Input = ({
     colortext = "gray",
     colorlabeltextandborderandhover = "#3A10E5",
     handleChange,
+    sx,
+    value,
     ...forInput
 }) => {
     // FOR INPUT colorlabeltextandborderandhover

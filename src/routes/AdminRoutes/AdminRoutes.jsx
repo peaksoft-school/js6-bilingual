@@ -13,7 +13,7 @@ function AdminRoutes() {
         <div>
             <Routes>
                 <Route path="/" element={<Navigate replace to="/admin" />} />
-                <Route path="/admin" element={<Layout />}>
+                <Route path="admin" element={<Layout />}>
                     <Route index element={<Navigate replace to="/admin/tests" />} />
                     <Route path="tests" element={<AdminTest />} />
                     <Route path="create-test" element={<CreateTest />} />
