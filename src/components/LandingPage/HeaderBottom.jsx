@@ -13,7 +13,7 @@ import Header from "./Header";
 function HeaderBottom() {
     return (
         <SHeaderBottom>
-            <Header Choice="true" />
+            <Header Choice="false" />
             <StyledHeaderBottom>
                 <StyledHeaderContainerText>
                     <StyledHeaderText>Prove your English proficiency today with</StyledHeaderText>
@@ -33,12 +33,13 @@ function HeaderBottom() {
 
 const SHeaderBottom = styled.div`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #fcd200;
 `;
 
 const StyledHeaderBottom = styled.div`
-    width: 1550px;
+    width: 1510px;
     height: 878px;
     background: url(${PhotoHeader});
     position: relative;
@@ -79,7 +80,7 @@ const StyledHeaderButton = styled.div`
     width: 200px;
     height: 60px;
     margin-top: 20px;
-    color: whote;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;

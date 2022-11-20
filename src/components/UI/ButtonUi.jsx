@@ -19,7 +19,7 @@ const ButtonUi = ({
     };
     return (
         <ButtonMain
-            onClick={handleClick}
+            onClick={onClick}
             maxwidth={maxwidth}
             fontSize={fontSize}
             maxheight={maxheight}

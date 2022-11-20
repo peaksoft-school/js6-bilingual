@@ -2,17 +2,17 @@ import React from "react";
 
 import styled from "styled-components";
 
-import Human1 from "../../assets/images/Human1.svg";
+import Human1 from "../../assets/images/landingPage/Human1.svg";
 
-import Human2 from "../../assets/images/Human2.svg";
+import Human2 from "../../assets/images/landingPage/Human2.svg";
 
-import Human3 from "../../assets/images/Human3.svg";
+import Human3 from "../../assets/images/landingPage/Human3.svg";
 
-import Human4 from "../../assets/images/Human4.svg";
+import Human4 from "../../assets/images/landingPage/Human4.svg";
 
-import Human5 from "../../assets/images/Human5.svg";
+import Human5 from "../../assets/images/landingPage/Human5.svg";
 
-import Human6 from "../../assets/images/Human6.svg";
+import Human6 from "../../assets/images/landingPage/Human6.svg";
 
 function OurTeam() {
     const Data = [
@@ -54,7 +54,7 @@ function OurTeam() {
                 <StyledPhotoBox>
                     {Data.map((item) => {
                         return (
-                            <StyledContainer>
+                            <StyledContainer key={item.name}>
                                 <StyledImage src={item.photo} />
                                 <StyledTittleName>{item.name}</StyledTittleName>
                                 <StyledTittleStatus>{item.status}</StyledTittleStatus>
@@ -66,24 +66,24 @@ function OurTeam() {
         </div>
     );
 }
+export default OurTeam;
 
 const StyledContainerMain = styled.div`
     width: 1232px;
     height: 335px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 `;
-const StyledTittle = styled.div`
-    width: 180px;
+const StyledTittle = styled.h1`
+    width: 200px;
     height: 52px;
-    font-family: Gilroy;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
     color: #3752b4;
-    line-height: 130%;
 `;
 const StyledPhotoBox = styled.div`
     width: 1232px;
@@ -124,4 +124,3 @@ const StyledTittleStatus = styled.div`
     font-size: 14px;
     line-height: 130%;
 `;
-export default OurTeam;
