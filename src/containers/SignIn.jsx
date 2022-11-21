@@ -4,11 +4,11 @@ import { Box } from "@mui/system";
 
 import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { RoutesUrl, UsersRole } from "containers/Admin/constants";
 import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { RoutesUrl, UsersRole } from "routes/constants";
 import { userSave } from "services/saveUser";
 import styled from "styled-components";
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { RoutesUrl } from "../containers/Admin/constants";
+import { RoutesUrl } from "./constants";
 
 const PrivateRoute = ({ expectedRoles, children }) => {
     const user = useSelector((state) => state.auth.data);
