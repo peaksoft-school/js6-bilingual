@@ -1,4 +1,4 @@
-import { ADMIN_CONST_URL } from "routes/constants";
+import { ADMIN_CONST_URL } from "containers/Admin/constants";
 
 const { ADD, TEST, QUESTION } = ADMIN_CONST_URL;
 
