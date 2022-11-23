@@ -1,7 +1,8 @@
 import axios from "axios";
+
 import { getToken, logout } from "utils/helpers/helpers";
 
-const BASE_URL = "http://ec2-54-93-233-9.eu-central-1.compute.amazonaws.com/api/";
+import { BASE_URL } from "./baseUrl";
 
 const headers = {
     "Content-Type": "application/json",
@@ -9,10 +10,9 @@ const headers = {
 
 const baseAxios = axios.create({ baseURL: BASE_URL, headers });
 
-const token = getToken();
-
 baseAxios.interceptors.request.use((config) => {
     const updatedConfig = { ...config };
+    const token = getToken();
     if (token) {
         updatedConfig.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,8 +24,7 @@ baseAxios.interceptors.response.use(
         return Promise.resolve(response);
     },
     (error) => {
-        console.log(error);
-        if (error.response.status === 401) {
+        if (error.response?.status === 401) {
             logout();
         }
         return Promise.reject(error);

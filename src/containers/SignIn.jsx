@@ -92,7 +92,7 @@ const SignIn = () => {
                             rules={{
                                 required: "This field is required",
                                 minLength: {
-                                    value: 6,
+                                    value: 5,
                                     message: "Password lenght must be at least 6",
                                 },
                             }}

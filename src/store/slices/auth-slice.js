@@ -1,13 +1,23 @@
+import Cookies from "js-cookie";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
-const tokenFromLS = localStorage.getItem("Token");
+// const tokenFromLS = localStorage.getItem("/test");
 
-const initialState = {
-    user: {
-        token: tokenFromLS || null,
-        role: null,
-    },
-};
+const cookies = Cookies.get("user") || "";
+
+const authData = cookies ? JSON.parse(cookies) : cookies;
+
+const initialState = authData
+    ? {
+          user: authData,
+      }
+    : {
+          user: {
+              token: null,
+              role: null,
+          },
+      };
 
 export const authSlice = createSlice({
     name: "auth",

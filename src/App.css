@@ -22,3 +22,7 @@ ul {
     padding: 0;
     margin: 0;
 }
+
+/* div[role="tooltip"] {
+    font-size: 30px !important;
+} */
