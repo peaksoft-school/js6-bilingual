@@ -20,9 +20,12 @@ export const UsersRole = {
 
 export const ADMIN_CONST_URL = {
     "/": "/",
-    TEST: "/test/",
-    ADD: "add/",
-    QUESTION: "question/",
+    TEST: "/tests",
+    CREATE_TEST: "/create-test",
+    UPDATETEST: "update-test/:id",
+    QUESTIONTOTEST: "/question-to-test/",
+    CREATE_QUESTION: "create-question",
+    UPDATE_QUESTION: "update-question/:id",
 };
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////

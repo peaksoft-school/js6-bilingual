@@ -75,8 +75,6 @@ export default CreateTest;
 const StyledSection = styled.section`
     width: 980px;
     margin: 0 auto;
-    margin-top: 68px;
-    padding: 100px 0 282px 0;
 `;
 
 const StyledDiv = styled.div`

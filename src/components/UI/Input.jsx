@@ -10,7 +10,7 @@ const Input = ({
     handleChange,
     sx,
     value,
-    ...forInput
+    forInput,
 }) => {
     // FOR INPUT colorlabeltextandborderandhover
     return (

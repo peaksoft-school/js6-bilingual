@@ -10,7 +10,7 @@ import {
 
 const initialState = {
     tests: [],
-    singleTest: null,
+    singleTest: [],
 };
 
 export const getTests = createAsyncThunk("test/getTests", async () => {
@@ -80,7 +80,7 @@ export const testsPostSlice = createSlice({
             state.tests = action.payload;
         },
         [getTestById.fulfilled]: (state, action) => {
-            state.singleTest = action.payload;
+            state.singleTest = [action.payload];
         },
     },
 });

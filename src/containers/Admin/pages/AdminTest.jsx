@@ -4,6 +4,7 @@ import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
+import Layout from "layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteTest, getTests, isTestActive } from "store/slices/adminTestActions";
@@ -11,7 +12,9 @@ import styled from "styled-components";
 
 function AdminTest() {
     const dispatch = useDispatch();
-    const tests = useSelector((state) => state.test.tests);
+    const tests = useSelector((state) => {
+        return state.test.tests;
+    });
 
     useEffect(() => {
         dispatch(getTests());
@@ -35,32 +38,31 @@ function AdminTest() {
         dispatch(deleteTest(id));
     };
     return (
-        <StyledMainDiv>
-            <StyledCardDiv>
-                <UICard
-                    marginBox="68px 190px"
-                    cardWidth="100%"
-                    cardBorderRadius="20px"
-                    cardBoxShadow="0px 4px 39px rgba(196, 196, 196, 0.6)">
-                    <StyledBtnDiv>
-                        <ButtonUi variant="contained" onClick={goToNexPage}>
-                            + ADD NEW TEST
-                        </ButtonUi>
-                    </StyledBtnDiv>
-                    {tests.map((item) => (
-                        <StyledContainerDiv key={item.id}>
-                            <UICard
-                                cardBorderRadius="8px"
-                                cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
-                                cardWidth="975px"
-                                cardHeight="66px">
-                                <StyledItemsDiv>
-                                    <h6>{item.title}</h6>
-                                    <StyledIconsBtn>
-                                        <SwitcherComp onChange={() => isActiveTest(item.id)} />
-                                        <IconButtonStyled
-                                            handleClick={() => updateTestsHandler(item.id)}
-                                            Icon={`
+        <StyledCardDiv>
+            <UICard
+                marginBox="68px 190px"
+                cardWidth="100%"
+                cardBorderRadius="20px"
+                cardBoxShadow="0px 4px 39px rgba(196, 196, 196, 0.6)">
+                <StyledBtnDiv>
+                    <ButtonUi variant="contained" onClick={goToNexPage}>
+                        + ADD NEW TEST
+                    </ButtonUi>
+                </StyledBtnDiv>
+                {tests?.map((item) => (
+                    <StyledContainerDiv key={item.id}>
+                        <UICard
+                            cardBorderRadius="8px"
+                            cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
+                            cardWidth="975px"
+                            cardHeight="66px">
+                            <StyledItemsDiv>
+                                <h6>{item.title}</h6>
+                                <StyledIconsBtn>
+                                    <SwitcherComp onChange={() => isActiveTest(item.id)} />
+                                    <IconButtonStyled
+                                        handleClick={() => updateTestsHandler(item.id)}
+                                        Icon={`
                                      <svg
                                         width="20"
                                         height="20"
@@ -89,10 +91,10 @@ function AdminTest() {
                                             </clipPath>
                                         </defs>
                                     </svg>`}
-                                        />
-                                        <IconButtonStyled
-                                            handleClick={() => deleteHandler(item.id)}
-                                            Icon={`
+                                    />
+                                    <IconButtonStyled
+                                        handleClick={() => deleteHandler(item.id)}
+                                        Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -115,29 +117,22 @@ function AdminTest() {
                                         />
                                     </svg>
                                     `}
-                                        />
-                                    </StyledIconsBtn>
-                                </StyledItemsDiv>
-                            </UICard>
-                        </StyledContainerDiv>
-                    ))}
-                </UICard>
-            </StyledCardDiv>
-        </StyledMainDiv>
+                                    />
+                                </StyledIconsBtn>
+                            </StyledItemsDiv>
+                        </UICard>
+                    </StyledContainerDiv>
+                ))}
+            </UICard>
+        </StyledCardDiv>
     );
 }
 
 export default AdminTest;
 
-const StyledMainDiv = styled.div`
-    padding: 100px 0 282px 0;
-    background: #d7e1f8;
-`;
-
 const StyledCardDiv = styled.div`
     width: 1060px;
     margin: 0 auto;
-    padding-top: 68px;
 `;
 
 const StyledBtnDiv = styled.div`

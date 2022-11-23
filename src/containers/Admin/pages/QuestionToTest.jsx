@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 
+import { Tooltip } from "@mui/material";
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
+import { formatterQuestionType } from "services/format";
+import { getTestById } from "store/slices/adminTestActions";
+import { deleteQuestion, isActiveQuestion } from "store/slices/questionSlice";
 import styled from "styled-components";
 
+import { ADMIN_CONST_URL } from "../../../routes/constants";
+
 function QuestionToTest() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const goBacktoAdminTests = () => {
-        navigate("/admin/update-test/:id");
+    const { id } = useParams();
+    const { singleTest } = useSelector((state) => state.test);
+    const questionList = singleTest[0]?.questionResponses;
+
+    useEffect(() => {
+        dispatch(getTestById(id));
+    }, []);
+
+    const changeActiveQuestion = (isActId) => {
+        dispatch(isActiveQuestion(isActId));
     };
+
+    const deleteQuestionById = (deleteId) => {
+        dispatch(deleteQuestion(deleteId));
+    };
+
+    const goBacktoAdminTests = () => {
+        navigate(-1);
+    };
+
     return (
         <StyledMainDiv>
             <UICard
@@ -20,48 +45,78 @@ function QuestionToTest() {
                 cardWidth="100%"
                 cardBorderRadius="20px"
                 cardBoxShadow="0px 4px 39px rgba(196, 196, 196, 0.6)">
-                <StyledAboutTest>
-                    <StyledNameTest>
-                        Title:
-                        <StyledSpan>Take a free practice test and estimate your score</StyledSpan>
-                    </StyledNameTest>
-                    <StyledNameTest>
-                        Short Description: <StyledSpan>Select real English words</StyledSpan>
-                    </StyledNameTest>
-                    <StyledNameTest>
-                        Duration: <StyledSpan>15:00</StyledSpan>
-                    </StyledNameTest>
-                </StyledAboutTest>
+                {singleTest.map((item) => (
+                    <StyledAboutTest key={item.id}>
+                        <StyledNameTest>
+                            Title:
+                            <StyledSpan>{item.title}</StyledSpan>
+                        </StyledNameTest>
+                        <StyledNameTest>
+                            Short Description: <StyledSpan>{item.shortDescription}</StyledSpan>
+                        </StyledNameTest>
+                        <StyledNameTest>
+                            Duration: <StyledSpan>{item.duration}</StyledSpan>
+                        </StyledNameTest>
+                    </StyledAboutTest>
+                ))}
                 <StyledBtnDiv>
-                    <ButtonUi variant="contained">+ ADD MORE QUESTIONS </ButtonUi>
+                    <ButtonUi
+                        variant="contained"
+                        onClick={() => navigate(`/admin/${ADMIN_CONST_URL.CREATE_QUESTION}`)}>
+                        + ADD MORE QUESTIONS
+                    </ButtonUi>
                 </StyledBtnDiv>
                 <StyledLine />
                 <StyledAboutTests>
-                    <StyledNameDiv>
-                        <p>#</p>
-                        <p>Name</p>
-                    </StyledNameDiv>
-                    <StyledQuestions>
-                        <p>Question</p>
-                        <p>Question Type</p>
-                    </StyledQuestions>
+                    <p>#</p>
+                    <p>Name</p>
+                    <p>Duration</p>
+                    <p>Question Type</p>
                 </StyledAboutTests>
-                <UICard
-                    cardBorderRadius="8px"
-                    cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
-                    cardWidth="100%"
-                    cardHeight="66px">
-                    <StyledContainerCard>
-                        <StyledAboutQuestion>
-                            <p>1</p>
-                            <p>Select the real Englisg word in the list...</p>
-                            <p>1 min</p>
-                            <p>Select real English word</p>
-                        </StyledAboutQuestion>
-                        <StyledIconsBtn>
-                            <SwitcherComp />
-                            <IconButtonStyled
-                                Icon={`
+                {questionList?.length > 0 &&
+                    questionList.map((item, index) => (
+                        <UICard
+                            key={item.id}
+                            cardBorderRadius="8px"
+                            cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
+                            cardWidth="100%"
+                            cardHeight="66px">
+                            <StyledContainerCard>
+                                <StyledAboutQuestion>
+                                    <p>{index + 1}</p>
+                                    <Tooltip
+                                        componentsProps={{
+                                            tooltip: {
+                                                sx: {
+                                                    maxWidth: "500px",
+                                                    fontSize: "18px",
+                                                },
+                                            },
+                                        }}
+                                        title={item.title}
+                                        placement="top">
+                                        <p>
+                                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                                            elit. Officia, doloribus sit nisi ipsum dolorum, animi
+                                            temporibus, quos deleniti nam impedit quasi? Cumque
+                                            magnam molestias fuga.
+                                        </p>
+                                    </Tooltip>
+                                    <p>{item.duration}</p>
+                                    <p style={{ textTransform: "capitalize" }}>
+                                        {formatterQuestionType(item.questionType)}
+                                    </p>
+                                </StyledAboutQuestion>
+                                <StyledIconsBtn>
+                                    <SwitcherComp
+                                        onChange={() => changeActiveQuestion(item.id)}
+                                        value={item.isActive}
+                                    />
+                                    <IconButtonStyled
+                                        handleClick={() =>
+                                            navigate(`/admin/update-question/${item.id}`)
+                                        }
+                                        Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -90,9 +145,10 @@ function QuestionToTest() {
                                             </clipPath>
                                         </defs>
                                     </svg>`}
-                            />
-                            <IconButtonStyled
-                                Icon={`
+                                    />
+                                    <IconButtonStyled
+                                        handleClick={() => deleteQuestionById(item.id)}
+                                        Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -115,16 +171,15 @@ function QuestionToTest() {
                                         />
                                     </svg>
                                     `}
-                            />
-                        </StyledIconsBtn>
-                    </StyledContainerCard>
-                </UICard>
+                                    />
+                                </StyledIconsBtn>
+                            </StyledContainerCard>
+                        </UICard>
+                    ))}
+
                 <StyledBtnGoBack>
                     <ButtonUi variant="outlined" onClick={goBacktoAdminTests}>
                         GO BACK
-                    </ButtonUi>
-                    <ButtonUi variant="contained" color="success">
-                        SAVE
                     </ButtonUi>
                 </StyledBtnGoBack>
             </UICard>
@@ -135,9 +190,8 @@ function QuestionToTest() {
 export default QuestionToTest;
 
 const StyledMainDiv = styled.div`
-    padding: 100px 190px 153px 190px;
-    background: #d7e1f8;
-    margin-top: 100px;
+    width: 1060px;
+    margin: 0 auto;
 `;
 
 const StyledAboutTest = styled.div`
@@ -146,15 +200,15 @@ const StyledAboutTest = styled.div`
 `;
 
 const StyledNameTest = styled.h5`
-    font-style: normal;
     font-size: 16px;
     padding-top: 6px;
     color: #3752b4;
 `;
 
 const StyledSpan = styled.span`
+    font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     color: #4c4859;
 `;
 
@@ -175,23 +229,20 @@ const StyledAboutTests = styled.div`
     width: 670px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 14px;
-`;
 
-const StyledNameDiv = styled.div`
-    width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 45px;
-`;
-
-const StyledQuestions = styled.div`
-    width: 210px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    p {
+        :nth-child(1) {
+            margin-left: 45px;
+            margin-right: 31px;
+        }
+        :nth-child(2) {
+            margin-right: 240px;
+        }
+        :nth-child(3) {
+            margin-right: 40px;
+        }
+    }
 `;
 
 const StyledContainerCard = styled.div`
@@ -203,10 +254,29 @@ const StyledContainerCard = styled.div`
 `;
 
 const StyledAboutQuestion = styled.div`
-    width: 700px;
+    width: 650px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    p {
+        :nth-child(1) {
+            width: 46px;
+        }
+        :nth-child(2) {
+            width: 321px;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow-wrap: break-word;
+            overflow: hidden;
+        }
+        :nth-child(3) {
+            width: 114px;
+        }
+        :nth-child(4) {
+            width: 256px;
+        }
+    }
 `;
 
 const StyledIconsBtn = styled.div`

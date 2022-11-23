@@ -4,7 +4,7 @@ import { ButtonUi } from "components/UI";
 import Input from "components/UI/Input";
 import UICard from "components/UI/UICard";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getTestById, updateTest } from "store/slices/adminTestActions";
 import styled from "styled-components";
 
@@ -38,7 +38,7 @@ function NewTest() {
     };
 
     const goToBackPage = () => {
-        navigate("/admin/tests");
+        navigate(-1);
     };
 
     const sedingUppdateTestById = () => {
@@ -47,9 +47,9 @@ function NewTest() {
         navigate("/admin/tests");
     };
 
-    const addQuestion = () => {
-        navigate("/admin/question-to-test");
-    };
+    // const addQuestion = () => {
+    //     navigate("/admin/question-to-test");
+    // };
 
     return (
         <StyledSection>
@@ -80,9 +80,9 @@ function NewTest() {
                             onClick={sedingUppdateTestById}>
                             SAVE
                         </ButtonUi>
-                        <ButtonUi variant="contained" onClick={addQuestion}>
-                            + ADD QUESTIONS{" "}
-                        </ButtonUi>
+                        <Link to="question-to-test">
+                            <ButtonUi variant="contained">+ ADD QUESTIONS</ButtonUi>
+                        </Link>
                     </StyledBtnDiv>
                 </StyledDiv>
             </UICard>
@@ -95,8 +95,6 @@ export default NewTest;
 const StyledSection = styled.section`
     width: 980px;
     margin: 0 auto;
-    margin-top: 68px;
-    padding: 100px 0 282px 0;
 `;
 
 const StyledDiv = styled.div`

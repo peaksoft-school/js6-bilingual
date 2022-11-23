@@ -14,9 +14,6 @@ const ButtonUi = ({
     onClick,
     text,
 }) => {
-    const handleClick = () => {
-        onClick();
-    };
     return (
         <ButtonMain
             onClick={onClick}
