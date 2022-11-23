@@ -5,12 +5,12 @@ import { TextField } from "@mui/material";
 import styled, { css } from "styled-components";
 
 const Input = ({
-    forInput,
-    colortext = "red",
+    colortext = "gray",
     colorlabeltextandborderandhover = "#3A10E5",
     handleChange,
     sx,
     value,
+    forInput,
 }) => {
     // FOR INPUT colorlabeltextandborderandhover
     return (

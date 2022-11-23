@@ -2,10 +2,11 @@ import React from "react";
 
 import { LandingPage, SignIn, SignUp, NotFound } from "containers";
 
+import Layout from "layout/Layout";
 import { Navigate } from "react-router-dom";
 import { getUserInfo } from "services/saveUser";
 
-import AdminRoutes from "./AdminRoutes";
+import AdminRoutes from "./AdminRoutes/index";
 import ClientRoutes from "./ClientRoutes";
 import { RoutesUrl, UsersRole } from "./constants";
 import PrivateRoute from "./PrivateRoute";
@@ -40,7 +41,9 @@ export const routesConfig = [
         path: RoutesUrl.Admin,
         element: (
             <PrivateRoute expectedRoles={[UsersRole.admin]}>
-                <AdminRoutes />
+                <Layout>
+                    <AdminRoutes />
+                </Layout>
             </PrivateRoute>
         ),
     },

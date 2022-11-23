@@ -8,7 +8,7 @@ import { scrollHeader } from "utils/helpers";
 
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
-function Header({ Choice }) {
+function Header({ Choice, HeaderBg }) {
     const [bgColor, setBgColor] = useState();
 
     window.addEventListener("scroll", () => {
@@ -23,7 +23,7 @@ function Header({ Choice }) {
     }
     return (
         <HeaderGlav>
-            <StyledHeader bgColor={bgColor}>
+            <StyledHeader bgColor={bgColor} HeaderBg={HeaderBg}>
                 <StyledImage src={Logotip} />
                 {Choice ? (
                     <StyledHeaderLandingPage>
@@ -55,9 +55,9 @@ function Header({ Choice }) {
                             click={() => handleClick}
                         />
                         <ButtonStyled
-                            text="MY RESULTS"
+                            text="Submitted results"
                             variant="text"
-                            maxwidth="110px"
+                            maxwidth="183px"
                             maxheight="18px"
                             fontSize="15px"
                             click={() => handleClick}
@@ -97,6 +97,7 @@ const StyledHeader = styled.div`
     position: fixed;
     z-index: 10;
     transition: 0.2s ease;
+    background: ${(props) => props.HeaderBg};
     &.active {
         background-color: white;
     }
@@ -115,7 +116,7 @@ const StyledHeaderLandingPage = styled.div`
     margin-right: 100px;
 `;
 const StyledHeaderClientRole = styled.div`
-    width: 354px;
+    width: 411px;
     height: 50px;
     display: flex;
     justify-content: space-between;
