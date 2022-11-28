@@ -31,7 +31,8 @@ function QuestionToTest() {
     };
 
     const deleteQuestionById = (deleteId) => {
-        dispatch(deleteQuestion(deleteId));
+        dispatch(deleteQuestion({ data: { questionId: deleteId, testId: id } }));
+        console.log("hi");
     };
 
     const goBacktoAdminTests = () => {
@@ -62,7 +63,9 @@ function QuestionToTest() {
                 <StyledBtnDiv>
                     <ButtonUi
                         variant="contained"
-                        onClick={() => navigate(`/admin/${ADMIN_CONST_URL.CREATE_QUESTION}`)}>
+                        onClick={() =>
+                            navigate(`/admin/test-${id}/${ADMIN_CONST_URL.CREATE_QUESTION}`)
+                        }>
                         + ADD MORE QUESTIONS
                     </ButtonUi>
                 </StyledBtnDiv>
@@ -89,18 +92,14 @@ function QuestionToTest() {
                                             tooltip: {
                                                 sx: {
                                                     maxWidth: "500px",
-                                                    fontSize: "18px",
+                                                    fontSize: "14px",
+                                                    padding: "8px 15px",
                                                 },
                                             },
                                         }}
                                         title={item.title}
                                         placement="top">
-                                        <p>
-                                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                                            elit. Officia, doloribus sit nisi ipsum dolorum, animi
-                                            temporibus, quos deleniti nam impedit quasi? Cumque
-                                            magnam molestias fuga.
-                                        </p>
+                                        <p>{item.title}</p>
                                     </Tooltip>
                                     <p>{item.duration}</p>
                                     <p style={{ textTransform: "capitalize" }}>

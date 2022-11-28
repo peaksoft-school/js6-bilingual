@@ -6,10 +6,7 @@
 }
 
 body {
-    display: grid;
-    place-items: center;
     overflow-x: hidden;
-    background-color: #afdcf0;
 }
 
 a {

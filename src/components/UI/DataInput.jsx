@@ -2,11 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 
-function DataInput({ onChange, value }) {
+function DataInput({ onChange }) {
     return (
         <StyledDataInput>
             <StyledText>Duration (in minutes)</StyledText>
-            <StyledInput type="time" onChange={onChange} value={value} />
+            <StyledInput type="time" min="01:00" max="30:00" onChange={onChange} />
         </StyledDataInput>
     );
 }

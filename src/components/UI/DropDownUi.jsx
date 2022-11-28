@@ -1,17 +1,17 @@
 import React from "react";
 
 import { ClickAwayListener } from "@mui/material";
-
+import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { motion } from "framer-motion";
 
 import styled, { css } from "styled-components";
 
-const DropDown = ({ items, stylecss, dropState, setDropState }) => {
+const DropDown = ({ items, stylecss, dropState }) => {
     const [dropActive, setDropActive] = React.useState(0);
     const [openDrop, setOpenDrop] = React.useState(false);
-
+    const { setTypeQuestion, typeQuestion } = React.useContext(QuestionContext);
     const handleClickDrop = (obj, idx) => {
-        setDropState(obj);
+        setTypeQuestion(obj);
         setDropActive(idx);
         setOpenDrop(() => false);
     };
@@ -31,7 +31,7 @@ const DropDown = ({ items, stylecss, dropState, setDropState }) => {
                     {...stylecss}
                     className={!openDrop ? "is_close" : ""}
                     onClick={handleClickDropClose}>
-                    <span>{dropState.text}</span>
+                    <span>{typeQuestion?.text || typeQuestion}</span>
                 </DropHead>
                 <DropBody animate={openDrop ? { height: "auto" } : { height: "0px" }}>
                     <DropList

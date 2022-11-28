@@ -1,7 +1,5 @@
 import React from "react";
 
-import ListenSelectTest from "components/ListenSelectTest";
-
 import { userRequest } from "features/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -17,7 +15,6 @@ const App = () => {
 
     return (
         <div className="app">
-            <ListenSelectTest />
             <RoutesRender />
         </div>
     );
