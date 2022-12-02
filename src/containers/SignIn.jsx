@@ -4,12 +4,12 @@ import { Box } from "@mui/system";
 
 import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
 import { userSave } from "services/saveUser";
+import { userRequest } from "store/slices/authSlice";
 import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
@@ -92,7 +92,7 @@ const SignIn = () => {
                             rules={{
                                 required: "This field is required",
                                 minLength: {
-                                    value: 5,
+                                    value: 4,
                                     message: "Password lenght must be at least 6",
                                 },
                             }}

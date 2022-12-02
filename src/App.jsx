@@ -1,10 +1,10 @@
 import React from "react";
 
-import { userRequest } from "features/authSlice";
 import { useDispatch } from "react-redux";
 
 import RoutesRender from "routes/routes-render";
 import { getUserInfo } from "services/saveUser";
+import { userRequest } from "store/slices/authSlice";
 import "./App.css";
 
 const App = () => {

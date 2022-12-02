@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "@mui/system";
 import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { userRequest } from "features/authSlice";
+import { userRequest } from "store/slices/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
