@@ -6,7 +6,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl } from "routes/constants";
-import { getUserFromCookies } from "services/saveUser";
 import { asyncAuth } from "store/slices/authSlice";
 import styled from "styled-components";
 import { REGISTRATION } from "utils/constants/api";
@@ -34,10 +33,6 @@ const SignIn = () => {
             setErrorMessage(error.response);
         }
     };
-    React.useEffect(() => {
-        const resUser = getUserFromCookies();
-        makeIsHave(resUser);
-    }, []);
 
     return (
         <SignInMain>
