@@ -6,7 +6,7 @@ import { SignIn, SignUp, NotFound } from "containers";
 
 import Layout from "layout/Layout";
 import { Navigate } from "react-router-dom";
-import { getUserInfo } from "services/saveUser";
+import { getUserFromCookies } from "services/saveUser";
 
 import AdminRoutes from "./AdminRoutes/index";
 import ClientRoutes from "./ClientRoutes";
@@ -14,7 +14,7 @@ import { RoutesUrl, UsersRole } from "./constants";
 import PrivateRoute from "./PrivateRoute";
 
 // TODO need to clean cookies or use localestorage
-const user = getUserInfo();
+const user = getUserFromCookies();
 const isAuth = (PrivateComponent) => {
     if (user?.role === UsersRole.client) {
         return <Navigate to="/home" replace />;

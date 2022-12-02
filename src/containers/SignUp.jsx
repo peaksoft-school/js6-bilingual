@@ -1,16 +1,14 @@
 import React from "react";
 
 import { Box } from "@mui/system";
-import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { userRequest } from "store/slices/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { RoutesUrl, UsersRole } from "routes/constants";
-import { getUserInfo, userSave } from "services/saveUser";
+import { RoutesUrl } from "routes/constants";
+import { getUserFromCookies } from "services/saveUser";
+import { asyncAuth } from "store/slices/authSlice";
 import styled from "styled-components";
-
 import { REGISTRATION } from "utils/constants/api";
 
 import Logo from "../assets/images/AuthLogo.svg";
@@ -27,25 +25,17 @@ const SignIn = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
-    const makeIsHave = (data) => {
-        if (data?.role === UsersRole.client) navigate("/home");
-        if (data?.role === UsersRole.admin) navigate("/admin");
-    };
-
-    async function onSubmit(userInfo) {
+    const onSubmit = async (userInfo) => {
         try {
-            const { data } = await baseAxios.post(REGISTRATION, userInfo);
-            dispatch(userRequest(data));
-            userSave(data);
-            makeIsHave(data);
+            await dispatch(asyncAuth(userInfo, REGISTRATION));
+            navigate("/home");
             reset();
         } catch (error) {
             setErrorMessage(error.response);
         }
-    }
+    };
     React.useEffect(() => {
-        const resUser = getUserInfo();
+        const resUser = getUserFromCookies();
         makeIsHave(resUser);
     }, []);
 

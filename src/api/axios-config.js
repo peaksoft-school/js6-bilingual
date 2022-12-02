@@ -17,7 +17,7 @@ const baseAxios = axios.create({ baseURL: BASE_URL, headers });
 
 baseAxios.interceptors.request.use((config) => {
     const updatedConfig = { ...config };
-    const { token } = store.getState().auth.user;
+    const { token } = store.getState().auth.data || {};
     if (token) {
         updatedConfig.headers.Authorization = `Bearer ${token}`;
     }
