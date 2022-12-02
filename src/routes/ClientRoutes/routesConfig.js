@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Client, NotFound, Results, Start } from "containers";
+import { NotFound, Results, Start } from "containers";
 import { CLIENT_CONST_URL } from "routes/constants";
 
 export const CLIENT_ROUTES_CONFIG = [
