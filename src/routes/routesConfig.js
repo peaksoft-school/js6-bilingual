@@ -11,15 +11,16 @@ import ClientRoutes from "./ClientRoutes";
 import { RoutesUrl, UsersRole } from "./constants";
 import PrivateRoute from "./PrivateRoute";
 
+// TODO need to clean cookies or use localestorage
 const user = getUserInfo();
-const isAuth = (children) => {
+const isAuth = (PrivateComponent) => {
     if (user?.role === UsersRole.client) {
         return <Navigate to="/home" replace />;
     }
     if (user?.role === UsersRole.admin) {
         return <Navigate to="/admin" replace />;
     }
-    return children;
+    return PrivateComponent;
 };
 
 export const routesConfig = [
