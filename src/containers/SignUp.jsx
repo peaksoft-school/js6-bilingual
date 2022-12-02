@@ -24,9 +24,10 @@ const SignIn = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     const onSubmit = async (userInfo) => {
         try {
-            await dispatch(asyncAuth(userInfo, REGISTRATION));
+            await dispatch(asyncAuth(userInfo, REGISTRATION)).unwrap();
             navigate("/home");
             reset();
         } catch (error) {
@@ -191,7 +192,7 @@ const SignIn = () => {
                             maxheight="52px"
                             variant="contained"
                             maxwidth="100%"
-                            text="SIGN IN"
+                            text="SIGN UP"
                         />
                     </form>
                     <SignInWithGoogleBox>
@@ -203,7 +204,7 @@ const SignIn = () => {
                         </Link>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
-                        Dont have an account? <Link to={RoutesUrl.SignIn}>Register</Link>
+                        ALREADY HAVE AN ACCOUNT? <Link to={RoutesUrl.SignIn}> LOG IN</Link>
                     </IsAccaunt>
                 </SignInWrapper>
             </SignInBox>

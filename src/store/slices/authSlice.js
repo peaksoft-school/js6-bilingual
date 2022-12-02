@@ -17,13 +17,13 @@ const authSlice = createSlice({
 export default authSlice;
 export const { setUser } = authSlice.actions;
 
-export const asyncAuth = (useData, signInType) => {
+export const asyncAuth = (useData, signInType, onNavigate) => {
     return async (dispatch) => {
         try {
             const { data } = await baseAxios.post(signInType, useData);
             dispatch(setUser(data));
             setUserToCookies(data);
-            return data;
+            onNavigate(data);
         } catch (e) {
             console.log(e);
         }

@@ -2,14 +2,12 @@ import React from "react";
 
 import { Box } from "@mui/system";
 
-import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
-import { setUserToCookies } from "services/saveUser";
-import { setUser } from "store/slices/authSlice";
+import { asyncAuth } from "store/slices/authSlice";
 import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
@@ -29,17 +27,14 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    const makeIsHave = (data) => {
+    const navigateAfterLogin = (data) => {
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");
     };
 
     async function onSubmit(userInfo) {
         try {
-            const { data } = await baseAxios.post(LOGIN, userInfo);
-            dispatch(setUser(data));
-            setUserToCookies(data);
-            makeIsHave(data);
+            await dispatch(asyncAuth(userInfo, LOGIN, navigateAfterLogin)).unwrap();
             reset();
         } catch (error) {
             setErrorMessage(error.response);
