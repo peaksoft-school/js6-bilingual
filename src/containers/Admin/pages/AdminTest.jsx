@@ -36,6 +36,7 @@ function AdminTest() {
     const deleteHandler = (id) => {
         dispatch(deleteTest(id));
     };
+
     return (
         <StyledCardDiv>
             <UICard
