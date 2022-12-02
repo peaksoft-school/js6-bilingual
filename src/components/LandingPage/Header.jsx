@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
+import { useNavigate } from "react-router-dom";
 
 import styled, { keyframes } from "styled-components";
 
@@ -9,6 +10,7 @@ import { scrollHeader } from "utils/helpers";
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice, HeaderBg }) {
+    const navigate = useNavigate();
     const [bgColor, setBgColor] = useState();
 
     window.addEventListener("scroll", () => {
@@ -18,9 +20,14 @@ function Header({ Choice, HeaderBg }) {
             setBgColor(false);
         }
     });
-    function handleClick(e) {
-        e.preventDefault();
+    function comeInNavigateHandler() {
+        // TODO navigate come in logic
     }
+
+    function registerNavigateHandler() {
+        navigate("/sign-in");
+    }
+
     return (
         <HeaderGlav>
             <StyledHeader bgColor={bgColor} HeaderBg={HeaderBg}>
@@ -33,7 +40,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="122px"
                             maxheight="42px"
                             fontSize="14px"
-                            click={() => handleClick}
+                            onClick={() => comeInNavigateHandler()}
                         />
                         <ButtonStyled
                             text="REGISTER"
@@ -41,7 +48,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="122px"
                             maxheight="42px"
                             fontSize="14px"
-                            click={() => handleClick}
+                            onClick={() => registerNavigateHandler()}
                         />
                     </StyledHeaderLandingPage>
                 ) : (
@@ -52,7 +59,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="44px"
                             maxheight="18px"
                             fontSize="15px"
-                            click={() => handleClick}
+                            click={() => comeInNavigateHandler}
                         />
                         <ButtonStyled
                             text="Submitted results"
@@ -60,7 +67,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="183px"
                             maxheight="18px"
                             fontSize="15px"
-                            click={() => handleClick}
+                            click={() => comeInNavigateHandler}
                         />
                         <ButtonStyled
                             text="LOG OUT"
@@ -68,7 +75,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="104px"
                             maxheight="42px"
                             fontSize="15px"
-                            click={() => handleClick}
+                            click={() => comeInNavigateHandler}
                         />
                     </StyledHeaderClientRole>
                 )}

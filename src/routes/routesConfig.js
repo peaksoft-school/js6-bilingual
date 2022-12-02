@@ -1,6 +1,8 @@
 import React from "react";
 
-import { LandingPage, SignIn, SignUp, NotFound } from "containers";
+import HomePage from "components/HomePage/HomePage";
+
+import { SignIn, SignUp, NotFound } from "containers";
 
 import Layout from "layout/Layout";
 import { Navigate } from "react-router-dom";
@@ -26,7 +28,7 @@ const isAuth = (PrivateComponent) => {
 export const routesConfig = [
     {
         path: RoutesUrl["/"],
-        element: <LandingPage />,
+        element: <HomePage />,
     },
 
     {
