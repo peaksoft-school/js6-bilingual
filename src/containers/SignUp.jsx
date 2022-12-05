@@ -1,16 +1,13 @@
 import React from "react";
 
 import { Box } from "@mui/system";
-import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { RoutesUrl, UsersRole } from "routes/constants";
-import { getUserInfo, userSave } from "services/saveUser";
+import { RoutesUrl } from "routes/constants";
+import { asyncAuth } from "store/slices/authSlice";
 import styled from "styled-components";
-
 import { REGISTRATION } from "utils/constants/api";
 
 import Logo from "../assets/images/AuthLogo.svg";
@@ -28,26 +25,14 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    const makeIsHave = (data) => {
-        if (data?.role === UsersRole.client) navigate("/home");
-        if (data?.role === UsersRole.admin) navigate("/admin");
-    };
-
-    async function onSubmit(userInfo) {
+    const onSubmit = async (userInfo) => {
         try {
-            const { data } = await baseAxios.post(REGISTRATION, userInfo);
-            dispatch(userRequest(data));
-            userSave(data);
-            makeIsHave(data);
+            await dispatch(asyncAuth(userInfo, REGISTRATION, navigate("/home"))).unwrap();
             reset();
         } catch (error) {
             setErrorMessage(error.response);
         }
-    }
-    React.useEffect(() => {
-        const resUser = getUserInfo();
-        makeIsHave(resUser);
-    }, []);
+    };
 
     return (
         <SignInMain>
@@ -206,7 +191,7 @@ const SignIn = () => {
                             maxheight="52px"
                             variant="contained"
                             maxwidth="100%"
-                            text="SIGN IN"
+                            text="SIGN UP"
                         />
                     </form>
                     <SignInWithGoogleBox>
@@ -218,7 +203,7 @@ const SignIn = () => {
                         </Link>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
-                        Dont have an account? <Link to={RoutesUrl.SignIn}>Register</Link>
+                        ALREADY HAVE AN ACCOUNT? <Link to={RoutesUrl.SignIn}> LOG IN</Link>
                     </IsAccaunt>
                 </SignInWrapper>
             </SignInBox>

@@ -1,8 +1,13 @@
 import axios from "axios";
-
-import { getToken, logout } from "utils/helpers/helpers";
+import { logout } from "utils/helpers/helpers";
 
 import { BASE_URL } from "./baseUrl";
+
+let store;
+
+export const injectStore = (_store) => {
+    store = _store;
+};
 
 const headers = {
     "Content-Type": "application/json",
@@ -12,7 +17,7 @@ const baseAxios = axios.create({ baseURL: BASE_URL, headers });
 
 baseAxios.interceptors.request.use((config) => {
     const updatedConfig = { ...config };
-    const token = getToken();
+    const { token } = store.getState().auth.data || {};
     if (token) {
         updatedConfig.headers.Authorization = `Bearer ${token}`;
     }

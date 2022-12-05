@@ -5,7 +5,6 @@ import IconButtonStyled from "components/UI/IconButtonStyled";
 import Loader from "components/UI/Loader";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
-import Layout from "layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteTest, getTests, isTestActive } from "store/slices/adminTestActions";

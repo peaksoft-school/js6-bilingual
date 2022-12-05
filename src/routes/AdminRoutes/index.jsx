@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useRoutes } from "react-router-dom";
 
 import { ADMIN_ROUTES_CONFIG } from "./routesConfig";

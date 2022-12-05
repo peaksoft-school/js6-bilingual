@@ -1,26 +1,27 @@
 import React from "react";
 
 import HomePage from "components/HomePage/HomePage";
-import { LandingPage, SignIn, SignUp, NotFound, Home } from "containers";
+import { SignIn, SignUp, NotFound } from "containers";
 
 import Layout from "layout/Layout";
 import { Navigate } from "react-router-dom";
-import { getUserInfo } from "services/saveUser";
+import { getUserFromCookies } from "services/saveUser";
 
 import AdminRoutes from "./AdminRoutes/index";
 import ClientRoutes from "./ClientRoutes";
 import { RoutesUrl, UsersRole } from "./constants";
 import PrivateRoute from "./PrivateRoute";
 
-const user = getUserInfo();
-const isAuth = (children) => {
+// TODO need to clean cookies or use localestorage
+const user = getUserFromCookies();
+const isAuth = (PrivateComponent) => {
     if (user?.role === UsersRole.client) {
         return <Navigate to="/home" replace />;
     }
     if (user?.role === UsersRole.admin) {
         return <Navigate to="/admin" replace />;
     }
-    return children;
+    return PrivateComponent;
 };
 
 export const routesConfig = [

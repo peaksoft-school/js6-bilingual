@@ -4,12 +4,12 @@ import { Box } from "@mui/system";
 
 import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
-import { userRequest } from "features/authSlice";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
-import { userSave } from "services/saveUser";
+import { setUserToCookies } from "services/saveUser";
+import { setUser } from "store/slices/authSlice";
 import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
@@ -30,7 +30,6 @@ const SignIn = () => {
     } = useForm();
 
     const makeIsHave = (data) => {
-        console.log(data);
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");
     };
@@ -38,8 +37,8 @@ const SignIn = () => {
     async function onSubmit(userInfo) {
         try {
             const { data } = await baseAxios.post(LOGIN, userInfo);
-            dispatch(userRequest(data));
-            userSave(data);
+            dispatch(setUser(data));
+            setUserToCookies(data);
             makeIsHave(data);
             reset();
         } catch (error) {
