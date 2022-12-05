@@ -30,6 +30,7 @@ const SignIn = () => {
     } = useForm();
 
     const makeIsHave = (data) => {
+        console.log(data);
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");
     };

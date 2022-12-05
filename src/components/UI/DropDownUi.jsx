@@ -3,13 +3,14 @@ import React from "react";
 import { ClickAwayListener } from "@mui/material";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { motion } from "framer-motion";
+import { formatterQuestionType } from "services/format";
 
 import styled, { css } from "styled-components";
 
-const DropDown = ({ items, stylecss, dropState }) => {
+const DropDown = ({ items, stylecss }) => {
     const [dropActive, setDropActive] = React.useState(0);
     const [openDrop, setOpenDrop] = React.useState(false);
-    const { setTypeQuestion, typeQuestion } = React.useContext(QuestionContext);
+    const { setTypeQuestion, typeQuestion, isUpdatePage } = React.useContext(QuestionContext);
     const handleClickDrop = (obj, idx) => {
         setTypeQuestion(obj);
         setDropActive(idx);
@@ -17,7 +18,9 @@ const DropDown = ({ items, stylecss, dropState }) => {
     };
 
     const handleClickDropClose = () => {
-        setOpenDrop((prev) => !prev);
+        if (!isUpdatePage) {
+            setOpenDrop((prev) => !prev);
+        }
     };
 
     const handleClickDropAway = () => {
@@ -31,7 +34,7 @@ const DropDown = ({ items, stylecss, dropState }) => {
                     {...stylecss}
                     className={!openDrop ? "is_close" : ""}
                     onClick={handleClickDropClose}>
-                    <span>{typeQuestion?.text || typeQuestion}</span>
+                    <span>{typeQuestion?.text || formatterQuestionType(typeQuestion)}</span>
                 </DropHead>
                 <DropBody animate={openDrop ? { height: "auto" } : { height: "0px" }}>
                     <DropList
@@ -41,7 +44,7 @@ const DropDown = ({ items, stylecss, dropState }) => {
                             <DropListItem
                                 className={dropActive === idx && "active"}
                                 onClick={() => handleClickDrop(obj, idx)}
-                                key={obj.value}>
+                                key={obj}>
                                 {obj.text}
                             </DropListItem>
                         ))}

@@ -1,24 +1,125 @@
 import React from "react";
 
+import { baseAxios } from "api/axios-config";
 import { ButtonUi, ImagePickerUi, InputUi } from "components/UI";
+import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { formatToMinute } from "services/format";
+import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-export default function DescribeImage() {
+export default function DescribeImage({ data }) {
+    const [img, setImg] = React.useState({ src: null, alt: "" });
+    const [corrAnswer, setCorrAnswer] = React.useState("");
+
+    const { isUpdatePage, typeQuestion, setMainQuestion, mainQuestion } =
+        React.useContext(QuestionContext);
+
+    const handleImg = async (e) => {
+        const formData = new FormData();
+        formData.append("file", e);
+        const imgLink = await baseAxios.post(
+            "http://ec2-54-93-233-9.eu-central-1.compute.amazonaws.com/api/static",
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        setImg((prev) => {
+            return {
+                ...prev,
+                src: imgLink.data.link,
+                alt: e.path,
+            };
+        });
+    };
+    const navigate = useNavigate();
+
+    const { id } = useParams();
+
+    const dispatch = useDispatch();
+
+    if (isUpdatePage && mainQuestion) {
+        React.useEffect(() => {
+            setImg((prev) => {
+                const alt = mainQuestion?.content.split("/")[3];
+
+                return {
+                    ...prev,
+                    src: mainQuestion.content,
+                    alt,
+                };
+            });
+            setCorrAnswer(mainQuestion.correctAnswer);
+        }, []);
+    }
+    const saveData = async (req) => {
+        const min = data.duration.split(":")[0];
+        const sec = data.duration.split(":")[1];
+        const duration = formatToMinute(+min, +sec);
+        const dataQuestion = {
+            testId: id,
+            title: data.title,
+            duration,
+            correctAnswer: corrAnswer,
+            contentRequest: {
+                contentType: "IMAGE",
+                content: img.src,
+            },
+            questionType: typeQuestion.value || typeQuestion,
+        };
+        console.log(dataQuestion);
+        if (req === "save") {
+            setMainQuestion(dataQuestion);
+            dispatch(sendingQuestion(dataQuestion));
+        } else if (req === "update") {
+            dispatch(
+                updateQuestionWithId(
+                    (data = {
+                        id,
+                        dataInfo: {
+                            ...dataQuestion,
+                            content: img.src,
+                            willDelete: [0],
+                            willUpdate: [0],
+                            optionRequests: [
+                                {
+                                    option: "string",
+                                    isTrue: true,
+                                },
+                            ],
+                        },
+                    })
+                )
+            );
+        }
+    };
     return (
         <Main>
             <Wrapper>
                 <Row>
-                    <ImagePickerUi />
-                    <h4>File_name_of_the_image_file.jpg</h4>
+                    <ImagePickerUi defaultValue={img.src} getImages={handleImg} />
+                    <h4>{img.alt ? img.alt : "File_name_of_the_image_file.jpg"}</h4>
                 </Row>
                 <Box>
                     <span>Correct answer</span>
-                    <InputUi />
+                    <InputUi
+                        forInput={{ defaultValue: mainQuestion?.correctAnswer }}
+                        handleChange={(e) => setCorrAnswer(e.target.value)}
+                    />
                 </Box>
             </Wrapper>
             <BottomActionBtn>
-                <ButtonUi variant="outlined">GO BACK</ButtonUi>
-                <ButtonUi variant="contained" color="success">
+                <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                    GO BACK
+                </ButtonUi>
+                <ButtonUi
+                    onClick={() => saveData(isUpdatePage ? "update" : "save")}
+                    variant="contained"
+                    color="success">
                     SAVE
                 </ButtonUi>
             </BottomActionBtn>

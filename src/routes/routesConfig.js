@@ -1,6 +1,7 @@
 import React from "react";
 
-import { LandingPage, SignIn, SignUp, NotFound } from "containers";
+import HomePage from "components/HomePage/HomePage";
+import { LandingPage, SignIn, SignUp, NotFound, Home } from "containers";
 
 import Layout from "layout/Layout";
 import { Navigate } from "react-router-dom";
@@ -25,7 +26,7 @@ const isAuth = (children) => {
 export const routesConfig = [
     {
         path: RoutesUrl["/"],
-        element: <LandingPage />,
+        element: <HomePage />,
     },
 
     {

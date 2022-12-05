@@ -1,16 +1,31 @@
 import React from "react";
 
+import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
+import { Howl } from "howler";
+import { useAudioPlayer, AudioPlayerProvider } from "react-use-audio-player";
+
 import styled from "styled-components";
 
 import CheckBox from "./Checkbox";
+
 import IconButtonStyled from "./IconButtonStyled";
 
-export default function SelectWordItem({ isTrue, index, title, setValueCheckbox }) {
+export default function SelectWordItem({ id, isTrue, audio, del, option, setValueCheckbox }) {
+    const soundPlay = (src) => {
+        const sound = new Howl({
+            src,
+            html5: true,
+        });
+        sound.play();
+    };
+
+    const { isUpdatePage } = React.useContext(QuestionContext);
+
     return (
-        <Main>
+        <Main key={id}>
             <Content>
-                <span>{index + 1}</span>
-                <span>
+                <span>{id}</span>
+                <span onClick={() => soundPlay(audio)}>
                     <svg
                         width="22"
                         height="22"
@@ -23,9 +38,7 @@ export default function SelectWordItem({ isTrue, index, title, setValueCheckbox 
                         />
                     </svg>
                 </span>
-                <span>
-                    {title}_{index + 1}
-                </span>
+                <span>WORD {id}</span>
             </Content>
             <Actions>
                 <CheckBox
@@ -35,6 +48,7 @@ export default function SelectWordItem({ isTrue, index, title, setValueCheckbox 
                 />
 
                 <IconButtonStyled
+                    handleClick={() => del(isUpdatePage ? { id, option } : { option })}
                     fontSize="21.3"
                     Icon={`
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

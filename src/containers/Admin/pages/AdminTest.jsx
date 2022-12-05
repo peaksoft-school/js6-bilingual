@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
+import Loader from "components/UI/Loader";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
 import Layout from "layout/Layout";
@@ -37,6 +38,9 @@ function AdminTest() {
     const deleteHandler = (id) => {
         dispatch(deleteTest(id));
     };
+    if (!tests.length) {
+        return <Loader />;
+    }
     return (
         <StyledCardDiv>
             <UICard

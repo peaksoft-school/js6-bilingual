@@ -3,15 +3,17 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 
-function ImagePicker({ getImages }) {
+function ImagePicker({ getImages, defaultValue }) {
     const [images, setImages] = useState([]);
 
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach((file) => {
+            const formData = new FormData();
+            formData.append("file", acceptedFiles);
             const reader = new FileReader();
             reader.onload = () => {
                 setImages((prevState) => [...prevState, reader.result]);
-                getImages(reader?.result);
+                getImages(acceptedFiles[0]);
             };
             reader.readAsDataURL(file);
         });
@@ -27,13 +29,12 @@ function ImagePicker({ getImages }) {
             "image/JPG": [],
         },
     });
-
     return (
         <ContainerDrop {...getRootProps()}>
             <input {...getInputProps()} />
-            {images.length > 0 ? (
+            {images.length > 0 || defaultValue ? (
                 <ProverkaDlyaHovera>
-                    <DropImage src={images} />
+                    <DropImage src={defaultValue || images} />
                     <button onClick={open}>REPLACE</button>
                 </ProverkaDlyaHovera>
             ) : isDragActive ? (

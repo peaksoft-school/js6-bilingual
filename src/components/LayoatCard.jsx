@@ -4,9 +4,8 @@ import React, { useState } from "react";
 
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 
+import { convertHMS } from "services/format";
 import styled from "styled-components";
-
-import { ButtonUi } from "./UI";
 
 import DataInput from "./UI/DataInput";
 
@@ -14,14 +13,21 @@ import DropDown from "./UI/DropDownUi";
 
 import Input from "./UI/Input";
 
+import Loader from "./UI/Loader";
 import UICard from "./UI/UICard";
 
 function ListenSelectTest({ children }) {
+    const { mainQuestion, isUpdatePage } = React.useContext(QuestionContext);
+
+    if (!mainQuestion && isUpdatePage) {
+        return <Loader />;
+    }
+
     const [state, setState] = useState(questionTypeList[0]);
-    const [data, setData] = useState({});
-    React.useEffect(() => {
-        console.log("Layout Card Rendered inside UseEffect");
-    }, []);
+    const [data, setData] = useState({
+        title: mainQuestion ? mainQuestion.title : "",
+        duration: mainQuestion ? convertHMS(mainQuestion.duration) : 0,
+    });
 
     return (
         <StyledContainerBoss>
@@ -32,6 +38,7 @@ function ListenSelectTest({ children }) {
                             <StyledText>Title</StyledText>
                             <Input
                                 colortext="black"
+                                forInput={{ defaultValue: data.title }}
                                 sx={{ width: "697px" }}
                                 handleChange={(el) =>
                                     setData((prev) => {
@@ -45,6 +52,7 @@ function ListenSelectTest({ children }) {
                         </StyledContainerOneOne>
                         <StyledContainerTwo>
                             <DataInput
+                                defaultValue={data.duration}
                                 onChange={(el) =>
                                     setData((prev) => {
                                         return {
@@ -62,7 +70,7 @@ function ListenSelectTest({ children }) {
                         </StyledContainerThreeOne>
                         <DropDown
                             stylecss={{ width: "820px" }}
-                            items={questionTypeList}
+                            items={isUpdatePage ? [mainQuestion.questionType] : questionTypeList}
                             setDropState={setState}
                             dropState={state}
                         />

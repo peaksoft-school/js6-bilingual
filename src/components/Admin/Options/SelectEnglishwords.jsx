@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Add from "@mui/icons-material/Add";
 import { ButtonUi } from "components/UI";
@@ -8,24 +8,33 @@ import ModalAdminLayot from "components/UI/ModalAdminLayot";
 import SelectWordItem from "components/UI/SelectWordItem";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
-import { sendingQuestion } from "store/slices/questionSlice";
+import { deleteOption } from "store/slices/option-slice";
+import {
+    getQuestionWithId,
+    sendingQuestion,
+    updateQuestionWithId,
+} from "store/slices/questionSlice";
 import styled from "styled-components";
 
-function SelectEnglishWords({ data, onClick }) {
+function SelectEnglishWords({ data }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const [inputValue, setInputValue] = useState("");
     const [valueCheckbox, setValueCheckbox] = useState(false);
     const [dataCard, setDataCard] = useState([]);
+    const { id } = useParams();
     const getValue = (e) => {
         setInputValue(e.target.value);
     };
 
-    const isUpdatePage = window.location.pathname.includes("update-question");
+    const { setMainQuestion, mainQuestion, typeQuestion, isUpdatePage } =
+        React.useContext(QuestionContext);
 
-    const { id } = useParams();
-    const { mainQuestion, setMainQuestion, typeQuestion } = React.useContext(QuestionContext);
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
     const sendingValueHandler = () => {
         if (!inputValue.trim()) return null;
         setDataCard((prev) => [...prev, { option: inputValue, isTrue: valueCheckbox }]);
@@ -33,32 +42,47 @@ function SelectEnglishWords({ data, onClick }) {
         setValueCheckbox(false);
         setIsOpen(false);
     };
+    if (isUpdatePage && mainQuestion) {
+        useEffect(() => {
+            setDataCard(mainQuestion.optionResponseList);
+        }, []);
+    }
+    const saveData = async (req) => {
+        console.log(data);
+        const min = data.duration.split(":")[0];
+        const sec = data.duration.split(":")[1];
+        const duration = formatToMinute(+min, +sec);
+        const option = isUpdatePage ? "optionRequests" : "options";
 
-    const options = isUpdatePage
-        ? mainQuestion.optionResponseList || mainQuestion.options
-        : dataCard;
-
-    const dispatch = useDispatch();
-
-    const saveData = () => {
-        const hour = data.duration.split(":")[0];
-        const min = data.duration.split(":")[1];
-        const duration = formatToMinute(hour, min);
-        setMainQuestion((state) => {
-            const dataQuestion = {
-                ...state,
-                testId: id,
-                title: data.title,
-                duration,
-                questionType: typeQuestion.value,
-                options: dataCard,
-            };
+        const dataQuestion = {
+            testId: id,
+            title: data.title,
+            duration,
+            contentRequest: {
+                contentType: "TEXT",
+                content: "string",
+            },
+            questionType: typeQuestion.value,
+            [option]: dataCard,
+        };
+        if (req === "save") {
+            setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
-            return dataQuestion;
-        });
+        } else if (req === "update") {
+            dispatch(
+                updateQuestionWithId(
+                    (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
+                )
+            );
+        }
     };
 
-    console.log(mainQuestion);
+    const delOption = (idx) => {
+        if (idx?.id) {
+            dispatch(deleteOption(idx.id));
+        }
+        setDataCard(dataCard.filter((item) => item.option !== idx.option));
+    };
 
     return (
         <Main>
@@ -70,7 +94,10 @@ function SelectEnglishWords({ data, onClick }) {
                 value={inputValue}>
                 <StyledContainerBoss>
                     <span>Is true option?</span>
-                    <CheckBox boxcolor="#2ab934" onChange={() => setValueCheckbox(true)} />
+                    <CheckBox
+                        boxcolor="#2ab934"
+                        onChange={() => setValueCheckbox(!valueCheckbox)}
+                    />
                 </StyledContainerBoss>
             </ModalAdminLayot>
             <div style={{ textAlign: "right" }}>
@@ -84,16 +111,23 @@ function SelectEnglishWords({ data, onClick }) {
             </div>
             <Wrapper>
                 <Row>
-                    {options.map(({ option, isTrue }, index) => {
+                    {dataCard.map((item, index) => {
                         return (
-                            <MainItem key={option}>
+                            <MainItem key={item.option}>
                                 <Content>
                                     <span>{index + 1}</span>
-                                    <span>{option}</span>
+                                    <span>{item.option}</span>
                                 </Content>
                                 <Actions>
-                                    <CheckBox boxcolor="#2ab934" value={isTrue} />
+                                    <CheckBox boxcolor="#2ab934" value={item.isTrue} />
                                     <IconButtonStyled
+                                        handleClick={() =>
+                                            delOption(
+                                                isUpdatePage
+                                                    ? { id: item.id, option: item.option }
+                                                    : { option: item.option }
+                                            )
+                                        }
                                         fontSize="21.3"
                                         Icon={`
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,8 +142,13 @@ function SelectEnglishWords({ data, onClick }) {
                     })}
                 </Row>
                 <StyledContainerMiniMiniBoss>
-                    <ButtonUi variant="outlined">GO BACK</ButtonUi>
-                    <ButtonUi onClick={saveData} variant="contained" color="success">
+                    <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                        GO BACK
+                    </ButtonUi>
+                    <ButtonUi
+                        onClick={() => saveData(isUpdatePage ? "update" : "save")}
+                        variant="contained"
+                        color="success">
                         SAVE
                     </ButtonUi>
                 </StyledContainerMiniMiniBoss>

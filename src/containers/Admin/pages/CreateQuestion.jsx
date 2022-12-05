@@ -25,16 +25,19 @@ const { DESCRIBE_IMAGE, LISTEN_WORDS, RESPOND, SELECT_WORDS, TYPE_HEAR, TYPE_REC
 export const QuestionContext = React.createContext();
 
 function CreateQuestion() {
-    const updateQuestion = useSelector((state) => state.question.questions);
+    // const updateQuestion = useSelector((state) => state.question.questions);
     const [typeQuestion, setTypeQuestion] = React.useState(questionTypeList[0]);
-    const [mainQuestion, setMainQuestion] = React.useState(updateQuestion.length || QUESTION_BODY);
+    const [mainQuestion, setMainQuestion] = React.useState(null);
     const [Component, setComponent] = React.useState(<SelectWord />);
     const { id } = useParams();
     const dispatch = useDispatch();
 
+    const isUpdatePage = window.location.pathname.includes("update-question");
+
     const setTypeQuestionMemo = React.useMemo(() => {
         return {
             setTypeQuestion,
+            isUpdatePage,
             typeQuestion,
             mainQuestion,
             setMainQuestion,
@@ -46,16 +49,28 @@ function CreateQuestion() {
         if (pathName.includes("update-question")) {
             dispatch(getQuestionWithId(id))
                 .unwrap()
-                .then((res) => setMainQuestion(res));
+                .then((res) => {
+                    setMainQuestion(res);
+                    setTypeQuestion(res.questionType);
+                });
         }
     }, []);
+
     React.useEffect(() => {
-        if (typeQuestion.value === SELECT_WORDS) setComponent(<SelectWord />);
-        if (typeQuestion.value === DESCRIBE_IMAGE) setComponent(<DescribeImage />);
-        if (typeQuestion.value === LISTEN_WORDS) setComponent(<ListenWords />);
-        if (typeQuestion.value === RESPOND) setComponent(<Respond />);
-        if (typeQuestion.value === TYPE_HEAR) setComponent(<TypeHear />);
-        if (typeQuestion.value === TYPE_RECORD) setComponent(<TypeRecord />);
+        if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === SELECT_WORDS)
+            setComponent(<SelectWord />);
+        else if (
+            (isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === DESCRIBE_IMAGE
+        )
+            setComponent(<DescribeImage />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === LISTEN_WORDS)
+            setComponent(<ListenWords />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === RESPOND)
+            setComponent(<Respond />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === TYPE_HEAR)
+            setComponent(<TypeHear />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === TYPE_RECORD)
+            setComponent(<TypeRecord />);
     }, [typeQuestion]);
     return (
         <QuestionContext.Provider value={setTypeQuestionMemo}>

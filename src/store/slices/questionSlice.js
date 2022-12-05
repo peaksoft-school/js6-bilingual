@@ -50,9 +50,9 @@ export const sendingQuestion = createAsyncThunk(
 
 export const updateQuestionWithId = createAsyncThunk(
     "question/update",
-    async ({ data }, { rejectWithValue }) => {
+    async ({ id, dataInfo }, { rejectWithValue }) => {
         try {
-            const info = await updateQuestion(data.id, data.info);
+            const info = await updateQuestion(id, dataInfo);
             return info;
         } catch (error) {
             return rejectWithValue("error");
@@ -67,6 +67,28 @@ export const isActiveQuestion = createAsyncThunk(
             return response;
         } catch (error) {
             rejectWithValue(error.message);
+        }
+    }
+);
+
+export const postGroups = createAsyncThunk(
+    "admin-groups/post",
+    async (newGroup, { rejectWithValue, dispatch }) => {
+        try {
+            const values = { ...newGroup };
+            values.dateOfStart = format(new Date(newGroup.dateOfStart), "yyyy-MM-dd");
+            const formData = new FormData();
+
+            formData.append("file", values.image);
+            const response = await fileUpload.post("file", formData);
+            const resp = await axiosInstance.post("group", {
+                ...newGroup,
+                image: response.data.link,
+            });
+            const { data } = resp;
+            return dispatch(getGroups(data));
+        } catch (err) {
+            return rejectWithValue(err.response.data.message);
         }
     }
 );

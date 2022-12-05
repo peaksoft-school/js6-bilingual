@@ -32,7 +32,6 @@ function QuestionToTest() {
 
     const deleteQuestionById = (deleteId) => {
         dispatch(deleteQuestion({ data: { questionId: deleteId, testId: id } }));
-        console.log("hi");
     };
 
     const goBacktoAdminTests = () => {
@@ -78,44 +77,45 @@ function QuestionToTest() {
                 </StyledAboutTests>
                 {questionList?.length > 0 &&
                     questionList.map((item, index) => (
-                        <UICard
-                            key={item.id}
-                            cardBorderRadius="8px"
-                            cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
-                            cardWidth="100%"
-                            cardHeight="66px">
-                            <StyledContainerCard>
-                                <StyledAboutQuestion>
-                                    <p>{index + 1}</p>
-                                    <Tooltip
-                                        componentsProps={{
-                                            tooltip: {
-                                                sx: {
-                                                    maxWidth: "500px",
-                                                    fontSize: "14px",
-                                                    padding: "8px 15px",
+                        <CardUIBox>
+                            <UICard
+                                key={item.id}
+                                cardBorderRadius="8px"
+                                cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
+                                cardWidth="100%"
+                                cardHeight="66px">
+                                <StyledContainerCard>
+                                    <StyledAboutQuestion>
+                                        <p>{index + 1}</p>
+                                        <Tooltip
+                                            componentsProps={{
+                                                tooltip: {
+                                                    sx: {
+                                                        maxWidth: "500px",
+                                                        fontSize: "14px",
+                                                        padding: "8px 15px",
+                                                    },
                                                 },
-                                            },
-                                        }}
-                                        title={item.title}
-                                        placement="top">
-                                        <p>{item.title}</p>
-                                    </Tooltip>
-                                    <p>{item.duration}</p>
-                                    <p style={{ textTransform: "capitalize" }}>
-                                        {formatterQuestionType(item.questionType)}
-                                    </p>
-                                </StyledAboutQuestion>
-                                <StyledIconsBtn>
-                                    <SwitcherComp
-                                        onChange={() => changeActiveQuestion(item.id)}
-                                        value={item.isActive}
-                                    />
-                                    <IconButtonStyled
-                                        handleClick={() =>
-                                            navigate(`/admin/update-question/${item.id}`)
-                                        }
-                                        Icon={`
+                                            }}
+                                            title={item.title}
+                                            placement="top">
+                                            <p>{item.title}</p>
+                                        </Tooltip>
+                                        <p>{item.duration}</p>
+                                        <p style={{ textTransform: "capitalize" }}>
+                                            {formatterQuestionType(item.questionType)}
+                                        </p>
+                                    </StyledAboutQuestion>
+                                    <StyledIconsBtn>
+                                        <SwitcherComp
+                                            onChange={() => changeActiveQuestion(item.id)}
+                                            value={item.isActive}
+                                        />
+                                        <IconButtonStyled
+                                            handleClick={() =>
+                                                navigate(`/admin/update-question/${item.id}`)
+                                            }
+                                            Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -144,10 +144,10 @@ function QuestionToTest() {
                                             </clipPath>
                                         </defs>
                                     </svg>`}
-                                    />
-                                    <IconButtonStyled
-                                        handleClick={() => deleteQuestionById(item.id)}
-                                        Icon={`
+                                        />
+                                        <IconButtonStyled
+                                            handleClick={() => deleteQuestionById(item.id)}
+                                            Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -170,10 +170,11 @@ function QuestionToTest() {
                                         />
                                     </svg>
                                     `}
-                                    />
-                                </StyledIconsBtn>
-                            </StyledContainerCard>
-                        </UICard>
+                                        />
+                                    </StyledIconsBtn>
+                                </StyledContainerCard>
+                            </UICard>
+                        </CardUIBox>
                     ))}
 
                 <StyledBtnGoBack>
@@ -191,6 +192,10 @@ export default QuestionToTest;
 const StyledMainDiv = styled.div`
     width: 1060px;
     margin: 0 auto;
+`;
+
+const CardUIBox = styled.div`
+    margin-top: 16px;
 `;
 
 const StyledAboutTest = styled.div`
