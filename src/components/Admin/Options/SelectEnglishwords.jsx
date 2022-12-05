@@ -112,6 +112,7 @@ function SelectEnglishWords({ data }) {
             <Wrapper>
                 <Row>
                     {dataCard.map((item, index) => {
+                        console.log(item);
                         return (
                             <MainItem key={item.option}>
                                 <Content>

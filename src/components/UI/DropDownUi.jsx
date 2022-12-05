@@ -27,6 +27,8 @@ const DropDown = ({ items, stylecss }) => {
         setOpenDrop(false);
     };
 
+    console.log(items);
+
     return (
         <ClickAwayListener onClickAway={handleClickDropAway}>
             <DropBox {...stylecss}>
@@ -42,9 +44,9 @@ const DropDown = ({ items, stylecss }) => {
                         className={!openDrop ? "is_close" : ""}>
                         {items.map((obj, idx) => (
                             <DropListItem
+                                key={obj.value || obj[0]}
                                 className={dropActive === idx && "active"}
-                                onClick={() => handleClickDrop(obj, idx)}
-                                key={obj}>
+                                onClick={() => handleClickDrop(obj, idx)}>
                                 {obj.text}
                             </DropListItem>
                         ))}

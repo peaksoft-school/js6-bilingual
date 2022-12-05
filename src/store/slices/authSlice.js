@@ -3,7 +3,7 @@ import { baseAxios } from "api/axios-config";
 import { setUserToCookies } from "services/saveUser";
 
 const initialState = {
-    data: {},
+    data: null,
 };
 const authSlice = createSlice({
     name: "user",

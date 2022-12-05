@@ -77,9 +77,8 @@ function QuestionToTest() {
                 </StyledAboutTests>
                 {questionList?.length > 0 &&
                     questionList.map((item, index) => (
-                        <CardUIBox>
+                        <CardUIBox key={item.id}>
                             <UICard
-                                key={item.id}
                                 cardBorderRadius="8px"
                                 cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
                                 cardWidth="100%"

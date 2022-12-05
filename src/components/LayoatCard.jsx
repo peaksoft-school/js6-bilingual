@@ -1,9 +1,10 @@
 import { questionTypeList } from "constants/questionType";
 
-import React, { useState } from "react";
+import React from "react";
 
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 
+import { useForm } from "react-hook-form";
 import { convertHMS } from "services/format";
 import styled from "styled-components";
 
@@ -18,17 +19,25 @@ import UICard from "./UI/UICard";
 
 function ListenSelectTest({ children }) {
     const { mainQuestion, isUpdatePage } = React.useContext(QuestionContext);
+    const [state, setState] = React.useState(questionTypeList[0]);
+    const [isErrorInput, setIsErrorInput] = React.useState({ title: true, duration: true });
+    const [data, setData] = React.useState({
+        title: "",
+        duration: "",
+    });
+    React.useEffect(() => {
+        setData((prev) => {
+            return {
+                ...prev,
+                title: mainQuestion?.title,
+                duration: mainQuestion ? convertHMS(mainQuestion.duration) : 0,
+            };
+        });
+    }, [mainQuestion]);
 
     if (!mainQuestion && isUpdatePage) {
         return <Loader />;
     }
-
-    const [state, setState] = useState(questionTypeList[0]);
-    const [data, setData] = useState({
-        title: mainQuestion ? mainQuestion.title : "",
-        duration: mainQuestion ? convertHMS(mainQuestion.duration) : 0,
-    });
-
     return (
         <StyledContainerBoss>
             <UICard cardWidth="100%" cardBorderRadius="20px">
@@ -37,8 +46,9 @@ function ListenSelectTest({ children }) {
                         <StyledContainerOneOne>
                             <StyledText>Title</StyledText>
                             <Input
+                                forInput={{ error: isErrorInput.title }}
                                 colortext="black"
-                                forInput={{ defaultValue: data.title }}
+                                value={data.title}
                                 sx={{ width: "697px" }}
                                 handleChange={(el) =>
                                     setData((prev) => {
@@ -52,7 +62,7 @@ function ListenSelectTest({ children }) {
                         </StyledContainerOneOne>
                         <StyledContainerTwo>
                             <DataInput
-                                defaultValue={data.duration}
+                                value={data.duration}
                                 onChange={(el) =>
                                     setData((prev) => {
                                         return {
@@ -61,6 +71,7 @@ function ListenSelectTest({ children }) {
                                         };
                                     })
                                 }
+                                error={isErrorInput.duration}
                             />
                         </StyledContainerTwo>
                     </StyledContainerOne>
