@@ -21,9 +21,10 @@ export const asyncAuth = (useData, signInType, onNavigate) => {
     return async (dispatch) => {
         try {
             const { data } = await baseAxios.post(signInType, useData);
+            console.log(data);
             dispatch(setUser(data));
             setUserToCookies(data);
-            onNavigate(data);
+            onNavigate();
         } catch (e) {
             console.log(e);
         }

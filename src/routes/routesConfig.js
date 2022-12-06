@@ -1,7 +1,6 @@
 import React from "react";
 
 import HomePage from "components/HomePage/HomePage";
-
 import { SignIn, SignUp, NotFound } from "containers";
 
 import Layout from "layout/Layout";

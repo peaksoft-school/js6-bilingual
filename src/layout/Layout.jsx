@@ -20,7 +20,7 @@ const StyledMain = styled.main`
 `;
 
 const Wrapper = styled.div`
-    padding: 150px 0 218px 0;
+    padding: 150px 0 50px;
     min-height: 100vh;
     background: #d7e1f8;
 `;
