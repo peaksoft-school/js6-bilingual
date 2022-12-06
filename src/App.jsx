@@ -1,5 +1,7 @@
 import React from "react";
 
+import Header from "components/UI/HeaderClient";
+
 import { useDispatch } from "react-redux";
 
 import RoutesRender from "routes/routes-render";
@@ -15,7 +17,7 @@ const App = () => {
 
     return (
         <div className="app">
-            <RoutesRender />
+            <Header />
         </div>
     );
 };
