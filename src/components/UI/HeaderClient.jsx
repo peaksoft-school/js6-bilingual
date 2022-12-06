@@ -52,9 +52,6 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    position: fixed;
-    z-index: 10;
     background-color: white;
 `;
 const StyledImage = styled.img`
