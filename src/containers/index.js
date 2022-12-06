@@ -25,5 +25,5 @@ export { default as QuestionToTest } from "./Admin/pages/QuestionToTest";
 
 // --------------------- -------------------- ---------------- ------------------  FOR CLIENT PAGES
 export { default as Client } from "./Client";
-export { default as Results } from "./Client/Results";
-export { default as Start } from "./Client/Start";
+export { default as MyResult } from "./Client/pages/MyResult";
+export { default as Start } from "./Client/pages/Start";

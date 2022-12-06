@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NotFound, Results, Start } from "containers";
+import { MyResult, NotFound, Start } from "containers";
 import { CLIENT_CONST_URL } from "routes/constants";
 
 export const CLIENT_ROUTES_CONFIG = [
@@ -11,7 +11,7 @@ export const CLIENT_ROUTES_CONFIG = [
 
     {
         path: CLIENT_CONST_URL.RESULTS,
-        element: <Results />,
+        element: <MyResult />,
     },
 
     {

@@ -5,7 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 
 function CheckBox({ onChange, value, boxcolor }) {
-    return <StyledCheckbox onChange={onChange} value={value} boxcolor={boxcolor} />;
+    return <StyledCheckbox onChange={onChange} boxcolor={boxcolor} defaultChecked={value} />;
 }
 
 export default CheckBox;

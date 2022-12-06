@@ -31,7 +31,7 @@ function QuestionToTest() {
     };
 
     const deleteQuestionById = (deleteId) => {
-        dispatch(deleteQuestion(deleteId));
+        dispatch(deleteQuestion({ data: { questionId: deleteId, testId: id } }));
     };
 
     const goBacktoAdminTests = () => {
@@ -62,7 +62,9 @@ function QuestionToTest() {
                 <StyledBtnDiv>
                     <ButtonUi
                         variant="contained"
-                        onClick={() => navigate(`/admin/${ADMIN_CONST_URL.CREATE_QUESTION}`)}>
+                        onClick={() =>
+                            navigate(`/admin/test-${id}/${ADMIN_CONST_URL.CREATE_QUESTION}`)
+                        }>
                         + ADD MORE QUESTIONS
                     </ButtonUi>
                 </StyledBtnDiv>
@@ -75,48 +77,45 @@ function QuestionToTest() {
                 </StyledAboutTests>
                 {questionList?.length > 0 &&
                     questionList.map((item, index) => (
-                        <UICard
-                            key={item.id}
-                            cardBorderRadius="8px"
-                            cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
-                            cardWidth="100%"
-                            cardHeight="66px">
-                            <StyledContainerCard>
-                                <StyledAboutQuestion>
-                                    <p>{index + 1}</p>
-                                    <Tooltip
-                                        componentsProps={{
-                                            tooltip: {
-                                                sx: {
-                                                    maxWidth: "500px",
-                                                    fontSize: "18px",
+                        <CardUIBox>
+                            <UICard
+                                key={item.id}
+                                cardBorderRadius="8px"
+                                cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
+                                cardWidth="100%"
+                                cardHeight="66px">
+                                <StyledContainerCard>
+                                    <StyledAboutQuestion>
+                                        <p>{index + 1}</p>
+                                        <Tooltip
+                                            componentsProps={{
+                                                tooltip: {
+                                                    sx: {
+                                                        maxWidth: "500px",
+                                                        fontSize: "14px",
+                                                        padding: "8px 15px",
+                                                    },
                                                 },
-                                            },
-                                        }}
-                                        title={item.title}
-                                        placement="top">
-                                        <p>
-                                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                                            elit. Officia, doloribus sit nisi ipsum dolorum, animi
-                                            temporibus, quos deleniti nam impedit quasi? Cumque
-                                            magnam molestias fuga.
+                                            }}
+                                            title={item.title}
+                                            placement="top">
+                                            <p>{item.title}</p>
+                                        </Tooltip>
+                                        <p>{item.duration}</p>
+                                        <p style={{ textTransform: "capitalize" }}>
+                                            {formatterQuestionType(item.questionType)}
                                         </p>
-                                    </Tooltip>
-                                    <p>{item.duration}</p>
-                                    <p style={{ textTransform: "capitalize" }}>
-                                        {formatterQuestionType(item.questionType)}
-                                    </p>
-                                </StyledAboutQuestion>
-                                <StyledIconsBtn>
-                                    <SwitcherComp
-                                        onChange={() => changeActiveQuestion(item.id)}
-                                        value={item.isActive}
-                                    />
-                                    <IconButtonStyled
-                                        handleClick={() =>
-                                            navigate(`/admin/update-question/${item.id}`)
-                                        }
-                                        Icon={`
+                                    </StyledAboutQuestion>
+                                    <StyledIconsBtn>
+                                        <SwitcherComp
+                                            onChange={() => changeActiveQuestion(item.id)}
+                                            value={item.isActive}
+                                        />
+                                        <IconButtonStyled
+                                            handleClick={() =>
+                                                navigate(`/admin/update-question/${item.id}`)
+                                            }
+                                            Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -145,10 +144,10 @@ function QuestionToTest() {
                                             </clipPath>
                                         </defs>
                                     </svg>`}
-                                    />
-                                    <IconButtonStyled
-                                        handleClick={() => deleteQuestionById(item.id)}
-                                        Icon={`
+                                        />
+                                        <IconButtonStyled
+                                            handleClick={() => deleteQuestionById(item.id)}
+                                            Icon={`
                                     <svg
                                         width="20"
                                         height="20"
@@ -171,10 +170,11 @@ function QuestionToTest() {
                                         />
                                     </svg>
                                     `}
-                                    />
-                                </StyledIconsBtn>
-                            </StyledContainerCard>
-                        </UICard>
+                                        />
+                                    </StyledIconsBtn>
+                                </StyledContainerCard>
+                            </UICard>
+                        </CardUIBox>
                     ))}
 
                 <StyledBtnGoBack>
@@ -192,6 +192,10 @@ export default QuestionToTest;
 const StyledMainDiv = styled.div`
     width: 1060px;
     margin: 0 auto;
+`;
+
+const CardUIBox = styled.div`
+    margin-top: 16px;
 `;
 
 const StyledAboutTest = styled.div`

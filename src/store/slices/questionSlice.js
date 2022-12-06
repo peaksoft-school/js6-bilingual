@@ -1,12 +1,22 @@
+import { useParams } from "react-router-dom";
+
+import { getTestById } from "./adminTestActions";
+
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
-const { getQuestionById, deleteQuestionById, switcherQuestion } = require("api/question-query");
+const {
+    getQuestionById,
+    deleteQuestionById,
+    switcherQuestion,
+    postQuestion,
+    updateQuestion,
+} = require("api/question-query");
 
 const initialState = {
     questions: [],
 };
 
-export const getQuestionList = createAsyncThunk(
-    "question/getQuestionList",
+export const getQuestionWithId = createAsyncThunk(
+    "question/getQuestionWithId",
     async (id, { rejectWithValue }) => {
         try {
             const questionById = await getQuestionById(id);
@@ -17,10 +27,38 @@ export const getQuestionList = createAsyncThunk(
     }
 );
 
-export const deleteQuestion = createAsyncThunk("question/deleteQuestion", async (id) => {
-    await deleteQuestionById(id);
-});
+export const deleteQuestion = createAsyncThunk(
+    "question/deleteQuestion",
+    async ({ data }, { dispatch }) => {
+        const info = await deleteQuestionById(data.questionId);
+        dispatch(getTestById(data.testId));
+        return info;
+    }
+);
 
+export const sendingQuestion = createAsyncThunk(
+    "question/sandingQuestion",
+    async (question, props) => {
+        try {
+            const response = await postQuestion(question);
+            return response;
+        } catch (error) {
+            props.rejectWithValue(error.message);
+        }
+    }
+);
+
+export const updateQuestionWithId = createAsyncThunk(
+    "question/update",
+    async ({ id, dataInfo }, { rejectWithValue }) => {
+        try {
+            const info = await updateQuestion(id, dataInfo);
+            return info;
+        } catch (error) {
+            return rejectWithValue("error");
+        }
+    }
+);
 export const isActiveQuestion = createAsyncThunk(
     "question/isActiveQuestion",
     async (id, { rejectWithValue }) => {
@@ -33,12 +71,34 @@ export const isActiveQuestion = createAsyncThunk(
     }
 );
 
+export const postGroups = createAsyncThunk(
+    "admin-groups/post",
+    async (newGroup, { rejectWithValue, dispatch }) => {
+        try {
+            const values = { ...newGroup };
+            values.dateOfStart = format(new Date(newGroup.dateOfStart), "yyyy-MM-dd");
+            const formData = new FormData();
+
+            formData.append("file", values.image);
+            const response = await fileUpload.post("file", formData);
+            const resp = await axiosInstance.post("group", {
+                ...newGroup,
+                image: response.data.link,
+            });
+            const { data } = resp;
+            return dispatch(getGroups(data));
+        } catch (err) {
+            return rejectWithValue(err.response.data.message);
+        }
+    }
+);
+
 export const questionsSlice = createSlice({
     name: "question",
     initialState,
     reducers: {},
     extraReducers: {
-        [getQuestionList.fulfilled]: (state, action) => {
+        [getQuestionWithId.fulfilled]: (state, action) => {
             state.questions = action.payload;
         },
     },
