@@ -11,6 +11,7 @@
     },
     "plugins": ["react", "import-helpers"],
     "rules": {
+        "no-param-reassign": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-props-no-spreading": "off",
         "react/react-in-jsx-scope": "error",
@@ -44,22 +45,6 @@
         ],
         "no-undef": "off",
 
-        // "import/order": [
-        //     "error",
-        //     {
-        //         "groups": [
-        //             "builtin",
-        //             "external",
-        //             "internal",
-        //             "parent",
-        //             "sibling",
-        //             "index",
-        //             "object",
-        //             "type"
-        //         ],
-        //         "newlines-between": "always-and-inside-groups"
-        //     }
-        // ],
         "import/order": [
             "error",
             {
@@ -133,6 +118,9 @@
                 ],
                 "allowExpressionValues": true
             }
-        ]
+        ],
+        "no-param-reassign": "off",
+        "consistent-return": "off",
+        "no-unused-expressions": "off"
     }
 }

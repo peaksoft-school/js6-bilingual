@@ -11,11 +11,16 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { aboutUser } from "utils/constants/General";
-
 import { ReactComponent as NextIcon } from "../../assets/icons/BackIcon.svg";
 
 import { ReactComponent as BackIcon } from "../../assets/icons/NextIcon.svg";
+
+import Human1 from "../../assets/images/landingPage/Human1.svg";
+import Human2 from "../../assets/images/landingPage/Human2.svg";
+import Human3 from "../../assets/images/landingPage/Human3.svg";
+import Human4 from "../../assets/images/landingPage/Human4.svg";
+import Human5 from "../../assets/images/landingPage/Human5.svg";
+import Human6 from "../../assets/images/landingPage/Human6.svg";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -35,7 +40,51 @@ function SamplePrevArrow(props) {
     );
 }
 
-export default function SecondarySlider() {
+function SecondarySlider() {
+    const aboutUser = [
+        {
+            id: Math.random().toString(),
+            name: "- Mahamatalieva Zuli",
+            text: "Bilingual has helped me to get a good grasp of the language in a fun and challenging way. I enjoy the dialogues and scenarios, which include helpful phrases that can be used in various situations.",
+            rating: 5,
+            avatar: Human1,
+        },
+        {
+            id: Math.random().toString(),
+            name: "- Abdimanap k Elnura",
+            text: "I have tried other language apps and found them boring but with Bilingual, it is easy and fun to practice every day.",
+            rating: 5,
+            avatar: Human2,
+        },
+        {
+            id: Math.random().toString(),
+            name: "- Melisov Abu",
+            text: "Great way to learn a language. Fun, interactive, and engaging. I am enjoying the course immensely and would recommend it to anyone who wishes to learn a second language.",
+            rating: 5,
+            avatar: Human3,
+        },
+        {
+            id: Math.random().toString(),
+            name: "- Zhumaev Emirlan",
+            text: "Bilingual has helped me to get a good grasp of the language in a fun and challenging way. I enjoy the dialogues and scenarios, which include helpful phrases that can be used in various situations.",
+            rating: 5,
+            avatar: Human4,
+        },
+        {
+            id: Math.random().toString(),
+            name: "- Zalkarbekov Chyngyz",
+            text: "I have tried other language apps and found them boring but with Bilingual, it is easy and fun to practice every day.",
+            rating: 5,
+            avatar: Human5,
+        },
+        {
+            id: Math.random().toString(),
+            name: "- Zalkarbekov Chyngyz",
+            text: "Great way to learn a language. Fun, interactive, and engaging. I am enjoying the course immensely and would recommend it to anyone who wishes to learn a second language.",
+            rating: 5,
+            avatar: Human6,
+        },
+    ];
     const [indexImage, setIndexImage] = useState(0);
     const settings = {
         autoplay: true,
@@ -73,6 +122,7 @@ export default function SecondarySlider() {
         </MainBox>
     );
 }
+export default SecondarySlider;
 
 const MainBox = styled("div")`
     height: 854px;
@@ -80,6 +130,7 @@ const MainBox = styled("div")`
     flex-direction: column;
     gap: 50px;
     margin-bottom: 120px;
+    margin-top: 120px;
 `;
 const MainTitle = StyledMUI(Typography)`
     text-align: center;

@@ -36,7 +36,7 @@ function Autoplay() {
             <Marquee {...settings}>
                 <StyledDiv>
                     {playerPhotos.map((item) => (
-                        <PartnersItem {...item} />
+                        <PartnersItem key={item.id} {...item} />
                     ))}
                 </StyledDiv>
             </Marquee>

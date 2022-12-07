@@ -12,9 +12,10 @@ export { default as NotFound } from "./NotFound";
 /// ////////////////////////////////////////////////////////////////////////////////////////////////
 
 // --------------------- -------------------- ---------------- ------------------  FOR ADMIN PAGES
-export { default as Test } from "./Admin/pages/Test";
-export { default as AddNewTest } from "./Admin/pages/AddNewTest";
-export { default as Question } from "./Admin/pages/Question";
+export { default as AdminTest } from "./Admin/pages/AdminTest";
+export { default as CreateTest } from "./Admin/pages/CreateTest";
+export { default as NewTest } from "./Admin/pages/NewTest";
+export { default as QuestionToTest } from "./Admin/pages/QuestionToTest";
 
 /// ////////////////////////////////////////////////////////////////////////////////////////////////
 /// ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,5 +25,6 @@ export { default as Question } from "./Admin/pages/Question";
 
 // --------------------- -------------------- ---------------- ------------------  FOR CLIENT PAGES
 export { default as Client } from "./Client";
-export { default as Results } from "./Client/Results";
-export { default as Start } from "./Client/Start";
+export { default as MyResult } from "./Client/pages/MyResult";
+export { default as HomeOne } from "./Client/pages/HomeOne";
+export { default as HomeTwo } from "./Client/pages/HomeTwo";

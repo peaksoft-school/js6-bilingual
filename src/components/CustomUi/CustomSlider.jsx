@@ -86,7 +86,7 @@ const ArrowNext = styled.button`
         return css`
             position: absolute;
             border: 1px solid #3a10e5;
-            right: -60px;
+            right: -600px;
             top: calc(50% - 30px);
             background: transparent;
             width: 60px;

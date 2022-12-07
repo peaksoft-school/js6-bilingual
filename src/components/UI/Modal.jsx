@@ -28,9 +28,8 @@ const StyleForBox = styled(Box)`
     flex-direction: column;
     align-items: center;
     transform: translate(-50%, -50%);
-    background: #ecdadd;
-    border: "2px solid #000";
-    box-shadow: 24;
+    background: #ffffff;
+    box-shadow: 0px 4px 39px rgba(196, 196, 196, 0.6);
     border-radius: 10px;
     outline: none;
 `;

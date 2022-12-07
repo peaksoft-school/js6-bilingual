@@ -1,17 +1,20 @@
 import React from "react";
 
-import { Client, NotFound, Results, Start } from "containers";
+import { HomeOne, HomeTwo, MyResult, NotFound } from "containers";
 import { CLIENT_CONST_URL } from "routes/constants";
 
 export const CLIENT_ROUTES_CONFIG = [
     {
         path: CLIENT_CONST_URL["/"],
-        element: <Start />,
+        element: <HomeOne />,
     },
-
+    {
+        path: CLIENT_CONST_URL.HOMETWO,
+        element: <HomeTwo />,
+    },
     {
         path: CLIENT_CONST_URL.RESULTS,
-        element: <Results />,
+        element: <MyResult />,
     },
 
     {
