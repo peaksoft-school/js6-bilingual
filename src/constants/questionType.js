@@ -5,6 +5,9 @@ export const questionType = {
     RESPOND: "RESPOND_IN_AT_LEAST_N_WORDS",
     TYPE_RECORD: "RECORD_SAYING_STATEMENT",
     TYPE_HEAR: "TYPE_WHAT_YOU_HEAR",
+    HIGLIGHT_ANSWER: "HIGHLIGHT_THE_ANSWER",
+    SELECT_IDEA: "SELECT_MAIN_IDEA",
+    BEST_TITLE: "SELECT_BEST_TITLE",
 };
 
 export const questionTypeList = [
@@ -14,6 +17,9 @@ export const questionTypeList = [
     { text: "Type what you hear", value: questionType.TYPE_HEAR },
     { text: "Type Record saying statement you hear", value: questionType.TYPE_RECORD },
     { text: "Respond in at least N words", value: questionType.RESPOND },
+    { text: "Highlight the answer", value: questionType.HIGLIGHT_ANSWER },
+    { text: "Select the main idea", value: questionType.SELECT_IDEA },
+    { text: "Select best title", value: questionType.BEST_TITLE },
 ];
 
 export const QUESTION_BODY = {

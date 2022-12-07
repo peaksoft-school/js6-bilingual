@@ -27,8 +27,6 @@ const DropDown = ({ items, stylecss }) => {
         setOpenDrop(false);
     };
 
-    console.log(items);
-
     return (
         <ClickAwayListener onClickAway={handleClickDropAway}>
             <DropBox {...stylecss}>

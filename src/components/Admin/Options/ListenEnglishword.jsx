@@ -19,6 +19,7 @@ import styled from "styled-components";
 function ListenEnglishWord({ data }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dataCard, setDataCard] = useState([]);
+    const [newCard, setNewCard] = useState([]);
     const [file, setFile] = useState();
     const [checkBoxValue, setCheckBoxValue] = React.useState(false);
     const [dataFile, setDataFile] = useState({});
@@ -36,6 +37,7 @@ function ListenEnglishWord({ data }) {
             }
         );
         setDataCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
+        setNewCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
     };
 
     const { id } = useParams();
@@ -70,7 +72,7 @@ function ListenEnglishWord({ data }) {
             willDelete: [0],
             willUpdate: [0],
             questionType: typeQuestion.value || typeQuestion,
-            [option]: dataCard,
+            [option]: isUpdatePage ? newCard : dataCard,
         };
 
         if (req === "save") {
@@ -86,6 +88,7 @@ function ListenEnglishWord({ data }) {
             dispatch(deleteOption(idx.id));
         }
         setDataCard(dataCard.filter((item) => item.option !== idx.option));
+        setNewCard(newCard.filter((item) => item.option !== idx.option));
     };
 
     return (

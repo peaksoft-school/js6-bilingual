@@ -9,6 +9,9 @@ import {
     Respond,
     TypeHear,
     TypeRecord,
+    Highlight,
+    BestTitle,
+    MainIdea,
 } from "components/Admin/Options";
 
 import { useDispatch } from "react-redux";
@@ -18,8 +21,17 @@ import { getQuestionWithId } from "store/slices/questionSlice";
 
 import ListenSelectTest from "../../../components/LayoatCard";
 
-const { DESCRIBE_IMAGE, LISTEN_WORDS, RESPOND, SELECT_WORDS, TYPE_HEAR, TYPE_RECORD } =
-    questionType;
+const {
+    DESCRIBE_IMAGE,
+    LISTEN_WORDS,
+    RESPOND,
+    SELECT_WORDS,
+    TYPE_HEAR,
+    TYPE_RECORD,
+    BEST_TITLE,
+    HIGLIGHT_ANSWER,
+    SELECT_IDEA,
+} = questionType;
 
 export const QuestionContext = React.createContext();
 
@@ -70,6 +82,14 @@ function CreateQuestion() {
             setComponent(<TypeHear />);
         else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === TYPE_RECORD)
             setComponent(<TypeRecord />);
+        else if (
+            (isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === HIGLIGHT_ANSWER
+        )
+            setComponent(<Highlight />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === SELECT_IDEA)
+            setComponent(<MainIdea />);
+        else if ((isUpdatePage ? mainQuestion?.questionType : typeQuestion.value) === BEST_TITLE)
+            setComponent(<BestTitle />);
     }, [typeQuestion]);
     return (
         <QuestionContext.Provider value={setTypeQuestionMemo}>

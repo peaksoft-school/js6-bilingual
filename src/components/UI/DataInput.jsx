@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 function DataInput({ onChange, value, ...props }) {
-    console.log(props);
     return (
         <StyledDataInput>
             <StyledText>Duration (in minutes)</StyledText>
@@ -14,7 +13,7 @@ function DataInput({ onChange, value, ...props }) {
 const StyledDataInput = styled.div`
     width: 99px;
     height: 46px;
-    input[type="time" i]::-webkit-calendar-picker-indicator {
+    input[type="time"]::-webkit-calendar-picker-indicator {
         display: none;
     }
 `;

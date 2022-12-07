@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
 
 import Add from "@mui/icons-material/Add";
-import { ButtonUi } from "components/UI";
+import { ButtonUi, PopUp } from "components/UI";
 import CheckBox from "components/UI/Checkbox";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";
-import SelectWordItem from "components/UI/SelectWordItem";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
 import { deleteOption } from "store/slices/option-slice";
-import {
-    getQuestionWithId,
-    sendingQuestion,
-    updateQuestionWithId,
-} from "store/slices/questionSlice";
+import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
 function SelectEnglishWords({ data }) {
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [valueCheckbox, setValueCheckbox] = useState(false);
     const [dataCard, setDataCard] = useState([]);
+    const [newCard, setNewCard] = useState([]);
+
     const { id } = useParams();
     const getValue = (e) => {
         setInputValue(e.target.value);
@@ -38,6 +35,8 @@ function SelectEnglishWords({ data }) {
     const sendingValueHandler = () => {
         if (!inputValue.trim()) return null;
         setDataCard((prev) => [...prev, { option: inputValue, isTrue: valueCheckbox }]);
+        if (isUpdatePage)
+            setNewCard((prev) => [...prev, { option: inputValue, isTrue: valueCheckbox }]);
         setInputValue("");
         setValueCheckbox(false);
         setIsOpen(false);
@@ -48,7 +47,10 @@ function SelectEnglishWords({ data }) {
         }, []);
     }
     const saveData = async (req) => {
-        console.log(data);
+        if (!data.duration) {
+            return;
+        }
+        console.log(newCard);
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -63,7 +65,7 @@ function SelectEnglishWords({ data }) {
                 content: "string",
             },
             questionType: typeQuestion.value,
-            [option]: dataCard,
+            [option]: isUpdatePage ? newCard : dataCard,
         };
         if (req === "save") {
             setMainQuestion(dataQuestion);
@@ -82,6 +84,7 @@ function SelectEnglishWords({ data }) {
             dispatch(deleteOption(idx.id));
         }
         setDataCard(dataCard.filter((item) => item.option !== idx.option));
+        setNewCard(newCard.filter((item) => item.option !== idx.option));
     };
 
     return (
@@ -112,9 +115,8 @@ function SelectEnglishWords({ data }) {
             <Wrapper>
                 <Row>
                     {dataCard.map((item, index) => {
-                        console.log(item);
                         return (
-                            <MainItem key={item.option}>
+                            <MainItem key={item.id || item.option}>
                                 <Content>
                                     <span>{index + 1}</span>
                                     <span>{item.option}</span>

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { convertHMS } from "services/format";
 import styled from "styled-components";
 
+import { PopUp } from "./UI";
 import DataInput from "./UI/DataInput";
 
 import DropDown from "./UI/DropDownUi";
@@ -20,7 +21,7 @@ import UICard from "./UI/UICard";
 function ListenSelectTest({ children }) {
     const { mainQuestion, isUpdatePage } = React.useContext(QuestionContext);
     const [state, setState] = React.useState(questionTypeList[0]);
-    const [isErrorInput, setIsErrorInput] = React.useState({ title: true, duration: true });
+    const [isErrorInput, setIsErrorInput] = React.useState({ title: false, duration: false });
     const [data, setData] = React.useState({
         title: "",
         duration: "",
@@ -40,6 +41,28 @@ function ListenSelectTest({ children }) {
     }
     return (
         <StyledContainerBoss>
+            <button
+                onClick={() =>
+                    setIsErrorInput((prev) => {
+                        return {
+                            ...prev,
+                            duration: !prev.duration,
+                        };
+                    })
+                }>
+                Error duration
+            </button>
+            <button
+                onClick={() =>
+                    setIsErrorInput((prev) => {
+                        return {
+                            ...prev,
+                            title: !prev.duration,
+                        };
+                    })
+                }>
+                Error title
+            </button>
             <UICard cardWidth="100%" cardBorderRadius="20px">
                 <StyledContainerMiniBoss>
                     <StyledContainerOne>
@@ -86,7 +109,7 @@ function ListenSelectTest({ children }) {
                             dropState={state}
                         />
                     </StyledContainerThree>
-                    <div>{React.cloneElement(children, { data })}</div>
+                    <Child>{React.cloneElement(children, { data })}</Child>
                 </StyledContainerMiniBoss>
             </UICard>
         </StyledContainerBoss>
@@ -99,6 +122,10 @@ const StyledContainerBoss = styled.div`
 `;
 const StyledContainerMiniBoss = styled.div`
     padding-left: 40px;
+`;
+
+const Child = styled.div`
+    max-width: 820px;
 `;
 
 const StyledContainerOne = styled.div`
@@ -134,7 +161,6 @@ const StyledText = styled.span`
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    font-family: "DINNextRoundedLTW04-Medium";
     line-height: 18px;
 `;
 export default ListenSelectTest;
