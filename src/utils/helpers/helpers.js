@@ -10,3 +10,19 @@ export const logout = () => {
     localStorage.removeItem(JWT_TOKEN_KEY);
     // dispatch for clear the token in store
 };
+
+export function readFileDataAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            resolve(event.target.result);
+        };
+
+        reader.onerror = (err) => {
+            reject(err);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}

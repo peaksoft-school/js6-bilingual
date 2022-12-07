@@ -32,5 +32,4 @@ const StyleForBox = styled(Box)`
     box-shadow: 0px 4px 39px rgba(196, 196, 196, 0.6);
     border-radius: 10px;
     outline: none;
-    padding: 50px 80px;
 `;

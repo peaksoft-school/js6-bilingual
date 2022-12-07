@@ -6,7 +6,7 @@ import styled from "styled-components";
 function Layout({ children }) {
     return (
         <StyledMain>
-            <Header HeaderBg="white" />
+            <Header Choice={false} HeaderBg="white" />
             <Wrapper>{children}</Wrapper>
         </StyledMain>
     );
@@ -20,7 +20,7 @@ const StyledMain = styled.main`
 `;
 
 const Wrapper = styled.div`
-    padding: 150px 0 218px 0;
+    padding: 150px 0 50px;
     min-height: 100vh;
     background: #d7e1f8;
 `;
