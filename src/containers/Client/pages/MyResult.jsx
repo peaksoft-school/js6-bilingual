@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 
 import ClientContainer from "components/UI/ClientContainer";
 
-import IconButtonStyled from "components/UI/IconButtonStyled";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { resultTestsSlice } from "store/slices/resultTestsSlice";
 
 import styled from "styled-components";
+
+import DeleteIcon from "../../../assets/icons/DeleteIcon.svg";
 
 import BookBilingual from "../../../assets/images/bookBilingual.png";
 
@@ -38,7 +38,6 @@ function MyResult() {
                         </StyledContainerNull>
                     ) : (
                         tests.map((item) => {
-                            console.log(item);
                             return (
                                 <StyledAnswer key={item.id}>
                                     <span>{item.id}</span>
@@ -58,13 +57,9 @@ function MyResult() {
                                         }}>
                                         {item.finalScore}
                                     </span>
-                                    <IconButtonStyled
-                                        Icon={`<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2.5 5H4.16667H17.5" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.66699 4.99984V3.33317C6.66699 2.89114 6.84259 2.46722 7.15515 2.15466C7.46771 1.8421 7.89163 1.6665 8.33366 1.6665H11.667C12.109 1.6665 12.5329 1.8421 12.8455 2.15466C13.1581 2.46722 13.3337 2.89114 13.3337 3.33317V4.99984M15.8337 4.99984V16.6665C15.8337 17.1085 15.6581 17.5325 15.3455 17.845C15.0329 18.1576 14.609 18.3332 14.167 18.3332H5.83366C5.39163 18.3332 4.96771 18.1576 4.65515 17.845C4.34259 17.5325 4.16699 17.1085 4.16699 16.6665V4.99984H15.8337Z" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`}
-                                    />
+                                    <span>
+                                        <img src={DeleteIcon} alt="Delete" />
+                                    </span>
                                 </StyledAnswer>
                             );
                         })

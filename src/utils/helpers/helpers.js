@@ -8,7 +8,6 @@ export const getToken = () => {
 
 export const logout = () => {
     localStorage.removeItem(JWT_TOKEN_KEY);
-    // dispatch for clear the token in store
 };
 
 export function readFileDataAsBase64(file) {
