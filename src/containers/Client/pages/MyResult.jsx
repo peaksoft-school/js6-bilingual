@@ -38,13 +38,26 @@ function MyResult() {
                         </StyledContainerNull>
                     ) : (
                         tests.map((item) => {
+                            console.log(item);
                             return (
                                 <StyledAnswer key={item.id}>
                                     <span>{item.id}</span>
                                     <span>{item.dateOfSubmission}</span>
                                     <span>{item.testTitle}</span>
-                                    <span>{item.status}</span>
-                                    <span>{item.finalScore}</span>
+                                    <span
+                                        style={{
+                                            color:
+                                                item.status === "EVALUATED" ? "#2AB930" : "#F61414",
+                                        }}>
+                                        {item.status}
+                                    </span>
+                                    <span
+                                        style={{
+                                            color:
+                                                item.status === "EVALUATED" ? "#2AB930" : "#F61414",
+                                        }}>
+                                        {item.finalScore}
+                                    </span>
                                     <IconButtonStyled
                                         Icon={`<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2.5 5H4.16667H17.5" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
