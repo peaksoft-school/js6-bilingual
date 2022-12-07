@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import { baseAxios } from "api/axios-config";
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
+
 import Input from "components/UI/Input";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { Howl } from "howler";
@@ -13,6 +14,9 @@ import { formatToMinute } from "services/format";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 
 import styled from "styled-components";
+
+import PauseIcon from "../../../assets/icons/Pause.svg";
+import PlayIcon from "../../../assets/icons/PlayIcon.svg";
 
 function Typewhatyouhear({ data }) {
     const { isUpdatePage, typeQuestion, setMainQuestion, mainQuestion } =
@@ -58,7 +62,7 @@ function Typewhatyouhear({ data }) {
             audio.play();
         }
     };
-
+    console.log(isAudioStop);
     const saveData = async (req) => {
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
@@ -102,7 +106,6 @@ function Typewhatyouhear({ data }) {
             );
         }
     };
-
     return (
         <StlyedContainer>
             <StyledTitle>Number off Replays</StyledTitle>
@@ -134,22 +137,7 @@ function Typewhatyouhear({ data }) {
                     <input hidden onChange={handleAudio} accept="audio/*" multiple type="file" />
                 </Button>
                 <StyledPause onClick={() => audioPlay(setIsAudioStop(false))}>
-                    <IconButtonStyled
-                        fontSize="27px"
-                        Icon={
-                            isAudioStop
-                                ? `<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 1.5L9 8L1 14.5V1.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`
-                                : `<svg width="46" height="35" viewBox="0 0 46 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="46" height="42" rx="8" fill="#3A10E5"/>
-<path d="M20.625 14.5H17.375V27.5H20.625V14.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M28.625 14.5H25.375V27.5H28.625V14.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`
-                        }
-                    />
+                    <IconButtonStyled Icon={isAudioStop ? PlayIcon : PauseIcon} />
                 </StyledPause>
                 <p>{dataField.file ? dataField.file.split("/")[3] : "Name audio file"}</p>
             </StyledAudioBox>
@@ -220,7 +208,7 @@ const StyledNumber = styled.div`
         font-size: 18px;
     }
 `;
-const StyledPause = styled.button`
+const StyledPause = styled.div`
     width: 46px;
     height: 42px;
     display: flex;

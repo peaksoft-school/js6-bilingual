@@ -50,10 +50,6 @@ function NewTest() {
 
     if (!newInputValue.title) return <Loader />;
 
-    // const addQuestion = () => {
-    //     navigate("/admin/question-to-test");
-    // };
-
     return (
         <StyledSection>
             <UICard
