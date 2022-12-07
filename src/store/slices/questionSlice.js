@@ -1,5 +1,3 @@
-import { useParams } from "react-router-dom";
-
 import { getTestById } from "./adminTestActions";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");

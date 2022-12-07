@@ -6,7 +6,7 @@ import styled from "styled-components";
 function Layout({ children }) {
     return (
         <StyledMain>
-            <Header HeaderBg="white" />
+            <Header Choice={false} HeaderBg="white" />
             <Wrapper>{children}</Wrapper>
         </StyledMain>
     );

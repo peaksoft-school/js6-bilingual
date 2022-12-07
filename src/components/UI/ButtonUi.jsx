@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
 const ButtonUi = ({
+    disabled,
     color,
     variant,
     maxwidth,
@@ -16,6 +17,7 @@ const ButtonUi = ({
 }) => {
     return (
         <ButtonMain
+            disabled={disabled}
             onClick={onClick}
             maxwidth={maxwidth}
             fontSize={fontSize}
