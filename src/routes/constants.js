@@ -31,5 +31,6 @@ export const ADMIN_CONST_URL = {
 
 export const CLIENT_CONST_URL = {
     "/": "/",
-    RESULTS: "/results/",
+    RESULTS: "/results",
+    HOMETWO: "/Twohome",
 };
