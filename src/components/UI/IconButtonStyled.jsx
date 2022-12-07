@@ -3,20 +3,12 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const IconButtonStyled = ({ Icon, fontSize, onhover, handleClick }) => {
-    return (
-        <StyledIcon
-            onClick={handleClick}
-            onhover={onhover}
-            fontSize={fontSize}
-            Icon={Icon}
-            dangerouslySetInnerHTML={{ __html: Icon }}
-        />
-    );
+    return <StyledIcon onClick={handleClick} onhover={onhover} fontSize={fontSize} src={Icon} />;
 };
 
 export default IconButtonStyled;
 
-const StyledIcon = styled.span`
+const StyledIcon = styled.img`
     ${({ fontSize = "24", onhover }) => {
         return css`
             cursor: pointer;

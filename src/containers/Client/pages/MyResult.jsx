@@ -8,7 +8,7 @@ import { resultTestsSlice } from "store/slices/resultTestsSlice";
 
 import styled from "styled-components";
 
-import DeleteIcon from "../../../assets/icons/DeleteIcon.svg";
+import DeleteIcon from "../../../assets/icons/Delete.svg";
 
 import BookBilingual from "../../../assets/images/bookBilingual.png";
 
