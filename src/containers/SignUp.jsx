@@ -27,8 +27,7 @@ const SignIn = () => {
 
     const onSubmit = async (userInfo) => {
         try {
-            await dispatch(asyncAuth(userInfo, REGISTRATION)).unwrap();
-            navigate("/home");
+            await dispatch(asyncAuth(userInfo, REGISTRATION, navigate("/home"))).unwrap();
             reset();
         } catch (error) {
             setErrorMessage(error.response);

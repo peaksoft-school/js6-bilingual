@@ -41,7 +41,7 @@ export const ADMIN_ROUTES_CONFIG = [
     },
     {
         path: ADMIN_ROUTES_URL.UPDATE_QUESTION,
-        element: <UpdateQuestion />,
+        element: <CreateQuestion />,
     },
     {
         path: "*",

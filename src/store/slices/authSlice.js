@@ -3,7 +3,7 @@ import { baseAxios } from "api/axios-config";
 import { setUserToCookies } from "services/saveUser";
 
 const initialState = {
-    data: {},
+    data: null,
 };
 const authSlice = createSlice({
     name: "user",
@@ -21,9 +21,10 @@ export const asyncAuth = (useData, signInType, onNavigate) => {
     return async (dispatch) => {
         try {
             const { data } = await baseAxios.post(signInType, useData);
+            console.log(data);
             dispatch(setUser(data));
             setUserToCookies(data);
-            onNavigate(data);
+            onNavigate();
         } catch (e) {
             console.log(e);
         }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { ButtonUi } from "components/UI";
 import Input from "components/UI/Input";
+import Loader from "components/UI/Loader";
 import UICard from "components/UI/UICard";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -46,6 +47,8 @@ function NewTest() {
         dispatch(updateTest({ id, newInputValue }));
         navigate("/admin/tests");
     };
+
+    if (!newInputValue.title) return <Loader />;
 
     // const addQuestion = () => {
     //     navigate("/admin/question-to-test");

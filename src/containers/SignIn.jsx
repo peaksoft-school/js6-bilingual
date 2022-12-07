@@ -2,12 +2,14 @@ import React from "react";
 
 import { Box } from "@mui/system";
 
+import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
-import { asyncAuth } from "store/slices/authSlice";
+import { setUserToCookies } from "services/saveUser";
+import { setUser } from "store/slices/authSlice";
 import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
@@ -27,14 +29,17 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    const navigateAfterLogin = (data) => {
+    const makeIsHave = (data) => {
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");
     };
 
     async function onSubmit(userInfo) {
         try {
-            await dispatch(asyncAuth(userInfo, LOGIN, navigateAfterLogin)).unwrap();
+            const { data } = await baseAxios.post(LOGIN, userInfo);
+            dispatch(setUser(data));
+            setUserToCookies(data);
+            makeIsHave(data);
             reset();
         } catch (error) {
             setErrorMessage(error.response);
@@ -87,7 +92,7 @@ const SignIn = () => {
                             rules={{
                                 required: "This field is required",
                                 minLength: {
-                                    value: 4,
+                                    value: 5,
                                     message: "Password lenght must be at least 6",
                                 },
                             }}

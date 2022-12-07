@@ -32,6 +32,6 @@ const StyledContainerGlav = styled.div`
 `;
 const StyledContainer = styled.div`
     margin-top: 80px;
-    margin-bottom: 80pc;
+    margin-bottom: 80px;
 `;
 export default ClientContainer;

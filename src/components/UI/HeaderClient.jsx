@@ -10,6 +10,8 @@ import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 function Header() {
     const navigate = useNavigate();
 
+    const MyresultGo = () => {};
+
     return (
         <HeaderGlav>
             <StyledHeader>
@@ -28,6 +30,7 @@ function Header() {
                         maxwidth="183px"
                         maxheight="18px"
                         fontSize="15px"
+                        onClick={MyresultGo}
                     />
                     <ButtonStyled
                         text="LOG OUT"
@@ -52,9 +55,6 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    position: fixed;
-    z-index: 10;
     background-color: white;
 `;
 const StyledImage = styled.img`
