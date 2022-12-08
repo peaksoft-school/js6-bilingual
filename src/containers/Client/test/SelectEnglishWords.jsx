@@ -1,32 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ButtonUi } from "components/UI";
 import ClientContainer from "components/UI/ClientContainer";
 import Progress from "components/UI/Progress";
 import UICard from "components/UI/UICard";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getQuestionForClientById } from "store/slices/clientSlice";
 import styled from "styled-components";
 
+const option = [
+    { id: Math.random().toString(), option: "chika" },
+    { id: Math.random().toString(), option: "abu" },
+    { id: Math.random().toString(), option: "zuli" },
+    { id: Math.random().toString(), option: "ema" },
+    { id: Math.random().toString(), option: "bema" },
+    { id: Math.random().toString(), option: "beka" },
+    { id: Math.random().toString(), option: "elya" },
+    { id: Math.random().toString(), option: "maka" },
+    { id: Math.random().toString(), option: "suli" },
+    { id: Math.random().toString(), option: "tigr" },
+    { id: Math.random().toString(), option: "line" },
+    { id: Math.random().toString(), option: "pantera" },
+];
 function SelectEnglishWords() {
-    const option = [
-        { id: Math.random().toString(), option: "chika" },
-        { id: Math.random().toString(), option: "abu" },
-        { id: Math.random().toString(), option: "zuli" },
-        { id: Math.random().toString(), option: "ema" },
-        { id: Math.random().toString(), option: "bema" },
-        { id: Math.random().toString(), option: "beka" },
-        { id: Math.random().toString(), option: "elya" },
-        { id: Math.random().toString(), option: "maka" },
-        { id: Math.random().toString(), option: "suli" },
-        { id: Math.random().toString(), option: "tigr" },
-        { id: Math.random().toString(), option: "line" },
-        { id: Math.random().toString(), option: "pantera" },
-    ];
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const clientQuestion = useSelector((state) => state.testType.questions);
+    console.log(clientQuestion, "question");
+    const [disableById, setDisableById] = useState([]);
 
-    const [cardList, setCardList] = useState("select words and drag here");
+    const [cardList, setCardList] = useState([]);
+
+    useEffect(() => {
+        dispatch(getQuestionForClientById(id));
+    }, []);
 
     const dragEndHandler = (e, card) => {
+        setDisableById((prev) => [...prev, card.id]);
         e.preventDefault();
-        setCardList(card);
+        setCardList((prev) => [...prev, card]);
     };
 
     const dragOverHandler = (e) => {
@@ -44,7 +57,8 @@ function SelectEnglishWords() {
                 <StyledWrapper>
                     {option.map((item) => (
                         <StyledWordDiv
-                            onDragEnd={(e) => dragEndHandler(e, item.option)}
+                            className={disableById.includes(item.id) ? "option_disable" : ""}
+                            onDragEnd={(e) => dragEndHandler(e, item)}
                             onDragOver={(e) => dragOverHandler(e)}
                             draggable
                             key={item.id}>
@@ -53,7 +67,13 @@ function SelectEnglishWords() {
                     ))}
                 </StyledWrapper>
                 <StyledDrag onDragOver={(e) => dragOverHandler(e, cardList.option)}>
-                    {cardList}
+                    <StyleDragBox>
+                        {cardList.length > 0
+                            ? cardList.map((item) => {
+                                  return <div>{item.option}</div>;
+                              })
+                            : "select words and drag here"}
+                    </StyleDragBox>
                 </StyledDrag>
                 <StyledLine />
                 <StyledBtn>
@@ -88,6 +108,13 @@ const StyledWrapper = styled.div`
     gap: 10px;
 `;
 
+const StyleDragBox = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+`;
+
 const StyledDrag = styled.div`
     width: 243px;
     height: 124px;
@@ -96,6 +123,7 @@ const StyledDrag = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 7px;
     margin: 30px 0 0 570px;
     font-weight: 400;
     font-size: 14px;
@@ -123,6 +151,11 @@ const StyledWordDiv = styled.div`
         outline: none;
         background: #3a10e5;
         color: #ffffff;
+    }
+    &.option_disable {
+        opacity: 0.5;
+        background: gray;
+        pointer-events: none;
     }
 `;
 

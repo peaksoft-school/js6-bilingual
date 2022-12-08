@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HomeOne, HomeTwo, MyResult, NotFound } from "containers";
+import { HomeOne, HomeTwo, MyResult, NotFound, SelectTests } from "containers";
 import { CLIENT_CONST_URL } from "routes/constants";
 
 export const CLIENT_ROUTES_CONFIG = [
@@ -9,8 +9,12 @@ export const CLIENT_ROUTES_CONFIG = [
         element: <HomeOne />,
     },
     {
-        path: CLIENT_CONST_URL.HOMETWO,
+        path: CLIENT_CONST_URL.TESTS,
         element: <HomeTwo />,
+    },
+    {
+        path: CLIENT_CONST_URL.TESTS + CLIENT_CONST_URL.SELECT_TESTS,
+        element: <SelectTests />,
     },
     {
         path: CLIENT_CONST_URL.RESULTS,

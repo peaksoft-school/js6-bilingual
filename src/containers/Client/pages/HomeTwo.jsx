@@ -4,7 +4,7 @@ import { ButtonUi } from "components/UI";
 
 import ClientContainer from "components/UI/ClientContainer";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -15,9 +15,14 @@ import ValidationTest from "../../../assets/images/validationTest.svg";
 
 function HomeTwo() {
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const CancelHandle = () => {
         navigate("/home");
+    };
+
+    const nextToPage = () => {
+        navigate(`/home/tests/${id}/select-words-test`);
     };
     return (
         <ClientContainer>
@@ -54,7 +59,7 @@ function HomeTwo() {
                     <ButtonUi maxwidth="145px" variant="outlined" onClick={CancelHandle}>
                         CANCEL
                     </ButtonUi>
-                    <ButtonUi maxwidth="148px" variant="contained">
+                    <ButtonUi maxwidth="148px" variant="contained" onClick={nextToPage}>
                         PRACTICE TEST
                     </ButtonUi>
                 </StyledFooterHomeTwo>

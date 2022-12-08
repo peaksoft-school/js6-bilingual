@@ -32,5 +32,6 @@ export const ADMIN_CONST_URL = {
 export const CLIENT_CONST_URL = {
     "/": "/",
     RESULTS: "/results",
-    HOMETWO: "/Twohome",
+    TESTS: "/tests/:id",
+    SELECT_TESTS: "/select-words-test",
 };
