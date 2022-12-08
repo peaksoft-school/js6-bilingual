@@ -4,6 +4,7 @@ import { reducer as notificationsReducer } from "reapop";
 import { injectStore } from "../api/axios-config";
 import { testsPostSlice } from "./slices/adminTestActions";
 import authSlice from "./slices/authSlice";
+import { clientSlice } from "./slices/clientSlice";
 import { questionsSlice } from "./slices/questionSlice";
 import { testsSlice } from "./slices/resultTestsSlice";
 
@@ -17,7 +18,7 @@ export const store = configureStore({
         test: testsPostSlice.reducer,
         question: questionsSlice.reducer,
         tests: testsSlice.reducer,
-        notification: notificationsReducer(),
+        testType: clientSlice.reducer,
     },
     middleware: customizedMiddleware,
 });

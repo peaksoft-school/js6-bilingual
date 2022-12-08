@@ -33,7 +33,7 @@ export const routesConfig = [
     {
         path: RoutesUrl.Home,
         element: (
-            <PrivateRoute expectedRoles={[UsersRole.admin, UsersRole.client]}>
+            <PrivateRoute expectedRoles={[UsersRole.client]}>
                 <ClientRoutes />
             </PrivateRoute>
         ),

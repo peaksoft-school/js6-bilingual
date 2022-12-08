@@ -71,7 +71,6 @@ export default function DescribeImage({ data }) {
             },
             questionType: typeQuestion.value || typeQuestion,
         };
-        console.log(dataQuestion);
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));

@@ -42,9 +42,6 @@ function ListenEnglishWord({ data }) {
     };
 
     const { id } = useParams();
-    // const getValue = (e) => {
-    //     setInputValue(e.target.value);
-    // };
 
     const { mainQuestion, typeQuestion, isUpdatePage, setMainQuestion } =
         React.useContext(QuestionContext);
@@ -61,7 +58,6 @@ function ListenEnglishWord({ data }) {
         const min = data.duration.split(":")[1];
         const duration = formatToMinute(hour, min);
         const option = isUpdatePage ? "optionRequests" : "options";
-        // const audioLink = baseAxios.post("static", dat);
         const dataQuestion = {
             testId: id,
             title: data.title,
