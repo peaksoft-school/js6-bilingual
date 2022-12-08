@@ -28,3 +28,4 @@ export { default as Client } from "./Client";
 export { default as MyResult } from "./Client/pages/MyResult";
 export { default as HomeOne } from "./Client/pages/HomeOne";
 export { default as HomeTwo } from "./Client/pages/HomeTwo";
+export { default as ListenTests } from "./Client/tests/ListenSelectWordsTests";

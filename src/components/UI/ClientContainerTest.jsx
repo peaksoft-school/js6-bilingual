@@ -42,4 +42,7 @@ const StyledButton = styled.button`
     border-radius: 8px;
     padding: 13px 24px;
     font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
