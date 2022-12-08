@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { ButtonUi } from "components/UI";
 import Input from "components/UI/Input";
-import Loader from "components/UI/Loader";
 import UICard from "components/UI/UICard";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

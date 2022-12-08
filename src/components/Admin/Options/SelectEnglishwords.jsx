@@ -5,17 +5,12 @@ import { ButtonUi } from "components/UI";
 import CheckBox from "components/UI/Checkbox";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";
-import SelectWordItem from "components/UI/SelectWordItem";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
 import { deleteOption } from "store/slices/option-slice";
-import {
-    getQuestionWithId,
-    sendingQuestion,
-    updateQuestionWithId,
-} from "store/slices/questionSlice";
+import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
 function SelectEnglishWords({ data }) {
@@ -48,7 +43,6 @@ function SelectEnglishWords({ data }) {
         }, []);
     }
     const saveData = async (req) => {
-        console.log(data);
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);

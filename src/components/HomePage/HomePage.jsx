@@ -49,7 +49,7 @@ const StyledDivCont = styled.div`
     margin: 0 auto;
 `;
 const StyledSliderDiv = styled.div`
-    width: 100%
+    width: 100%;
     margin: 0 auto;
     margin-bottom: 200px;
 `;

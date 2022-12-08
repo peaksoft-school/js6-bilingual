@@ -1,10 +1,10 @@
 import React from "react";
 
 import { ButtonUi } from "components/UI";
+
 import styled from "styled-components";
 
 function Respond() {
-    console.log("The responed rendered");
     return (
         <StyledContainerRespond>
             <StyledContainer>

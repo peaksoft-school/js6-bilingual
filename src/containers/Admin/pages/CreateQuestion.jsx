@@ -1,8 +1,7 @@
-import { questionType, questionTypeList, QUESTION_BODY } from "constants/questionType";
+import { questionType, questionTypeList } from "constants/questionType";
 
-import React, { useRef } from "react";
+import React from "react";
 
-import { getQuestionById } from "api/question-query";
 import {
     SelectWord,
     DescribeImage,
@@ -12,10 +11,10 @@ import {
     TypeRecord,
 } from "components/Admin/Options";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useParams } from "react-router-dom";
-import { getQuestionWithId, sendingQuestion } from "store/slices/questionSlice";
+import { getQuestionWithId } from "store/slices/questionSlice";
 
 import ListenSelectTest from "../../../components/LayoatCard";
 

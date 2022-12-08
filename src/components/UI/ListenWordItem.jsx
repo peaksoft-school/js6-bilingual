@@ -2,7 +2,6 @@ import React from "react";
 
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { Howl } from "howler";
-import { useAudioPlayer, AudioPlayerProvider } from "react-use-audio-player";
 
 import styled from "styled-components";
 

@@ -8,7 +8,7 @@ import { RoutesUrl } from "./constants";
 const PrivateRoute = ({ expectedRoles, children }) => {
     const user = useSelector((state) => state.auth.data);
     if (user !== null) {
-        if (expectedRoles.includes(user.role) && user?.token) {
+        if (expectedRoles.includes(user?.role) && user?.token) {
             return children;
         }
         return <Navigate to={`${RoutesUrl.SignIn}`} />;
