@@ -1,33 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ButtonUi } from "components/UI";
 
 import ClientContainer from "components/UI/ClientContainer";
 
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { getQuestionForClient } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import ListBook from "../../../assets/images/BookList.svg";
 
 function HomeOne() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const typeTest = useSelector((state) => state.testType.answer);
+
+    useEffect(() => {
+        dispatch(getQuestionForClient());
+    }, []);
+
     const TryTestClick = () => {
         navigate("Twohome");
     };
     return (
         <ClientContainer>
-            <StyledContainerHomeOne>
-                <img src={ListBook} alt="" />
-                <div>
-                    <span>15 minutes</span>
-                    <h4>English advanced test </h4>
-                    <span>Train as much as you like.</span>
-                </div>
-                <ButtonUi variant="outlined" onClick={TryTestClick}>
-                    TRY TEST
-                </ButtonUi>
-            </StyledContainerHomeOne>
+            {typeTest.map((item) => (
+                <StyledContainerHomeOne key={item.id}>
+                    <img src={ListBook} alt="" />
+                    <div>
+                        <span>{item.duration} minutes</span>
+                        <h4>{item.title}</h4>
+                        <span>{item.shortDescription}</span>
+                    </div>
+                    <ButtonUi variant="outlined" onClick={TryTestClick}>
+                        TRY TEST
+                    </ButtonUi>
+                </StyledContainerHomeOne>
+            ))}
         </ClientContainer>
     );
 }
@@ -40,6 +51,7 @@ const StyledContainerHomeOne = styled.div`
     background-color: white;
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
     img {
         width: 90px;
         height: 80px;
@@ -55,7 +67,6 @@ const StyledContainerHomeOne = styled.div`
         align-items: flex-start;
         span {
             :nth-child(1) {
-                width: 82px;
                 height: 18px;
                 color: #3a10e5;
             }
