@@ -19,6 +19,10 @@ function HomeTwo() {
     const CancelHandle = () => {
         navigate("/home");
     };
+
+    const nextToPage = () => {
+        navigate("/home/select-words-test");
+    };
     return (
         <ClientContainer>
             <StyledContainerHomeTwo>
@@ -54,7 +58,7 @@ function HomeTwo() {
                     <ButtonUi maxwidth="145px" variant="outlined" onClick={CancelHandle}>
                         CANCEL
                     </ButtonUi>
-                    <ButtonUi maxwidth="148px" variant="contained">
+                    <ButtonUi maxwidth="148px" variant="contained" onClick={nextToPage}>
                         PRACTICE TEST
                     </ButtonUi>
                 </StyledFooterHomeTwo>

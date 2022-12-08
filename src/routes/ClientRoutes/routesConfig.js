@@ -13,6 +13,10 @@ export const CLIENT_ROUTES_CONFIG = [
         element: <HomeTwo />,
     },
     {
+        path: CLIENT_CONST_URL.HOMETWO,
+        element: <HomeTwo />,
+    },
+    {
         path: CLIENT_CONST_URL.RESULTS,
         element: <MyResult />,
     },
