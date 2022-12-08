@@ -14,22 +14,26 @@ export default function Highlight({ data }) {
         passage: "",
         statement: "",
         correctAnswer: "",
-        pieceOfCorrectAnswer: "",
     });
-    const highlighEvent = () => {
-        const str = window.getSelection().toString();
-        const correctAnswer = dataFeild.passage.replace(str, `<span>${str}</span>`);
-        setDataField((prev) => {
-            return {
-                ...prev,
-                correctAnswer,
-                pieceOfCorrectAnswer: str,
-            };
-        });
-    };
 
     const { setMainQuestion, mainQuestion, typeQuestion, isUpdatePage } =
         React.useContext(QuestionContext);
+
+    const highlighEvent = () => {
+        const pieceOfAnswer = window.getSelection().toString();
+
+        const correctAnswer = mainQuestion.passage.replace(
+            pieceOfAnswer,
+            `<span>${pieceOfAnswer}</span>`
+        );
+        setDataField((prev) => {
+            return {
+                ...prev,
+                correctAnswer: pieceOfAnswer,
+                passage: correctAnswer,
+            };
+        });
+    };
 
     const { id } = useParams();
 
@@ -42,6 +46,7 @@ export default function Highlight({ data }) {
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
+        const passage = dataFeild.passage.replace(/<span>|<\/span>/gi, "");
 
         const dataQuestion = {
             testId: +id,
@@ -53,14 +58,30 @@ export default function Highlight({ data }) {
             },
             questionType: typeQuestion.value,
             statement: dataFeild.statement,
-            passage: dataFeild.passage,
-            correctAnswer: dataFeild.pieceOfCorrectAnswer,
+            passage,
+            correctAnswer: dataFeild.correctAnswer,
+            numberOfReplays: 10,
+            minNumberOfWords: 10,
+            content: "string",
+            willDelete: [0],
+            willUpdate: [0],
+            optionRequests: [
+                {
+                    option: "string",
+                    title: "string",
+                    isTrue: true,
+                },
+            ],
         };
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
         } else if (req === "update") {
-            dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            dispatch(
+                updateQuestionWithId(
+                    (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
+                )
+            );
         }
     };
     if (mainQuestion && isUpdatePage) {
@@ -72,7 +93,7 @@ export default function Highlight({ data }) {
             console.log(correctAnswer);
             setDataField({
                 statement: mainQuestion.statement,
-                passage: mainQuestion.passage,
+                passage: correctAnswer,
                 correctAnswer,
             });
         }, []);
@@ -101,7 +122,7 @@ export default function Highlight({ data }) {
                             return { ...prev, passage: e.target.value };
                         });
                     }}
-                    value={dataFeild.passage}
+                    value={dataFeild.passage.replace(/<span>|<\/span>/gi, "")}
                     width="100%"
                 />
             </Block>
@@ -109,7 +130,7 @@ export default function Highlight({ data }) {
                 <h4> Highlight correct answer: </h4>
                 <CorrectAnswer
                     onMouseUp={highlighEvent}
-                    dangerouslySetInnerHTML={{ __html: dataFeild.correctAnswer }}
+                    dangerouslySetInnerHTML={{ __html: dataFeild.passage }}
                 />
             </Block>
             <StyledContainerMiniMiniBoss>

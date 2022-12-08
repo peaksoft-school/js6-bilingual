@@ -73,27 +73,39 @@ function ListenSelectTest({ children }) {
                                 colortext="black"
                                 value={data.title}
                                 sx={{ width: "697px" }}
-                                handleChange={(el) =>
+                                handleChange={(el) => {
                                     setData((prev) => {
                                         return {
                                             ...prev,
                                             title: el.target.value,
                                         };
-                                    })
-                                }
+                                    });
+                                    setIsErrorInput((prev) => {
+                                        return {
+                                            ...prev,
+                                            title: false,
+                                        };
+                                    });
+                                }}
                             />
                         </StyledContainerOneOne>
                         <StyledContainerTwo>
                             <DataInput
                                 value={data.duration}
-                                onChange={(el) =>
+                                onChange={(el) => {
                                     setData((prev) => {
                                         return {
                                             ...prev,
                                             duration: el.target.value,
                                         };
-                                    })
-                                }
+                                    });
+                                    setIsErrorInput((prev) => {
+                                        return {
+                                            ...prev,
+                                            duration: false,
+                                        };
+                                    });
+                                }}
                                 error={isErrorInput.duration}
                             />
                         </StyledContainerTwo>
@@ -109,7 +121,7 @@ function ListenSelectTest({ children }) {
                             dropState={state}
                         />
                     </StyledContainerThree>
-                    <Child>{React.cloneElement(children, { data })}</Child>
+                    <Child>{React.cloneElement(children, { data, setIsErrorInput })}</Child>
                 </StyledContainerMiniBoss>
             </UICard>
         </StyledContainerBoss>

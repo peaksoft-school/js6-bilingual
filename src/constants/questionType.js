@@ -12,10 +12,10 @@ export const questionType = {
 
 export const questionTypeList = [
     { text: "Select real English words", value: questionType.SELECT_WORDS },
-    { text: "Describe image", value: questionType.DESCRIBE_IMAGE },
     { text: "Listen and English select word", value: questionType.LISTEN_WORDS },
     { text: "Type what you hear", value: questionType.TYPE_HEAR },
-    { text: "Type Record saying statement you hear", value: questionType.TYPE_RECORD },
+    { text: "Describe image", value: questionType.DESCRIBE_IMAGE },
+    { text: "Record saying statement", value: questionType.TYPE_RECORD },
     { text: "Respond in at least N words", value: questionType.RESPOND },
     { text: "Highlight the answer", value: questionType.HIGLIGHT_ANSWER },
     { text: "Select the main idea", value: questionType.SELECT_IDEA },

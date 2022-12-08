@@ -23,6 +23,7 @@ function ListenEnglishWord({ data }) {
     const [file, setFile] = useState();
     const [checkBoxValue, setCheckBoxValue] = React.useState(false);
     const [dataFile, setDataFile] = useState({});
+    const [updateWithId, setUpdateWithId] = useState([]);
 
     const handleClick = async () => {
         const formData = new FormData();
@@ -70,11 +71,11 @@ function ListenEnglishWord({ data }) {
                 content: "string",
             },
             willDelete: [0],
-            willUpdate: [0],
+            willUpdate: updateWithId,
             questionType: typeQuestion.value || typeQuestion,
             [option]: isUpdatePage ? newCard : dataCard,
         };
-
+        console.log(dataQuestion);
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
@@ -89,6 +90,17 @@ function ListenEnglishWord({ data }) {
         }
         setDataCard(dataCard.filter((item) => item.option !== idx.option));
         setNewCard(newCard.filter((item) => item.option !== idx.option));
+    };
+
+    const handleUpdate = (e) => {
+        if (isUpdatePage) {
+            setUpdateWithId((prevState) => {
+                if (!prevState.includes(e)) return [...prevState, e];
+                const itemIndex = prevState.findIndex((item) => item === e);
+                prevState.splice(itemIndex, 1);
+                return prevState;
+            });
+        }
     };
 
     return (
@@ -149,6 +161,7 @@ function ListenEnglishWord({ data }) {
                                 id={item.id}
                                 key={item.id}
                                 audio={item.option}
+                                updateCheckbox={handleUpdate}
                                 option={item.option}
                                 isTrue={item.isTrue}
                                 del={delOption}

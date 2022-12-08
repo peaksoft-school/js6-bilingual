@@ -13,12 +13,13 @@ import { deleteOption } from "store/slices/option-slice";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-function SelectEnglishWords({ data }) {
+function SelectEnglishWords({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [valueCheckbox, setValueCheckbox] = useState(false);
     const [dataCard, setDataCard] = useState([]);
     const [newCard, setNewCard] = useState([]);
+    const [updateWithId, setUpdateWithId] = React.useState([]);
 
     const { id } = useParams();
     const getValue = (e) => {
@@ -31,7 +32,6 @@ function SelectEnglishWords({ data }) {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
-
     const sendingValueHandler = () => {
         if (!inputValue.trim()) return null;
         setDataCard((prev) => [...prev, { option: inputValue, isTrue: valueCheckbox }]);
@@ -48,8 +48,22 @@ function SelectEnglishWords({ data }) {
     }
     const saveData = async (req) => {
         if (!data.duration) {
-            return;
+            return setIsErrorInput((prev) => {
+                return {
+                    ...prev,
+                    duration: true,
+                };
+            });
         }
+        if (!data.title) {
+            return setIsErrorInput((prev) => {
+                return {
+                    ...prev,
+                    title: true,
+                };
+            });
+        }
+
         console.log(newCard);
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
@@ -67,13 +81,18 @@ function SelectEnglishWords({ data }) {
             questionType: typeQuestion.value,
             [option]: isUpdatePage ? newCard : dataCard,
         };
+        console.log(updateWithId);
+
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(
-                    (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
+                    (data = {
+                        id,
+                        dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: updateWithId },
+                    })
                 )
             );
         }
@@ -85,6 +104,15 @@ function SelectEnglishWords({ data }) {
         }
         setDataCard(dataCard.filter((item) => item.option !== idx.option));
         setNewCard(newCard.filter((item) => item.option !== idx.option));
+    };
+
+    const handleUpdate = (idx) => {
+        setUpdateWithId((prevState) => {
+            if (!prevState.includes(idx)) return [...prevState, idx];
+            const itemIndex = prevState.findIndex((item) => item === idx);
+            prevState.splice(itemIndex, 1);
+            return prevState;
+        });
     };
 
     return (
@@ -122,7 +150,11 @@ function SelectEnglishWords({ data }) {
                                     <span>{item.option}</span>
                                 </Content>
                                 <Actions>
-                                    <CheckBox boxcolor="#2ab934" value={item.isTrue} />
+                                    <CheckBox
+                                        boxcolor="#2ab934"
+                                        onChange={() => handleUpdate(item.id)}
+                                        value={item.isTrue}
+                                    />
                                     <IconButtonStyled
                                         handleClick={() =>
                                             delOption(

@@ -10,7 +10,7 @@ import CheckBox from "./Checkbox";
 
 import IconButtonStyled from "./IconButtonStyled";
 
-export default function SelectWordItem({ id, isTrue, audio, del, option, setValueCheckbox }) {
+export default function SelectWordItem({ id, isTrue, audio, del, option, updateCheckbox }) {
     const soundPlay = (src) => {
         const sound = new Howl({
             src,
@@ -41,11 +41,7 @@ export default function SelectWordItem({ id, isTrue, audio, del, option, setValu
                 <span>WORD {id}</span>
             </Content>
             <Actions>
-                <CheckBox
-                    boxcolor="#2ab934"
-                    value={isTrue}
-                    onChange={() => setValueCheckbox(true)}
-                />
+                <CheckBox boxcolor="#2ab934" value={isTrue} onChange={() => updateCheckbox(id)} />
 
                 <IconButtonStyled
                     handleClick={() => del(isUpdatePage ? { id, option } : { option })}
