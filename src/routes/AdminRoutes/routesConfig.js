@@ -8,8 +8,6 @@ import CreateTest from "containers/Admin/pages/CreateTest";
 import NewTest from "containers/Admin/pages/NewTest";
 import QuestionToTest from "containers/Admin/pages/QuestionToTest";
 
-import UpdateQuestion from "containers/Admin/pages/UpdateQuestion";
-
 import { Navigate } from "react-router-dom";
 
 import { ADMIN_ROUTES_URL } from "./adminRoutesUrl";

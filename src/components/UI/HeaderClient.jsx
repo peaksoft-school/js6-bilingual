@@ -1,6 +1,7 @@
 import React from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -9,6 +10,11 @@ import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header() {
     const navigate = useNavigate();
+
+    const logOut = () => {
+        navigate("/");
+        Cookies.remove("user");
+    };
 
     const MyresultGo = () => {};
 
@@ -38,6 +44,7 @@ function Header() {
                         maxwidth="104px"
                         maxheight="42px"
                         fontSize="15px"
+                        onClick={logOut}
                     />
                 </StyledHeaderClientRole>
             </StyledHeader>
