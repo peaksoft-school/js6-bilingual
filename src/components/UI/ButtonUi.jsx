@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
 const ButtonUi = ({
+    disabled,
     color,
     variant,
     maxwidth,
@@ -16,6 +17,7 @@ const ButtonUi = ({
 }) => {
     return (
         <ButtonMain
+            disabled={disabled}
             onClick={onClick}
             maxwidth={maxwidth}
             fontSize={fontSize}
@@ -94,7 +96,7 @@ const ButtonMain = styled(Button)`
             }
             // --------------------- DISABLED --------------------
             &.Mui-disabled {
-                background: transparent !important;
+                background: rgba(196, 196, 196, 0.2) !important;
                 border: 2px solid #c4c4c4 !important;
                 box-shadow: 0px 1px 2px rgba(196, 196, 196, 0.2),
                     0px 1px 2px rgba(196, 196, 196, 0.2);
