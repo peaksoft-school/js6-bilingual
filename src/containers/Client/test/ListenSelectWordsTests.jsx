@@ -14,6 +14,7 @@ import Yes from "../../../assets/icons/Ptichka.svg";
 
 function ListenSelectWordsTests() {
     const [prov, setProv] = useState([]);
+    const clientQuestion = useSelector((state) => state.testType.questions);
     const state = [
         {
             id: 1,

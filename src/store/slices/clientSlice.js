@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { questionForClient } from "api/question-for-client";
+import { questionForClient, questionForClientById } from "api/question-for-client";
 
 const initialState = {
     answer: [],
+    questions: [],
 };
 
 export const getQuestionForClient = createAsyncThunk("client/getQestionForClient", async () => {
@@ -14,6 +15,18 @@ export const getQuestionForClient = createAsyncThunk("client/getQestionForClient
     }
 });
 
+export const getQuestionForClientById = createAsyncThunk(
+    "client/getQuestionForClientById",
+    async (id) => {
+        try {
+            const response = await questionForClientById(id);
+            return response;
+        } catch (error) {
+            return error.message;
+        }
+    }
+);
+
 export const clientSlice = createSlice({
     name: "client",
     initialState,
@@ -21,6 +34,9 @@ export const clientSlice = createSlice({
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
             state.answer = action.payload;
+        },
+        [getQuestionForClientById.fulfilled]: (state, action) => {
+            state.questions = action.payload;
         },
     },
 });

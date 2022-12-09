@@ -21,8 +21,9 @@ function HomeOne() {
         dispatch(getQuestionForClient());
     }, []);
 
-    const TryTestClick = () => {
-        navigate("Twohome");
+    const TryTestClick = (id) => {
+        console.log(id, "id");
+        navigate(`/home/tests/${id}`);
     };
     return (
         <ClientContainer>
@@ -34,7 +35,7 @@ function HomeOne() {
                         <h4>{item.title}</h4>
                         <span>{item.shortDescription}</span>
                     </div>
-                    <ButtonUi variant="outlined" onClick={TryTestClick}>
+                    <ButtonUi variant="outlined" onClick={() => TryTestClick(item.id)}>
                         TRY TEST
                     </ButtonUi>
                 </StyledContainerHomeOne>
