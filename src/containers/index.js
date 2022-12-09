@@ -27,5 +27,5 @@ export { default as QuestionToTest } from "./Admin/pages/QuestionToTest";
 export { default as Client } from "./Client";
 export { default as HomeOne } from "./Client/pages/HomeOne";
 export { default as HomeTwo } from "./Client/pages/HomeTwo";
-export { default as SelectTests } from "./Client/test/SelectEnglishWords";
+export { default as SelectTests } from "./Client/test/ClientSelectWords";
 export { default as MyResult } from "./Client/pages/MyResult";

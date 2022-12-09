@@ -2,7 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { questionForClient, questionForClientById } from "api/question-for-client";
 
 const initialState = {
-    answer: [],
+    answer: {
+        testId: 0,
+        questionsAnswers: [],
+        answer: "",
+    },
     questions: [],
 };
 
@@ -30,10 +34,18 @@ export const getQuestionForClientById = createAsyncThunk(
 export const clientSlice = createSlice({
     name: "client",
     initialState,
-    reducers: {},
+    reducers: {
+        addAnswer: (state, action) => {
+            state.answer = {
+                testId: action.payload.testId,
+                questionsAnswers: [...state.answer.questionsAnswers, action.payload.options],
+                answer: action.payload.answer,
+            };
+        },
+    },
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
-            state.answer = action.payload;
+            state.questions = action.payload;
         },
         [getQuestionForClientById.fulfilled]: (state, action) => {
             state.questions = action.payload;
@@ -41,4 +53,4 @@ export const clientSlice = createSlice({
     },
 });
 
-// export const {} = clientSlice.actions;
+export const { addAnswer } = clientSlice.actions;
