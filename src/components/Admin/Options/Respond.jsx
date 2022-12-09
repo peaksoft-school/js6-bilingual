@@ -18,6 +18,7 @@ function Respond({ data }) {
     const dispatch = useDispatch();
 
     const saveData = async (req) => {
+        console.log(data);
         const hour = data.duration.split(":")[0];
         const min = data.duration.split(":")[1];
         const duration = formatToMinute(hour, min);
@@ -36,9 +37,17 @@ function Respond({ data }) {
             passage: "string",
             minNumberOfWords: 10,
             correctAnswer: "string",
-            options: [],
+            content: "string",
+            willDelete: [0],
+            willUpdate: [0],
+            optionRequests: [
+                {
+                    option: "string",
+                    title: "string",
+                    isTrue: true,
+                },
+            ],
         };
-        console.log(dataQuestion);
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
@@ -55,11 +64,13 @@ function Respond({ data }) {
             });
         }, []);
     }
+    console.log(dataField);
     return (
         <StyledContainerRespond>
             <StyledContainer>
                 <StyledText>Question statement</StyledText>
                 <StyledInput
+                    value={dataField.statement}
                     onChange={(e) =>
                         setDataField((prev) => {
                             return {
@@ -73,7 +84,7 @@ function Respond({ data }) {
                     <h3>Number off Replays</h3>
                     <input
                         type="number"
-                        value={dataField.numberOfReplays}
+                        value={+dataField.numberOfReplays}
                         onChange={(e) =>
                             setDataField((prev) => {
                                 return {

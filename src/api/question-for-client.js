@@ -6,6 +6,6 @@ export const questionForClient = async () => {
 };
 
 export const questionForClientById = async (id) => {
-    const response = await baseAxios.get(`/test/client/${id}`);
+    const response = await baseAxios.get(`/test/getQuestions/${id}`);
     return response.data;
 };

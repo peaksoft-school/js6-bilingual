@@ -23,7 +23,7 @@ function TypeRecord({ data }) {
         const duration = formatToMinute(hour, min);
 
         const dataQuestion = {
-            testId: id,
+            testId: +id,
             title: data.title,
             contentRequest: {
                 contentType: "TEXT",
@@ -33,6 +33,19 @@ function TypeRecord({ data }) {
             statement: "string",
             questionType: typeQuestion.value || typeQuestion,
             correctAnswer: answer,
+            passage: "string",
+            numberOfReplays: 10,
+            minNumberOfWords: 10,
+            content: "string",
+            willDelete: [0],
+            willUpdate: [0],
+            optionRequests: [
+                {
+                    option: "string",
+                    title: "string",
+                    isTrue: true,
+                },
+            ],
         };
 
         if (req === "save") {

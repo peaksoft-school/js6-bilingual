@@ -49,7 +49,6 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
         }, []);
     }
     const saveData = async (req) => {
-        console.log(data);
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -66,7 +65,6 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
             questionType: typeQuestion.value,
             [option]: isUpdatePage ? newCard : dataCard,
         };
-        console.log(updateWithId);
 
         if (req === "save") {
             setMainQuestion(dataQuestion);

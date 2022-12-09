@@ -4,13 +4,13 @@ import { ButtonUi } from "components/UI";
 import TextArea from "components/UI/TextArea";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
 export default function Highlight({ data }) {
-    const [dataFeild, setDataField] = React.useState({
+    const [dataField, setDataField] = React.useState({
         passage: "",
         statement: "",
         correctAnswer: "",
@@ -21,11 +21,18 @@ export default function Highlight({ data }) {
 
     const highlighEvent = () => {
         const pieceOfAnswer = window.getSelection().toString();
-
-        const correctAnswer = mainQuestion.passage.replace(
-            pieceOfAnswer,
-            `<span>${pieceOfAnswer}</span>`
-        );
+        let correctAnswer;
+        if (isUpdatePage) {
+            correctAnswer = mainQuestion.passage.replace(
+                pieceOfAnswer,
+                `<span>${pieceOfAnswer}</span>`
+            );
+        } else {
+            correctAnswer = dataField.passage.replace(
+                pieceOfAnswer,
+                `<span>${pieceOfAnswer}</span>`
+            );
+        }
         setDataField((prev) => {
             return {
                 ...prev,
@@ -38,6 +45,7 @@ export default function Highlight({ data }) {
     const { id } = useParams();
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const saveData = async (req) => {
         if (!data.duration) {
@@ -46,7 +54,7 @@ export default function Highlight({ data }) {
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
-        const passage = dataFeild.passage.replace(/<span>|<\/span>/gi, "");
+        const passage = dataField.passage.replace(/<span>|<\/span>/gi, "");
 
         const dataQuestion = {
             testId: +id,
@@ -57,9 +65,9 @@ export default function Highlight({ data }) {
                 content: "string",
             },
             questionType: typeQuestion.value,
-            statement: dataFeild.statement,
+            statement: dataField.statement,
             passage,
-            correctAnswer: dataFeild.correctAnswer,
+            correctAnswer: dataField.correctAnswer,
             numberOfReplays: 10,
             minNumberOfWords: 10,
             content: "string",
@@ -111,7 +119,7 @@ export default function Highlight({ data }) {
                             };
                         })
                     }
-                    value={dataFeild.statement}
+                    value={dataField.statement}
                 />
             </Block>
             <Block>
@@ -122,7 +130,8 @@ export default function Highlight({ data }) {
                             return { ...prev, passage: e.target.value };
                         });
                     }}
-                    value={dataFeild.passage.replace(/<span>|<\/span>/gi, "")}
+                    rows={5}
+                    value={dataField.passage.replace(/<span>|<\/span>/gi, "")}
                     width="100%"
                 />
             </Block>
@@ -130,7 +139,7 @@ export default function Highlight({ data }) {
                 <h4> Highlight correct answer: </h4>
                 <CorrectAnswer
                     onMouseUp={highlighEvent}
-                    dangerouslySetInnerHTML={{ __html: dataFeild.passage }}
+                    dangerouslySetInnerHTML={{ __html: dataField.passage }}
                 />
             </Block>
             <StyledContainerMiniMiniBoss>
