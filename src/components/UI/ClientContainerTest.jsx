@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
+import { ButtonUi } from ".";
+
+import BasicModal from "./Modal";
+
 function ClientContainerTest({ children }) {
+    const [openModal, setOpenModal] = useState(false);
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    const logOut = () => {
+        navigate(`/home/tests/${id}`);
+    };
+
     return (
         <StyledMain>
             <StyeldDivBtn>
-                <StyledButton>QUITE TEST</StyledButton>
+                <StyledButton onClick={() => setOpenModal(true)}>QUITE TEST</StyledButton>
             </StyeldDivBtn>
+            <BasicModal open={openModal}>
+                <StyledBoxModal>
+                    <p>Are you sure you want to leave your practice test?</p>
+                    <div>
+                        <ButtonUi onClick={logOut} variant="outlined">
+                            QUIT TEST
+                        </ButtonUi>
+                        <ButtonUi onClick={() => setOpenModal(false)} variant="contained">
+                            COUNTINUE TEST
+                        </ButtonUi>
+                    </div>
+                </StyledBoxModal>
+            </BasicModal>
             <StyledSection>{children}</StyledSection>
         </StyledMain>
     );
@@ -22,14 +49,31 @@ const StyledMain = styled.main`
     flex-direction: column;
     align-items: center;
 `;
+
 const StyledSection = styled.div`
     margin-top: 40px;
 `;
+
 const StyeldDivBtn = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: end;
+`;
+
+const StyledBoxModal = styled.div`
+    margin: 36px 32px;
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        color: #4c4859;
+        margin-bottom: 24px;
+    }
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
 `;
 
 const StyledButton = styled.button`
