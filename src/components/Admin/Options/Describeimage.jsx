@@ -9,7 +9,7 @@ import { formatToMinute } from "services/format";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-export default function DescribeImage({ data }) {
+export default function DescribeImage({ data, setIsError }) {
     const [img, setImg] = React.useState({ src: null, alt: "" });
     const [corrAnswer, setCorrAnswer] = React.useState("");
 

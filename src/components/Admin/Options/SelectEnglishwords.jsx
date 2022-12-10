@@ -53,7 +53,6 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
         const option = isUpdatePage ? "optionRequests" : "options";
-
         const dataQuestion = {
             testId: id,
             title: data.title,
