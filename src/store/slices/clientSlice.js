@@ -18,6 +18,7 @@ export const getQuestionForClient = createAsyncThunk("client/getQestionForClient
 export const getQuestionForClientById = createAsyncThunk(
     "client/getQuestionForClientById",
     async (id) => {
+        console.log("hi");
         try {
             const response = await questionForClientById(id);
             return response;
