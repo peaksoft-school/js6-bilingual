@@ -16,7 +16,8 @@ function SelectEnglishWords({ question }) {
         setDisableById((prev) => [...prev, card.id]);
         e.preventDefault();
         setCardList((prev) => [...prev, card]);
-        console.log(cardList);
+    };
+    React.useEffect(() => {
         dispatch(
             addAnswer({
                 testId: +id,
@@ -26,7 +27,7 @@ function SelectEnglishWords({ question }) {
                 },
             })
         );
-    };
+    }, [cardList]);
 
     const dragOverHandler = (e) => {
         e.preventDefault();
