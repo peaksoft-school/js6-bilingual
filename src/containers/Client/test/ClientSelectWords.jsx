@@ -13,18 +13,22 @@ function SelectEnglishWords({ question }) {
     const { id } = useParams();
 
     const dragEndHandler = (e, card) => {
-        setDisableById((prev) => [...prev, card.id]);
         e.preventDefault();
+        setDisableById((prev) => [...prev, card.id]);
         setCardList((prev) => [...prev, card]);
     };
+
     React.useEffect(() => {
         dispatch(
             addAnswer({
                 testId: +id,
-                options: {
-                    questionId: question.id,
-                    optionAnswerId: cardList.map((item) => item.id),
-                },
+                questionsAnswers: [
+                    {
+                        questionId: question.id,
+                        optionAnswerId: cardList.map((item) => item.id),
+                        answer: cardList.map((options) => options.option),
+                    },
+                ],
             })
         );
     }, [cardList]);

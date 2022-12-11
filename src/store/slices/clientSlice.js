@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { questionForClient, questionForClientById } from "api/question-for-client";
-import { store } from "store";
 
 const initialState = {
     answer: {
@@ -37,19 +36,7 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state, action) => {
-            const prevState = current(state.answer.questionsAnswers);
-            const copyState = [...prevState];
-            copyState.push(action.payload.options);
-            const findItem = copyState.findIndex(
-                (item) => item.questionId === action.payload.questionId
-            );
-            console.log(findItem);
-            console.log(copyState);
-            state.answer = {
-                testId: action.payload.testId,
-                answer: action.payload.answer,
-                questionsAnswers: copyState,
-            };
+            state.answer = action.payload;
         },
     },
     extraReducers: {

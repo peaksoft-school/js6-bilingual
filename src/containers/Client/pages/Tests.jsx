@@ -1,6 +1,6 @@
 import { questionType } from "constants/questionType";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 import Loader from "components/UI/Loader";
 import ClientTestsLayout from "layout/ClientTestsLayout";
@@ -29,13 +29,6 @@ export default function Tests() {
     const { questionResponses } = useSelector((state) => state.testType.questions);
 
     const renderTestContentByType = () => {
-        // return questionResponses?.map((question) => {
-        //     if (question.questionType === questionType.SELECT_WORDS) {
-        //         return <ClientSelectWords />;
-        //     }
-
-        //     return null;
-        // });
         if (questionResponses) {
             if (count > questionResponses.length - 1) return <CompleteTest />;
             switch (questionResponses[count].questionType) {
