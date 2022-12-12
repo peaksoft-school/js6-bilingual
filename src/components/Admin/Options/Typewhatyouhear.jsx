@@ -11,6 +11,7 @@ import { Howl } from "howler";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 
 import styled from "styled-components";
@@ -18,7 +19,7 @@ import styled from "styled-components";
 import PauseIcon from "../../../assets/icons/Pause.svg";
 import PlayIcon from "../../../assets/icons/PlayIcon.svg";
 
-function Typewhatyouhear({ data }) {
+function Typewhatyouhear({ data, setIsErrorInput }) {
     const { isUpdatePage, typeQuestion, setMainQuestion, mainQuestion } =
         React.useContext(QuestionContext);
 
@@ -58,12 +59,16 @@ function Typewhatyouhear({ data }) {
                 setIsAudioStop(true);
             },
         });
+        if (dataField.file) {
+            setIsAudioStop(false);
+        }
         if (isAudioStop) {
             audio.play();
         }
     };
     console.log(isAudioStop);
     const saveData = async (req) => {
+        if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -84,6 +89,7 @@ function Typewhatyouhear({ data }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(
@@ -136,7 +142,7 @@ function Typewhatyouhear({ data }) {
                     Upload
                     <input hidden onChange={handleAudio} accept="audio/*" multiple type="file" />
                 </Button>
-                <StyledPause onClick={() => audioPlay(setIsAudioStop(false))}>
+                <StyledPause onClick={() => audioPlay()}>
                     <IconButtonStyled Icon={isAudioStop ? PlayIcon : PauseIcon} />
                 </StyledPause>
                 <p>{dataField.file ? dataField.file.split("/")[3] : "Name audio file"}</p>

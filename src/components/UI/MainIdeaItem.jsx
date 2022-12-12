@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import IconButtonStyled from "./IconButtonStyled";
 
-export default function MainIdeaItem({ index, text, radioValue, onChange }) {
+export default function MainIdeaItem({ index, text, radioValue, onChange, onDelete, id }) {
     return (
         <Main>
             <FormControl>
@@ -20,7 +20,11 @@ export default function MainIdeaItem({ index, text, radioValue, onChange }) {
                         <Text>{text}</Text>
                         <Actions>
                             <FormControlLabel value={text} control={<Radio />} />
-                            <IconButtonStyled fontSize="24px" Icon={DeleteIcon} />
+                            <IconButtonStyled
+                                handleClick={() => onDelete(id, radioValue)}
+                                fontSize="24px"
+                                Icon={DeleteIcon}
+                            />
                         </Actions>
                     </Box>
                 </RadioGroup>

@@ -9,6 +9,7 @@ import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { deleteOption } from "store/slices/option-slice";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
@@ -49,6 +50,7 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
         }, []);
     }
     const saveData = async (req) => {
+        if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -67,7 +69,9 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
 
         if (req === "save") {
             setMainQuestion(dataQuestion);
-            dispatch(sendingQuestion(dataQuestion));
+            dispatch(sendingQuestion(dataQuestion))
+                .unwrap()
+                .then(() => navigate(-1));
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(

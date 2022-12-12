@@ -7,12 +7,14 @@ import ModalAdminLayot from "components/UI/ModalAdminLayot";
 import TextArea from "components/UI/TextArea";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
+import { deleteOption } from "store/slices/option-slice";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-export default function MainIdea({ data }) {
+export default function MainIdea({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const [passage, setPassage] = React.useState("");
     const [radioValue, setReadioValue] = React.useState("");
@@ -30,16 +32,14 @@ export default function MainIdea({ data }) {
         setIsOpen(false);
     };
     const { id } = useParams();
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const { setMainQuestion, mainQuestion, typeQuestion, isUpdatePage } =
         React.useContext(QuestionContext);
 
     const saveData = async (req) => {
-        if (!data.duration) {
-            return;
-        }
+        if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -65,12 +65,13 @@ export default function MainIdea({ data }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(
                     (data = {
                         id,
-                        dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [282, 283] },
+                        dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: updateOptionsId },
                     })
                 )
             );
@@ -104,12 +105,19 @@ export default function MainIdea({ data }) {
         setReadioValue(e.target.value);
         if (isUpdatePage) {
             setUpdateOptionsId((prev) => {
-                if (!prev.includes(idx)) return [...prev, idx];
+                if (!prev.includes(idx)) return [idx];
                 const findIndex = prev.findIndex((item) => item === idx);
                 prev.splice(findIndex, 1);
                 return prev;
             });
         }
+    };
+    const handleDelete = (idx, option) => {
+        if (idx) {
+            dispatch(deleteOption(idx));
+        }
+        setDataCard(dataCard.filter((item) => item.option !== option));
+        setNewCard(newCard.filter((item) => item.option !== option));
     };
     console.log(updateOptionsId);
     return (
@@ -156,12 +164,14 @@ export default function MainIdea({ data }) {
                         return (
                             <MainIdeaItem
                                 key={Symbol(idx).toString()}
+                                id={item.id}
                                 onChange={(e) => handleRadioChange(e, item.id)}
                                 radioValue={
                                     isUpdatePage ? (item.isTrue ? item.option : "") : radioValue
                                 }
                                 index={idx + 1}
                                 text={item.option}
+                                onDelete={handleDelete}
                             />
                         );
                     })}

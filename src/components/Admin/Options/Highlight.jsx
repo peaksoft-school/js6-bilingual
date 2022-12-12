@@ -6,10 +6,11 @@ import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-export default function Highlight({ data }) {
+export default function Highlight({ data, setIsErrorInput }) {
     const [dataField, setDataField] = React.useState({
         passage: "",
         statement: "",
@@ -29,10 +30,11 @@ export default function Highlight({ data }) {
             );
         } else {
             correctAnswer = dataField.passage.replace(
-                pieceOfAnswer,
+                `<span>${pieceOfAnswer}</span>`,
                 `<span>${pieceOfAnswer}</span>`
             );
         }
+        console.log(correctAnswer);
         setDataField((prev) => {
             return {
                 ...prev,
@@ -48,9 +50,7 @@ export default function Highlight({ data }) {
     const navigate = useNavigate();
 
     const saveData = async (req) => {
-        if (!data.duration) {
-            return;
-        }
+        if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -84,6 +84,7 @@ export default function Highlight({ data }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(

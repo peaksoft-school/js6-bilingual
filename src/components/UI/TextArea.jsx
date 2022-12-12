@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 
 import styled from "styled-components";
 
-export default function TextArea({ width, value, onChange, placeholder, rows }) {
+export default function TextArea({ width, value, onChange, placeholder, rows, ...props }) {
     return (
         <Textarea
             width={width}
@@ -13,6 +13,7 @@ export default function TextArea({ width, value, onChange, placeholder, rows }) 
             placeholder={placeholder}
             multiline
             minRows={rows}
+            {...props}
         />
     );
 }

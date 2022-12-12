@@ -3,12 +3,13 @@ import React from "react";
 import { ButtonUi, InputUi } from "components/UI";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-function TypeRecord({ data }) {
+function TypeRecord({ data, setIsErrorInput }) {
     const [answer, setAnswer] = React.useState("");
     const { mainQuestion, typeQuestion, isUpdatePage, setMainQuestion } =
         React.useContext(QuestionContext);
@@ -16,8 +17,10 @@ function TypeRecord({ data }) {
     const { id } = useParams();
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const saveData = async (req) => {
+        if (validateInput(data, setIsErrorInput)) return;
+
         const hour = data.duration.split(":")[0];
         const min = data.duration.split(":")[1];
         const duration = formatToMinute(hour, min);
@@ -51,6 +54,7 @@ function TypeRecord({ data }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));

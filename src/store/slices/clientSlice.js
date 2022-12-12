@@ -1,8 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { questionForClient, questionForClientById } from "api/question-for-client";
+import produce from "immer";
 
 const initialState = {
-    answer: [],
+    answer: {
+        testId: 0,
+        questionsAnswers: [],
+        answer: "",
+    },
     questions: [],
 };
 
@@ -31,7 +36,30 @@ export const getQuestionForClientById = createAsyncThunk(
 export const clientSlice = createSlice({
     name: "client",
     initialState,
-    reducers: {},
+    reducers: {
+        addAnswer: (state, action) => {
+            const base = current(state.answer.questionsAnswers);
+
+            const findItem = base.findIndex((item) => {
+                return item.questionId === action.payload.options.questionId;
+            });
+            let newState;
+            if (findItem >= 0) {
+                newState = produce(base, (draft) => {
+                    draft[findItem].optionAnswerId = [...action.payload.options.optionAnswerId];
+                });
+            } else {
+                newState = produce(base, (draft) => {
+                    draft.push(action.payload.options);
+                });
+            }
+            state.answer = {
+                testId: action.payload.testId,
+                answer: action.payload.answer,
+                questionsAnswers: newState,
+            };
+        },
+    },
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
             state.answer = action.payload;
@@ -42,4 +70,4 @@ export const clientSlice = createSlice({
     },
 });
 
-// export const {} = clientSlice.actions;
+export const { addAnswer } = clientSlice.actions;
