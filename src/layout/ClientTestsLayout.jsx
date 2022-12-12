@@ -18,7 +18,7 @@ export default function ClientTestsLayout({ children, questionResponses, setcoun
     };
 
     const answer = useSelector((item) => item.testType.answer.questionsAnswers);
-    const isActiveBtnNext = answer[count]?.optionAnswerId.length;
+    const isActiveBtnNext = answer[count]?.optionAnswerId.length || answer[count]?.answer;
     return (
         <ClientContainerTest>
             <UICard

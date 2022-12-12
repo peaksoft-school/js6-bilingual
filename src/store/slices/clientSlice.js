@@ -6,7 +6,6 @@ const initialState = {
     answer: {
         testId: 0,
         questionsAnswers: [],
-        answer: "",
     },
     questions: [],
     questionById: {},
@@ -39,6 +38,7 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state, action) => {
+            console.log(action.payload);
             const base = current(state.answer.questionsAnswers);
             console.log(base);
             const findItem = base.findIndex((item) => {
@@ -48,6 +48,7 @@ export const clientSlice = createSlice({
             if (findItem >= 0) {
                 newState = produce(base, (draft) => {
                     draft[findItem].optionAnswerId = [...action.payload.options.optionAnswerId];
+                    draft[findItem].answer = action.payload.options.answer;
                 });
             } else {
                 newState = produce(base, (draft) => {
@@ -56,7 +57,6 @@ export const clientSlice = createSlice({
             }
             state.answer = {
                 testId: action.payload.testId,
-                answer: action.payload.answer,
                 questionsAnswers: newState,
             };
         },
