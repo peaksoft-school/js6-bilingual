@@ -15,15 +15,17 @@ import ListBook from "../../../assets/images/BookList.svg";
 function HomeOne() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const typeTest = useSelector((state) => state.testType.answer);
+    const typeTest = useSelector((state) => state.testType.questions);
 
     useEffect(() => {
         dispatch(getQuestionForClient());
     }, []);
 
-    const TryTestClick = () => {
-        navigate("Twohome");
+    const TryTestClick = (id) => {
+        navigate(`/home/tests/${id}`);
     };
+    console.log(typeTest);
+
     return (
         <ClientContainer>
             {typeTest.map((item) => (
@@ -34,7 +36,7 @@ function HomeOne() {
                         <h4>{item.title}</h4>
                         <span>{item.shortDescription}</span>
                     </div>
-                    <ButtonUi variant="outlined" onClick={TryTestClick}>
+                    <ButtonUi variant="outlined" onClick={() => TryTestClick(item.id)}>
                         TRY TEST
                     </ButtonUi>
                 </StyledContainerHomeOne>

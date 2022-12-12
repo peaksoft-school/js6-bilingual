@@ -1,28 +1,74 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { questionForClient } from "api/question-for-client";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { questionForClient, questionForClientById } from "api/question-for-client";
+import produce from "immer";
 
 const initialState = {
-    answer: [],
+    answer: {
+        testId: 0,
+        questionsAnswers: [],
+        answer: "",
+    },
+    questions: [],
+    questionById: {},
 };
 
 export const getQuestionForClient = createAsyncThunk("client/getQestionForClient", async () => {
     try {
         const response = await questionForClient();
+
         return response;
     } catch (error) {
         return error.message;
     }
 });
 
+export const getQuestionForClientById = createAsyncThunk(
+    "client/getQuestionForClientById",
+    async (id) => {
+        try {
+            const response = await questionForClientById(id);
+            return response;
+        } catch (error) {
+            return error.message;
+        }
+    }
+);
+
 export const clientSlice = createSlice({
     name: "client",
     initialState,
-    reducers: {},
+    reducers: {
+        addAnswer: (state, action) => {
+            const base = current(state.answer.questionsAnswers);
+            console.log(base);
+            const findItem = base.findIndex((item) => {
+                return item.questionId === action.payload.options.questionId;
+            });
+            let newState;
+            if (findItem >= 0) {
+                newState = produce(base, (draft) => {
+                    draft[findItem].optionAnswerId = [...action.payload.options.optionAnswerId];
+                });
+            } else {
+                newState = produce(base, (draft) => {
+                    draft.push(action.payload.options);
+                });
+            }
+            state.answer = {
+                testId: action.payload.testId,
+                answer: action.payload.answer,
+                questionsAnswers: newState,
+            };
+        },
+    },
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
-            state.answer = action.payload;
+            state.questions = action.payload;
+        },
+        [getQuestionForClientById.fulfilled]: (state, action) => {
+            state.questionById = action.payload;
         },
     },
 });
 
-// export const {} = clientSlice.actions;
+export const { addAnswer } = clientSlice.actions;

@@ -1,6 +1,6 @@
 import { store } from "store";
 
-import { JWT_TOKEN_KEY } from "utils/constants/General";
+import { JWT_TOKEN_KEY } from "utils/constants/general";
 
 export const getToken = () => {
     return store.getState().auth.user.token;
