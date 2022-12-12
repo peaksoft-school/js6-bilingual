@@ -1,5 +1,4 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { reducer as notificationsReducer } from "reapop";
 
 import { injectStore } from "../api/axios-config";
 import { testsPostSlice } from "./slices/adminTestActions";
