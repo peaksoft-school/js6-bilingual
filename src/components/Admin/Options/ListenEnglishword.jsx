@@ -9,19 +9,24 @@ import ListenWordItem from "components/UI/ListenWordItem";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { deleteOption } from "store/slices/option-slice";
 
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-function ListenEnglishWord({ data }) {
+function ListenEnglishWord({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dataCard, setDataCard] = useState([]);
+    const [newCard, setNewCard] = useState([]);
     const [file, setFile] = useState();
     const [checkBoxValue, setCheckBoxValue] = React.useState(false);
     const [dataFile, setDataFile] = useState({});
+    const [updateWithId, setUpdateWithId] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleClick = async () => {
         const formData = new FormData();
@@ -36,6 +41,7 @@ function ListenEnglishWord({ data }) {
             }
         );
         setDataCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
+        setNewCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
     };
 
     const { id } = useParams();
@@ -51,12 +57,13 @@ function ListenEnglishWord({ data }) {
         }, []);
     }
     const saveData = async (req) => {
+        if (validateInput(data, setIsErrorInput)) return;
         const hour = data.duration.split(":")[0];
         const min = data.duration.split(":")[1];
         const duration = formatToMinute(hour, min);
         const option = isUpdatePage ? "optionRequests" : "options";
         const dataQuestion = {
-            testId: id,
+            testId: +id,
             title: data.title,
             duration,
             contentRequest: {
@@ -64,24 +71,37 @@ function ListenEnglishWord({ data }) {
                 content: "string",
             },
             willDelete: [0],
-            willUpdate: [0],
+            willUpdate: updateWithId,
             questionType: typeQuestion.value || typeQuestion,
-            [option]: dataCard,
+            [option]: isUpdatePage ? newCard : dataCard,
         };
-
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
         }
+        setIsOpen(false);
     };
     const delOption = (idx) => {
         if (idx?.id) {
             dispatch(deleteOption(idx.id));
         }
         setDataCard(dataCard.filter((item) => item.option !== idx.option));
+        setNewCard(newCard.filter((item) => item.option !== idx.option));
+    };
+
+    const handleUpdate = (e) => {
+        if (isUpdatePage) {
+            setUpdateWithId((prevState) => {
+                if (!prevState.includes(e)) return [...prevState, e];
+                const itemIndex = prevState.findIndex((item) => item === e);
+                prevState.splice(itemIndex, 1);
+                return prevState;
+            });
+        }
     };
 
     return (
@@ -140,8 +160,9 @@ function ListenEnglishWord({ data }) {
                         return (
                             <ListenWordItem
                                 id={item.id}
-                                key={item.id}
+                                key={item.id || item.option}
                                 audio={item.option}
+                                updateCheckbox={handleUpdate}
                                 option={item.option}
                                 isTrue={item.isTrue}
                                 del={delOption}

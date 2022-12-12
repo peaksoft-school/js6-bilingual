@@ -6,6 +6,10 @@ import { Howl } from "howler";
 
 import { useDispatch } from "react-redux";
 
+import { useParams } from "react-router-dom";
+
+import { addAnswer } from "store/slices/clientSlice";
+
 import styled from "styled-components";
 
 import Yes from "../../../assets/icons/Ptichka.svg";
@@ -13,7 +17,22 @@ import Yes from "../../../assets/icons/Ptichka.svg";
 function ClientListenSelectWords({ question }) {
     const [prov, setProv] = useState([]);
 
+    const { id } = useParams();
+
     const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(
+            addAnswer({
+                testId: +id,
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: prov,
+                    answer: "",
+                },
+            })
+        );
+    }, [prov]);
 
     const soundPlay = (src) => {
         const sound = new Howl({
@@ -23,12 +42,12 @@ function ClientListenSelectWords({ question }) {
         sound.play();
     };
 
-    const handleClick = (id) => {
-        const find = prov.findIndex((item) => item === id);
+    const handleClick = (Id) => {
+        const find = prov.findIndex((item) => item === Id);
         if (find < 0) {
-            setProv([...prov, id]);
+            setProv([...prov, Id]);
         } else {
-            setProv(prov.filter((item) => item !== id));
+            setProv(prov.filter((item) => item !== Id));
         }
     };
 

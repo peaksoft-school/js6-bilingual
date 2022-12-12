@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Tooltip } from "@mui/material";
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
+import Loader from "components/UI/Loader";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +15,6 @@ import { deleteQuestion, isActiveQuestion } from "store/slices/questionSlice";
 import styled from "styled-components";
 
 import DeleteIcon from "../../../assets/icons/Delete.svg";
-
 import UpdateIcon from "../../../assets/icons/UpdateIcon.svg";
 
 import { ADMIN_CONST_URL } from "../../../routes/constants";
@@ -81,9 +81,8 @@ function QuestionToTest() {
                 </StyledAboutTests>
                 {questionList?.length > 0 &&
                     questionList.map((item, index) => (
-                        <CardUIBox>
+                        <CardUIBox key={item.id}>
                             <UICard
-                                key={item.id}
                                 cardBorderRadius="8px"
                                 cardBoxShadow="0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06)"
                                 cardWidth="100%"

@@ -24,7 +24,6 @@ function HomeOne() {
     const TryTestClick = (id) => {
         navigate(`/home/tests/${id}`);
     };
-
     return (
         <ClientContainer>
             {typeTest.map((item) => (
