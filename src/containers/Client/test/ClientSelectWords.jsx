@@ -1,37 +1,47 @@
 import React, { useState } from "react";
 
+import Chip from "components/UI/Chip";
+
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 
 import styled from "styled-components";
 
-function SelectEnglishWords({ question }) {
-    const [disableById, setDisableById] = useState([]);
+function SelectEnglishWords({ question, count }) {
     const [cardList, setCardList] = useState([]);
     const dispatch = useDispatch();
     const { id } = useParams();
-
     const dragEndHandler = (e, card) => {
         e.preventDefault();
-        setDisableById((prev) => [...prev, card.id]);
-        setCardList((prev) => [...prev, card]);
+        setCardList((prev) => {
+            if (prev.find((item) => item.id === card.id)) {
+                return prev;
+            }
+            return [...prev, card];
+        });
     };
 
     React.useEffect(() => {
         dispatch(
             addAnswer({
                 testId: +id,
-                questionsAnswers: [
-                    {
-                        questionId: question.id,
-                        optionAnswerId: cardList.map((item) => item.id),
-                        answer: cardList.map((options) => options.option),
-                    },
-                ],
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: cardList.map((item) => item.id),
+                    answer: cardList.map((options) => options.option),
+                },
             })
         );
     }, [cardList]);
+
+    React.useEffect(() => {
+        setCardList([]);
+    }, [count]);
+
+    const handleDelete = (chipToDelete) => {
+        setCardList((chips) => chips.filter((chip) => chip.option !== chipToDelete.option));
+    };
 
     const dragOverHandler = (e) => {
         e.preventDefault();
@@ -43,7 +53,11 @@ function SelectEnglishWords({ question }) {
             <StyledWrapper>
                 {question.optionResponseList.map((item) => (
                     <StyledWordDiv
-                        className={disableById.includes(item.id) ? "option_disable" : ""}
+                        className={
+                            cardList.findIndex((inner) => inner.id === item.id) >= 0
+                                ? "option_disable"
+                                : ""
+                        }
                         onDragEnd={(e) => dragEndHandler(e, item)}
                         onDragOver={(e) => dragOverHandler(e)}
                         draggable
@@ -56,7 +70,13 @@ function SelectEnglishWords({ question }) {
                 <StyleDragBox>
                     {cardList.length > 0
                         ? cardList.map((answer) => {
-                              return <div key={answer.id}>{answer.option}</div>;
+                              return (
+                                  <Chip
+                                      key={answer.id}
+                                      text={answer.option}
+                                      onDelete={() => handleDelete(answer)}
+                                  />
+                              );
                           })
                         : "select words and drag here"}
                 </StyleDragBox>
@@ -127,8 +147,8 @@ const StyledWordDiv = styled.div`
         color: #ffffff;
     }
     &.option_disable {
-        opacity: 0.5;
-        background: gray;
+        opacity: 0.4;
+        background: #e5e5e5;
         pointer-events: none;
     }
 `;

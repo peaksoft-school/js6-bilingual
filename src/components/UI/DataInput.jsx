@@ -2,18 +2,18 @@ import React from "react";
 
 import styled from "styled-components";
 
-function DataInput({ onChange, defaultValue }) {
+function DataInput({ onChange, value, ...props }) {
     return (
         <StyledDataInput>
-            <StyledText>Duration (in minutes)</StyledText>
-            <StyledInput type="time" defaultValue={defaultValue} onChange={onChange} />
+            <StyledText error={props.error}>Duration (in minutes)</StyledText>
+            <StyledInput error={props.error} type="time" value={value} onChange={onChange} />
         </StyledDataInput>
     );
 }
 const StyledDataInput = styled.div`
     width: 99px;
     height: 46px;
-    input[type="time" i]::-webkit-calendar-picker-indicator {
+    input[type="time"]::-webkit-calendar-picker-indicator {
         display: none;
     }
 `;
@@ -26,6 +26,8 @@ const StyledInput = styled.input`
     font-weight: 400;
     font-family: "DINNextRoundedLTW01-Regular";
     padding-left: 30px;
+    border-color: ${(props) => (props.error ? "red" : "")};
+    color: ${(props) => (props.error ? "red" : "")};
 `;
 const StyledText = styled.span`
     width: 78px;
@@ -36,5 +38,6 @@ const StyledText = styled.span`
     font-size: 16px;
     line-height: 18px;
     display: flex;
+    color: ${(props) => (props.error ? "red" : "")};
 `;
 export default DataInput;

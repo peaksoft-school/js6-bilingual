@@ -41,11 +41,7 @@ const Switcher = styled((props) => (
 export default function SwitcherComp({ onChange, value }) {
     return (
         <FormGroup>
-            <FormControlLabel
-                onChange={onChange}
-                value={value}
-                control={<Switcher defaultChecked />}
-            />
+            <FormControlLabel onChange={onChange} control={<Switcher defaultChecked={value} />} />
         </FormGroup>
     );
 }

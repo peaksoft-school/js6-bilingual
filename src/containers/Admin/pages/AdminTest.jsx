@@ -65,7 +65,10 @@ function AdminTest() {
                             <StyledItemsDiv>
                                 <h6>{item.title}</h6>
                                 <StyledIconsBtn>
-                                    <SwitcherComp onChange={() => isActiveTest(item.id)} />
+                                    <SwitcherComp
+                                        value={item.isActive}
+                                        onChange={() => isActiveTest(item.id)}
+                                    />
                                     <IconButtonStyled
                                         handleClick={() => updateTestsHandler(item.id)}
                                         Icon={UpdateIcon}

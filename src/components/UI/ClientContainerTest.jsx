@@ -43,7 +43,7 @@ function ClientContainerTest({ children }) {
 export default ClientContainerTest;
 
 const StyledMain = styled.main`
-    height: 100vh;
+    min-height: 100vh;
     background: #d7e1f8;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ const StyledMain = styled.main`
 `;
 
 const StyledSection = styled.div`
-    margin-top: 40px;
+    margin: 40px 0;
 `;
 
 const StyeldDivBtn = styled.div`
