@@ -4,11 +4,9 @@ import React from "react";
 
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 
-import { useForm } from "react-hook-form";
 import { convertHMS } from "services/format";
 import styled from "styled-components";
 
-import { PopUp } from "./UI";
 import DataInput from "./UI/DataInput";
 
 import DropDown from "./UI/DropDownUi";

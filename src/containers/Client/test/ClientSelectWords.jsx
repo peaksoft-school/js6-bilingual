@@ -8,7 +8,7 @@ import { addAnswer } from "store/slices/clientSlice";
 
 import styled from "styled-components";
 
-function SelectEnglishWords({ question, count }) {
+function SelectEnglishWords({ question }) {
     const [cardList, setCardList] = useState([]);
     const dispatch = useDispatch();
     const { id } = useParams();

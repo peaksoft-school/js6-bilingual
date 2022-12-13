@@ -9,7 +9,7 @@ import ListenWordItem from "components/UI/ListenWordItem";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
 import validateInput from "services/inputValidate";
 import { deleteOption } from "store/slices/option-slice";
@@ -80,7 +80,6 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
             dispatch(sendingQuestion(dataQuestion));
             navigate(-1);
         } else if (req === "update") {
-            // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
         }
         setIsOpen(false);
