@@ -5,10 +5,8 @@ import TextArea from "components/UI/TextArea";
 import styled from "styled-components";
 
 export default function ClientRespond({ question }) {
-    const [state, setState] = useState(30);
     const [value, setValue] = useState("");
-    const abu = value.split();
-    console.log(abu);
+    const valueLength = value.split(" ").length - 1;
     return (
         <StyledContainerRespond>
             <StyledTextTitle>{question.title}</StyledTextTitle>
@@ -18,11 +16,11 @@ export default function ClientRespond({ question }) {
                     width="382px"
                     rows={7}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => setValue(e.target.value.replace(/\s{2,}/g, " "))}
                     placeholder="Your response"
                 />
             </StyledContaiter>
-            <span>word: {state}</span>
+            <span>words: {valueLength}</span>
         </StyledContainerRespond>
     );
 }

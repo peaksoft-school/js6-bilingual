@@ -66,7 +66,6 @@ function Typewhatyouhear({ data, setIsErrorInput }) {
             audio.play();
         }
     };
-    console.log(isAudioStop);
     const saveData = async (req) => {
         if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];

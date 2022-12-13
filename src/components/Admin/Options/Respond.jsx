@@ -36,7 +36,7 @@ function Respond({ data, setIsErrorInput }) {
             statement: dataField.statement,
             numberOfReplays: 1,
             passage: "string",
-            minNumberOfWords: +dataField.numberOfReplays,
+            minNumberOfWords: +dataField.minNumberOfWords,
             correctAnswer: "string",
             content: "string",
             willDelete: [0],
@@ -84,7 +84,7 @@ function Respond({ data, setIsErrorInput }) {
                     <h3>Number off Words</h3>
                     <input
                         type="number"
-                        value={+dataField.minNumberOfWords}
+                        value={+dataField.minNumberOfWords || 1}
                         onChange={(e) =>
                             setDataField((prev) => {
                                 return {
