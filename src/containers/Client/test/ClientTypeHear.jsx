@@ -6,12 +6,16 @@ import TextArea from "components/UI/TextArea";
 
 import { Howl } from "howler";
 
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import Volume from "../../../assets/icons/Volume-Up.svg";
 
 export default function ClientTypeHear({ question }) {
     const [numberOfReplays, setNumberOfReplays] = useState(question.numberOfReplays);
+    const [value, setValue] = useState("");
     const [bgcolor, setBgcolor] = useState(true);
     const audioPlay = () => {
         const audio = new Howl({
@@ -19,16 +23,35 @@ export default function ClientTypeHear({ question }) {
             html5: true,
             onend: () => {
                 setBgcolor(true);
-                setNumberOfReplays(numberOfReplays - 1);
             },
         });
         if (numberOfReplays > 0) {
             setBgcolor(false);
+            setNumberOfReplays(numberOfReplays - 1);
+
             if (bgcolor) {
                 audio.play();
             }
         }
     };
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    React.useEffect(() => {
+        dispatch(
+            addAnswer({
+                testId: +id,
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: [],
+                    answer: value,
+                },
+            })
+        );
+    }, [value]);
+    console.log(value);
+    React.useEffect(() => {
+        setValue("");
+    }, [question.id]);
     return (
         <StyledContainer>
             <span>Type the statement you hear</span>
@@ -40,7 +63,12 @@ export default function ClientTypeHear({ question }) {
                     <IconButtonStyled Icon={Volume} />
                 </StyledContainerIcon>
                 <StyledContainerOne>
-                    <TextArea width="439px" rows="4" />
+                    <TextArea
+                        width="439px"
+                        rows="4"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                    />
                     <span>number of replays left: {numberOfReplays}</span>
                 </StyledContainerOne>
             </StyledContainerMain>
@@ -85,7 +113,10 @@ const StyledContainerIcon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: ${(props) => (props.disabeled ? "pointer" : "not-allowed;")};
+    &,
+    & * {
+        cursor: ${(props) => (props.disabeled ? "pointer" : "not-allowed;")};
+    }
 `;
 const StyledContainerOne = styled.div`
     width: 439px;

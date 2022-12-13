@@ -55,6 +55,7 @@ function Respond({ data, setIsErrorInput }) {
             navigate(-1);
         } else if (req === "update") {
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            navigate(-1);
         }
     };
     if (isUpdatePage && mainQuestion) {

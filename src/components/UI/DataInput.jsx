@@ -5,7 +5,9 @@ import styled from "styled-components";
 function DataInput({ onChange, value, ...props }) {
     return (
         <StyledDataInput>
-            <StyledText error={props.error}>Duration (in minutes)</StyledText>
+            <StyledText error={props.error}>
+                Duration <span>(in minutes)</span>
+            </StyledText>
             <StyledInput error={props.error} type="time" value={value} onChange={onChange} />
         </StyledDataInput>
     );
@@ -30,14 +32,14 @@ const StyledInput = styled.input`
     color: ${(props) => (props.error ? "red" : "")};
 `;
 const StyledText = styled.span`
-    width: 78px;
     height: 36px;
-    font-family: "DINNextRoundedLTW04-Medium";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 18px;
-    display: flex;
     color: ${(props) => (props.error ? "red" : "")};
+    span {
+        display: block;
+    }
 `;
 export default DataInput;

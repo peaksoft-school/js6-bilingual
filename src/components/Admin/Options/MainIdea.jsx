@@ -75,6 +75,7 @@ export default function MainIdea({ data, setIsErrorInput }) {
                     })
                 )
             );
+            navigate(-1);
         }
     };
 

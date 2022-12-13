@@ -97,6 +97,7 @@ export default function DescribeImage({ data, setIsErrorInput }) {
                     })
                 )
             );
+            navigate(-1);
         }
     };
     return (

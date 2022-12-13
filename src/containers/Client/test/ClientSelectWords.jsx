@@ -34,7 +34,7 @@ function SelectEnglishWords({ question, count }) {
             })
         );
     }, [cardList]);
-
+    console.log(cardList.map((item) => item.id));
     React.useEffect(() => {
         setCardList([]);
     }, [question.id]);

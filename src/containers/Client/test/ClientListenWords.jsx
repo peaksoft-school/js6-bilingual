@@ -34,6 +34,10 @@ function ClientListenSelectWords({ question }) {
         );
     }, [prov]);
 
+    React.useEffect(() => {
+        setProv([]);
+    }, [question.id]);
+
     const soundPlay = (src) => {
         const sound = new Howl({
             src,
@@ -50,6 +54,8 @@ function ClientListenSelectWords({ question }) {
             setProv(prov.filter((item) => item !== Id));
         }
     };
+
+    console.log(prov);
 
     return (
         <StyledContainerCard>

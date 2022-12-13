@@ -7,6 +7,7 @@ import { RoutesUrl } from "./constants";
 
 const PrivateRoute = ({ expectedRoles, children }) => {
     const user = useSelector((state) => state.auth.data);
+    console.log(user);
     if (user !== null) {
         if (expectedRoles.includes(user?.role) && user?.token) {
             return children;
