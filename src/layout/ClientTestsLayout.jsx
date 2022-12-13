@@ -31,7 +31,7 @@ export default function ClientTestsLayout({ children, questionResponses, setcoun
                 <StyledBtn>
                     <ButtonUi
                         onClick={handleNextClick}
-                        disabled={!isActiveBtnNext}
+                        // disabled={!isActiveBtnNext}
                         variant="contained"
                         maxwidth="143px"
                         maxheight="42px"
