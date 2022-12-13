@@ -40,7 +40,6 @@ export const clientSlice = createSlice({
         addAnswer: (state, action) => {
             console.log(action.payload);
             const base = current(state.answer.questionsAnswers);
-            console.log(base);
             const findItem = base.findIndex((item) => {
                 return item.questionId === action.payload.options.questionId;
             });
