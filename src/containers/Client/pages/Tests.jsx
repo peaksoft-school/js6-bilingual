@@ -35,7 +35,6 @@ export default function Tests() {
 
     const renderTestContentByType = () => {
         if (questionResponses) {
-            console.log(count, questionResponses.length - 1);
             if (count > questionResponses.length - 1) return <CompleteTest />;
             switch (questionResponses[count].questionType) {
                 case questionType.SELECT_WORDS:
