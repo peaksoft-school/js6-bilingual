@@ -1,12 +1,14 @@
 import { questionTypeList } from "constants/questionType";
 
-import React, { useState } from "react";
+import React from "react";
 
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 
+import { useForm } from "react-hook-form";
 import { convertHMS } from "services/format";
 import styled from "styled-components";
 
+import { PopUp } from "./UI";
 import DataInput from "./UI/DataInput";
 
 import DropDown from "./UI/DropDownUi";
@@ -18,49 +20,93 @@ import UICard from "./UI/UICard";
 
 function ListenSelectTest({ children }) {
     const { mainQuestion, isUpdatePage } = React.useContext(QuestionContext);
+    const [state, setState] = React.useState(questionTypeList[0]);
+    const [isErrorInput, setIsErrorInput] = React.useState({ title: false, duration: false });
+    const [data, setData] = React.useState({
+        title: "",
+        duration: "",
+    });
+    React.useEffect(() => {
+        setData((prev) => {
+            return {
+                ...prev,
+                title: mainQuestion?.title,
+                duration: mainQuestion ? convertHMS(mainQuestion.duration) : 0,
+            };
+        });
+    }, [mainQuestion]);
 
     if (!mainQuestion && isUpdatePage) {
         return <Loader />;
     }
-
-    const [state, setState] = useState(questionTypeList[0]);
-    const [data, setData] = useState({
-        title: mainQuestion ? mainQuestion.title : "",
-        duration: mainQuestion ? convertHMS(mainQuestion.duration) : 0,
-    });
-
     return (
         <StyledContainerBoss>
+            <button
+                onClick={() =>
+                    setIsErrorInput((prev) => {
+                        return {
+                            ...prev,
+                            duration: !prev.duration,
+                        };
+                    })
+                }>
+                Error duration
+            </button>
+            <button
+                onClick={() =>
+                    setIsErrorInput((prev) => {
+                        return {
+                            ...prev,
+                            title: !prev.duration,
+                        };
+                    })
+                }>
+                Error title
+            </button>
             <UICard cardWidth="100%" cardBorderRadius="20px">
                 <StyledContainerMiniBoss>
                     <StyledContainerOne>
                         <StyledContainerOneOne>
                             <StyledText>Title</StyledText>
                             <Input
+                                forInput={{ error: isErrorInput.title }}
                                 colortext="black"
-                                forInput={{ defaultValue: data.title }}
+                                value={data.title}
                                 sx={{ width: "697px" }}
-                                handleChange={(el) =>
+                                handleChange={(el) => {
                                     setData((prev) => {
                                         return {
                                             ...prev,
                                             title: el.target.value,
                                         };
-                                    })
-                                }
+                                    });
+                                    setIsErrorInput((prev) => {
+                                        return {
+                                            ...prev,
+                                            title: false,
+                                        };
+                                    });
+                                }}
                             />
                         </StyledContainerOneOne>
                         <StyledContainerTwo>
                             <DataInput
-                                defaultValue={data.duration}
-                                onChange={(el) =>
+                                value={data.duration}
+                                onChange={(el) => {
                                     setData((prev) => {
                                         return {
                                             ...prev,
                                             duration: el.target.value,
                                         };
-                                    })
-                                }
+                                    });
+                                    setIsErrorInput((prev) => {
+                                        return {
+                                            ...prev,
+                                            duration: false,
+                                        };
+                                    });
+                                }}
+                                error={isErrorInput.duration}
                             />
                         </StyledContainerTwo>
                     </StyledContainerOne>
@@ -75,7 +121,7 @@ function ListenSelectTest({ children }) {
                             dropState={state}
                         />
                     </StyledContainerThree>
-                    <div>{React.cloneElement(children, { data })}</div>
+                    <Child>{React.cloneElement(children, { data, setIsErrorInput })}</Child>
                 </StyledContainerMiniBoss>
             </UICard>
         </StyledContainerBoss>
@@ -88,6 +134,10 @@ const StyledContainerBoss = styled.div`
 `;
 const StyledContainerMiniBoss = styled.div`
     padding-left: 40px;
+`;
+
+const Child = styled.div`
+    max-width: 820px;
 `;
 
 const StyledContainerOne = styled.div`
@@ -123,7 +173,6 @@ const StyledText = styled.span`
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    font-family: "DINNextRoundedLTW04-Medium";
     line-height: 18px;
 `;
 export default ListenSelectTest;
