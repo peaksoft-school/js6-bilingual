@@ -29,7 +29,7 @@ function SelectEnglishWords({ question, count }) {
                 options: {
                     questionId: question.id,
                     optionAnswerId: cardList.map((item) => item.id),
-                    answer: cardList.map((options) => options.option),
+                    answer: "",
                 },
             })
         );
@@ -37,7 +37,7 @@ function SelectEnglishWords({ question, count }) {
 
     React.useEffect(() => {
         setCardList([]);
-    }, [count]);
+    }, [question.id]);
 
     const handleDelete = (chipToDelete) => {
         setCardList((chips) => chips.filter((chip) => chip.option !== chipToDelete.option));

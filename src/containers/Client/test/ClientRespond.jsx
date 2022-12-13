@@ -2,11 +2,28 @@ import React, { useState } from "react";
 
 import TextArea from "components/UI/TextArea";
 
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 export default function ClientRespond({ question }) {
     const [value, setValue] = useState("");
     const valueLength = value.split(" ").length - 1;
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    React.useEffect(() => {
+        dispatch(
+            addAnswer({
+                testId: +id,
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: "cardList.map((item) => item.id)",
+                    answer: "",
+                },
+            })
+        );
+    }, [question.id]);
     return (
         <StyledContainerRespond>
             <StyledTextTitle>{question.title}</StyledTextTitle>

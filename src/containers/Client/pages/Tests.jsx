@@ -2,7 +2,6 @@ import { questionType } from "constants/questionType";
 
 import React, { useEffect, useState } from "react";
 
-import ClientContainerTest from "components/UI/ClientContainerTest";
 import Loader from "components/UI/Loader";
 import Progress from "components/UI/Progress";
 import UICard from "components/UI/UICard";
