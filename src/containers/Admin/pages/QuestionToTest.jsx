@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { Tooltip } from "@mui/material";
 import { ButtonUi } from "components/UI";
 import IconButtonStyled from "components/UI/IconButtonStyled";
-import Loader from "components/UI/Loader";
 import SwitcherComp from "components/UI/Switcher";
 import UICard from "components/UI/UICard";
 import { useDispatch, useSelector } from "react-redux";

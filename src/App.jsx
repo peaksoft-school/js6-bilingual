@@ -1,6 +1,5 @@
 import React from "react";
 
-import { PopUp } from "components/UI";
 import { useDispatch } from "react-redux";
 import { AudioPlayerProvider } from "react-use-audio-player";
 import RoutesRender from "routes/routes-render";

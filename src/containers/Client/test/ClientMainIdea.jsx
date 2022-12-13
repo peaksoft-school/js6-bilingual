@@ -1,28 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function ClientMainIdea() {
+import RadioButton from "components/UI/RadioButton";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+
+export default function ClientMainIdea({ question }) {
+    const dispatch = useDispatch();
+    const [radioValue, setRadioValue] = useState("");
+    const [answers, setAnswers] = useState("");
+
+    const handleRadioChange = (e) => {
+        setRadioValue(e.target.value);
+    };
+
     return (
-        <div>
-            <section>
-                <div>
-                    <h2>PASSAGE</h2>
-                    <hr />
-                    <p>
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-                        ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-                        porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                        adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
-                        dolore magnam aliquam quaerat voluptatem.
-                    </p>
-                </div>
-                <div>
-                    <h1>Select the best title for the passage</h1>
-                    <div />
-                </div>
-            </section>
-        </div>
+        <StyledSection>
+            <StyledPassage>
+                <p>PASSAGE</p>
+                <hr />
+                <p>{question.passage}</p>
+            </StyledPassage>
+            <StyledSelectPassage>
+                <p>{question.title}</p>
+                {question.optionResponseList.map((item) => (
+                    <RadioButton
+                        key={item.id}
+                        onChange={handleRadioChange}
+                        value={item.id}
+                        label={item.option}
+                        radioValue={radioValue}
+                    />
+                ))}
+            </StyledSelectPassage>
+        </StyledSection>
     );
 }
+
+const StyledSection = styled.section`
+    display: flex;
+    gap: 40px;
+`;
+
+const StyledPassage = styled.div`
+    width: 60%;
+    background: #f7f7f7;
+    border: 1px solid #d4d0d0;
+    border-radius: 8px;
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        color: #4c4859;
+        margin: 18px 15px;
+        line-height: 124%;
+        word-break: break-all;
+        ::first-letter {
+            text-transform: capitalize;
+        }
+    }
+`;
+
+const StyledSelectPassage = styled.div`
+    width: 40%;
+    p {
+        font-weight: 400;
+        font-size: 26px;
+        color: #4c4859;
+        ::first-letter {
+            text-transform: capitalize;
+        }
+    }
+    div {
+        display: flex;
+        gap: 16px;
+        background: #ffffff;
+        border: 1px solid #d4d0d0;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 26px 0 14px 0;
+        cursor: pointer;
+        :hover {
+            border: 1px solid #3a10e5;
+            border-radius: 8px;
+            background: rgba(58, 16, 229, 0.14);
+        }
+    }
+`;
