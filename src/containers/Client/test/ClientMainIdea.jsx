@@ -2,16 +2,35 @@ import React, { useState } from "react";
 
 import RadioButton from "components/UI/RadioButton";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 export default function ClientMainIdea({ question }) {
     const dispatch = useDispatch();
-    const [radioValue, setRadioValue] = useState("");
-    const [answers, setAnswers] = useState("");
+    const [radioValue, setRadioValue] = useState([]);
 
     const handleRadioChange = (e) => {
         setRadioValue(e.target.value);
     };
+
+    const { id } = useParams();
+    React.useEffect(() => {
+        dispatch(
+            addAnswer({
+                testId: +id,
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: radioValue,
+                    answer: "",
+                },
+            })
+        );
+    }, [radioValue]);
+
+    React.useEffect(() => {
+        setRadioValue([]);
+    }, [question.id]);
 
     return (
         <StyledSection>

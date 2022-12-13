@@ -8,7 +8,7 @@ import { addAnswer } from "store/slices/clientSlice";
 
 import styled from "styled-components";
 
-function SelectEnglishWords({ question, count }) {
+function SelectEnglishWords({ question }) {
     const [cardList, setCardList] = useState([]);
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -29,7 +29,7 @@ function SelectEnglishWords({ question, count }) {
                 options: {
                     questionId: question.id,
                     optionAnswerId: cardList.map((item) => item.id),
-                    answer: cardList.map((options) => options.option),
+                    answer: "",
                 },
             })
         );
@@ -37,7 +37,7 @@ function SelectEnglishWords({ question, count }) {
 
     React.useEffect(() => {
         setCardList([]);
-    }, [count]);
+    }, [question.id]);
 
     const handleDelete = (chipToDelete) => {
         setCardList((chips) => chips.filter((chip) => chip.option !== chipToDelete.option));
