@@ -19,5 +19,5 @@ export default function ClientBestTitle({ question }) {
             })
         );
     }, [question.id]);
-    return <div>ClientBestTiele</div>;
+    return <div>Client Best Tiele</div>;
 }
