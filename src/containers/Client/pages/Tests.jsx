@@ -34,7 +34,6 @@ export default function Tests() {
 
     const renderTestContentByType = () => {
         if (questionResponses) {
-            if (count > questionResponses.length - 1) return <CompleteTest />;
             switch (questionResponses[count].questionType) {
                 case questionType.SELECT_WORDS:
                     return <ClientSelectWords />;
@@ -67,6 +66,7 @@ export default function Tests() {
     }, []);
 
     if (questionResponses?.length > 0) {
+        if (count > questionResponses.length - 1) return <CompleteTest />;
         return (
             <ClientTestsLayout
                 questionResponses={questionResponses}

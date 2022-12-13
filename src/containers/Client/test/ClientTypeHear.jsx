@@ -6,6 +6,9 @@ import TextArea from "components/UI/TextArea";
 
 import { Howl } from "howler";
 
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import Volume from "../../../assets/icons/Volume-Up.svg";
@@ -29,6 +32,20 @@ export default function ClientTypeHear({ question }) {
             }
         }
     };
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    React.useEffect(() => {
+        dispatch(
+            addAnswer({
+                testId: +id,
+                options: {
+                    questionId: question.id,
+                    optionAnswerId: "cardList.map((item) => item.id)",
+                    answer: "",
+                },
+            })
+        );
+    }, [question.id]);
     return (
         <StyledContainer>
             <span>Type the statement you hear</span>
