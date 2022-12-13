@@ -19,6 +19,7 @@ export default function ClientTestsLayout({ children, questionResponses, setcoun
 
     const answer = useSelector((item) => item.testType.answer.questionsAnswers);
     const isActiveBtnNext = answer[count]?.optionAnswerId.length || answer[count]?.answer;
+    console.log(answer[count]?.optionAnswerId.length);
     return (
         <ClientContainerTest>
             <UICard
@@ -31,7 +32,7 @@ export default function ClientTestsLayout({ children, questionResponses, setcoun
                 <StyledBtn>
                     <ButtonUi
                         onClick={handleNextClick}
-                        // disabled={!isActiveBtnNext}
+                        disabled={!isActiveBtnNext}
                         variant="contained"
                         maxwidth="143px"
                         maxheight="42px"
