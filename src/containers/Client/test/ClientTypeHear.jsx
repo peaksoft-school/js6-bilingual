@@ -19,10 +19,10 @@ export default function ClientTypeHear({ question }) {
             html5: true,
             onend: () => {
                 setBgcolor(true);
+                setNumberOfReplays(numberOfReplays - 1);
             },
         });
         if (numberOfReplays > 0) {
-            setNumberOfReplays(numberOfReplays - 1);
             setBgcolor(false);
             if (bgcolor) {
                 audio.play();
@@ -33,7 +33,10 @@ export default function ClientTypeHear({ question }) {
         <StyledContainer>
             <span>Type the statement you hear</span>
             <StyledContainerMain>
-                <StyledContainerIcon bgcolor={bgcolor} onClick={() => audioPlay()}>
+                <StyledContainerIcon
+                    disabeled={numberOfReplays}
+                    bgcolor={bgcolor}
+                    onClick={() => audioPlay()}>
                     <IconButtonStyled Icon={Volume} />
                 </StyledContainerIcon>
                 <StyledContainerOne>
@@ -77,11 +80,12 @@ const StyledContainerIcon = styled.div`
     width: 88px;
     height: 88px;
     border-radius: 100%;
+    opacity: ${(props) => (props.disabeled ? 1 : 0.5)};
     background-color: ${(props) => (props.bgcolor ? "rgba(58, 16, 229, 1)" : "#7a5df1")};
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    cursor: ${(props) => (props.disabeled ? "pointer" : "not-allowed;")};
 `;
 const StyledContainerOne = styled.div`
     width: 439px;
