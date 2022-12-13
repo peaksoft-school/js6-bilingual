@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { questionForClient, questionForClientById } from "api/question-for-client";
+import produce from "immer";
 
 const initialState = {
     answer: {
@@ -8,11 +9,13 @@ const initialState = {
         answer: "",
     },
     questions: [],
+    questionById: {},
 };
 
 export const getQuestionForClient = createAsyncThunk("client/getQestionForClient", async () => {
     try {
         const response = await questionForClient();
+
         return response;
     } catch (error) {
         return error.message;
@@ -36,10 +39,25 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state, action) => {
+            const base = current(state.answer.questionsAnswers);
+            console.log(base);
+            const findItem = base.findIndex((item) => {
+                return item.questionId === action.payload.options.questionId;
+            });
+            let newState;
+            if (findItem >= 0) {
+                newState = produce(base, (draft) => {
+                    draft[findItem].optionAnswerId = [...action.payload.options.optionAnswerId];
+                });
+            } else {
+                newState = produce(base, (draft) => {
+                    draft.push(action.payload.options);
+                });
+            }
             state.answer = {
                 testId: action.payload.testId,
-                questionsAnswers: [...state.answer.questionsAnswers, action.payload.options],
                 answer: action.payload.answer,
+                questionsAnswers: newState,
             };
         },
     },
@@ -48,7 +66,7 @@ export const clientSlice = createSlice({
             state.questions = action.payload;
         },
         [getQuestionForClientById.fulfilled]: (state, action) => {
-            state.questions = action.payload;
+            state.questionById = action.payload;
         },
     },
 });

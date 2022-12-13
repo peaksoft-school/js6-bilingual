@@ -6,10 +6,11 @@ import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatToMinute } from "services/format";
+import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
 
-export default function DescribeImage({ data }) {
+export default function DescribeImage({ data, setIsErrorInput }) {
     const [img, setImg] = React.useState({ src: null, alt: "" });
     const [corrAnswer, setCorrAnswer] = React.useState("");
 
@@ -57,6 +58,7 @@ export default function DescribeImage({ data }) {
         }, []);
     }
     const saveData = async (req) => {
+        if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];
         const sec = data.duration.split(":")[1];
         const duration = formatToMinute(+min, +sec);
@@ -74,6 +76,7 @@ export default function DescribeImage({ data }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
+            navigate(-1);
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(

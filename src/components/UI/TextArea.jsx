@@ -4,15 +4,16 @@ import { TextField } from "@mui/material";
 
 import styled from "styled-components";
 
-export default function TextArea({ width, value, setValue, placeholder, rows }) {
+export default function TextArea({ width, value, onChange, placeholder, rows, ...props }) {
     return (
         <Textarea
             width={width}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={onChange}
             value={value}
             placeholder={placeholder}
             multiline
             minRows={rows}
+            {...props}
         />
     );
 }
