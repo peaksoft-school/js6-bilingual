@@ -20,10 +20,13 @@ function Header({ Choice, HeaderBg }) {
             setBgColor(false);
         }
     });
+
+    function GoSubmittedResults() {
+        navigate("/submitted-results");
+    }
     function comeInNavigateHandler() {
         // TODO navigate come in logic
     }
-
     function registerNavigateHandler() {
         navigate("/sign-in");
     }
@@ -67,7 +70,7 @@ function Header({ Choice, HeaderBg }) {
                             maxwidth="183px"
                             maxheight="18px"
                             fontSize="15px"
-                            click={() => comeInNavigateHandler}
+                            click={() => GoSubmittedResults}
                         />
                         <ButtonStyled
                             text="LOG OUT"

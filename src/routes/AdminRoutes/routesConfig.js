@@ -2,6 +2,7 @@ import React from "react";
 
 import { NotFound } from "containers";
 
+import SubmittedResults from "containers/Admin/check/SubmittedResults";
 import AdminTest from "containers/Admin/pages/AdminTest";
 import CreateQuestion from "containers/Admin/pages/CreateQuestion";
 import CreateTest from "containers/Admin/pages/CreateTest";
@@ -40,6 +41,10 @@ export const ADMIN_ROUTES_CONFIG = [
     {
         path: ADMIN_ROUTES_URL.UPDATE_QUESTION,
         element: <CreateQuestion />,
+    },
+    {
+        path: ADMIN_ROUTES_URL.RESULTS_CHECK,
+        element: <SubmittedResults />,
     },
     {
         path: "*",

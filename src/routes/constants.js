@@ -23,6 +23,7 @@ export const ADMIN_CONST_URL = {
     QUESTIONTOTEST: "/question-to-test/",
     CREATE_QUESTION: "create-question",
     UPDATE_QUESTION: "update-question/:id",
+    RESULTS_CHECK: "submitted-results",
 };
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////

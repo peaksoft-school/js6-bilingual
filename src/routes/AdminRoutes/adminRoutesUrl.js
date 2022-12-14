@@ -12,4 +12,5 @@ export const ADMIN_ROUTES_URL = {
     CREATE_TEST,
     CREATE_QUESTION: `test-:id/${CREATE_QUESTION}`,
     UPDATE_QUESTION,
+    RESULTS_CHECK,
 };
