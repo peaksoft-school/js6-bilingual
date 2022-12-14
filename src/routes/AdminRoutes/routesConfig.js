@@ -3,10 +3,12 @@ import React from "react";
 import { NotFound } from "containers";
 
 import AdminTest from "containers/Admin/pages/AdminTest";
+
 import CreateQuestion from "containers/Admin/pages/CreateQuestion";
 import CreateTest from "containers/Admin/pages/CreateTest";
 import NewTest from "containers/Admin/pages/NewTest";
 import QuestionToTest from "containers/Admin/pages/QuestionToTest";
+import SubmitedResult from "containers/Admin/pages/SubmitedResult.jsx";
 
 import { Navigate } from "react-router-dom";
 
@@ -40,6 +42,10 @@ export const ADMIN_ROUTES_CONFIG = [
     {
         path: ADMIN_ROUTES_URL.UPDATE_QUESTION,
         element: <CreateQuestion />,
+    },
+    {
+        path: ADMIN_ROUTES_URL.SUBMITED_TEST,
+        element: <SubmitedResult />,
     },
     {
         path: "*",

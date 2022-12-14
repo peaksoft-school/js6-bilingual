@@ -41,28 +41,6 @@ function ListenSelectTest({ children }) {
     }
     return (
         <StyledContainerBoss>
-            <button
-                onClick={() =>
-                    setIsErrorInput((prev) => {
-                        return {
-                            ...prev,
-                            duration: !prev.duration,
-                        };
-                    })
-                }>
-                Error duration
-            </button>
-            <button
-                onClick={() =>
-                    setIsErrorInput((prev) => {
-                        return {
-                            ...prev,
-                            title: !prev.duration,
-                        };
-                    })
-                }>
-                Error title
-            </button>
             <UICard cardWidth="100%" cardBorderRadius="20px">
                 <StyledContainerMiniBoss>
                     <StyledContainerOne>

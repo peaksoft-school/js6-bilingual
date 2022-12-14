@@ -15,6 +15,7 @@ import Volume from "../../../assets/icons/Volume-Up.svg";
 
 export default function ClientTypeHear({ question }) {
     const [numberOfReplays, setNumberOfReplays] = useState(question.numberOfReplays);
+    const [value, setValue] = useState("");
     const [bgcolor, setBgcolor] = useState(true);
     const audioPlay = () => {
         const audio = new Howl({
@@ -22,11 +23,12 @@ export default function ClientTypeHear({ question }) {
             html5: true,
             onend: () => {
                 setBgcolor(true);
-                setNumberOfReplays(numberOfReplays - 1);
             },
         });
         if (numberOfReplays > 0) {
             setBgcolor(false);
+            setNumberOfReplays(numberOfReplays - 1);
+
             if (bgcolor) {
                 audio.play();
             }
@@ -40,15 +42,27 @@ export default function ClientTypeHear({ question }) {
                 testId: +id,
                 options: {
                     questionId: question.id,
+<<<<<<< HEAD
                     optionAnswerId: "cardList.map((item) => item.id)",
                     answer: "",
                 },
             })
         );
+=======
+                    optionAnswerId: [],
+                    answer: value,
+                },
+            })
+        );
+    }, [value]);
+    console.log(value);
+    React.useEffect(() => {
+        setValue("");
+>>>>>>> 7cae49e76a6fc3bbfca07f7a08f16acc8c213289
     }, [question.id]);
     return (
         <StyledContainer>
-            <span>Type the statement you hear</span>
+            <h4 className="question-title">{question.title}</h4>
             <StyledContainerMain>
                 <StyledContainerIcon
                     disabeled={numberOfReplays}
@@ -57,7 +71,13 @@ export default function ClientTypeHear({ question }) {
                     <IconButtonStyled Icon={Volume} />
                 </StyledContainerIcon>
                 <StyledContainerOne>
-                    <TextArea width="439px" rows="4" />
+                    <TextArea
+                        width="439px"
+                        rows="4"
+                        value={value}
+                        placeholder="Your response"
+                        onChange={(e) => setValue(e.target.value)}
+                    />
                     <span>number of replays left: {numberOfReplays}</span>
                 </StyledContainerOne>
             </StyledContainerMain>
@@ -67,9 +87,7 @@ export default function ClientTypeHear({ question }) {
 
 const StyledContainer = styled.div`
     width: 640px;
-    height: 269px;
     margin: auto;
-    margin-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -87,10 +105,9 @@ const StyledContainer = styled.div`
     }
 `;
 const StyledContainerMain = styled.div`
-    width: 639px;
-    height: 200px;
     display: flex;
     justify-content: space-between;
+    gap: 115px;
     align-items: center;
 `;
 const StyledContainerIcon = styled.div`
@@ -102,13 +119,21 @@ const StyledContainerIcon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: ${(props) => (props.disabeled ? "pointer" : "not-allowed;")};
+    &,
+    & * {
+        cursor: ${(props) => (props.disabeled ? "pointer" : "not-allowed;")};
+    }
 `;
 const StyledContainerOne = styled.div`
     width: 439px;
-    height: 160px;
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        margin-top: 10px;
+        color: #afafaf;
+    }
 `;

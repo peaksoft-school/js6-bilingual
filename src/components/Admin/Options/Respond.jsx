@@ -34,9 +34,9 @@ function Respond({ data, setIsErrorInput }) {
             duration,
             questionType: typeQuestion.value || typeQuestion,
             statement: dataField.statement,
-            numberOfReplays: +dataField.numberOfReplays,
+            numberOfReplays: 1,
             passage: "string",
-            minNumberOfWords: 10,
+            minNumberOfWords: +dataField.minNumberOfWords,
             correctAnswer: "string",
             content: "string",
             willDelete: [0],
@@ -54,8 +54,8 @@ function Respond({ data, setIsErrorInput }) {
             dispatch(sendingQuestion(dataQuestion));
             navigate(-1);
         } else if (req === "update") {
-            // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            navigate(-1);
         }
     };
     if (isUpdatePage && mainQuestion) {
@@ -66,7 +66,6 @@ function Respond({ data, setIsErrorInput }) {
             });
         }, []);
     }
-    console.log(dataField);
     return (
         <StyledContainerRespond>
             <StyledContainer>
@@ -83,15 +82,15 @@ function Respond({ data, setIsErrorInput }) {
                     }
                 />
                 <NumOfReplace>
-                    <h3>Number off Replays</h3>
+                    <h3>Number off Words</h3>
                     <input
                         type="number"
-                        value={+dataField.numberOfReplays}
+                        value={+dataField.minNumberOfWords || 1}
                         onChange={(e) =>
                             setDataField((prev) => {
                                 return {
                                     ...prev,
-                                    numberOfReplays: e.target.value,
+                                    minNumberOfWords: e.target.value,
                                 };
                             })
                         }

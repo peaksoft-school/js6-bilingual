@@ -17,16 +17,15 @@ const authSlice = createSlice({
 export default authSlice;
 export const { setUser } = authSlice.actions;
 
-export const asyncAuth = (useData, signInType, onNavigate) => {
-    return async (dispatch) => {
-        try {
-            const { data } = await baseAxios.post(signInType, useData);
-            console.log(data);
-            dispatch(setUser(data));
-            setUserToCookies(data);
-            onNavigate();
-        } catch (e) {
-            console.log(e);
-        }
-    };
-};
+// export const asyncAuth = (useData, signInType) => {
+//     return async (dispatch) => {
+//         try {
+//             const { data } = await baseAxios.post(signInType, useData);
+//             console.log(data);
+//             dispatch(setUser(data));
+//             setUserToCookies(data);
+//         } catch (e) {
+//             console.log(e);
+//         }
+//     };
+// };

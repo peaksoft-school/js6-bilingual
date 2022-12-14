@@ -81,6 +81,7 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
                     })
                 )
             );
+            navigate(-1);
         }
     };
 
