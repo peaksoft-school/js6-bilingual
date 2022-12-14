@@ -38,7 +38,6 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state, action) => {
-            console.log(action.payload);
             const base = current(state.answer.questionsAnswers);
             const findItem = base.findIndex((item) => {
                 return item.questionId === action.payload.options.questionId;
@@ -63,6 +62,10 @@ export const clientSlice = createSlice({
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
             state.questions = action.payload;
+            state.answer = {
+                testId: null,
+                questionsAnswers: [],
+            };
         },
         [getQuestionForClientById.fulfilled]: (state, action) => {
             state.questionById = action.payload;

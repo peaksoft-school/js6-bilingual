@@ -7,6 +7,7 @@ import styled from "styled-components";
 import IconButtonStyled from "./IconButtonStyled";
 
 export default function MainIdeaItem({ index, text, radioValue, onChange, onDelete, id }) {
+    console.log(radioValue);
     return (
         <Main>
             <FormControl>
@@ -21,7 +22,7 @@ export default function MainIdeaItem({ index, text, radioValue, onChange, onDele
                         <Actions>
                             <FormControlLabel value={text} control={<Radio />} />
                             <IconButtonStyled
-                                handleClick={() => onDelete(id, radioValue)}
+                                handleClick={() => onDelete(id, text)}
                                 fontSize="24px"
                                 Icon={DeleteIcon}
                             />

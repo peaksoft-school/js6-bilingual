@@ -11,7 +11,7 @@ export default function ClientMainIdea({ question }) {
     const [radioValue, setRadioValue] = useState([]);
 
     const handleRadioChange = (e) => {
-        setRadioValue(e.target.value);
+        setRadioValue([e.target.value]);
     };
 
     const { id } = useParams();

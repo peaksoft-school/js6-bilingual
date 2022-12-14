@@ -34,7 +34,6 @@ function SelectEnglishWords({ question }) {
             })
         );
     }, [cardList]);
-
     React.useEffect(() => {
         setCardList([]);
     }, [question.id]);
@@ -49,7 +48,7 @@ function SelectEnglishWords({ question }) {
 
     return (
         <>
-            <StyledP>{question.title}</StyledP>
+            <h4 className="question-title">{question.title}</h4>
             <StyledWrapper>
                 {question.optionResponseList.map((item) => (
                     <StyledWordDiv
@@ -92,7 +91,7 @@ const StyledP = styled.p`
     font-weight: 400;
     font-size: 28px;
     color: #4c4859;
-    margin: 50px 0;
+    margin: 0 0 50px 0;
 `;
 
 const StyledWrapper = styled.div`
@@ -134,9 +133,10 @@ const StyledWordDiv = styled.div`
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    border: 1.53px solid #d4d0d0;
+    border: 2px solid #d4d0d0;
     border-radius: 8px;
     cursor: grab;
+
     :hover {
         border: 2px solid #3a10e5;
     }

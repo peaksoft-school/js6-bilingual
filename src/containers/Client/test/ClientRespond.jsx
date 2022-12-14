@@ -13,20 +13,23 @@ export default function ClientRespond({ question }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     React.useEffect(() => {
+        setValue("");
+    }, [question.id]);
+    React.useEffect(() => {
         dispatch(
             addAnswer({
                 testId: +id,
                 options: {
                     questionId: question.id,
-                    optionAnswerId: "cardList.map((item) => item.id)",
-                    answer: "",
+                    optionAnswerId: [],
+                    answer: value,
                 },
             })
         );
-    }, [question.id]);
+    }, [valueLength >= question.minNumberOfWords]);
     return (
         <StyledContainerRespond>
-            <StyledTextTitle>{question.title}</StyledTextTitle>
+            <h4 className="question-title">{question.title}</h4>
             <StyledContaiter>
                 <StyledTextStatement>{question.statement}</StyledTextStatement>
                 <TextArea
@@ -37,7 +40,9 @@ export default function ClientRespond({ question }) {
                     placeholder="Your response"
                 />
             </StyledContaiter>
-            <span>words: {valueLength}</span>
+            <span>
+                words: {valueLength} minWords: {question.minNumberOfWords}
+            </span>
         </StyledContainerRespond>
     );
 }

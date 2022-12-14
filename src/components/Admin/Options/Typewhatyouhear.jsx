@@ -109,6 +109,7 @@ function Typewhatyouhear({ data, setIsErrorInput }) {
                     })
                 )
             );
+            navigate(-1);
         }
     };
     return (

@@ -42,6 +42,7 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
         );
         setDataCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
         setNewCard((prev) => [...prev, { option: audioLink.data.link, isTrue: checkBoxValue }]);
+        setIsOpen(false);
     };
 
     const { id } = useParams();
@@ -81,6 +82,7 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
             navigate(-1);
         } else if (req === "update") {
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            navigate(-1);
         }
         setIsOpen(false);
     };

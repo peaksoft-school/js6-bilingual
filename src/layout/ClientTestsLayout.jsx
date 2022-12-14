@@ -19,10 +19,13 @@ export default function ClientTestsLayout({ children, questionResponses, setcoun
 
     const answer = useSelector((item) => item.testType.answer.questionsAnswers);
     const isActiveBtnNext = answer[count]?.optionAnswerId.length || answer[count]?.answer;
+
+    const forWidth = questionResponses[count]?.questionType === "HIGHLIGHT_THE_ANSWER";
+
     return (
         <ClientContainerTest>
             <UICard
-                cardWidth="900px"
+                cardWidth={forWidth ? "1092px" : "900px"}
                 cardBorderRadius="10px"
                 cardBoxShadow="0px 4px 39px -5px rgba(196, 196, 196, 0.6)">
                 <Progress minute={10} />
@@ -53,9 +56,10 @@ const Wrapper = styled.div`
     }
 `;
 const StyledLine = styled.div`
-    border: 1.53px solid #d4d0d0;
-    height: 1px;
+    display: block;
+    height: 1.88px;
     margin: 60px 0 32px 0;
+    background: #999;
 `;
 
 const StyledBtn = styled.div`

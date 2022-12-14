@@ -91,6 +91,7 @@ export default function Highlight({ data, setIsErrorInput }) {
                     (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
                 )
             );
+            navigate(-1);
         }
     };
     if (mainQuestion && isUpdatePage) {

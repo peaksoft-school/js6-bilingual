@@ -58,6 +58,7 @@ function TypeRecord({ data, setIsErrorInput }) {
         } else if (req === "update") {
             // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            navigate(-1);
         }
     };
     if (isUpdatePage && mainQuestion) {
