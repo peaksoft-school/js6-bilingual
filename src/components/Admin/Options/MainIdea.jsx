@@ -61,7 +61,6 @@ export default function MainIdea({ data, setIsErrorInput }) {
             willUpdate: [0],
             [option]: isUpdatePage ? newCard : dataCard,
         };
-        console.log(dataQuestion);
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
@@ -114,6 +113,7 @@ export default function MainIdea({ data, setIsErrorInput }) {
         }
     };
     const handleDelete = (idx, option) => {
+        console.log(idx, option);
         if (idx) {
             dispatch(deleteOption(idx));
         }

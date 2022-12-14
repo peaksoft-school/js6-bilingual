@@ -32,7 +32,7 @@ export const ADMIN_CONST_URL = {
 
 export const CLIENT_CONST_URL = {
     "/": "/",
-    RESULTS: "/results",
+    RESULTS: "results",
     TESTS: "/tests/:id",
     SELECT_TESTS: "/select-words-test",
 };

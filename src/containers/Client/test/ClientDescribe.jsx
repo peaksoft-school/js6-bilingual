@@ -30,7 +30,7 @@ export default function ClientDescribe({ question }) {
     return (
         <>
             <StyledForTitle>
-                <p>{question.title}</p>
+                <h4 className="question-title">{question.title}</h4>
             </StyledForTitle>
             <StyledForImage>
                 <img width="202px" height="193px" src={question.content} alt="" />
@@ -54,6 +54,7 @@ const StyledForImage = styled.div`
     justify-content: space-between;
     img {
         object-fit: cover;
+        border-radius: 6px;
     }
 `;
 const StyledForTitle = styled.div`

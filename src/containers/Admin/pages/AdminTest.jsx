@@ -63,7 +63,7 @@ function AdminTest() {
                             cardWidth="975px"
                             cardHeight="66px">
                             <StyledItemsDiv>
-                                <h6>{item.title}</h6>
+                                <h3>{item.title}</h3>
                                 <StyledIconsBtn>
                                     <SwitcherComp
                                         value={item.isActive}
@@ -111,6 +111,10 @@ const StyledItemsDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    h3 {
+        font-size: 16px;
+        font-weight: 500;
+    }
 `;
 
 const StyledIconsBtn = styled.div`

@@ -15,15 +15,13 @@ function Header() {
         window.location.pathname = "/";
     };
 
-    const MyresultGo = () => {};
-
     return (
         <HeaderGlav>
             <StyledHeader>
                 <StyledImage src={Logotip} />
                 <StyledHeaderClientRole>
                     <LinkItem to="/home">TESTS</LinkItem>
-                    <LinkItem to={`/home${CLIENT_ROUTES_URL.RESULTS}`}>MY RESULTS</LinkItem>
+                    <LinkItem to={`/home/${CLIENT_ROUTES_URL.RESULTS}`}>MY RESULTS</LinkItem>
                     <ButtonStyled
                         text="LOG OUT"
                         variant="outlined"
