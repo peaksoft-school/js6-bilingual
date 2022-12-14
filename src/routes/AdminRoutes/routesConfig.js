@@ -1,6 +1,7 @@
 import React from "react";
 
 import { NotFound } from "containers";
+import { CheckMain } from "containers/Admin/check/CheckMain";
 
 import AdminTest from "containers/Admin/pages/AdminTest";
 
@@ -46,6 +47,10 @@ export const ADMIN_ROUTES_CONFIG = [
     {
         path: ADMIN_ROUTES_URL.SUBMITED_TEST,
         element: <SubmitedResult />,
+    },
+    {
+        path: ADMIN_ROUTES_URL.CHECK_TESTS,
+        element: <CheckMain />,
     },
     {
         path: "*",

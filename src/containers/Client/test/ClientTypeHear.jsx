@@ -42,13 +42,6 @@ export default function ClientTypeHear({ question }) {
                 testId: +id,
                 options: {
                     questionId: question.id,
-<<<<<<< HEAD
-                    optionAnswerId: "cardList.map((item) => item.id)",
-                    answer: "",
-                },
-            })
-        );
-=======
                     optionAnswerId: [],
                     answer: value,
                 },
@@ -58,7 +51,6 @@ export default function ClientTypeHear({ question }) {
     console.log(value);
     React.useEffect(() => {
         setValue("");
->>>>>>> 7cae49e76a6fc3bbfca07f7a08f16acc8c213289
     }, [question.id]);
     return (
         <StyledContainer>
