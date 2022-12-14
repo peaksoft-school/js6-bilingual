@@ -1,5 +1,16 @@
 import React from "react";
 
+import UICard from "components/UI/UICard";
+
+import styled from "styled-components";
+
 export default function SubmitedResult() {
-    return <div>SubmitedResult</div>;
+    return (
+        <StyledContainerResult>
+            <UICard>SubmitedResult</UICard>;
+        </StyledContainerResult>
+    );
 }
+const StyledContainerResult = styled.div`
+    width: 100px;
+`;
