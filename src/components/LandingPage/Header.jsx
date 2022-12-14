@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
-import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { NavLink, useNavigate } from "react-router-dom";
 
+import { ADMIN_ROUTES_URL } from "routes/AdminRoutes/adminRoutesUrl";
 import styled, { keyframes } from "styled-components";
 
 import { scrollHeader } from "utils/helpers";
@@ -20,16 +22,12 @@ function Header({ Choice, HeaderBg }) {
             setBgColor(false);
         }
     });
+    const isAuth = Cookies.get("user");
 
-    function GoSubmittedResults() {
-        navigate("/submitted-results");
-    }
-    function comeInNavigateHandler() {
-        // TODO navigate come in logic
-    }
-    function registerNavigateHandler() {
-        navigate("/sign-in");
-    }
+    const logout = () => {
+        Cookies.remove("user");
+        window.location.pathname = "/";
+    };
 
     return (
         <HeaderGlav>
@@ -37,48 +35,37 @@ function Header({ Choice, HeaderBg }) {
                 <StyledImage src={Logotip} />
                 {Choice ? (
                     <StyledHeaderLandingPage>
-                        <ButtonStyled
-                            text="TO COME IN"
-                            variant="contained"
-                            maxwidth="122px"
-                            maxheight="42px"
-                            fontSize="14px"
-                            onClick={() => comeInNavigateHandler()}
-                        />
-                        <ButtonStyled
-                            text="REGISTER"
-                            variant="outlined"
-                            maxwidth="122px"
-                            maxheight="42px"
-                            fontSize="14px"
-                            onClick={() => registerNavigateHandler()}
-                        />
+                        {isAuth ? (
+                            <ButtonStyled
+                                text="TO COME IN"
+                                variant="contained"
+                                maxwidth="122px"
+                                maxheight="42px"
+                                fontSize="14px"
+                                onClick={() => navigate(`/admin${ADMIN_ROUTES_URL.TEST}`)}
+                            />
+                        ) : (
+                            <ButtonStyled
+                                text="REGISTER"
+                                variant="outlined"
+                                maxwidth="122px"
+                                maxheight="42px"
+                                fontSize="14px"
+                                onClick={() => navigate(`/sign-in`)}
+                            />
+                        )}
                     </StyledHeaderLandingPage>
                 ) : (
                     <StyledHeaderClientRole>
-                        <ButtonStyled
-                            text="TESTS"
-                            variant="text"
-                            maxwidth="44px"
-                            maxheight="18px"
-                            fontSize="15px"
-                            click={() => comeInNavigateHandler}
-                        />
-                        <ButtonStyled
-                            text="Submitted results"
-                            variant="text"
-                            maxwidth="183px"
-                            maxheight="18px"
-                            fontSize="15px"
-                            click={() => GoSubmittedResults}
-                        />
+                        <LinkItem to={`/admin${ADMIN_ROUTES_URL.TEST}`}>TEST</LinkItem>
+                        <LinkItem to={ADMIN_ROUTES_URL.SUBMITED_TEST}>SUBMITED TEST</LinkItem>
                         <ButtonStyled
                             text="LOG OUT"
                             variant="outlined"
                             maxwidth="104px"
                             maxheight="42px"
                             fontSize="15px"
-                            click={() => comeInNavigateHandler}
+                            onClick={logout}
                         />
                     </StyledHeaderClientRole>
                 )}
@@ -91,6 +78,13 @@ const HeaderAnimation = keyframes`
 to{
     background-color: white;
 }
+`;
+
+const LinkItem = styled(NavLink)`
+    &.active,
+    &:hover {
+        color: rgba(58, 16, 229, 0.9);
+    }
 `;
 const HeaderGlav = styled.div`
     display: flex;
@@ -118,7 +112,6 @@ const StyledImage = styled.img`
     margin-left: 80px;
 `;
 const StyledHeaderLandingPage = styled.div`
-    width: 259px;
     height: 42px;
     display: flex;
     justify-content: space-between;

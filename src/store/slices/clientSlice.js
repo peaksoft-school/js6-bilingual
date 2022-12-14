@@ -11,15 +11,18 @@ const initialState = {
     questionById: {},
 };
 
-export const getQuestionForClient = createAsyncThunk("client/getQestionForClient", async () => {
-    try {
-        const response = await questionForClient();
-
-        return response;
-    } catch (error) {
-        return error.message;
+export const getQuestionForClient = createAsyncThunk(
+    "client/getQestionForClient",
+    async ({ dispatch, clearData }) => {
+        try {
+            const response = await questionForClient();
+            dispatch(clearData());
+            return response;
+        } catch (error) {
+            return error.message;
+        }
     }
-});
+);
 
 export const getQuestionForClientById = createAsyncThunk(
     "client/getQuestionForClientById",
@@ -38,7 +41,6 @@ export const clientSlice = createSlice({
     initialState,
     reducers: {
         addAnswer: (state, action) => {
-            console.log(action.payload);
             const base = current(state.answer.questionsAnswers);
             const findItem = base.findIndex((item) => {
                 return item.questionId === action.payload.options.questionId;
@@ -59,10 +61,15 @@ export const clientSlice = createSlice({
                 questionsAnswers: newState,
             };
         },
+        clearData: (state) => {
+            state.answer = initialState.answer;
+        },
     },
     extraReducers: {
         [getQuestionForClient.fulfilled]: (state, action) => {
             state.questions = action.payload;
+            state.questionById = initialState.questionById;
+            state.answer = initialState.answer;
         },
         [getQuestionForClientById.fulfilled]: (state, action) => {
             state.questionById = action.payload;
@@ -70,4 +77,4 @@ export const clientSlice = createSlice({
     },
 });
 
-export const { addAnswer } = clientSlice.actions;
+export const { addAnswer, clearData } = clientSlice.actions;

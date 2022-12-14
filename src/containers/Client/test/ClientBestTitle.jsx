@@ -13,8 +13,8 @@ export default function ClientBestTitle({ question }) {
                 testId: +id,
                 options: {
                     questionId: question.id,
-                    optionAnswerId: "cardList.map((item) => item.id)",
-                    answer: "",
+                    optionAnswerId: [],
+                    answer: "safd",
                 },
             })
         );

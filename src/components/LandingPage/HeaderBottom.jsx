@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 import PhotoCap from "../../assets/images/landingPage/Group 4264.png";
@@ -22,7 +24,7 @@ function HeaderBottom() {
                         For nearly 30 years, learners have turned to Rosetta Stone to build the
                         fluency and confidence they need to speak new languages.
                     </StyledHeaderMelkiText>
-                    <StyledHeaderButton>TO BEGIN</StyledHeaderButton>
+                    <StyledHeaderButton to="/home">TO BEGIN</StyledHeaderButton>
                 </StyledHeaderContainerText>
                 <StyledHeaderImageBook src={PhotoBook} />
                 <StyledHeaderImageCap src={PhotoCap} />
@@ -76,7 +78,7 @@ const StyledHeaderMelkiText = styled.div`
     font-family: Poppins;
     font-size: 20px;
 `;
-const StyledHeaderButton = styled.div`
+const StyledHeaderButton = styled(Link)`
     width: 200px;
     height: 60px;
     margin-top: 20px;
