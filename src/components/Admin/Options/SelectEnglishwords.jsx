@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Add from "@mui/icons-material/Add";
-import { ButtonUi, PopUp } from "components/UI";
+import { ButtonUi } from "components/UI";
 import CheckBox from "components/UI/Checkbox";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";

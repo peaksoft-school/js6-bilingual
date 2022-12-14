@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from "assets/icons/Delete.svg";
 import styled from "styled-components";
 

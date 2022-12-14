@@ -22,12 +22,14 @@ export default function CompleteTest() {
     const dispatch = useDispatch();
 
     const handleDone = async () => {
+        console.log(resulTests);
         setIsLoad(true);
 
         try {
             const res = await baseAxios.post("/test/pass-test", resulTests);
             setIsLoad(false);
             navigate(`/home/${CLIENT_ROUTES_URL.RESULTS}`);
+            dispatch(clearData());
         } catch (error) {
             setIsLoad(false);
             alert("Some thing went wroing");
