@@ -5,10 +5,11 @@ import { ButtonUi } from "components/UI";
 import ClientContainer from "components/UI/ClientContainer";
 import Loader from "components/UI/Loader";
 import UICard from "components/UI/UICard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
 import { CLIENT_CONST_URL } from "routes/constants";
+import { addAnswer, clearData } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import Group from "../../../assets/icons/group.svg";
@@ -18,17 +19,20 @@ export default function CompleteTest() {
     const [isLoad, setIsLoad] = React.useState(false);
     const resulTests = useSelector((item) => item.testType.answer);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const handleDone = async () => {
         console.log(resulTests);
         setIsLoad(true);
+
         try {
             const res = await baseAxios.post("/test/pass-test", resulTests);
             setIsLoad(false);
             navigate(`/home/${CLIENT_ROUTES_URL.RESULTS}`);
+            dispatch(clearData());
         } catch (error) {
             setIsLoad(false);
             alert("Some thing went wroing");
-            console.log(error);
         }
     };
     return isLoad ? (

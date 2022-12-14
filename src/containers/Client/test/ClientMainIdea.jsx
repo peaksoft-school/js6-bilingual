@@ -22,8 +22,8 @@ export default function ClientMainIdea({ question }) {
                 testId: +id,
                 options: {
                     questionId: question.id,
-                    optionAnswerId: radioValue,
-                    answer: "",
+                    optionAnswerId: [],
+                    answer: "sad",
                 },
             })
         );
