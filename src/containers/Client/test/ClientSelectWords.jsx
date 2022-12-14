@@ -30,6 +30,7 @@ function SelectEnglishWords({ question }) {
                     questionId: question.id,
                     optionAnswerId: cardList.map((item) => item.id),
                     answer: "",
+                    numberOfPlays: 0,
                 },
             })
         );

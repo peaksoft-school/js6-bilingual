@@ -29,6 +29,7 @@ function ClientListenSelectWords({ question }) {
                     questionId: question.id,
                     optionAnswerId: prov,
                     answer: "",
+                    numberOfPlays: 0,
                 },
             })
         );

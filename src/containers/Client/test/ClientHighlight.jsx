@@ -19,6 +19,7 @@ export default function ClientHighlight({ question }) {
                     questionId: question.id,
                     optionAnswerId: [],
                     answer: value,
+                    numberOfPlays: 0,
                 },
             })
         );
