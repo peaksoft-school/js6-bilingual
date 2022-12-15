@@ -22,7 +22,6 @@ const StlyedClientContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: #d7e1f8;
-    padding-top: 60px;
 `;
 const StyledContainerGlav = styled.div`
     width: 1530px;
@@ -32,7 +31,7 @@ const StyledContainerGlav = styled.div`
     align-items: center;
 `;
 const StyledContainer = styled.div`
-    margin-top: 80px;
+    margin-top: 150px;
     margin-bottom: 80px;
 `;
 export default ClientContainer;
