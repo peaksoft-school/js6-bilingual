@@ -9,14 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { auth } from "services/firebase";
->>>>>>> 9fa367474ee8de045564235df6c6578f05f7e720
-=======
-import { auth } from "services/firebase";
->>>>>>> 773fc4abb7744d5b03e466de3da4e172031af823
 import { setUserToCookies } from "services/saveUser";
 import { asyncAuth, setUser } from "store/slices/authSlice";
 import styled from "styled-components";

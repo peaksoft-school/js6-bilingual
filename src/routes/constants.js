@@ -24,11 +24,8 @@ export const ADMIN_CONST_URL = {
     CREATE_QUESTION: "create-question",
     UPDATE_QUESTION: "update-question/:id",
     SUBMITED_TEST: "submited-tests",
-<<<<<<< HEAD
     CHECK: "check/:id",
-=======
     CHECK_TESTS: "/check/:test",
->>>>>>> 773fc4abb7744d5b03e466de3da4e172031af823
 };
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////
