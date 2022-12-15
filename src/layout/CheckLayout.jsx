@@ -1,3 +1,5 @@
+import { questionType } from "constants/questionType";
+
 import React from "react";
 
 import { baseAxios } from "api/axios-config";
@@ -9,14 +11,15 @@ import { convertHMS, formatterQuestionType } from "services/format";
 import styled from "styled-components";
 
 export default function CheckLayout({ children, data }) {
-    const [score, setScore] = React.useState(null);
+    const [score, setScore] = React.useState(+data.scoreOfQuestion);
     const navigate = useNavigate();
     const handleSave = async () => {
         try {
-            await baseAxios.post(`/result/evaluate-client-answer`, {
+            const res = await baseAxios.post(`/result/evaluate-client-answer`, {
                 questionId: data.id,
-                scoreOfQuestion: score,
+                scoreOfQuestion: +score,
             });
+            console.log(res);
             return navigate(-1);
         } catch (error) {
             return error;
@@ -58,12 +61,21 @@ export default function CheckLayout({ children, data }) {
                             <h3>Evaluation</h3>
                             <Score>
                                 <span>Score: </span>
+                                {data.questionType === questionType.LISTEN_WORDS ||
+                                data.questionType === questionType.SELECT_WORDS ? (
+                                    <>
+                                        <span>(1-10)</span>
+                                        <br />
+                                        <input
+                                            value={score}
+                                            onChange={(e) => setScore(e.target.value)}
+                                            type="number"
+                                        />
+                                    </>
+                                ) : (
+                                    data.scoreOfQuestion
+                                )}
                             </Score>
-                            <input
-                                value={score}
-                                onChange={(e) => setScore(e.target.value)}
-                                type="number"
-                            />
                         </BoxScore>
                     </AboutTest>
                     <Wrapper>{React.cloneElement(children, data)}</Wrapper>
@@ -71,7 +83,7 @@ export default function CheckLayout({ children, data }) {
                         <ButtonUi onClick={() => navigate(-1)} variant="outlined">
                             GO BACK
                         </ButtonUi>
-                        <ButtonUi handleSave={handleSave} variant="contained" color="success">
+                        <ButtonUi onClick={handleSave} variant="contained" color="success">
                             SAVE
                         </ButtonUi>
                     </Actions>

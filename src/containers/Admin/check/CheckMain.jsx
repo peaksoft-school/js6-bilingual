@@ -16,16 +16,18 @@ export const CheckMain = () => {
             const res = await checkAnswerById(test);
             return setData(res);
         } catch (error) {
-            console.log(error);
+            setData(404);
             return error;
         }
     };
-
+    console.log(data);
     React.useEffect(() => {
         request();
     }, []);
-    console.log(data);
-    return !data ? (
+
+    return data === 404 ? (
+        <h1>Not Found</h1>
+    ) : !data ? (
         <Loader />
     ) : (
         <CheckLayout data={data}>{getComponent(data.questionType)}</CheckLayout>
