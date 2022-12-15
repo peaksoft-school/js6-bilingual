@@ -70,16 +70,8 @@ export default function Highlight({ data, setIsErrorInput }) {
             correctAnswer: dataField.correctAnswer,
             numberOfReplays: 10,
             minNumberOfWords: 10,
+            optionRequests: [],
             content: "string",
-            willDelete: [0],
-            willUpdate: [0],
-            optionRequests: [
-                {
-                    option: "string",
-                    title: "string",
-                    isTrue: true,
-                },
-            ],
         };
         if (req === "save") {
             setMainQuestion(dataQuestion);
@@ -91,6 +83,7 @@ export default function Highlight({ data, setIsErrorInput }) {
                     (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
                 )
             );
+            navigate(-1);
         }
     };
     if (mainQuestion && isUpdatePage) {
@@ -99,7 +92,17 @@ export default function Highlight({ data, setIsErrorInput }) {
                 mainQuestion.correctAnswer,
                 `<span>${mainQuestion.correctAnswer}</span>`
             );
-            console.log(correctAnswer);
+            console.log(mainQuestion.passage.includes(mainQuestion.correctAnswer));
+            console.log({
+                correct: mainQuestion.correctAnswer,
+                passage: mainQuestion.passage,
+            });
+            console.log(
+                mainQuestion.passage.replace(
+                    mainQuestion.correctAnswer,
+                    `<span>${mainQuestion.correctAnswer}</span>`
+                )
+            );
             setDataField({
                 statement: mainQuestion.statement,
                 passage: correctAnswer,

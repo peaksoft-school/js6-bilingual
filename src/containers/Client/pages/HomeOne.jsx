@@ -7,7 +7,7 @@ import ClientContainer from "components/UI/ClientContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getQuestionForClient } from "store/slices/clientSlice";
+import { getQuestionForClient, clearData } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import ListBook from "../../../assets/images/BookList.svg";
@@ -18,15 +18,16 @@ function HomeOne() {
     const typeTest = useSelector((state) => state.testType.questions);
 
     useEffect(() => {
-        dispatch(getQuestionForClient());
+        dispatch(getQuestionForClient({ dispatch, clearData }));
     }, []);
 
     const TryTestClick = (id) => {
         navigate(`/home/tests/${id}`);
     };
+    console.log(typeTest);
     return (
         <ClientContainer>
-            {typeTest.map((item) => (
+            {typeTest?.map((item) => (
                 <StyledContainerHomeOne key={item.id}>
                     <img src={ListBook} alt="" />
                     <div>

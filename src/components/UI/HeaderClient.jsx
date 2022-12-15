@@ -2,42 +2,26 @@ import React from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
+import { Link, NavLink } from "react-router-dom";
+import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
 import styled from "styled-components";
 
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header() {
-    const navigate = useNavigate();
-
     const logOut = () => {
-        navigate("/");
         Cookies.remove("user");
+        window.location.pathname = "/";
     };
-
-    const MyresultGo = () => {};
 
     return (
         <HeaderGlav>
             <StyledHeader>
                 <StyledImage src={Logotip} />
                 <StyledHeaderClientRole>
-                    <ButtonStyled
-                        text="TESTS"
-                        variant="text"
-                        maxwidth="44px"
-                        maxheight="18px"
-                        fontSize="15px"
-                    />
-                    <ButtonStyled
-                        text="My results"
-                        variant="text"
-                        maxwidth="183px"
-                        maxheight="18px"
-                        fontSize="15px"
-                        onClick={MyresultGo}
-                    />
+                    <LinkItem to="/home/tests">TESTS</LinkItem>
+                    <LinkItem to={`/home/${CLIENT_ROUTES_URL.RESULTS}`}>MY RESULTS</LinkItem>
                     <ButtonStyled
                         text="LOG OUT"
                         variant="outlined"
@@ -55,6 +39,18 @@ function Header() {
 const HeaderGlav = styled.div`
     display: flex;
     justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+`;
+
+const LinkItem = styled(NavLink)`
+    &.active,
+    &:hover {
+        color: #3a10e5;
+    }
 `;
 const StyledHeader = styled.div`
     width: 1550px;
@@ -63,6 +59,7 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    box-shadow: 3px 0 7px #999;
 `;
 const StyledImage = styled.img`
     width: 235px;

@@ -20,6 +20,16 @@ ul {
     margin: 0;
 }
 
+.question-title {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+    text-transform: capitalize;
+    color: #4c4859;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 /* div[role="tooltip"] {
     font-size: 30px !important;
 } */

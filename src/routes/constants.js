@@ -23,6 +23,8 @@ export const ADMIN_CONST_URL = {
     QUESTIONTOTEST: "/question-to-test/",
     CREATE_QUESTION: "create-question",
     UPDATE_QUESTION: "update-question/:id",
+    SUBMITED_TEST: "submited-tests",
+    CHECK_TESTS: "/check/:test",
 };
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +32,8 @@ export const ADMIN_CONST_URL = {
 // ----------------------------------------------------------------------------------------------
 
 export const CLIENT_CONST_URL = {
-    "/": "/",
-    RESULTS: "/results",
+    "/": "/tests",
+    RESULTS: "results",
     TESTS: "/tests/:id",
     SELECT_TESTS: "/select-words-test",
 };

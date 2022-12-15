@@ -1,12 +1,13 @@
 import React from "react";
 
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import DeleteIcon from "assets/icons/Delete.svg";
 import styled from "styled-components";
 
 import IconButtonStyled from "./IconButtonStyled";
 
 export default function MainIdeaItem({ index, text, radioValue, onChange, onDelete, id }) {
+    console.log(radioValue);
     return (
         <Main>
             <FormControl>
@@ -21,7 +22,7 @@ export default function MainIdeaItem({ index, text, radioValue, onChange, onDele
                         <Actions>
                             <FormControlLabel value={text} control={<Radio />} />
                             <IconButtonStyled
-                                handleClick={() => onDelete(id, radioValue)}
+                                handleClick={() => onDelete(id, text)}
                                 fontSize="24px"
                                 Icon={DeleteIcon}
                             />

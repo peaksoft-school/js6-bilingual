@@ -11,16 +11,20 @@ const CountUpScroll = () => {
             <MainDiv>
                 <Div>
                     <h1>
-                        {counterOn && <CountUp start={1000} end={10000} duration={1} delay={0} />}+
+                        {counterOn && <CountUp start={9900} end={10000} duration={3} delay={0} />}+
                     </h1>
                 </Div>
                 <Div>
-                    <h1>{counterOn && <CountUp start={0} end={200} duration={1} delay={0} />}+</h1>
+                    <h1>
+                        {counterOn && <CountUp start={180} end={200} duration={3} delay={0} />}+
+                    </h1>
                 </Div>
                 <Div>
                     <h1>
                         <sup>$</sup>
-                        {counterOn && <CountUp start={0} end={0} duration={1} delay={0} />}
+                        {counterOn && (
+                            <CountUp start={900800} end={1000000} duration={3} delay={0} />
+                        )}
                     </h1>
                 </Div>
             </MainDiv>

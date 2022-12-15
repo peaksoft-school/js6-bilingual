@@ -30,18 +30,22 @@ const SignIn = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async (userInfo) => {
-        try {
-            await dispatch(asyncAuth(userInfo, REGISTRATION, navigate("/home"))).unwrap();
-            reset();
-        } catch (error) {
-            setErrorMessage(error.response);
-        }
-    };
-
     const makeIsHave = (data) => {
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");
+    };
+
+    const onSubmit = async (userInfo) => {
+        try {
+            const { data } = await baseAxios.post(REGISTRATION, userInfo);
+            dispatch(setUser(data));
+            setUserToCookies(data);
+            makeIsHave(data);
+            reset();
+        } catch (error) {
+            console.log(error);
+            setErrorMessage(error.response);
+        }
     };
 
     const provider = new GoogleAuthProvider();
@@ -159,7 +163,7 @@ const SignIn = () => {
                             rules={{
                                 required: "This field is required",
                                 minLength: {
-                                    value: 6,
+                                    value: 5,
                                     message: "Password lenght must be at least 6",
                                 },
                             }}

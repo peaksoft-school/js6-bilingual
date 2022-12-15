@@ -46,10 +46,7 @@ function Autoplay() {
 
 export default Autoplay;
 
-const SectionContainer = styled.section`
-    width: 1440px;
-    margin: 0 auto;
-`;
+const SectionContainer = styled.section``;
 
 const StyledTitle = styled.h1`
     width: 157px;

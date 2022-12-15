@@ -29,10 +29,15 @@ function ClientListenSelectWords({ question }) {
                     questionId: question.id,
                     optionAnswerId: prov,
                     answer: "",
+                    numberOfPlays: 0,
                 },
             })
         );
     }, [prov]);
+
+    React.useEffect(() => {
+        setProv([]);
+    }, [question.id]);
 
     const soundPlay = (src) => {
         const sound = new Howl({
@@ -53,7 +58,7 @@ function ClientListenSelectWords({ question }) {
 
     return (
         <StyledContainerCard>
-            <span>Select the real English words in this list</span>
+            <h4 className="question-title">{question.title}</h4>
             <StyledCardContainer>
                 {question.optionResponseList.map((item, index) => {
                     return (
@@ -90,29 +95,17 @@ function ClientListenSelectWords({ question }) {
     );
 }
 const StyledContainerCard = styled.div`
-    width: 730px;
-    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    span {
-        margin-left: 70px;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 28px;
-        line-height: 32px;
-        text-transform: capitalize;
-        color: #4c4859;
-    }
 `;
 const StyledCardContainer = styled.div`
-    width: 730px;
     margin-bottom: 60px;
-    margin-top: 50px;
-    margin-left: 90px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 77px;
 `;
 const StyledMiniContainer = styled.div`
     width: 46px;

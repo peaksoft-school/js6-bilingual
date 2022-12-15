@@ -58,6 +58,7 @@ function TypeRecord({ data, setIsErrorInput }) {
         } else if (req === "update") {
             // console.log("update");
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            navigate(-1);
         }
     };
     if (isUpdatePage && mainQuestion) {
@@ -72,7 +73,9 @@ function TypeRecord({ data, setIsErrorInput }) {
                 <InputUi value={answer} handleChange={(e) => setAnswer(e.target.value)} />
             </Main>
             <StyledContainerMiniMiniBoss>
-                <ButtonUi variant="outlined">GO BACK</ButtonUi>
+                <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                    GO BACK
+                </ButtonUi>
                 <ButtonUi
                     onClick={() => saveData(isUpdatePage ? "update" : "save")}
                     variant="contained"
