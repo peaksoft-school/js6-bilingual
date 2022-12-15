@@ -24,11 +24,15 @@ function SubmitedResult() {
 
     const navigate = useNavigate();
 
-    function GoCheck(idx) {
+    function goCheck(idx) {
         navigate(`/admin/check/${idx}`);
     }
     const getData = () => {
-        getViewResults().then((res) => setData(res));
+        try {
+            return getViewResults().then((res) => setData(res));
+        } catch (error) {
+            return error;
+        }
     };
     async function deleteCard(Id) {
         await deleteViewResults(Id);
@@ -69,25 +73,13 @@ function SubmitedResult() {
                                             }`}
                                         </span>
                                         <span>{item.testTitle}</span>
-                                        <span
-                                            style={{
-                                                color:
-                                                    item.status === "EVALUATED"
-                                                        ? "#2AB930"
-                                                        : "#F61414",
-                                            }}>
+                                        <StyledTextColor bgColor={item.status}>
                                             {item.status}
-                                        </span>
-                                        <span
-                                            style={{
-                                                color:
-                                                    item.status === "EVALUATED"
-                                                        ? "#2AB930"
-                                                        : "#F61414",
-                                            }}>
+                                        </StyledTextColor>
+                                        <StyledTextColor bgColor={item.status}>
                                             {item.finalScore}
-                                        </span>
-                                        <span onClick={() => GoCheck(item.id)}>
+                                        </StyledTextColor>
+                                        <span onClick={() => goCheck(item.id)}>
                                             <IconButtonStyled
                                                 Icon={
                                                     item.status === "EVALUATED"
@@ -206,7 +198,7 @@ const StyledAnswer = styled.div`
             margin-left: 108px;
         }
         &:nth-child(5) {
-            width: 95px;
+            width: 100px;
             margin-left: 80px;
         }
         &:nth-child(6) {
@@ -215,7 +207,7 @@ const StyledAnswer = styled.div`
         }
         &:nth-child(7) {
             width: 20px;
-            margin-left: 84px;
+            margin-left: 70px;
             cursor: pointer;
         }
         &:nth-child(8) {
@@ -224,5 +216,8 @@ const StyledAnswer = styled.div`
             cursor: pointer;
         }
     }
+`;
+const StyledTextColor = styled.span`
+    color: ${(props) => (props.bgColor === "EVALUATED" ? "#2AB930" : "#F61414")};
 `;
 export default SubmitedResult;

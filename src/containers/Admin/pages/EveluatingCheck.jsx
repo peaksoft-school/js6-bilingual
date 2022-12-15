@@ -49,24 +49,13 @@ function EveluatingCheck() {
                 <StyledContainerTwo>
                     <StyledText>
                         Final Score:
-                        <StyledInside
-                            style={{
-                                color: state.finalScore === "NOT_EVELAUTED" ? "#2AB930" : "#F61414",
-                            }}>
-                            {state.finalScore}
-                        </StyledInside>
+                        <StyledInside bgColor={state.finalScore}>{state.finalScore}</StyledInside>
                     </StyledText>
                     <StyledText>
                         Final Status:
-                        <StyledInside
-                            style={{
-                                color:
-                                    state.finalStatus === "NOT_EVELAUTED" ? "#2AB930" : "#F61414",
-                            }}>
-                            {state.finalStatus}
-                        </StyledInside>
+                        <StyledInside bgColor={state.finalScore}>{state.finalStatus}</StyledInside>
                     </StyledText>
-                    <StyledInputEmail placeholder="SEND RESULTS TO USER’S EMAIL" />
+                    <StyledButtonEmail>SEND RESULTS TO USER’S EMAIL</StyledButtonEmail>
                 </StyledContainerTwo>
             </StyledContainer>
             <StyledContainerResults>
@@ -82,12 +71,9 @@ function EveluatingCheck() {
                             <span>{index + 1}</span>
                             <span>{item.questionTitle}</span>
                             <span>{item.score} out of 10</span>
-                            <span
-                                style={{
-                                    color: item.status === "EVELUATED" ? "#2AB930" : "#F61414",
-                                }}>
+                            <StyledTextColor bgColor={item.status} style={{}}>
                                 {item.status}
-                            </span>
+                            </StyledTextColor>
                             <span>
                                 <IconButtonStyled
                                     handleClick={() =>
@@ -118,6 +104,9 @@ const StyledContainerMain = styled.div`
 const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between;
+`;
+const StyledTextColor = styled.div`
+    color: ${(props) => (props.bgColor === "EVELUATED" ? "#2AB930" : "#F61414")};
 `;
 const StyledContainerResults = styled.div`
     width: 900px;
@@ -162,6 +151,10 @@ const StyledCardTests = styled.div`
             width: 240px;
         }
         &:nth-child(5) {
+            width: 130px;
+            height: 20px;
+            display: flex;
+            justify-content: end;
         }
     }
 `;
@@ -191,15 +184,19 @@ const StyledHeaderResults = styled.div`
         }
     }
 `;
-const StyledInputEmail = styled.input`
+const StyledButtonEmail = styled.button`
     padding: 13px 24px;
-    gap: 8px;
-    width: 271px;
+    width: 291px;
     height: 42px;
+    font-size: 14px;
     background: #ffffff;
-    outline: none;
     border: 2px solid #c4c4c4;
     border-radius: 8px;
+    cursor: pointer;
+    :hover {
+        border: 2px solid rgba(58, 16, 229, 1);
+        color: rgba(58, 16, 229, 1);
+    }
 `;
 const StyledText = styled.span`
     font-weight: 500;
@@ -209,6 +206,6 @@ const StyledText = styled.span`
 const StyledInside = styled.span`
     font-weight: 400;
     line-height: 18px;
-    color: #4c4859;
+    color: ${(props) => (props.bgColor === "EVELUATED" ? "#2AB930" : "#F61414")};
 `;
 export default EveluatingCheck;
