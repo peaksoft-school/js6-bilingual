@@ -20,7 +20,7 @@ function SelectWord({
     userOptionsAnswer,
 }) {
     console.log(testTitle);
-    return <div>{testTitle}</div>;
+    return <div>title</div>;
 }
 
 export default SelectWord;
