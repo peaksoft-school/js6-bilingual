@@ -70,6 +70,7 @@ export default function Highlight({ data, setIsErrorInput }) {
             correctAnswer: dataField.correctAnswer,
             numberOfReplays: 10,
             minNumberOfWords: 10,
+            optionRequests: [],
             content: "string",
         };
         if (req === "save") {
@@ -77,7 +78,11 @@ export default function Highlight({ data, setIsErrorInput }) {
             dispatch(sendingQuestion(dataQuestion));
             navigate(-1);
         } else if (req === "update") {
-            dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
+            dispatch(
+                updateQuestionWithId(
+                    (data = { id, dataInfo: { ...dataQuestion, willDelete: [0], willUpdate: [0] } })
+                )
+            );
             navigate(-1);
         }
     };

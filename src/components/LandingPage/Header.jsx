@@ -58,7 +58,7 @@ function Header({ Choice, HeaderBg }) {
                 ) : (
                     <StyledHeaderClientRole>
                         <LinkItem to={`/admin${ADMIN_ROUTES_URL.TEST}`}>TEST</LinkItem>
-                        <LinkItem to={ADMIN_ROUTES_URL.SUBMITED_TEST}>SUBMITED TEST</LinkItem>
+                        <LinkItem to={ADMIN_ROUTES_URL.SUBMITED_TEST}>SUBMITED RESULTS</LinkItem>
                         <ButtonStyled
                             text="LOG OUT"
                             variant="outlined"
@@ -76,6 +76,7 @@ function Header({ Choice, HeaderBg }) {
 
 const HeaderAnimation = keyframes`
 to{
+    box-shadow: 3px 0 7px #999;
     background-color: white;
 }
 `;

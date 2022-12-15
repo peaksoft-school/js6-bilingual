@@ -33,6 +33,10 @@ export default function CompleteTest() {
             alert("Some thing went wroing");
         }
     };
+    const handleTryAgain = () => {
+        dispatch(clearData());
+        navigate(-1);
+    };
     return isLoad ? (
         <Loader />
     ) : (
@@ -58,7 +62,12 @@ export default function CompleteTest() {
                 </Container>
 
                 <Footer>
-                    <ButtonUi maxwidth="143px" fontSize="14px" maxheight="42px" variant="outlined">
+                    <ButtonUi
+                        onClick={handleTryAgain}
+                        maxwidth="143px"
+                        fontSize="14px"
+                        maxheight="42px"
+                        variant="outlined">
                         Try again
                     </ButtonUi>
                     <ButtonUi

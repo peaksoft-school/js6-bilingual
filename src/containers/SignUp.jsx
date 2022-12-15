@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
 import { auth } from "services/firebase";
 import { setUserToCookies } from "services/saveUser";
-import { asyncAuth, setUser } from "store/slices/authSlice";
+import { setUser } from "store/slices/authSlice";
 import styled from "styled-components";
 import { REGISTRATION } from "utils/constants/api";
 
@@ -29,6 +29,7 @@ const SignIn = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     const makeIsHave = (data) => {
         if (data?.role === UsersRole.client) navigate("/home");
         if (data?.role === UsersRole.admin) navigate("/admin");

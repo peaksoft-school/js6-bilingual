@@ -64,7 +64,7 @@ export default function BestTitle({ data, setIsErrorInput }) {
         if (req === "save") {
             setMainQuestion(dataQuestion);
             dispatch(sendingQuestion(dataQuestion));
-            // navigate(-1);
+            navigate(-1);
         } else if (req === "update") {
             dispatch(
                 updateQuestionWithId(
@@ -74,7 +74,7 @@ export default function BestTitle({ data, setIsErrorInput }) {
                     })
                 )
             );
-            // navigate(-1);
+            navigate(-1);
         }
     };
 

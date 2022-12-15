@@ -49,6 +49,8 @@ function SelectEnglishWords({ data, setIsErrorInput }) {
             setDataCard(mainQuestion.optionResponseList);
         }, []);
     }
+
+    console.log(id);
     const saveData = async (req) => {
         if (validateInput(data, setIsErrorInput)) return;
         const min = data.duration.split(":")[0];

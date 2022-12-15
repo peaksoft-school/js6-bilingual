@@ -58,12 +58,10 @@ const StyledHeaderContainerText = styled.div`
     left: 80px;
 `;
 const StyledHeaderText = styled.h1`
-    font-family: Gilroy;
     font-weight: 700;
     font-size: 60px;
 `;
 const StyledHeaderLiderText = styled.h1`
-    font-family: Gilroy;
     width: 295px;
     height: 75px;
     font-weight: 900;
