@@ -22,16 +22,22 @@ export default function CompleteTest() {
     const dispatch = useDispatch();
 
     const handleDone = async () => {
+        console.log(resulTests);
         setIsLoad(true);
 
         try {
             const res = await baseAxios.post("/test/pass-test", resulTests);
             setIsLoad(false);
             navigate(`/home/${CLIENT_ROUTES_URL.RESULTS}`);
+            dispatch(clearData());
         } catch (error) {
             setIsLoad(false);
             alert("Some thing went wroing");
         }
+    };
+    const handleTryAgain = () => {
+        dispatch(clearData());
+        navigate(-1);
     };
     return isLoad ? (
         <Loader />
@@ -58,7 +64,12 @@ export default function CompleteTest() {
                 </Container>
 
                 <Footer>
-                    <ButtonUi maxwidth="143px" fontSize="14px" maxheight="42px" variant="outlined">
+                    <ButtonUi
+                        onClick={handleTryAgain}
+                        maxwidth="143px"
+                        fontSize="14px"
+                        maxheight="42px"
+                        variant="outlined">
                         Try again
                     </ButtonUi>
                     <ButtonUi

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { NotFound } from "containers";
+import { CheckMain } from "containers/Admin/check/CheckMain";
 
 import AdminTest from "containers/Admin/pages/AdminTest";
 
@@ -49,8 +50,13 @@ export const ADMIN_ROUTES_CONFIG = [
         element: <SubmitedResult />,
     },
     {
+<<<<<<< HEAD
         path: ADMIN_ROUTES_URL.CHECK,
         element: <EveluatingCheck />,
+=======
+        path: ADMIN_ROUTES_URL.CHECK_TESTS,
+        element: <CheckMain />,
+>>>>>>> 773fc4abb7744d5b03e466de3da4e172031af823
     },
     {
         path: "*",

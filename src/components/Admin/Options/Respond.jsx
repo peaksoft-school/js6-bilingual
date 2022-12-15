@@ -98,7 +98,9 @@ function Respond({ data, setIsErrorInput }) {
                 </NumOfReplace>
             </StyledContainer>
             <StyledContainerMiniMiniBoss>
-                <ButtonUi variant="outlined">GO BACK</ButtonUi>
+                <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                    GO BACK
+                </ButtonUi>
                 <ButtonUi
                     onClick={() => saveData(isUpdatePage ? "update" : "save")}
                     variant="contained"

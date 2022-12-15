@@ -9,7 +9,11 @@ const {
     CREATE_QUESTION,
     UPDATE_QUESTION,
     SUBMITED_TEST,
+<<<<<<< HEAD
     CHECK,
+=======
+    CHECK_TESTS,
+>>>>>>> 773fc4abb7744d5b03e466de3da4e172031af823
 } = ADMIN_CONST_URL;
 
 export const ADMIN_ROUTES_URL = {
@@ -22,5 +26,9 @@ export const ADMIN_ROUTES_URL = {
     CREATE_QUESTION: `test-:id/${CREATE_QUESTION}`,
     UPDATE_QUESTION,
     SUBMITED_TEST,
+<<<<<<< HEAD
     CHECK,
+=======
+    CHECK_TESTS,
+>>>>>>> 773fc4abb7744d5b03e466de3da4e172031af823
 };

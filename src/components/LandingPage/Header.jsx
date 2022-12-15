@@ -76,6 +76,7 @@ function Header({ Choice, HeaderBg }) {
 
 const HeaderAnimation = keyframes`
 to{
+    box-shadow: 3px 0 7px #999;
     background-color: white;
 }
 `;
