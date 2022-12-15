@@ -54,10 +54,6 @@ const StyledContainerRespond = styled.div`
         }
     }
 `;
-const StyledTextTitle = styled.div`
-    font-size: 28px;
-    color: #4c4859;
-`;
 const StyledContaiter = styled.div`
     margin-top: 50px;
     margin-bottom: 10px;

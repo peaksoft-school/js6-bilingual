@@ -7,7 +7,6 @@ import styled from "styled-components";
 import IconButtonStyled from "./IconButtonStyled";
 
 export default function MainIdeaItem({ index, text, radioValue, onChange, onDelete, id }) {
-    console.log(radioValue);
     return (
         <Main>
             <FormControl>

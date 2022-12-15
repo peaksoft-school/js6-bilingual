@@ -3,7 +3,7 @@ import React from "react";
 import ButtonStyled from "components/UI/ButtonUi";
 import Cookies from "js-cookie";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
 import styled from "styled-components";
 
