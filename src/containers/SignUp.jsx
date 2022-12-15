@@ -3,10 +3,16 @@ import React from "react";
 import { Box } from "@mui/system";
 import { baseAxios } from "api/axios-config";
 import { InputUi, CheckboxUi, ButtonUi, PasswordInputUi } from "components/UI";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutesUrl, UsersRole } from "routes/constants";
+<<<<<<< HEAD
+=======
+import { auth } from "services/firebase";
+>>>>>>> 9fa367474ee8de045564235df6c6578f05f7e720
 import { setUserToCookies } from "services/saveUser";
 import { asyncAuth, setUser } from "store/slices/authSlice";
 import styled from "styled-components";
@@ -42,6 +48,29 @@ const SignIn = () => {
             console.log(error);
             setErrorMessage(error.response);
         }
+    };
+
+    const makeIsHave = (data) => {
+        if (data?.role === UsersRole.client) navigate("/home");
+        if (data?.role === UsersRole.admin) navigate("/admin");
+    };
+
+    const provider = new GoogleAuthProvider();
+
+    const signInWithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const success = (data) => {
+                    dispatch(setUser(data));
+                    setUserToCookies(data);
+                    makeIsHave(data);
+                    return data;
+                };
+                baseAxios
+                    .post(`/auth/authenticate/google?tokenId=${result.user.accessToken}`)
+                    .then(({ data }) => success(data));
+            })
+            .catch((error) => console.log(error));
     };
 
     return (
@@ -205,12 +234,12 @@ const SignIn = () => {
                         />
                     </form>
                     <SignInWithGoogleBox>
-                        <Link to="sign-up">
+                        <div onClick={signInWithGoogle}>
                             <span>
                                 <img src={google} alt="google" />
                             </span>
                             <span>SIGN UP WITH GOOGLE</span>
-                        </Link>
+                        </div>
                     </SignInWithGoogleBox>
                     <IsAccaunt>
                         ALREADY HAVE AN ACCOUNT? <Link to={RoutesUrl.SignIn}> LOG IN</Link>
@@ -273,7 +302,7 @@ const SignInWithGoogleBox = styled.div`
     text-align: center;
     margin-top: 34px;
     margin-bottom: 24px;
-    a {
+    div {
         cursor: pointer;
         padding: 14px 20px;
         border: 1px solid #bdbdbd;
