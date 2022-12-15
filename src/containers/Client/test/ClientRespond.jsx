@@ -12,9 +12,8 @@ export default function ClientRespond({ question }) {
     const valueLength = value.split(" ").length - 1;
     const dispatch = useDispatch();
     const { id } = useParams();
-    React.useEffect(() => {
-        setValue("");
-    }, [question.id]);
+    const isChange = valueLength >= question.minNumberOfWords;
+
     React.useEffect(() => {
         dispatch(
             addAnswer({
@@ -26,7 +25,7 @@ export default function ClientRespond({ question }) {
                 },
             })
         );
-    }, [valueLength >= question.minNumberOfWords]);
+    }, [isChange]);
     return (
         <StyledContainerRespond>
             <h4 className="question-title">{question.title}</h4>

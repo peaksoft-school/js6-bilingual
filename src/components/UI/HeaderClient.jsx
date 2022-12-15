@@ -20,7 +20,7 @@ function Header() {
             <StyledHeader>
                 <StyledImage src={Logotip} />
                 <StyledHeaderClientRole>
-                    <LinkItem to="/home">TESTS</LinkItem>
+                    <LinkItem to="/home/tests">TESTS</LinkItem>
                     <LinkItem to={`/home/${CLIENT_ROUTES_URL.RESULTS}`}>MY RESULTS</LinkItem>
                     <ButtonStyled
                         text="LOG OUT"
@@ -59,6 +59,7 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    box-shadow: 3px 0 7px #999;
 `;
 const StyledImage = styled.img`
     width: 235px;

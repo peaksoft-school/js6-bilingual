@@ -27,3 +27,10 @@ export function convertHMS(value) {
     }
     return `${minutes}:${seconds}`;
 }
+
+export function getDate(time) {
+    const Split = time.split("T");
+    const date = Split[0].split("-").join(".");
+    const Hour = Split[1].slice(0, 5);
+    return [Hour, date];
+}

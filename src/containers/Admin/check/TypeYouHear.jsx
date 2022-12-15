@@ -6,31 +6,63 @@ import styled from "styled-components";
 
 import PlayRadio from "../../../assets/icons/PlayAudio.svg";
 
-function TypeYouHear() {
+function TypeYouHear({
+    id,
+    correctAnswer,
+    duration,
+    fullName,
+    testTitle,
+    link,
+    minNumberOfReplays,
+    minNumberOfWords,
+    options,
+    passage,
+    questionTitle,
+    questionType,
+    scoreOfQuestion,
+    statement,
+    userAnswer,
+    userNumberOfPlays,
+    userOptionsAnswer,
+}) {
+    const audioPlay = () => {
+        const audio = new Howl({
+            src: link,
+            html5: true,
+            onend: () => {
+                setIsAudioStop(true);
+            },
+        });
+        if (dataField.file) {
+            setIsAudioStop(false);
+        }
+        if (isAudioStop) {
+            audio.play();
+        }
+    };
     return (
         <div>
             <Audio>
-                <ButtonUi variant="contained">
+                <ButtonUi onClick={audioPlay} variant="contained">
                     <img src={PlayRadio} alt="" />
                     PLAY AUDIO
                 </ButtonUi>
-                <p>Correct ansver: “Hello, how is it going?”</p>
+                <p>Correct ansver: {correctAnswer}</p>
             </Audio>
             <Answer>
                 <h3> User`s Answer</h3>
                 <BlText>
                     <span>Entered Statement: </span>
-                    <span>“Hello, how is it going?”</span>
+                    <span>{correctAnswer}</span>
                 </BlText>
                 <BlText>
                     <span>Number of plays: </span>
-                    <span>1</span>
+                    <span>{userNumberOfPlays}</span>
                 </BlText>
             </Answer>
         </div>
     );
 }
-
 export default TypeYouHear;
 const Audio = styled.div`
     display: flex;

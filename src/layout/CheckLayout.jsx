@@ -1,12 +1,30 @@
+import { questionType } from "constants/questionType";
+
 import React from "react";
 
+import { baseAxios } from "api/axios-config";
 import Container from "components/CustomUi/Container";
 
 import { ButtonUi } from "components/UI";
+import { useNavigate } from "react-router-dom";
+import { convertHMS, formatterQuestionType } from "services/format";
 import styled from "styled-components";
 
-export default function CheckLayout({ children }) {
-    const data = {};
+export default function CheckLayout({ children, data }) {
+    const [score, setScore] = React.useState(+data.scoreOfQuestion);
+    const navigate = useNavigate();
+    const handleSave = async () => {
+        try {
+            const res = await baseAxios.post(`/result/evaluate-client-answer`, {
+                questionId: data.id,
+                scoreOfQuestion: +score,
+            });
+            console.log(res);
+            return navigate(-1);
+        } catch (error) {
+            return error;
+        }
+    };
     return (
         <Container>
             <StyledMain>
@@ -14,11 +32,11 @@ export default function CheckLayout({ children }) {
                     <AboutUser>
                         <BlText>
                             <span>User: </span>
-                            <span>Askarov Marat</span>
+                            <span>{data.fullName}</span>
                         </BlText>
                         <BlText>
                             <span>Test: </span>
-                            <span>Test number 1</span>
+                            <span>{data.testTitle}</span>
                         </BlText>
                     </AboutUser>
                     <AboutTest>
@@ -27,15 +45,15 @@ export default function CheckLayout({ children }) {
                             <BoxItem>
                                 <BlText>
                                     <span>Question Title: </span>
-                                    <span>Select real English words </span>
+                                    <span>{data.questionTitle}</span>
                                 </BlText>
                                 <BlText>
                                     <span>Duration (in minutes): </span>
-                                    <span>00:30 </span>
+                                    <span>{convertHMS(data.duration)}</span>
                                 </BlText>
                                 <BlText>
                                     <span>Question Type: </span>
-                                    <span>Select real English words </span>
+                                    <span>{formatterQuestionType(data.questionType)}</span>
                                 </BlText>
                             </BoxItem>
                         </div>
@@ -43,14 +61,29 @@ export default function CheckLayout({ children }) {
                             <h3>Evaluation</h3>
                             <Score>
                                 <span>Score: </span>
+                                {data.questionType === questionType.LISTEN_WORDS ||
+                                data.questionType === questionType.SELECT_WORDS ? (
+                                    <>
+                                        <span>(1-10)</span>
+                                        <br />
+                                        <input
+                                            value={score}
+                                            onChange={(e) => setScore(e.target.value)}
+                                            type="number"
+                                        />
+                                    </>
+                                ) : (
+                                    data.scoreOfQuestion
+                                )}
                             </Score>
-                            <input type="number" />
                         </BoxScore>
                     </AboutTest>
-                    <Wrapper>{React.cloneElement(children, { data })}</Wrapper>
+                    <Wrapper>{React.cloneElement(children, data)}</Wrapper>
                     <Actions>
-                        <ButtonUi variant="outlined">GO BACK</ButtonUi>
-                        <ButtonUi variant="contained" color="success">
+                        <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                            GO BACK
+                        </ButtonUi>
+                        <ButtonUi onClick={handleSave} variant="contained" color="success">
                             SAVE
                         </ButtonUi>
                     </Actions>
