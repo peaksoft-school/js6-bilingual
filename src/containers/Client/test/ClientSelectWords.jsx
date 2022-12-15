@@ -86,14 +86,6 @@ function SelectEnglishWords({ question }) {
 
 export default SelectEnglishWords;
 
-const StyledP = styled.p`
-    text-align: center;
-    font-weight: 400;
-    font-size: 28px;
-    color: #4c4859;
-    margin: 0 0 50px 0;
-`;
-
 const StyledWrapper = styled.div`
     width: 813px;
     display: flex;

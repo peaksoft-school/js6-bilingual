@@ -1,7 +1,7 @@
 import React from "react";
 
 import TextArea from "components/UI/TextArea";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
@@ -9,9 +9,8 @@ import styled from "styled-components";
 export default function ClientDescribe({ question }) {
     const dispatch = useDispatch();
     const [text, setText] = React.useState("");
-    const questionsAnswers = useSelector((inner) => inner.testType.answer.questionsAnswers);
     const { id } = useParams();
-    console.log(questionsAnswers);
+
     React.useEffect(() => {
         dispatch(
             addAnswer({
@@ -27,6 +26,7 @@ export default function ClientDescribe({ question }) {
     React.useEffect(() => {
         setText("");
     }, [question.id]);
+
     return (
         <>
             <StyledForTitle>

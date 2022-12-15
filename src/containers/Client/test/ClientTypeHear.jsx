@@ -48,10 +48,11 @@ export default function ClientTypeHear({ question }) {
             })
         );
     }, [value]);
-    console.log(value);
+
     React.useEffect(() => {
         setValue("");
     }, [question.id]);
+
     return (
         <StyledContainer>
             <h4 className="question-title">{question.title}</h4>

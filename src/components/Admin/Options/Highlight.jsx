@@ -34,7 +34,7 @@ export default function Highlight({ data, setIsErrorInput }) {
                 `<span>${pieceOfAnswer}</span>`
             );
         }
-        console.log(correctAnswer);
+
         setDataField((prev) => {
             return {
                 ...prev,
@@ -87,17 +87,7 @@ export default function Highlight({ data, setIsErrorInput }) {
                 mainQuestion.correctAnswer,
                 `<span>${mainQuestion.correctAnswer}</span>`
             );
-            console.log(mainQuestion.passage.includes(mainQuestion.correctAnswer));
-            console.log({
-                correct: mainQuestion.correctAnswer,
-                passage: mainQuestion.passage,
-            });
-            console.log(
-                mainQuestion.passage.replace(
-                    mainQuestion.correctAnswer,
-                    `<span>${mainQuestion.correctAnswer}</span>`
-                )
-            );
+
             setDataField({
                 statement: mainQuestion.statement,
                 passage: correctAnswer,

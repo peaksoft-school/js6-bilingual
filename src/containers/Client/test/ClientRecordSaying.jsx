@@ -37,7 +37,6 @@ export default function ClientRecordSaying({ question }) {
         SpeechRecognition.stopListening();
     }, [question.id]);
 
-    console.log(transcript);
     return (
         <Main>
             <Box>
@@ -81,7 +80,6 @@ const Row = styled.div`
 `;
 const Main = styled.div``;
 const Box = styled.div``;
-const Title = styled.h2``;
 const Actions = styled.div`
     display: flex;
     justify-content: space-between;
@@ -109,9 +107,4 @@ const Point = styled.span`
                   animation: ${PointAnimate} 1.2s linear infinite;
               `
             : ""}
-`;
-const StyledLine = styled.div`
-    border: 1.53px solid #d4d0d0;
-    height: 1px;
-    margin: 60px 0 32px 0;
 `;

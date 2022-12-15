@@ -113,14 +113,13 @@ export default function BestTitle({ data, setIsErrorInput }) {
         }
     };
     const handleDelete = (idx, option) => {
-        console.log({ idx, option });
         if (idx) {
             dispatch(deleteOption(idx));
         }
         setDataCard(dataCard.filter((item) => item.option !== option));
         setNewCard(newCard.filter((item) => item.option !== option));
     };
-    console.log(updateOptionsId);
+
     return (
         <Main>
             <ModalAdminLayot
