@@ -1,12 +1,27 @@
 import React from "react";
 
+import { baseAxios } from "api/axios-config";
 import Container from "components/CustomUi/Container";
 
 import { ButtonUi } from "components/UI";
+import { useNavigate } from "react-router-dom";
+import { convertHMS, formatterQuestionType } from "services/format";
 import styled from "styled-components";
 
-export default function CheckLayout({ children }) {
-    const data = {};
+export default function CheckLayout({ children, data }) {
+    const [score, setScore] = React.useState(null);
+    const navigate = useNavigate();
+    const handleSave = async () => {
+        try {
+            await baseAxios.post(`/result/evaluate-client-answer`, {
+                questionId: data.id,
+                scoreOfQuestion: score,
+            });
+            return navigate(-1);
+        } catch (error) {
+            return error;
+        }
+    };
     return (
         <Container>
             <StyledMain>
@@ -14,11 +29,11 @@ export default function CheckLayout({ children }) {
                     <AboutUser>
                         <BlText>
                             <span>User: </span>
-                            <span>Askarov Marat</span>
+                            <span>{data.fullName}</span>
                         </BlText>
                         <BlText>
                             <span>Test: </span>
-                            <span>Test number 1</span>
+                            <span>{data.testTitle}</span>
                         </BlText>
                     </AboutUser>
                     <AboutTest>
@@ -27,15 +42,15 @@ export default function CheckLayout({ children }) {
                             <BoxItem>
                                 <BlText>
                                     <span>Question Title: </span>
-                                    <span>Select real English words </span>
+                                    <span>{data.questionTitle}</span>
                                 </BlText>
                                 <BlText>
                                     <span>Duration (in minutes): </span>
-                                    <span>00:30 </span>
+                                    <span>{convertHMS(data.duration)}</span>
                                 </BlText>
                                 <BlText>
                                     <span>Question Type: </span>
-                                    <span>Select real English words </span>
+                                    <span>{formatterQuestionType(data.questionType)}</span>
                                 </BlText>
                             </BoxItem>
                         </div>
@@ -44,13 +59,19 @@ export default function CheckLayout({ children }) {
                             <Score>
                                 <span>Score: </span>
                             </Score>
-                            <input type="number" />
+                            <input
+                                value={score}
+                                onChange={(e) => setScore(e.target.value)}
+                                type="number"
+                            />
                         </BoxScore>
                     </AboutTest>
-                    <Wrapper>{React.cloneElement(children, { data })}</Wrapper>
+                    <Wrapper>{React.cloneElement(children, data)}</Wrapper>
                     <Actions>
-                        <ButtonUi variant="outlined">GO BACK</ButtonUi>
-                        <ButtonUi variant="contained" color="success">
+                        <ButtonUi onClick={() => navigate(-1)} variant="outlined">
+                            GO BACK
+                        </ButtonUi>
+                        <ButtonUi handleSave={handleSave} variant="contained" color="success">
                             SAVE
                         </ButtonUi>
                     </Actions>

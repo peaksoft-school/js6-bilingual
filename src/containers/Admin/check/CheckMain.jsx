@@ -24,9 +24,10 @@ export const CheckMain = () => {
     React.useEffect(() => {
         request();
     }, []);
+    console.log(data);
     return !data ? (
         <Loader />
     ) : (
-        <CheckLayout>{React.cloneElement(getComponent(data.questionType), data)}</CheckLayout>
+        <CheckLayout data={data}>{getComponent(data.questionType)}</CheckLayout>
     );
 };
