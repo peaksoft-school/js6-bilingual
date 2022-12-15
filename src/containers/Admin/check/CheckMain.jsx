@@ -20,7 +20,7 @@ export const CheckMain = () => {
             return error;
         }
     };
-    console.log(data);
+    // console.log(data);
     React.useEffect(() => {
         request();
     }, []);
