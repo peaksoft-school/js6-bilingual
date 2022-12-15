@@ -72,6 +72,7 @@ const Row = styled.div`
 `;
 const Left = styled.div`
     max-width: 555px;
+    width: 100%;
     border: 1px solid #d4d0d0;
     border-radius: 8px;
 

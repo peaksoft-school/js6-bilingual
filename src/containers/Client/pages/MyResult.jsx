@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 
+import { baseAxios } from "api/axios-config";
 import ClientContainer from "components/UI/ClientContainer";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { getDate } from "services/format";
 import { resultTestsSlice } from "store/slices/resultTestsSlice";
 
 import styled from "styled-components";
@@ -16,9 +18,18 @@ function MyResult() {
     const tests = useSelector((state) => state.tests.resultTests);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const getData = () => {
         dispatch(resultTestsSlice());
+    };
+
+    useEffect(() => {
+        getData();
     }, []);
+
+    const handleDelete = async (id) => {
+        await baseAxios.delete(`result/${id}`);
+        getData();
+    };
 
     return (
         <ClientContainer width="220px">
@@ -41,7 +52,11 @@ function MyResult() {
                             return (
                                 <StyledAnswer key={item.id}>
                                     <span>{item.id}</span>
-                                    <span>{item.dateOfSubmission}</span>
+                                    <span>
+                                        {getDate(item.dateOfSubmission)[0]}
+                                        <br />
+                                        {getDate(item.dateOfSubmission)[1]}
+                                    </span>
                                     <span>{item.testTitle}</span>
                                     <span
                                         style={{
@@ -57,7 +72,7 @@ function MyResult() {
                                         }}>
                                         {item.finalScore}
                                     </span>
-                                    <span>
+                                    <span onClick={() => handleDelete(item.id)}>
                                         <img src={DeleteIcon} alt="Delete" />
                                     </span>
                                 </StyledAnswer>
@@ -104,70 +119,61 @@ const StyledHeading = styled.div`
     span {
         &:nth-child(1) {
             width: 9px;
-            height: 18px;
             margin-left: 15px;
         }
         &:nth-child(2) {
             width: 125px;
-            height: 17px;
             margin-left: 32px;
         }
         &:nth-child(3) {
             width: 74px;
-            height: 18px;
             margin-left: 97px;
         }
         &:nth-child(4) {
             width: 45px;
-            height: 18px;
             margin-left: 220px;
         }
         &:nth-child(5) {
             width: 46px;
-            height: 19px;
             margin-left: 144px;
         }
     }
 `;
 const StyledAnswer = styled.div`
     width: 943px;
-    height: 66px;
     display: flex;
     align-items: center;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
     font-size: 15px;
     margin-top: 15px;
+    padding: 15px 0;
+
     span {
         &:nth-child(1) {
             width: 9px;
-            height: 18px;
             margin-left: 16px;
         }
         &:nth-child(2) {
             width: 77px;
-            height: 36px;
             margin-left: 32px;
         }
         &:nth-child(3) {
             width: 151px;
-            height: 18px;
             margin-left: 145px;
         }
         &:nth-child(4) {
             width: 95px;
-            height: 18px;
             margin-left: 143px;
         }
         &:nth-child(5) {
             width: 9px;
-            height: 19px;
             margin-left: 94px;
         }
         &:nth-child(6) {
             width: 9px;
-            height: 19px;
             margin-left: 130px;
+            cursor: pointer;
         }
     }
 `;

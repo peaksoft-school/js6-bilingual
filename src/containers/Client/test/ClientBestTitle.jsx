@@ -23,7 +23,7 @@ export default function ClientMainIdea({ question }) {
                 options: {
                     questionId: question.id,
                     optionAnswerId: radioValue,
-                    answer: "<x></x>",
+                    answer: "",
                 },
             })
         );
