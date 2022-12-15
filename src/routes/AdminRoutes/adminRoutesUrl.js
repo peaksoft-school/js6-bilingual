@@ -10,7 +10,7 @@ const {
     UPDATE_QUESTION,
     SUBMITED_TEST,
     CHECK,
-    CHECK_TESTS,
+    CHECK_ANSWER,
 } = ADMIN_CONST_URL;
 
 export const ADMIN_ROUTES_URL = {
@@ -24,5 +24,5 @@ export const ADMIN_ROUTES_URL = {
     UPDATE_QUESTION,
     SUBMITED_TEST,
     CHECK,
-    CHECK_TESTS,
+    CHECK_ANSWER,
 };

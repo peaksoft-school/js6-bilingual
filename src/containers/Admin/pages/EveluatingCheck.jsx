@@ -4,7 +4,7 @@ import { getViewResultsQuestions } from "api/view-results-questions";
 import IconButtonStyled from "components/UI/IconButtonStyled";
 import Loader from "components/UI/Loader";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDate } from "services/format";
 import styled from "styled-components";
 
@@ -14,13 +14,18 @@ import EyeIcon from "../../../assets/icons/eye.svg";
 function EveluatingCheck() {
     const [state, setState] = useState(null);
     const { id } = useParams();
-
+    const navigate = useNavigate();
     const GetDataCard = () => {
         getViewResultsQuestions(id).then((res) => setState(res));
     };
     useEffect(() => {
         GetDataCard();
     }, []);
+
+    const click = (idx) => {
+        navigate(`/admin/check/answer/${idx}`);
+    };
+    const handleEveluated = () => {};
 
     return state ? (
         <StyledContainerMain>
@@ -71,6 +76,11 @@ function EveluatingCheck() {
                             </StyledTextColor>
                             <span>
                                 <IconButtonStyled
+                                    handleClick={() =>
+                                        item.status === "EVELUATED"
+                                            ? handleEveluated()
+                                            : click(item.id)
+                                    }
                                     Icon={item.status === "EVELUATED" ? Eveluated : EyeIcon}
                                 />
                             </span>
