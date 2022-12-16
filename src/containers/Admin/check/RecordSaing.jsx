@@ -42,13 +42,19 @@ function RecordSaing({
     };
 
     return (
-        <Audio>
-            <ButtonUi onClick={audioPlay} variant="contained">
-                <img src={PlayRadio} alt="" />
-                PLAY AUDIO
-            </ButtonUi>
-            <p>Correct ansver: {correctAnswer}</p>
-        </Audio>
+        <>
+            <Audio>
+                <ButtonUi onClick={audioPlay} variant="contained">
+                    <img src={PlayRadio} alt="" />
+                    PLAY AUDIO
+                </ButtonUi>
+                <p>Correct ansver: {correctAnswer}</p>
+            </Audio>
+            <Box>
+                <h3>User Answer</h3>
+                <p>{userAnswer}</p>
+            </Box>
+        </>
     );
 }
 export default RecordSaing;
@@ -63,5 +69,12 @@ const Audio = styled.div`
     }
     img {
         margin-right: 8px;
+    }
+`;
+
+const Box = styled.div`
+    margin-top: 15px;
+    p {
+        margin-top: 7px;
     }
 `;

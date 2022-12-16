@@ -55,14 +55,35 @@ export default function CheckLayout({ children, data }) {
                                     <span>Question Type: </span>
                                     <span>{formatterQuestionType(data.questionType)}</span>
                                 </BlText>
+                                {console.log(data)}
+                                {data.minNumberOfReplays && (
+                                    <BlText>
+                                        <span>Mimimum number of Replays: </span>
+                                        <span>{data.minNumberOfReplays}</span>
+                                    </BlText>
+                                )}
+                                {data.minNumberOfWords && (
+                                    <BlText>
+                                        <span>Mimimum number of words: </span>
+                                        <span>{data.minNumberOfWords}</span>
+                                    </BlText>
+                                )}
+                                {data.statement && (
+                                    <BlText>
+                                        <span> Statement </span>
+                                        <span>{data.statement}</span>
+                                    </BlText>
+                                )}
                             </BoxItem>
                         </div>
                         <BoxScore>
                             <h3>Evaluation</h3>
                             <Score>
                                 <span>Score: </span>
-                                {data.questionType !== questionType.LISTEN_WORDS ||
-                                data.questionType !== questionType.SELECT_WORDS ? (
+                                {data.questionType === questionType.LISTEN_WORDS ||
+                                data.questionType === questionType.SELECT_WORDS ? (
+                                    data.scoreOfQuestion
+                                ) : (
                                     <>
                                         <span>(1-10)</span>
                                         <br />
@@ -72,8 +93,6 @@ export default function CheckLayout({ children, data }) {
                                             type="number"
                                         />
                                     </>
-                                ) : (
-                                    data.scoreOfQuestion
                                 )}
                             </Score>
                         </BoxScore>

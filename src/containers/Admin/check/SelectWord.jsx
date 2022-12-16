@@ -9,21 +9,32 @@ function SelectWord({ options, userOptionsAnswer }) {
             <StyledOptions>
                 {options.map((option, index) => (
                     <div key={option.id}>
-                        <p>{index + 1}</p>
-                        <p>{option.option}</p>
-                        <CheckBox boxcolor="#2AB930" value={option.isTrue} />
+                        <div>
+                            <p>{index + 1}</p>
+                            <p>{option.option}</p>
+                        </div>
+                        <div>
+                            <CheckBox boxcolor="#2AB930" value={option.isTrue} />
+                        </div>
                     </div>
                 ))}
             </StyledOptions>
             <StyledAnswers>
                 <p>User&apos;s answers</p>
-                {userOptionsAnswer.map((answer) => (
-                    <div key={answer.id}>
-                        <div>
-                            <p>{answer.option}</p>
+                <div>
+                    {userOptionsAnswer.map((option, index) => (
+                        <div key={option.id}>
+                            <div>
+                                <p>{index + 1}</p>
+                                <p>{option.option}</p>
+                            </div>
+                            <div>
+                                {console.log(option)}
+                                <CheckBox boxcolor="#2AB930" value={option.isTrue} />
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </StyledAnswers>
         </StyledSection>
     );
@@ -42,7 +53,7 @@ const StyledOptions = styled.div`
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 46px;
-    div {
+    & > div {
         width: 234px;
         display: flex;
         align-items: center;
@@ -51,6 +62,10 @@ const StyledOptions = styled.div`
         border-radius: 8px;
         padding: 15px;
         background: #ffffff;
+        div {
+            display: flex;
+            gap: 16px;
+        }
     }
 `;
 
@@ -62,17 +77,24 @@ const StyledAnswers = styled.div`
         font-size: 18px;
         color: #4c4859;
     }
-    div {
+    & > div {
         display: flex;
-        align-items: center;
-        gap: 18px;
-        margin-top: 14px;
+        margin-top: 16px;
+        gap: 16px;
     }
-    div div {
-        width: 171px;
-        padding: 14px 16px;
+    & > div > div {
         border: 1.53px solid #d4d0d0;
         border-radius: 8px;
-        background: #ffffff;
+        width: 234px;
+        display: flex;
+        height: 46px;
+        align-items: center;
+        padding: 10px;
+
+        div:first-child {
+            display: flex;
+            width: 100%;
+            gap: 14px;
+        }
     }
 `;

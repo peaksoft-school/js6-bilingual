@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { baseAxios } from "api/axios-config";
 import ClientContainer from "components/UI/ClientContainer";
 
+import Loader from "components/UI/Loader";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getDate } from "services/format";
@@ -31,7 +32,9 @@ function MyResult() {
         getData();
     };
 
-    return (
+    return !tests.length ? (
+        <Loader />
+    ) : (
         <ClientContainer width="220px">
             <StyledContainerMyResult>
                 <StyledTable>

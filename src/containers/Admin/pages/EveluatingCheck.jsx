@@ -40,18 +40,18 @@ function EveluatingCheck() {
             <StyledContainer>
                 <StyledContainerOne>
                     <StyledText>
-                        User: <StyledInside>{state.userFullName}</StyledInside>
+                        User: <Span>{state.userFullName}</Span>
                     </StyledText>
                     <StyledText>
-                        Test: <StyledInside>{state.testTitle}</StyledInside>
+                        Test: <Span>{state.testTitle}</Span>
                     </StyledText>
                     <StyledText>
                         Date of submission:
-                        <StyledInside>
+                        <Span>
                             {` ${getDate(state.dateOfSubmission)[1]} ${
                                 getDate(state.dateOfSubmission)[0]
                             }`}
-                        </StyledInside>
+                        </Span>
                     </StyledText>
                 </StyledContainerOne>
                 <StyledContainerTwo>
@@ -85,9 +85,7 @@ function EveluatingCheck() {
                             <span>
                                 <IconButtonStyled
                                     handleClick={() =>
-                                        item.status === "EVELUATED"
-                                            ? handleEveluated()
-                                            : click(item.id)
+                                        item.status === "EVELUATED" ? null : click(item.id)
                                     }
                                     Icon={item.status === "EVELUATED" ? Eveluated : EyeIcon}
                                 />
@@ -115,6 +113,9 @@ const StyledContainer = styled.div`
 `;
 const StyledTextColor = styled.div`
     color: ${(props) => (props.bgColor === "EVELUATED" ? "#2AB930" : "#F61414")};
+`;
+const Span = styled.span`
+    color: #4c4859 !important;
 `;
 const StyledContainerResults = styled.div`
     width: 900px;

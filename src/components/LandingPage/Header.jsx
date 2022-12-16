@@ -35,25 +35,22 @@ function Header({ Choice, HeaderBg }) {
                 <StyledImage src={Logotip} />
                 {Choice ? (
                     <StyledHeaderLandingPage>
-                        {isAuth ? (
-                            <ButtonStyled
-                                text="TO COME IN"
-                                variant="contained"
-                                maxwidth="122px"
-                                maxheight="42px"
-                                fontSize="14px"
-                                onClick={() => navigate(`/admin${ADMIN_ROUTES_URL.TEST}`)}
-                            />
-                        ) : (
-                            <ButtonStyled
-                                text="REGISTER"
-                                variant="outlined"
-                                maxwidth="122px"
-                                maxheight="42px"
-                                fontSize="14px"
-                                onClick={() => navigate(`/sign-in`)}
-                            />
-                        )}
+                        <ButtonStyled
+                            text="TO COME IN"
+                            variant="contained"
+                            maxwidth="152px"
+                            maxheight="42px"
+                            fontSize="14px"
+                            onClick={() => navigate(`/admin${ADMIN_ROUTES_URL.TEST}`)}
+                        />
+                        <ButtonStyled
+                            text="REGISTER"
+                            variant="outlined"
+                            maxwidth="122px"
+                            maxheight="42px"
+                            fontSize="14px"
+                            onClick={() => navigate(`/sign-in`)}
+                        />
                     </StyledHeaderLandingPage>
                 ) : (
                     <StyledHeaderClientRole>
@@ -118,6 +115,11 @@ const StyledHeaderLandingPage = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-right: 100px;
+    gap: 10px;
+
+    button {
+        width: 120px !important;
+    }
 `;
 const StyledHeaderClientRole = styled.div`
     width: 411px;

@@ -4,6 +4,7 @@ import { ButtonUi } from "components/UI";
 
 import styled from "styled-components";
 
+import Pause from "../../../assets/icons/paus.svg";
 import PlayRadio from "../../../assets/icons/PlayAudio.svg";
 
 function TypeYouHear({
@@ -25,7 +26,9 @@ function TypeYouHear({
     userNumberOfPlays,
     userOptionsAnswer,
 }) {
+    const [isAudioStop, setIsAudioStop] = React.useState(true);
     const audioPlay = () => {
+        console.log(link);
         const audio = new Howl({
             src: link,
             html5: true,
@@ -33,20 +36,26 @@ function TypeYouHear({
                 setIsAudioStop(true);
             },
         });
-        if (dataField.file) {
-            setIsAudioStop(false);
-        }
         if (isAudioStop) {
             audio.play();
+            setIsAudioStop(false);
         }
     };
     return (
         <div>
             <Audio>
-                <ButtonUi onClick={audioPlay} variant="contained">
-                    <img src={PlayRadio} alt="" />
-                    PLAY AUDIO
-                </ButtonUi>
+                {isAudioStop ? (
+                    <ButtonUi onClick={audioPlay} variant="contained">
+                        <img src={PlayRadio} alt="" />
+                        PLAY AUDIO
+                    </ButtonUi>
+                ) : (
+                    <ButtonUi onClick={audioPlay} variant="contained">
+                        <img src={Pause} alt="" />
+                        STOP RECORDED AUDIO
+                    </ButtonUi>
+                )}
+
                 <p>Correct ansver: {correctAnswer}</p>
             </Audio>
             <Answer>
@@ -57,12 +66,13 @@ function TypeYouHear({
                 </BlText>
                 <BlText>
                     <span>Number of plays: </span>
-                    <span>{userNumberOfPlays}</span>
+                    <span>{minNumberOfReplays}</span>
                 </BlText>
             </Answer>
         </div>
     );
 }
+
 export default TypeYouHear;
 const Audio = styled.div`
     display: flex;
