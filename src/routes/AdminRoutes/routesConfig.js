@@ -54,7 +54,7 @@ export const ADMIN_ROUTES_CONFIG = [
         element: <EveluatingCheck />,
     },
     {
-        path: ADMIN_ROUTES_URL.CHECK_TESTS,
+        path: ADMIN_ROUTES_URL.CHECK_ANSWER,
         element: <CheckMain />,
     },
     {
