@@ -63,6 +63,7 @@ function TypeYouHear({
         </div>
     );
 }
+
 export default TypeYouHear;
 const Audio = styled.div`
     display: flex;
