@@ -12,8 +12,8 @@ import { scrollHeader } from "utils/helpers";
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ Choice, HeaderBg }) {
-    const navigate = useNavigate();
     const [bgColor, setBgColor] = useState();
+    const navigate = useNavigate();
 
     window.addEventListener("scroll", () => {
         if (scrollHeader()) {
@@ -30,8 +30,8 @@ function Header({ Choice, HeaderBg }) {
     };
 
     return (
-        <HeaderGlav>
-            <StyledHeader bgColor={bgColor} HeaderBg={HeaderBg}>
+        <HeaderGlav bgColor={bgColor} HeaderBg={HeaderBg}>
+            <StyledHeader>
                 <StyledImage src={Logotip} />
                 {Choice ? (
                     <StyledHeaderLandingPage>
@@ -88,8 +88,17 @@ const LinkItem = styled(NavLink)`
     }
 `;
 const HeaderGlav = styled.div`
+    width: 100%;
     display: flex;
     justify-content: center;
+    position: fixed;
+    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
+    background: ${(props) => props.HeaderBg};
+    z-index: 10;
+    transition: 0.2s ease;
+    &.active {
+        background-color: white;
+    }
 `;
 const StyledHeader = styled.div`
     width: 1550px;
@@ -97,15 +106,6 @@ const StyledHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
-    position: fixed;
-    z-index: 10;
-    transition: 0.2s ease;
-    background: ${(props) => props.HeaderBg};
-    &.active {
-        background-color: white;
-    }
 `;
 const StyledImage = styled.img`
     width: 235px;

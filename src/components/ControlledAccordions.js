@@ -12,6 +12,14 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 
 import styleds from "styled-components";
 
+import FacebookIcon from "../assets/images/landingPage/facebookIcon.svg";
+import InstagramIcon from "../assets/images/landingPage/instagramInstgramIcon.svg";
+
+import YoutubeIcon from "../assets/images/landingPage/youtubeIcon.svg";
+
+import LogoBilingual from "../assets/images/LogoFooter.svg";
+import IconButtonStyled from "./UI/IconButtonStyled";
+
 export default function ControlledAccordions() {
     const [expanded, setExpanded] = React.useState(false);
 
@@ -66,12 +74,43 @@ export default function ControlledAccordions() {
                     );
                 })}
             </StyledContainer>
+            <StyledFooterInline>
+                <StyledImage src={LogoBilingual} />
+                <StyledText>© Copyright PeakSoft. All Rights Reserved</StyledText>
+                <IconButtonStyled Icon={YoutubeIcon} />
+                <IconButtonStyled Icon={FacebookIcon} />
+                <IconButtonStyled Icon={InstagramIcon} />
+            </StyledFooterInline>
         </StyledFooter>
     );
 }
 const StyledFooter = styleds.div`
     width: 100%;
     background-color: #262626;
+`;
+const StyledFooterInline = styleds.div`
+    width: 1150px;
+    height: 140px;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    img {
+        :nth-child(3) {
+            margin-left: 300px;
+    }
+`;
+const StyledImage = styleds.img`
+    width: 225px;
+    height: 46px;
+`;
+const StyledText = styleds.span`
+    margin-top:110px;
+    margin-left:200px;
+    font-family: Poppins;
+    font-style: Regular;
+    font-size: 14px;
+    color: #98a2b3;
 `;
 const StyledAccordionSummary = styled((props) => (
     <AccordionSummary expandIcon={<AddIcon sx={{ color: "#ffffff" }} />} {...props} />
