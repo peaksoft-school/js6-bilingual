@@ -15,19 +15,27 @@ function EveluatingCheck() {
     const [state, setState] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
-    const getDataCard = () => {
-        getViewResultsQuestions(id).then((res) => setState(res));
+    const getDataCard = async () => {
+        try {
+            const data = await getViewResultsQuestions(id);
+            console.log(data);
+            setState(data);
+        } catch (error) {
+            setState("ERROR");
+        }
     };
     useEffect(() => {
         getDataCard();
     }, []);
 
     const click = (idx) => {
+        // idx это id вопроса id
         navigate(`/admin/check/answer/${idx}`);
     };
-    const handleEveluated = () => {};
 
-    return state ? (
+    return state === "ERROR" ? (
+        <h1>Some thing went wrong</h1>
+    ) : state ? (
         <StyledContainerMain>
             <StyledContainer>
                 <StyledContainerOne>
