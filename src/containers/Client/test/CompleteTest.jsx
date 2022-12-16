@@ -8,8 +8,7 @@ import UICard from "components/UI/UICard";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
-import { CLIENT_CONST_URL } from "routes/constants";
-import { addAnswer, clearData } from "store/slices/clientSlice";
+import { clearData } from "store/slices/clientSlice";
 import styled from "styled-components";
 
 import Group from "../../../assets/icons/group.svg";
@@ -22,7 +21,6 @@ export default function CompleteTest() {
     const dispatch = useDispatch();
 
     const handleDone = async () => {
-        console.log(resulTests);
         setIsLoad(true);
 
         try {

@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ButtonStyled from "components/UI/ButtonUi";
 import Cookies from "js-cookie";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
-function Header() {
+function Header({ HeaderBg }) {
+    const [bgColor, setBgColor] = useState();
     const logOut = () => {
         Cookies.remove("user");
         window.location.pathname = "/";
     };
 
+    window.addEventListener("scroll", () => {
+        if (scrollHeader()) {
+            setBgColor(true);
+        } else {
+            setBgColor(false);
+        }
+    });
     return (
-        <HeaderGlav>
+        <HeaderGlav bgColor={bgColor}>
             <StyledHeader>
                 <StyledImage src={Logotip} />
                 <StyledHeaderClientRole>
@@ -36,30 +44,39 @@ function Header() {
     );
 }
 
-const HeaderGlav = styled.div`
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+const HeaderAnimation = keyframes`
+to{
+    box-shadow: 3px 0 7px #999;
+    background-color: white;
+}
 `;
 
 const LinkItem = styled(NavLink)`
     &.active,
     &:hover {
-        color: #3a10e5;
+        color: rgba(58, 16, 229, 0.9);
     }
 `;
+const HeaderGlav = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
+    background: white;
+    z-index: 10;
+    transition: 0.2s ease;
+    &.active {
+        background-color: white;
+    }
+`;
+
 const StyledHeader = styled.div`
     width: 1550px;
     height: 96px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
-    box-shadow: 3px 0 7px #999;
 `;
 const StyledImage = styled.img`
     width: 235px;
