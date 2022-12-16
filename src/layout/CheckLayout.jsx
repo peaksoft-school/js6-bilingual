@@ -61,8 +61,8 @@ export default function CheckLayout({ children, data }) {
                             <h3>Evaluation</h3>
                             <Score>
                                 <span>Score: </span>
-                                {data.questionType === questionType.LISTEN_WORDS ||
-                                data.questionType === questionType.SELECT_WORDS ? (
+                                {data.questionType !== questionType.LISTEN_WORDS ||
+                                data.questionType !== questionType.SELECT_WORDS ? (
                                     <>
                                         <span>(1-10)</span>
                                         <br />

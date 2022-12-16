@@ -15,11 +15,11 @@ function EveluatingCheck() {
     const [state, setState] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
-    const GetDataCard = () => {
+    const getDataCard = () => {
         getViewResultsQuestions(id).then((res) => setState(res));
     };
     useEffect(() => {
-        GetDataCard();
+        getDataCard();
     }, []);
 
     const click = (idx) => {
