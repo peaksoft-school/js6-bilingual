@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function ClientDescribe({ question }) {
     const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const StyledForImage = styled.div`
 const StyledForTitle = styled.div`
     margin-bottom: 50px;
     font-weight: 400;
-    font-size: 28px;
+    font-size: ${Styles.FontSizes["28"]}px;
     text-align: center;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
 `;

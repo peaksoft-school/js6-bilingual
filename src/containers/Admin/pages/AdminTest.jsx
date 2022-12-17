@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { deleteTest, getTests, isTestActive } from "store/slices/adminTestActions";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import DeleteIcon from "../../../assets/icons/Delete.svg";
 import UpdateIcon from "../../../assets/icons/UpdateIcon.svg";
 
@@ -112,7 +114,7 @@ const StyledItemsDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     h3 {
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         font-weight: 500;
     }
 `;

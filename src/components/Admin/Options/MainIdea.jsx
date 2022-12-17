@@ -13,6 +13,7 @@ import validateInput from "services/inputValidate";
 import { deleteOption } from "store/slices/option-slice";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function MainIdea({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -196,7 +197,7 @@ const Wrapper = styled.div``;
 const Block = styled.div`
     h4 {
         font-weight: 500;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         color: #4c4859;
         margin-bottom: 12px;
     }
@@ -214,7 +215,7 @@ const Row = styled.div`
         border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb {
-        background: #3a10e5;
+        background: ${Styles.colors.Primary.PmrBlue};
         border-radius: 10px;
     }
 `;

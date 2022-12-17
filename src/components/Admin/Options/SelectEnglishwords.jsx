@@ -15,6 +15,7 @@ import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlic
 import styled from "styled-components";
 
 import DeleteIcon from "../../../assets/icons/Delete.svg";
+import { Styles } from "utils/constants/theme";
 
 function SelectEnglishWords({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -191,7 +192,7 @@ const MainItem = styled.div`
     height: 46px;
     display: flex;
     align-items: center;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
 `;
 

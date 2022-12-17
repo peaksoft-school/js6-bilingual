@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const CountUpScroll = () => {
     const [counterOn, setCounterOn] = useState(false);
@@ -47,10 +48,10 @@ const Div = styled.div`
     top: 148px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.94);
-    border: 1.5px solid #3785d7;
+    border: 1.5px solid ${Styles.colors.Secondary.Scd18};
     position: relative;
     font-family: "poppins-bold", sans-serif !important;
-    color: #4c4c4c;
+    color: ${Styles.colors.Secondary.Scd17};
     display: flex;
     justify-content: center;
     align-items: center;

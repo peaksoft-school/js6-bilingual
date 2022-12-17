@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function ImagePicker({ getImages, defaultValue }) {
     const [images, setImages] = useState([]);
@@ -50,11 +51,11 @@ const ContainerDrop = styled.div`
     width: 181px;
     height: 178px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: ${Styles.colors.Primary.PmrWhite};
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     button {
         display: none;
     }

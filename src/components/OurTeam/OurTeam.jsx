@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 import Human1 from "../../assets/images/landingPage/Human1.svg";
 
@@ -80,10 +81,10 @@ const StyledContainerMain = styled.div`
 const StyledTittle = styled.h1`
     width: 200px;
     height: 52px;
-    font-size: 40px;
+    font-size: ${Styles.FontSizes["40"]}px;
     font-style: normal;
     font-weight: 700;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd18};
 `;
 const StyledPhotoBox = styled.div`
     width: 1232px;
@@ -107,11 +108,11 @@ const StyledTittleName = styled.div`
     width: 110px;
     height: 21px;
     text-align: center;
-    color: #3a10e5;
+    color: ${Styles.colors.Primary.PmrBlue};
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 130%;
 `;
 const StyledTittleStatus = styled.div`
@@ -121,6 +122,6 @@ const StyledTittleStatus = styled.div`
     font-family: Poppins;
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: ${Styles.FontSizes["14"]}px;
     line-height: 130%;
 `;

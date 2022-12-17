@@ -7,6 +7,8 @@ import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { convertHMS } from "services/format";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import DataInput from "./UI/DataInput";
 
 import DropDown from "./UI/DropDownUi";
@@ -133,7 +135,6 @@ const StyledContainerOneOne = styled.div`
 const StyledContainerTwo = styled.div`
     width: 80px;
     height: 86px;
-    border-radius
 `;
 const StyledContainerThree = styled.div`
     width: 820px;
@@ -146,7 +147,7 @@ const StyledContainerThreeOne = styled.div`
     margin-bottom: 12px;
 `;
 const StyledText = styled.span`
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     font-style: normal;
     font-weight: 500;
     line-height: 18px;

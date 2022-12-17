@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Clock from "../../../assets/images/clock.svg";
 import Laptop from "../../../assets/images/laptop.svg";
 import User from "../../../assets/images/user.svg";
@@ -79,7 +81,7 @@ const StyledTitle = styled.div`
     justify-items: center;
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: ${Styles.FontSizes["15"]}px;
 `;
 const StyledImgInform = styled.div`
     display: flex;
@@ -118,8 +120,8 @@ const StyledTitleInform = styled.div`
 `;
 const StyledForMainInform = styled.div`
     font-style: normal;
-    font-size: 17px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["17"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -129,7 +131,7 @@ const StyledContainerHomeTwo = styled.div`
     height: 549px;
     border-radius: 10px;
     box-shadow: 0px 4px 39px -5px rgba(196, 196, 196, 0.6);
-    background-color: white;
+    background-color: ${Styles.colors.Primary.PmrWhite};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,9 +141,9 @@ const StyledHeaderHomeTwo = styled.div`
     height: 32px;
     margin-top: 35px;
     font-weight: 400;
-    font-size: 27px;
+    font-size: ${Styles.FontSizes["27"]}px;
     line-height: 32px;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
     display: flex;
     flex-wrap: wrap;
 `;
@@ -155,7 +157,7 @@ const StyledMainHomeTwo = styled.div`
 const StyledFooterHomeTwo = styled.div`
     width: 813px;
     height: 74px;
-    border-top: 1.6px solid #d4d0d0;
+    border-top: 1.6px solid ${Styles.colors.Secondary.ScdD4};
     display: flex;
     justify-content: space-between;
     align-items: flex-end;

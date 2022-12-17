@@ -3,6 +3,8 @@ import React from "react";
 import { Button } from "@mui/material";
 import styled, { css } from "styled-components";
 
+import { Styles } from "../../utils/constants/theme";
+
 const ButtonUi = ({
     disabled,
     color,
@@ -38,44 +40,44 @@ const ButtonMain = styled(Button)`
             align-items: center;
             ${maxwidth && `max-width: ${maxwidth}; width: 100%;`}
             height: ${maxheight};
-            font-size: 14px;
+            font-size: ${Styles.FontSizes["14"]}px;
             letter-spacing: 0.02em !important;
             font-size: ${fontSize}px !important;
             &.css-f3g22s-MuiButtonBase-root-MuiButton-root,
             &.css-sghohy-MuiButtonBase-root-MuiButton-root {
-                background-color: #3a10e5;
+                background-color: ${Styles.colors.Primary.PmrBlue};
                 box-shadow: none;
                 :hover {
-                    background-color: rgba(58, 16, 229, 0.9);
+                    background-color: ${Styles.colors.Primary.PmrBlue};
                     box-shadow: none;
                 }
                 :active {
-                    background: #3007da;
+                    background: ${Styles.colors.Secondary.Scd10};
                 }
             }
             &.css-jzc2lf-MuiButtonBase-root-MuiButton-root,
             &.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-                border: 2px solid #3a10e5 !important;
+                border: 2px solid ${Styles.colors.Primary.PmrBlue} !important;
                 font-size: 14px;
                 letter-spacing: 0.02em !important;
-                color: #3a10e5;
+                color: ${Styles.colors.Primary.PmrBlue};
                 :hover {
-                    background-color: #3a10e5 !important;
-                    color: #fff;
+                    background-color: ${Styles.colors.Primary.PmrBlue}!important;
+                    color: ${Styles.colors.Primary.PmrWhite};
                 }
                 &:active {
-                    background: #3007da !important;
+                    background: ${Styles.colors.Secondary.Scd10} !important;
                 }
             }
             &.css-1at7div-MuiButtonBase-root-MuiButton-root,
             &.css-sxix9q-MuiButtonBase-root-MuiButton-root {
-                border: 2px solid #2ab930 !important;
+                border: 2px solid ${Styles.colors.Secondary.Scd9} !important;
                 &:hover {
-                    background: #2ab930;
-                    color: #fff;
+                    background: ${Styles.colors.Secondary.Scd9};
+                    color: ${Styles.colors.Primary.PmrWhite};
                 }
                 &:active {
-                    background: #08af10;
+                    background: ${Styles.colors.Secondary.Scd08};
                 }
             }
             .MuiTouchRipple-root {
@@ -83,21 +85,21 @@ const ButtonMain = styled(Button)`
             }
             &.css-rlclm-MuiButtonBase-root-MuiButton-root,
             &.css-ke5b6m-MuiButtonBase-root-MuiButton-root {
-                background: #2ab930;
+                background: ${Styles.colors.Secondary.Scd9};
                 box-shadow: none;
                 &:hover {
-                    background: #31cf38;
+                    background: ${Styles.colors.Secondary.Scd31};
                     box-shadow: none;
                 }
                 &:active {
-                    background: #08af10;
+                    background: ${Styles.colors.Secondary.Scd08};
                     box-shadow: none;
                 }
             }
             // --------------------- DISABLED --------------------
             &.Mui-disabled {
                 background: rgba(196, 196, 196, 0.2) !important;
-                border: 2px solid #c4c4c4 !important;
+                border: 2px solid ${Styles.colors.Secondary.ScdC4} !important;
                 box-shadow: 0px 1px 2px rgba(196, 196, 196, 0.2),
                     0px 1px 2px rgba(196, 196, 196, 0.2);
                 border-radius: 8px;

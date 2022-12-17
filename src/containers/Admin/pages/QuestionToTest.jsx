@@ -13,6 +13,8 @@ import { getTestById } from "store/slices/adminTestActions";
 import { deleteQuestion, isActiveQuestion } from "store/slices/questionSlice";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import DeleteIcon from "../../../assets/icons/Delete.svg";
 import UpdateIcon from "../../../assets/icons/UpdateIcon.svg";
 
@@ -158,14 +160,14 @@ const StyledAboutTest = styled.div`
 const StyledNameTest = styled.h5`
     font-size: 16px;
     padding-top: 6px;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd37};
 `;
 
 const StyledSpan = styled.span`
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["15"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
 `;
 
 const StyledBtnDiv = styled.div`
@@ -176,8 +178,8 @@ const StyledBtnDiv = styled.div`
 
 const StyledLine = styled.div`
     height: 1px;
-    border: 1.53px solid #d4d0d0;
-    background: #c4c4c4;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
+    background: ${Styles.colors.Secondary.ScdC4};
     margin: 22px 0 24px 0;
 `;
 

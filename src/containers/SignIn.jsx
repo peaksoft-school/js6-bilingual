@@ -18,6 +18,8 @@ import styled from "styled-components";
 
 import { LOGIN } from "utils/constants/api";
 
+import { Styles } from "utils/constants/theme";
+
 import Logo from "../assets/images/AuthLogo.svg";
 import google from "../assets/images/google.svg";
 
@@ -238,7 +240,7 @@ const ErrorMessage = styled.small`
 `;
 
 const SignInBox = styled.div`
-    background: #fff;
+    background: ${Styles.colors.Primary.PmrWhite};
     max-width: 616px;
     width: 100%;
     border-radius: 10px;
@@ -254,7 +256,7 @@ const SignInHead = styled.div`
     margin-bottom: 32px;
     h3 {
         font-size: 24px;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         margin-top: 12px;
     }
 `;

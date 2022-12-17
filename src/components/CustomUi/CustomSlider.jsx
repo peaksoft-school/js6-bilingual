@@ -3,6 +3,7 @@ import React from "react";
 import { East, KeyboardBackspace } from "@mui/icons-material";
 import Slider from "react-slick";
 import styled, { css } from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const CustomSlider = ({ settings, children, bottomArrows }) => {
     const slider = React.useRef(null);
@@ -67,7 +68,7 @@ const SliderStyled = styled(Slider)`
     .slick-dots li button:before {
         position: absolute;
         content: "";
-        background: rgba(58, 16, 229, 0.2);
+        background: ${Styles.colors.Secondary.ScdViolet};
         opacity: 1;
         width: 6px;
         height: 16px;
@@ -77,7 +78,7 @@ const SliderStyled = styled(Slider)`
     .slick-dots li.slick-active :before {
         transform: translateY(-15px);
         height: 30px;
-        background: rgba(58, 16, 229, 1);
+        background: ${Styles.colors.Secondary.ScdViolet};
     }
 `;
 
@@ -85,7 +86,7 @@ const ArrowNext = styled.button`
     ${(props) => {
         return css`
             position: absolute;
-            border: 1px solid #3a10e5;
+            border: 1px solid ${Styles.colors.Primary.PmrBlue};
             right: -600px;
             top: calc(50% - 30px);
             background: transparent;
@@ -97,11 +98,11 @@ const ArrowNext = styled.button`
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: rgba(58, 16, 229, 1);
+            color: ${Styles.colors.Primary.PmrBlue};
 
             :hover {
-                background-color: blue;
-                color: white;
+                background-color: ${Styles.colors.Primary.PmrBlue};
+                color: ${Styles.colors.Primary.PmrWhite};
             }
 
             &.bottom_arrow {
@@ -118,7 +119,7 @@ const ArrowPrev = styled.button`
             position: absolute;
             left: -60px;
             top: calc(50% - 30px);
-            border: 1px solid #3a10e5;
+            border: 1px solid ${Styles.colors.Primary.PmrBlue};
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -127,12 +128,12 @@ const ArrowPrev = styled.button`
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(58, 16, 229, 1);
+            color: ${Styles.colors.Primary.PmrBlue};
             cursor: pointer;
 
             :hover {
-                background-color: blue;
-                color: white;
+                background-color: ${Styles.colors.Primary.PmrBlue};
+                color: ${Styles.colors.Primary.PmrWhite};
             }
 
             &.bottom_arrow {

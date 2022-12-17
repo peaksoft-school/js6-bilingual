@@ -3,6 +3,7 @@ import React from "react";
 import { Container } from "@mui/material";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const ContainerStyled = ({ children, maxWidth }) => {
     return <StyledContainer maxWidth={maxWidth}>{children}</StyledContainer>;
@@ -15,7 +16,7 @@ const StyledContainer = styled(Container)`
         padding: 0;
         margin: 0;
         border-radius: 8px;
-        background: #ffffff;
+        background: ${Styles.colors.Primary.PmrWhite};
         box-shadow: 0px 4px 39px -5px rgba(196, 196, 196, 0.6);
     }
     &.MuiContainer-maxWidthXl {

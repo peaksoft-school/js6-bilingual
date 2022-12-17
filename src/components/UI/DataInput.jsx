@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function DataInput({ onChange, value, ...props }) {
     return (
@@ -22,9 +23,9 @@ const StyledDataInput = styled.div`
 const StyledInput = styled.input`
     width: 99px;
     height: 46px;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     font-weight: 400;
     font-family: "DINNextRoundedLTW01-Regular";
     padding-left: 30px;
@@ -35,7 +36,7 @@ const StyledText = styled.span`
     height: 36px;
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 18px;
     color: ${(props) => (props.error ? "red" : "")};
     span {

@@ -6,6 +6,8 @@ import { Howl } from "howler";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import DeleteIcon from "../../assets/icons/Delete.svg";
 
 import CheckBox from "./Checkbox";
@@ -60,7 +62,7 @@ const Main = styled.div`
     height: 46px;
     display: flex;
     align-items: center;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
 `;
 

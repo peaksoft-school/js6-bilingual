@@ -3,6 +3,7 @@ import React from "react";
 import { FormControlLabel, RadioGroup, Radio } from "@mui/material";
 
 import { styled } from "@mui/material/styles";
+import { Styles } from "utils/constants/theme";
 
 function RadioButton({ onChange, value, label, radioValue }) {
     return (
@@ -23,12 +24,12 @@ const StyleRadio = styled(Radio)`
         width: 18px;
         height: 18px;
         margin: 10px;
-        color: #9a9a9a;
+        color: ${Styles.colors.Secondary.Scd9A};
     }
     &.Mui-checked {
         width: 18px;
         height: 18px;
         margin: 10px;
-        color: #3a10e5;
+        color: ${Styles.colors.Primary.PmrBlue};
     }
 `;

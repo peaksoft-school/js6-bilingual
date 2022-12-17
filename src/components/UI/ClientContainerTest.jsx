@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 import { ButtonUi } from ".";
 
@@ -44,7 +45,7 @@ export default ClientContainerTest;
 
 const StyledMain = styled.main`
     min-height: 100vh;
-    background: #d7e1f8;
+    background: ${Styles.colors.Primary.PmrD7};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,7 +67,7 @@ const StyledBoxModal = styled.div`
     p {
         font-weight: 400;
         font-size: 16px;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         margin-bottom: 24px;
     }
     div {
@@ -85,7 +86,7 @@ const StyledButton = styled.button`
     box-shadow: 0px 1px 2px rgba(76, 72, 89, 0.2), 0px 1px 2px rgba(76, 72, 89, 0.2);
     border-radius: 8px;
     padding: 13px 24px;
-    font-size: 14px;
+    font-size: ${Styles.FontSizes["14"]}px;
     display: flex;
     justify-content: center;
     align-items: center;

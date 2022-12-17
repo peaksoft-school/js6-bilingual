@@ -5,6 +5,7 @@ import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function BasicModal({ handleClose, open, children }) {
     return (
@@ -28,7 +29,7 @@ const StyleForBox = styled(Box)`
     flex-direction: column;
     align-items: center;
     transform: translate(-50%, -50%);
-    background: #ffffff;
+    background: ${Styles.colors.Primary.PmrWhite};
     box-shadow: 0px 4px 39px rgba(196, 196, 196, 0.6);
     border-radius: 10px;
     outline: none;

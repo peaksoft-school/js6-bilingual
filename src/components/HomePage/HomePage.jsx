@@ -17,6 +17,7 @@ import OurTeam from "components/OurTeam/OurTeam";
 import UseFullVideo from "components/UseFullVideo/UseFullVideo";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function HomePage() {
     return (
@@ -45,7 +46,7 @@ export default HomePage;
 
 const StyledDivCont = styled.div`
     width: 100%;
-    background: #fef5e8;
+    background: ${Styles.colors.Primary.PmrBeige};
     margin: 0 auto;
 `;
 const StyledSliderDiv = styled.div`

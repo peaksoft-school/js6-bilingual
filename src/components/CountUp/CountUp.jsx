@@ -13,6 +13,7 @@ import englishBook from "./image/Group.png";
 import speech from "./image/speech.png";
 import tutoring from "./image/tutoring.png";
 import vector from "./image/vector.png";
+import { Styles } from "utils/constants/theme";
 
 const CountUp = () => {
     return (
@@ -120,11 +121,11 @@ const TextForAdvertisement = styled.p`
     font-family: "Poppins" sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 24px;
     text-align: center;
     margin-top: 25px;
-    color: #23212a;
+    color: ${Styles.colors.Secondary.Scd23};
 `;
 const BoxForAdditionallyInfo = styled.div`
     height: 437px;
@@ -140,9 +141,9 @@ const TitleForAdditionallyInfo = styled.h1`
     font-family: "Gilroy-Bold", sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 40px;
+    font-size: ${Styles.FontSizes["40"]}px;
     line-height: 48px;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd18};
     text-align: left;
 `;
 const TextForAdditionallyInfo = styled.p`
@@ -153,10 +154,10 @@ const TextForAdditionallyInfo = styled.p`
     font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 24px;
     margin-top: 34px;
-    color: #23212a;
+    color: ${Styles.colors.Secondary.Scd23};
 `;
 const UsefulInform = styled.div`
     display: flex;
@@ -167,7 +168,7 @@ const UsefulInform = styled.div`
     font-family: "Poppins" sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 22px;
 `;
 const NavForUsefulInform = styled.nav`

@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function Describe({ correctAnswer, link, userAnswer }) {
     return (
@@ -40,12 +41,12 @@ const StyledImage = styled.img`
 `;
 const StyledText = styled.span`
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
 `;
 const StyledTextOne = styled.span`
     font-weight: 500;
-    font-size: 18px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["18"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
 `;
 const StyledContainerText = styled.div`
     margin-top: 46px;

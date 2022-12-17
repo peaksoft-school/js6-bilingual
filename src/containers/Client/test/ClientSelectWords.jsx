@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function SelectEnglishWords({ question }) {
     const [cardList, setCardList] = useState([]);
@@ -104,7 +105,7 @@ const StyleDragBox = styled.div`
 const StyledDrag = styled.div`
     width: 243px;
     height: 124px;
-    border: 1px dashed #a8a2a2;
+    border: 1px dashed ${Styles.colors.Secondary.ScdA8a};
     border-radius: 4.62335px;
     display: flex;
     align-items: center;
@@ -112,10 +113,10 @@ const StyledDrag = styled.div`
     gap: 7px;
     margin: 30px 0 0 570px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: ${Styles.FontSizes["14"]}px;
     :hover {
-        background: rgba(58, 16, 229, 0.1);
-        border: 1px dashed #3a10e5;
+        background: ${Styles.colors.Secondary.ScdViolet};
+        border: 1px dashed ${Styles.colors.Primary.PmrBlue};
     }
 `;
 
@@ -125,23 +126,23 @@ const StyledWordDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
-    border: 2px solid #d4d0d0;
+    background: ${Styles.colors.Primary.PmrWhite};
+    border: 2px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
     cursor: grab;
 
     :hover {
-        border: 2px solid #3a10e5;
+        border: 2px solid ${Styles.colors.Primary.PmrBlue};
     }
     :active {
         border: none;
         outline: none;
-        background: #3a10e5;
-        color: #ffffff;
+        background: ${Styles.colors.Primary.PmrBlue};
+        color: ${Styles.colors.Primary.PmrWhite};
     }
     &.option_disable {
         opacity: 0.4;
-        background: #e5e5e5;
+        background: ${Styles.colors.Secondary.ScdE5};
         pointer-events: none;
     }
 `;

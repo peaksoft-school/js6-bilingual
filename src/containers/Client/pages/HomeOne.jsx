@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { getQuestionForClient, clearData } from "store/slices/clientSlice";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import ListBook from "../../../assets/images/BookList.svg";
 
 function HomeOne() {
@@ -49,7 +51,7 @@ const StyledContainerHomeOne = styled.div`
     height: 250px;
     border-radius: 10px;
     box-shadow: 0px 4px 39px -5px rgba(196, 196, 196, 0.6);
-    background-color: white;
+    background-color: ${Styles.colors.Primary.PmrWhite};
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -69,20 +71,19 @@ const StyledContainerHomeOne = styled.div`
         span {
             :nth-child(1) {
                 height: 18px;
-                color: #3a10e5;
+                color: ${Styles.colors.Primary.PmrBlue};
             }
             :nth-child(2) {
                 width: 178px;
                 height: 18px;
                 font-style: normal;
                 font-weight: 400;
-                font-size: 16px;
+                font-size: ${Styles.FontSizes["16"]}px;
                 line-height: 18px;
                 display: flex;
                 align-items: center;
                 text-transform: capitalize;
-
-                color: #4c4859;
+                color: ${Styles.colors.Primary.Pmr4C};
             }
         }
         h1 {
@@ -90,9 +91,9 @@ const StyledContainerHomeOne = styled.div`
             height: 29px;
             font-style: normal;
             font-weight: 400;
-            font-size: 26px;
+            font-size: ${Styles.FontSizes["26"]}px;
             text-transform: capitalize;
-            color: #4c4859;
+            color: ${Styles.colors.Primary.Pmr4C};
         }
     }
     button {

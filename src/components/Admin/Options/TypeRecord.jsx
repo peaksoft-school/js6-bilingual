@@ -8,6 +8,7 @@ import { formatToMinute } from "services/format";
 import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function TypeRecord({ data, setIsErrorInput }) {
     const [answer, setAnswer] = React.useState("");
@@ -97,7 +98,7 @@ const StyledContainerMiniMiniBoss = styled.div`
 const Main = styled.div`
     h3 {
         margin-top: 24px;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         font-weight: 500;
         margin-bottom: 10px;
     }

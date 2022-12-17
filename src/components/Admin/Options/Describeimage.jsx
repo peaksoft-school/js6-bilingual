@@ -9,6 +9,7 @@ import { formatToMinute } from "services/format";
 import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function DescribeImage({ data, setIsErrorInput }) {
     const [img, setImg] = React.useState({ src: null, alt: "" });
@@ -149,9 +150,9 @@ const Row = styled.div`
     align-items: center;
     gap: 0 40px;
     h4 {
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         font-weight: 400;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
     }
 `;
 

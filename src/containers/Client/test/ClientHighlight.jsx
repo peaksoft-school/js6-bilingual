@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function ClientHighlight({ question }) {
     const [value, setValue] = React.useState("");
@@ -62,7 +63,7 @@ export default function ClientHighlight({ question }) {
 const Main = styled.div``;
 const Box = styled.div``;
 const Area = styled.div`
-    background: #f7f7f7;
+    background: ${Styles.colors.Secondary.ScdF7};
     border-radius: 8px;
     overflow: hidden;
 `;
@@ -73,23 +74,23 @@ const Row = styled.div`
 const Left = styled.div`
     max-width: 555px;
     width: 100%;
-    border: 1px solid #d4d0d0;
+    border: 1px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
 
     h3 {
         padding: 16px;
-        border-bottom: 1px solid #d4d0d0;
+        border-bottom: 1px solid ${Styles.colors.Secondary.ScdD4};
     }
     & > div {
         padding: 16px;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         line-height: 140%;
         max-height: 550px;
         overflow-y: auto;
 
         &::-webkit-scrollbar {
             width: 15px;
-            background: #f0f0f0;
+            background: ${Styles.colors.Secondary.ScdF0f0};
             padding: 7px;
             &-track {
                 box-shadow: inset 1px 1px 5px #999;
@@ -101,7 +102,6 @@ const Left = styled.div`
                     border-style: solid;
                     height: 13px;
                     width: 16px;
-
                     :vertical:increment {
                         border-width: 8px 8px 0 8px;
                         border-color: #828282 transparent transparent transparent;
@@ -120,28 +120,28 @@ const Left = styled.div`
             }
 
             &-thumb {
-                background: #c4c4c4;
+                background: ${Styles.colors.Secondary.ScdC4};
                 border-radius: 8px;
                 width: 8px;
             }
         }
 
         &::selection {
-            background: rgba(58, 16, 229, 0.18);
+            background: ${Styles.colors.Secondary.ScdViolet};
         }
     }
 `;
 const Right = styled.div`
     h3 {
         font-weight: 400;
-        font-size: 26px;
+        font-size: ${Styles.FontSizes["26"]}px;
         line-height: 29px;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
     }
     h5 {
-        font-size: 18px;
+        font-size: ${Styles.FontSizes["18"]}px;
         line-height: 124%;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         font-weight: 400;
         margin-top: 26px;
         margin-bottom: 28px;
@@ -152,7 +152,7 @@ const Right = styled.div`
         overflow-y: auto !important;
         &::-webkit-scrollbar {
             width: 15px;
-            background: #f0f0f0;
+            background: ${Styles.colors.Secondary.ScdF0f0};
             &-track {
                 box-shadow: inset 1px 1px 5px #999;
             }
@@ -182,13 +182,13 @@ const Right = styled.div`
             }
 
             &-thumb {
-                background: #c4c4c4;
+                background: ${Styles.colors.Secondary.ScdC4};
                 border-radius: 8px;
                 width: 8px;
             }
         }
         ::placeholder {
-            color: white !important;
+            color: ${Styles.colors.Primary.PmrWhite} !important;
         }
     }
 `;

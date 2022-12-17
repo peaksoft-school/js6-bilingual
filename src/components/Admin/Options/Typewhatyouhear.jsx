@@ -18,6 +18,7 @@ import styled from "styled-components";
 
 import PauseIcon from "../../../assets/icons/Pause.svg";
 import PlayIcon from "../../../assets/icons/PlayIcon.svg";
+import { Styles } from "utils/constants/theme";
 
 function Typewhatyouhear({ data, setIsErrorInput }) {
     const { isUpdatePage, typeQuestion, setMainQuestion, mainQuestion } =
@@ -178,13 +179,13 @@ export default Typewhatyouhear;
 
 const StlyedContainer = styled.div`
     width: 100%;
-    background: #ffffff;
+    background: ${Styles.colors.Primary.PmrWhite};
 `;
 const StyledTitle = styled.h1`
     width: 80px;
     font-weight: 500;
-    font-size: 16px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["16"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
     display: flex;
     justify-content: start;
 `;
@@ -200,8 +201,8 @@ const StyledNumber = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
-    border: 1.53px solid #d4d0d0;
+    background: ${Styles.colors.Primary.PmrWhite};
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
 
     input {
@@ -211,7 +212,7 @@ const StyledNumber = styled.div`
         border-radius: 8px;
         outline: none;
         text-align: center;
-        font-size: 18px;
+        font-size: ${Styles.FontSizes["18"]}px;
     }
 `;
 const StyledPause = styled.div`
@@ -220,18 +221,18 @@ const StyledPause = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: ${Styles.colors.Primary.PmrWhite};
     outline: none;
     border: none;
-    background: #3a10e5;
+    background-color: ${Styles.colors.Primary.PmrBlue};
     border-radius: 8px;
     padding: 13px 24px;
     cursor: pointer;
 `;
 const StyledAnswer = styled.p`
     font-weight: 500;
-    font-size: 16px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["16"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
     margin-bottom: 12px;
 `;
 const StyledBtnBox = styled.div`

@@ -8,6 +8,7 @@ import { formatToMinute } from "services/format";
 import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function Respond({ data, setIsErrorInput }) {
     const [dataField, setDataField] = React.useState({});
@@ -123,17 +124,17 @@ const NumOfReplace = styled.div`
     max-width: 80px;
     margin-top: 27px;
     h3 {
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         font-weight: 500;
         margin-bottom: 12px;
     }
     input {
         width: 49px;
         height: 42px;
-        border: 1.53px solid #d4d0d0;
+        border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
         border-radius: 8px;
         outline: none;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         text-align: center;
     }
 `;
@@ -144,17 +145,16 @@ const StyledInput = styled.input`
     width: 820px;
     height: 46px;
     padding: 14px 0 14px 16px;
-    border: 1.53px solid #d5d0d0;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     outline: none;
-    border: 1px solid #d4d0d0;
+    border: 1px solid ${Styles.colors.Secondary.ScdD4};
 
     :hover {
-        border: 1px solid #3a10e5;
+        border: 1px solid ${Styles.colors.Primary.PmrBlue};
     }
     :focus {
-        border: 2px solid #3a10e5;
+        border: 2px solid ${Styles.colors.Primary.PmrBlue};
     }
 `;
 const StyledContainerMiniMiniBoss = styled.div`

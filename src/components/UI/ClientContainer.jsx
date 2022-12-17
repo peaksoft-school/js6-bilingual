@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 import Header from "./HeaderClient";
 
@@ -21,7 +22,7 @@ const StlyedClientContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #d7e1f8;
+    background-color: ${Styles.colors.Primary.PmrD7};
 `;
 const StyledContainerGlav = styled.div`
     width: 1530px;

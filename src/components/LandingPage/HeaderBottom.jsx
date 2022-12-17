@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 import PhotoCap from "../../assets/images/landingPage/Group 4264.png";
 
@@ -37,7 +38,7 @@ const SHeaderBottom = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fcd200;
+    background-color: ${Styles.colors.Primary.PmrOrange};
 `;
 
 const StyledHeaderBottom = styled.div`
@@ -67,20 +68,20 @@ const StyledHeaderLiderText = styled.h1`
     font-weight: 900;
     font-size: 60px;
     margin-bottom: 30px;
-    color: #c93d7d;
+    color: ${Styles.colors.Primary.PmrPink};
 `;
 const StyledHeaderMelkiText = styled.div`
     width: 580px;
     height: 60px;
     font-weight: 400;
     font-family: Poppins;
-    font-size: 20px;
+    font-size: ${Styles.FontSizes["20"]}px;
 `;
 const StyledHeaderButton = styled(Link)`
     width: 200px;
     height: 60px;
     margin-top: 20px;
-    color: white;
+    color: ${Styles.colors.Primary.PmrWhite};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +92,7 @@ const StyledHeaderButton = styled(Link)`
     color: white;
     font-size: 14px;
     cursor: pointer;
-    background-color: #cb4080;
+    background-color: ${Styles.colors.Primary.PmrPink};
     box-shadow: inset 4px -5px 0px rgba(255, 204, 191, 0.68);
 `;
 const StyledHeaderImageBook = styled.img`

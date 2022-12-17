@@ -12,6 +12,8 @@ import { addAnswer } from "store/slices/clientSlice";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Yes from "../../../assets/icons/Ptichka.svg";
 
 function ClientListenSelectWords({ question }) {
@@ -113,27 +115,27 @@ const StyledMiniContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 1.53px solid #d4d0d0;
+    border-left: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     position: relative;
     top: -1px;
     left: 1.2px;
     :hover {
-        border: 1.6px solid #3a10e5;
+        border: 1.6px solid ${Styles.colors.Primary.PmrBlue};
     }
     cursor: pointer;
 `;
 const StyledCard = styled.div`
     width: 192px;
     height: 42px;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdC4};
     border-radius: 8px;
     margin-top: 12px;
     display: flex;
     justify-content: space-between;
     :hover {
-        border: 1.6px solid #3a10e5;
+        border: 1.6px solid ${Styles.colors.Primary.PmrBlue};
     }
     div {
         :nth-child(1) {

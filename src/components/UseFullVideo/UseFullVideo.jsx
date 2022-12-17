@@ -5,6 +5,8 @@ import CustomSlider from "components/CustomUi/CustomSlider";
 import Section from "components/CustomUi/Section";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import UseFullVideoItem from "./UseFullVideoItem";
 
 const UseFullVideo = () => {
@@ -46,7 +48,7 @@ const UseFullVideoTitle = styled.div`
     font-weight: 700;
     font-size: 40px;
     line-height: 48px;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd37};
     text-align: center;
 `;
 const UseFullVidoeRow = styled.div`

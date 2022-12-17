@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getTestById, updateTest } from "store/slices/adminTestActions";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function NewTest() {
     const navigate = useNavigate();
@@ -106,9 +107,9 @@ const StyledDiv = styled.div`
 
 const StyledTitle = styled.h5`
     font-weight: 500;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 16px;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
     margin-bottom: 12px;
 `;
 

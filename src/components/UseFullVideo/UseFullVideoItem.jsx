@@ -2,6 +2,7 @@ import React from "react";
 
 import ReactPlayer from "react-player";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const UseFullVideoItem = () => {
     return (
@@ -40,16 +41,16 @@ const Body = styled.div`
 
     h3 {
         font-weight: 700;
-        font-size: 20px;
+        font-size: ${Styles.FontSizes["20"]}px;
         line-height: 24px;
-        color: #3a10e5;
+        color: ${Styles.colors.Primary.PmrBlue};
     }
 
     span {
         margin-top: 10px;
         font-weight: 400;
-        font-size: 18px;
-        color: #212629;
+        font-size: ${Styles.FontSizes["18"]}px;
+        color: ${Styles.colors.Secondary.Scd21};
         display: inline-block;
     }
 `;

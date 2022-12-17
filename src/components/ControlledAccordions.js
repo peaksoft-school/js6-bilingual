@@ -12,6 +12,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 
 import styleds from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import FacebookIcon from "../assets/images/landingPage/facebookIcon.svg";
 import InstagramIcon from "../assets/images/landingPage/instagramInstgramIcon.svg";
 
@@ -148,7 +150,7 @@ const StyledAccordion = styled((props) => (
 const StyledAccordionDetails = styled(AccordionDetails)(() => ({}));
 
 const Header = styled("h1")`
-    color: #ffffff;
+    color: ${Styles.colors.Primary.PmrWhite};
     font-family: "Gilroy";
     font-weight: 700;
     font-size: 40px;

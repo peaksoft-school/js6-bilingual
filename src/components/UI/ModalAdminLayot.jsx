@@ -4,6 +4,8 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import ButtonUi from "./ButtonUi";
 
 import ModalUi from "./Modal";
@@ -59,8 +61,8 @@ const CloseButton = styled.button`
 `;
 
 const StyledModalSpan = styled.span`
-    font-size: 16px;
-    color: #4b4759;
+    font-size: ${Styles.FontSizes["16"]}px;
+    color: ${Styles.colors.Primary.Pmr4B};
 `;
 const StyledModalContainerMiniBoss = styled.div`
     width: 517px;
@@ -72,10 +74,10 @@ const StyledModalContainerMiniBoss = styled.div`
 const StyledModalInput = styled.input`
     width: 517px;
     height: 46px;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
     padding: 14px 0 14px 16px;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     outline: none;
 `;
 const StyledModalContainer = styled.div`
@@ -86,7 +88,7 @@ const StyledModalContainer = styled.div`
     justify-content: end;
     align-items: center;
     padding-right: 60px;
-    background-color: #f0f1f1;
+    background-color: ${Styles.colors.Secondary.ScdF0};
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 `;

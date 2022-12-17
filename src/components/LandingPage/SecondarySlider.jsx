@@ -21,6 +21,7 @@ import Human3 from "../../assets/images/landingPage/Human3.svg";
 import Human4 from "../../assets/images/landingPage/Human4.svg";
 import Human5 from "../../assets/images/landingPage/Human5.svg";
 import Human6 from "../../assets/images/landingPage/Human6.svg";
+import { Styles } from "utils/constants/theme";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -138,7 +139,7 @@ const MainTitle = StyledMUI(Typography)`
     font-weight: 700;
     font-size: 40px;
     line-height: 48px;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd18};
     
 `;
 const UserPhotos = styled.img`
@@ -151,7 +152,7 @@ const Text = StyledMUI(Typography)`
     width: 300px;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 24px;
     color: rgba(35, 33, 42, 0.8);
     margin: 0 10px 0 17px;
@@ -163,9 +164,9 @@ const UserName = StyledMUI(Typography)`
     font-family: "Poppins";
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 24px;
-    color: #3A10E5;
+    color: ${Styles.colors.Primary.PmrBlue};
     margin: 24px 96px 20px 85px;
     color:${(p) => (p.className ? "#FFFFFF" : "#3A10E5")}
 `;
@@ -177,7 +178,7 @@ const UserRating = StyledMUI(Rating)`
 const StyledSlider = styled(Slider)`
     .slick-slide {
         width: 700px;
-        background: #e5e5e5;
+        background: ${Styles.colors.Secondary.Scd16};
         border-radius: 40px;
     }
     .slick-track {
@@ -187,14 +188,12 @@ const StyledSlider = styled(Slider)`
         height: 564px;
         padding-top: 50px;
     }
-    ,
     .slick-list {
         margin: 0 auto;
         width: 1100px;
         height: 700px;
         padding-bottom: 50px;
     }
-
     .slick-arrow {
         width: 60px;
         height: 60px;
@@ -226,11 +225,11 @@ const StyledSlider = styled(Slider)`
         content: "";
         width: 6px;
         height: 16px;
-        background: rgba(58, 16, 229, 0.2);
+        background: ${Styles.colors.Secondary.ScdViolet};
         border-radius: 20px;
     }
     .slick-dots li.slick-active button:before {
-        background: #3a10e5;
+        background: ${Styles.colors.Primary.PmrBlue};
         width: 6px;
         height: 30px;
         margin-top: -14px;

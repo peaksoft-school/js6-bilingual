@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function PartnersItem({ id, playUrlPhoto, alt }) {
     return (
@@ -14,8 +15,8 @@ export default PartnersItem;
 const StyledDiv = styled.div`
     width: 255px;
     height: 126px;
-    background: #ffffff;
-    border: 1px solid #e4e4e4;
+    background: ${Styles.colors.Primary.PmrWhite};
+    border: 1px solid ${Styles.colors.Secondary.Scd16};
     border-radius: 20px;
     padding: 20px 40px;
     display: flex;

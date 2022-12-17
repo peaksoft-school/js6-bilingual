@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
+import { Styles } from "utils/constants/theme";
 
 export default function Progress({ minute }) {
     const intervalRef = React.useRef(null);
@@ -56,7 +57,7 @@ export default function Progress({ minute }) {
 const StyledBox = styled(Box)`
     & .MuiLinearProgress-determinate {
         width: 100%;
-        background-color: #d4d0d0;
+        background-color: ${Styles.colors.Secondary.ScdD4};
         height: 8px;
     }
     & .MuiLinearProgress-bar {
@@ -76,7 +77,7 @@ const StyledTypografy = styled(Typography)`
     font-family: "DINNextRoundedLTW01-Regular";
     font-style: normal;
     font-weight: 550;
-    font-size: 32px;
+    font-size: ${Styles.FontSizes["32"]}px;
     line-height: 24px;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
 `;

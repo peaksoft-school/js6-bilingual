@@ -6,6 +6,7 @@ import { ReactNotifications, Store } from "react-notifications-component";
 import styled, { css } from "styled-components";
 
 import "react-notifications-component/dist/theme.css";
+import { Styles } from "utils/constants/theme";
 
 const PopUp = ({ forCss, typeIs, titleIs, textIs }) => {
     React.useEffect(() => {
@@ -65,7 +66,7 @@ const Notification = styled(ReactNotifications)`
             .rnc__notification-title {
                 margin-top: 0;
                 font-family: cursive;
-                font-size: 16px;
+                font-size: ${Styles.FontSizes["16"]}px;
                 line-height: 19px;
                 color: ${titleColor};
             }
@@ -100,7 +101,7 @@ const Notification = styled(ReactNotifications)`
             .rnc__notification-message {
                 font-family: cursive;
                 font-weight: 400;
-                font-size: 16px;
+                font-size: ${Styles.FontSizes["16"]}px;
                 line-height: 18px;
                 color: ${textColor};
                 margin-bottom: 0;
@@ -109,7 +110,7 @@ const Notification = styled(ReactNotifications)`
 
             .rnc__notification-item--success {
                 background: ${Bg};
-                border: 1px solid #8cdb95;
+                border: 1px solid ${Styles.colors.Secondary.Scd8C};
                 border-radius: 4px;
             }
 

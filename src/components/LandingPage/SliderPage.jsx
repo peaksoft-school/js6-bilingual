@@ -13,7 +13,6 @@ function SliderPage() {
         </ContainerDiv>
     );
 }
-
 export default SliderPage;
 
 const ContainerDiv = styled.div`

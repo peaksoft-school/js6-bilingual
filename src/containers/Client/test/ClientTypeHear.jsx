@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Volume from "../../../assets/icons/Volume-Up.svg";
 
 export default function ClientTypeHear({ question }) {
@@ -91,9 +93,9 @@ const StyledContainer = styled.div`
             height: 32px;
             font-style: normal;
             font-weight: 400;
-            font-size: 28px;
+            font-size: ${Styles.FontSizes["28"]}px;
             line-height: 32px;
-            color: #4c4859;
+            color: ${Styles.colors.Primary.Pmr4C};
         }
     }
 `;
@@ -125,8 +127,8 @@ const StyledContainerOne = styled.div`
 
     span {
         font-weight: 400;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         margin-top: 10px;
-        color: #afafaf;
+        color: ${Styles.colors.Secondary.ScdAf};
     }
 `;

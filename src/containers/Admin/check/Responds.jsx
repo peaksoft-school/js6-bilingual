@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function Responds({
     id,
@@ -50,8 +51,8 @@ const Main = styled.div``;
 const Box = styled.div`
     h4 {
         font-weight: 500;
-        font-size: 18px;
-        color: #4c4859;
+        font-size: ${Styles.FontSizes["18"]}px;
+        color: ${Styles.colors.Primary.Pmr4C};
     }
 `;
 const Respon = styled.div`
@@ -60,7 +61,7 @@ const Respon = styled.div`
     gap: 7px;
 
     p {
-        color: #3a10e5;
+        color: ${Styles.colors.Primary.PmrBlue};
     }
 `;
 const NumOfWords = styled.p`

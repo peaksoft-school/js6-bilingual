@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const SliderItem = ({ data }) => {
     return (
@@ -40,8 +41,8 @@ const SliderRow = styled.div`
 
 const SliderDescription = styled.div`
     max-width: 579px;
-    color: white;
-    font-size: 24px;
+    color: ${Styles.colors.Primary.PmrWhite};
+    font-size: ${Styles.FontSizes["24"]}px;
     margin-top: 25px;
 `;
 
@@ -55,8 +56,8 @@ const SliderImg = styled.div`
 const SliderContent = styled.div``;
 
 const SliderTitle = styled.h2`
-    color: #fe9102;
-    font-size: 38px;
+    color: ${Styles.colors.Secondary.Scd15};
+    font-size: ${Styles.FontSizes["38"]}px;
     line-height: 46px;
     max-width: 508px;
 `;

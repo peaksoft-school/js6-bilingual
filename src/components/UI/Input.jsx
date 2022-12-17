@@ -12,7 +12,6 @@ const Input = ({
     value,
     forInput,
 }) => {
-    // FOR INPUT colorlabeltextandborderandhover
     return (
         <CssTextField
             sx={sx}

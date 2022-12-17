@@ -9,6 +9,7 @@ import { formatToMinute } from "services/format";
 import validateInput from "services/inputValidate";
 import { sendingQuestion, updateQuestionWithId } from "store/slices/questionSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function Highlight({ data, setIsErrorInput }) {
     const [dataField, setDataField] = React.useState({
@@ -156,24 +157,25 @@ const Block = styled.div`
     margin-top: 24px;
     h4 {
         font-weight: 500;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         margin-bottom: 12px;
     }
 `;
 
 const CorrectAnswer = styled.div`
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 144%;
     letter-spacing: 0.03em;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
 
     ::selection,
     span {
         text-decoration: underline;
-        text-decoration-color: #3a10e5;
-        color: #3a10e5;
+        text-decoration-color: ${Styles.colors.Primary.PmrBlue};
+        color: ${Styles.colors.Primary.PmrBlue};
     }
 `;
 
@@ -181,17 +183,15 @@ const StyledInput = styled.input`
     width: 820px;
     height: 46px;
     padding: 14px 0 14px 16px;
-    border: 1.53px solid #d5d0d0;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     outline: none;
-    border: 1px solid #d4d0d0;
-
+    border: 1px solid ${Styles.colors.Secondary.ScdD4};
     :hover {
-        border: 1px solid #3a10e5;
+        border: 1px solid ${Styles.colors.Primary.PmrBlue};
     }
     :focus {
-        border: 2px solid #3a10e5;
+        border: 2px solid ${Styles.colors.Primary.PmrBlue};
     }
 `;
 

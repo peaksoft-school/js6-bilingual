@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { addAnswer } from "store/slices/clientSlice";
 import styled, { css, keyframes } from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function ClientRecordSaying({ question }) {
     const dispatch = useDispatch();
@@ -87,8 +88,8 @@ const Actions = styled.div`
 `;
 const AnimationPoint = styled.div`
     text-transform: uppercase;
-    etter-spacing: 0.075em;
-    color: #3a10e5;
+    letter-spacing: 0.075em;
+    color: ${Styles.colors.Primary.PmrBlue};
     display: flex;
     align-items: center;
     gap: 8px;
@@ -98,7 +99,7 @@ const Point = styled.span`
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    background: #3a10e5;
+    background: ${Styles.colors.Primary.PmrBlue};
     display: block;
 
     ${(props) =>

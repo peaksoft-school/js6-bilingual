@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
 import styled, { keyframes } from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Logotip from "../../assets/images/landingPage/LogoBilingual.png";
 
 function Header({ HeaderBg }) {
@@ -47,14 +49,14 @@ function Header({ HeaderBg }) {
 const HeaderAnimation = keyframes`
 to{
     box-shadow: 3px 0 7px #999;
-    background-color: white;
+    background-color: ${Styles.colors.Primary.PmrWhite};
 }
 `;
 
 const LinkItem = styled(NavLink)`
     &.active,
     &:hover {
-        color: rgba(58, 16, 229, 0.9);
+        color: ${Styles.colors.Secondary.ScdViolet};
     }
 `;
 const HeaderGlav = styled.div`
@@ -63,11 +65,11 @@ const HeaderGlav = styled.div`
     justify-content: center;
     position: fixed;
     animation: ${(props) => (props.bgColor ? HeaderAnimation : "")} 0.5s forwards;
-    background: white;
+    background: ${Styles.colors.Primary.PmrWhite};
     z-index: 10;
     transition: 0.2s ease;
     &.active {
-        background-color: white;
+        background-color: ${Styles.colors.Primary.PmrWhite};
     }
 `;
 

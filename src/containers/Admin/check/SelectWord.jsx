@@ -2,6 +2,7 @@ import React from "react";
 
 import CheckBox from "components/UI/Checkbox";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function SelectWord({ options, userOptionsAnswer }) {
     return (
@@ -47,10 +48,10 @@ const StyledOptions = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 1.53px solid #d4d0d0;
+        border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
         border-radius: 8px;
         padding: 15px;
-        background: #ffffff;
+        background: ${Styles.colors.Primary.PmrWhite};
     }
 `;
 
@@ -59,8 +60,8 @@ const StyledAnswers = styled.div`
     flex-wrap: wrap;
     p {
         font-weight: 500;
-        font-size: 18px;
-        color: #4c4859;
+        font-size: ${Styles.FontSizes["18"]}px;
+        color: ${Styles.colors.Primary.Pmr4C};
     }
     div {
         display: flex;
@@ -71,8 +72,8 @@ const StyledAnswers = styled.div`
     div div {
         width: 171px;
         padding: 14px 16px;
-        border: 1.53px solid #d4d0d0;
+        border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
         border-radius: 8px;
-        background: #ffffff;
+        background: ${Styles.colors.Primary.PmrWhite};
     }
 `;

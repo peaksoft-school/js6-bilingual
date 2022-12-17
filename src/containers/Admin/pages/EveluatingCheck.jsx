@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDate } from "services/format";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Eveluated from "../../../assets/icons/Evaluated.svg";
 import EyeIcon from "../../../assets/icons/eye.svg";
 
@@ -104,7 +106,7 @@ function EveluatingCheck() {
 
 const StyledContainerMain = styled.div`
     width: 1060px;
-    background-color: white;
+    background-color: ${Styles.colors.Primary.PmrWhite};
     border-radius: 20px;
     padding: 50px 80px 50px 80px;
     margin: auto;
@@ -119,7 +121,7 @@ const StyledTextColor = styled.div`
 const StyledContainerResults = styled.div`
     width: 900px;
     margin-top: 22px;
-    border-top: 2.53px solid #d4d0d0;
+    border-top: 2.53px solid ${Styles.colors.Secondary.ScdD4};
 `;
 const StyledContainerOne = styled.div`
     height: 76px;
@@ -138,7 +140,7 @@ const StyledCardTests = styled.div`
     width: 900px;
     display: flex;
     margin-top: 16px;
-    background: #ffffff;
+    background: ${Styles.colors.Primary.PmrWhite};
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
     padding: 24px 0 24px 0;
@@ -196,20 +198,20 @@ const StyledButtonEmail = styled.button`
     padding: 13px 24px;
     width: 291px;
     height: 42px;
-    font-size: 14px;
-    background: #ffffff;
-    border: 2px solid #c4c4c4;
+    font-size: ${Styles.FontSizes["14"]}px;
+    background: ${Styles.colors.Primary.PmrWhite};
+    border: 2px solid ${Styles.colors.Secondary.ScdC4};
     border-radius: 8px;
     cursor: pointer;
     :hover {
-        border: 2px solid rgba(58, 16, 229, 1);
-        color: rgba(58, 16, 229, 1);
+        border: 2px solid ${Styles.colors.Secondary.ScdViolet};
+        color: ${Styles.colors.Secondary.ScdViolet};
     }
 `;
 const StyledText = styled.span`
     font-weight: 500;
-    font-size: 16px;
-    color: #3752b4;
+    font-size: ${Styles.FontSizes["16"]}px;
+    color: ${Styles.colors.Secondary.Scd37};
 `;
 const StyledInside = styled.span`
     font-weight: 400;

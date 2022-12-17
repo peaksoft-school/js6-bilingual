@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function ClientMainIdea({ question }) {
     const dispatch = useDispatch();
@@ -62,13 +63,13 @@ const StyledSection = styled.section`
 
 const StyledPassage = styled.div`
     width: 60%;
-    background: #f7f7f7;
-    border: 1px solid #d4d0d0;
+    background: ${Styles.colors.Secondary.ScdF7};
+    border: 1px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
     p {
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         font-weight: 400;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
         margin: 18px 15px;
         line-height: 124%;
         word-break: break-all;
@@ -82,8 +83,8 @@ const StyledSelectPassage = styled.div`
     width: 40%;
     p {
         font-weight: 400;
-        font-size: 26px;
-        color: #4c4859;
+        font-size: ${Styles.FontSizes["26"]}px;
+        color: ${Styles.colors.Primary.Pmr4C};
         ::first-letter {
             text-transform: capitalize;
         }
@@ -91,16 +92,16 @@ const StyledSelectPassage = styled.div`
     div {
         display: flex;
         gap: 16px;
-        background: #ffffff;
-        border: 1px solid #d4d0d0;
+        background: ${Styles.colors.Primary.PmrWhite};
+        border: 1px solid ${Styles.colors.Secondary.ScdD4};
         border-radius: 8px;
         padding: 12px;
         margin: 26px 0 14px 0;
         cursor: pointer;
         :hover {
-            border: 1px solid #3a10e5;
+            border: 1px solid ${Styles.colors.Primary.PmrBlue};
             border-radius: 8px;
-            background: rgba(58, 16, 229, 0.14);
+            background: ${Styles.colors.Secondary.ScdViolet};
         }
     }
 `;

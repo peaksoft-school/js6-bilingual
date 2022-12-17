@@ -11,6 +11,8 @@ import { CLIENT_ROUTES_URL } from "routes/ClientRoutes/clientRoutesUrl";
 import { clearData } from "store/slices/clientSlice";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import Group from "../../../assets/icons/group.svg";
 import Layer from "../../../assets/icons/layer.svg";
 
@@ -87,9 +89,9 @@ export default function CompleteTest() {
 const Title = styled.div`
     margin-bottom: 52px;
     font-weight: 400;
-    font-size: 28px;
+    font-size: ${Styles.FontSizes["28"]}px;
     text-align: center;
-    color: #4c4859;
+    color: ${Styles.colors.Primary.Pmr4C};
     display: flex;
     justify-content: center;
     gap: 18px;
@@ -107,15 +109,15 @@ const Footer = styled.div`
     justify-content: space-between;
 `;
 const Container = styled.div`
-    border-bottom: 1.8px solid #d4d0d0;
+    border-bottom: 1.8px solid ${Styles.colors.Secondary.ScdD4};
     height: 320px;
 `;
 const Text = styled.p`
     margin: auto;
     height: 46px;
-    color: 4C4859;
+    color: ${Styles.colors.Secondary.ScdD4};
     width: 435px;
-    font-size: 18px;
+    font-size: ${Styles.FontSizes["18"]}px;
     font-weight: 400;
     line-height: 29px;
     text-align: center;

@@ -73,10 +73,8 @@ const SliderMain = styled.div``;
 const SliderWrapp = styled.div``;
 const SliderBox = styled.div`
     width: 1370px;
-
     margin-right: -185px;
     position: relative;
-
     .slick-center {
         transition: all 0.3s ease;
         transform: scale(1.15);

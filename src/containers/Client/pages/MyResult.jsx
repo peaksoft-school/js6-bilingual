@@ -10,6 +10,8 @@ import { resultTestsSlice } from "store/slices/resultTestsSlice";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import DeleteIcon from "../../../assets/icons/Delete.svg";
 
 import BookBilingual from "../../../assets/images/bookBilingual.png";
@@ -86,7 +88,7 @@ function MyResult() {
 }
 const StyledContainerMyResult = styled.div`
     width: 1130px;
-    background-color: white;
+    background-color: ${Styles.colors.Primary.PmrWhite};
     border-radius: 20px;
     margin-bottom: 50px;
 `;
@@ -99,8 +101,8 @@ const StyledContainerNull = styled.div`
     justify-content: space-around;
     align-items: center;
     h1 {
-        color: #4c4859;
-        font-size: 28px;
+        color: ${Styles.colors.Primary.Pmr4C};
+        font-size: ${Styles.FontSizes["28"]}px;
         font-weight: 400;
         text-transform: capitalize;
     }
@@ -145,7 +147,7 @@ const StyledAnswer = styled.div`
     align-items: center;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.06), 0px 4px 10px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
-    font-size: 15px;
+    font-size: ${Styles.FontSizes["15"]}px;
     margin-top: 15px;
     padding: 15px 0;
 

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { formatterQuestionType } from "services/format";
 
 import styled, { css } from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 const DropDown = ({ items, stylecss }) => {
     const [dropActive, setDropActive] = React.useState(0);
@@ -71,7 +72,7 @@ const DropBox = styled.div`
 const DropHead = styled.div`
     border-radius: 8px 8px 0 0;
     overflow: hidden;
-    border: 1.6px solid #3a10e5;
+    border: 1.6px solid ${Styles.colors.Primary.PmrBlue};
     padding: 12px 18px;
     ${(props) =>
         props.className === "is_close" &&

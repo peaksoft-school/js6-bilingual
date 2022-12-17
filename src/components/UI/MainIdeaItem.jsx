@@ -4,6 +4,8 @@ import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material"
 import DeleteIcon from "assets/icons/Delete.svg";
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import IconButtonStyled from "./IconButtonStyled";
 
 export default function MainIdeaItem({ index, text, radioValue, onChange, onDelete, id }) {
@@ -42,14 +44,14 @@ const Main = styled.div`
 const Num = styled.h3`
     font-size: 16px;
     font-weight: 500;
-    color: #4c4859;
+    color: ${Styles.colors.Secondary.ScdC4};
     line-height: 22px;
 `;
 const Box = styled.div`
     display: flex;
     gap: 26px;
     align-items: flex-start;
-    border: 1.53px solid #d4d0d0;
+    border: 1.53px solid ${Styles.colors.Secondary.ScdD4};
     border-radius: 8px;
     padding: 14px 16px;
 
@@ -60,9 +62,9 @@ const Box = styled.div`
 const Text = styled.div`
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: ${Styles.FontSizes["16"]}px;
     line-height: 22px;
-    color: #4c4859;
+    color: ${Styles.colors.Secondary.ScdC4};
     text-align: justify;
 `;
 const Actions = styled.div`

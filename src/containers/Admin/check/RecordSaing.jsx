@@ -4,6 +4,8 @@ import { ButtonUi } from "components/UI";
 
 import styled from "styled-components";
 
+import { Styles } from "utils/constants/theme";
+
 import PlayRadio from "../../../assets/icons/PlayAudio.svg";
 
 function RecordSaing({
@@ -56,10 +58,10 @@ const Audio = styled.div`
     display: flex;
     p {
         margin-left: 18px;
-        font-size: 16px;
+        font-size: ${Styles.FontSizes["16"]}px;
         display: flex;
         align-items: center;
-        color: #4c4859;
+        color: ${Styles.colors.Primary.Pmr4C};
     }
     img {
         margin-right: 8px;

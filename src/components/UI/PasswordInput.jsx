@@ -5,6 +5,7 @@ import { IconButton, FormControl, InputLabel, OutlinedInput } from "@mui/materia
 import { InputViewOff, InputViewOn } from "assets/icons/index";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 function PasswordInput({ onChange, sx, forInput }) {
     const [inputViewOnOff, setInputViewOnOff] = useState(false);
@@ -33,7 +34,7 @@ function PasswordInput({ onChange, sx, forInput }) {
 const OutlinedInput1 = styled(OutlinedInput)`
     width: 100%;
     height: 52px;
-    color: #757575 !important;
+    color: ${Styles.colors.Secondary.Scd75} !important;
 `;
 const FormControl1 = styled(FormControl)({
     width: "100%",

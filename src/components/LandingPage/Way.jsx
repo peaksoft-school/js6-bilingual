@@ -120,7 +120,7 @@ const Description = styled.div`
     line-height: 24px;
 `;
 const LearnMore = styled(Link)`
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd18};
     font-size: ${Styles.FontSizes["40"]}px;
     font-weight: 700;
     display: block;

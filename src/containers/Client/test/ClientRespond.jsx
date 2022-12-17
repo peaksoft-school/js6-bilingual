@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addAnswer } from "store/slices/clientSlice";
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 export default function ClientRespond({ question }) {
     const [value, setValue] = useState("");
@@ -63,6 +64,6 @@ const StyledContaiter = styled.div`
 const StyledTextStatement = styled.div`
     width: 329px;
     text-align: start;
-    font-size: 18px;
-    color: #4c4859;
+    font-size: ${Styles.FontSizes["18"]}px;
+    color: ${Styles.colors.Primary.Pmr4C};
 `;

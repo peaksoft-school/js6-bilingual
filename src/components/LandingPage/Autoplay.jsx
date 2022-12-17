@@ -3,6 +3,7 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 
 import styled from "styled-components";
+import { Styles } from "utils/constants/theme";
 
 import Play1 from "../../assets/images/play1.svg";
 
@@ -54,9 +55,9 @@ const StyledTitle = styled.h1`
     margin: 0 auto;
     font-style: normal;
     font-weight: 700;
-    font-size: 40px;
+    font-size: ${Styles.FontSizes["40"]}px;
     line-height: 48px;
-    color: #3752b4;
+    color: ${Styles.colors.Secondary.Scd18};
     margin-bottom: 40px;
 `;
 const StyledDiv = styled.div`
