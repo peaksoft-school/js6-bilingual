@@ -22,7 +22,7 @@ export default function SelectWordItem({ id, isTrue, audio, del, option, updateC
     };
 
     const { isUpdatePage } = React.useContext(QuestionContext);
-
+    console.log(isUpdatePage);
     return (
         <Main key={id}>
             <Content>

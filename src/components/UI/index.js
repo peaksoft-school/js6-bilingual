@@ -8,3 +8,4 @@ export { default as PasswordInputUi } from "./PasswordInput";
 export { default as SwitcherUi } from "./Switcher";
 export { default as CardUi } from "./UICard";
 export { default as PopUp } from "./PopUp";
+export { default as ListenWordItem } from "./ListenWordItem";

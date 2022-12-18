@@ -44,6 +44,7 @@ export default function ClientTypeHear({ question }) {
                     questionId: question.id,
                     optionAnswerId: [],
                     answer: value,
+                    numberOfReplays: question.numberOfReplays - numberOfReplays,
                 },
             })
         );

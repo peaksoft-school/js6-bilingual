@@ -6,6 +6,7 @@ import { baseAxios } from "api/axios-config";
 import { ButtonUi } from "components/UI";
 import CheckBox from "components/UI/Checkbox";
 import ListenWordItem from "components/UI/ListenWordItem";
+import Loader from "components/UI/Loader";
 import ModalAdminLayot from "components/UI/ModalAdminLayot";
 import { QuestionContext } from "containers/Admin/pages/CreateQuestion";
 import { useDispatch } from "react-redux";
@@ -20,6 +21,7 @@ import styled from "styled-components";
 function ListenEnglishWord({ data, setIsErrorInput }) {
     const [isOpen, setIsOpen] = useState(false);
     const [dataCard, setDataCard] = useState([]);
+    const [isLoad, setIsLoad] = useState(false);
     const [newCard, setNewCard] = useState([]);
     const [file, setFile] = useState();
     const [checkBoxValue, setCheckBoxValue] = React.useState(false);
@@ -58,6 +60,7 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
         }, []);
     }
     const saveData = async (req) => {
+        setIsLoad(true);
         if (validateInput(data, setIsErrorInput)) return;
         const hour = data.duration.split(":")[0];
         const min = data.duration.split(":")[1];
@@ -78,11 +81,22 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
         };
         if (req === "save") {
             setMainQuestion(dataQuestion);
-            dispatch(sendingQuestion(dataQuestion));
-            navigate(-1);
+            dispatch(sendingQuestion(dataQuestion))
+                .unwrap()
+                .then((res) => {
+                    setIsLoad(false);
+                    navigate(-1);
+                })
+                .catch((error) => {
+                    setIsLoad(false);
+                    navigate(-1);
+
+                    console.log(error);
+                });
         } else if (req === "update") {
             dispatch(updateQuestionWithId((data = { id, dataInfo: dataQuestion })));
             navigate(-1);
+            setIsLoad(false);
         }
         setIsOpen(false);
     };
@@ -105,7 +119,9 @@ function ListenEnglishWord({ data, setIsErrorInput }) {
         }
     };
 
-    return (
+    return isLoad ? (
+        <Loader />
+    ) : (
         <Main>
             <ModalAdminLayot
                 setIsOpen={setIsOpen}
